@@ -3,13 +3,15 @@
 
 > Roadmap to becoming a Visual-SLAM developer in 2021, inspired by [web-developer-roadmap](https://github.com/kamranahmedse/developer-roadmap) and [game-developer-roadmap](https://github.com/utilForever/game-developer-roadmap).
 
-Visual-SLAM is a special case of a technology called '[Simultaneous Localization and Mapping](https://en.wikipedia.org/wiki/Simultaneous_localization_and_mapping)', which you use a camera device to gather exteroceptive sensory data. 
+Visual-SLAM is a special case of '[Simultaneous Localization and Mapping](https://en.wikipedia.org/wiki/Simultaneous_localization_and_mapping)', which you use a camera device to gather exteroceptive sensory data. 
 
-Below there is a set of charts demonstrating topics you need to understand to study Visual-SLAM, and eventually become a Visual-SLAM engineer / researcher.
+Below there is a set of charts demonstrating the topics you need to understand in Visual-SLAM, from an absolute beginner difficulty to getting ready to become a Visual-SLAM engineer / researcher.
 
-Visual-SLAM is often portrayed as a technology with a high entry barrier in learning, requiring good C++ programming skills and deep understanding of mathematics.
+***
 
-On the other hand, there are not many introductory level courses provided for beginners, especially in non-English languages. 
+Visual-SLAM is often portrayed as a rather difficult topic - many think good C++ programming skills and deep understanding of mathematics is necessary.
+
+On the other hand, there are not many courses provided for beginners, especially in non-English languages. 
 
 I made these charts to share my thoughts and experience on studying Visual-SLAM, and hopefully the beginner learners can get a grasp of where to start from.
 
@@ -19,11 +21,11 @@ I made these charts to share my thoughts and experience on studying Visual-SLAM,
 
 <h3 align="center"><strong>Purpose of these Roadmaps</strong></h3>
 
-> The purpose of these roadmaps is to give you an idea about the general idea of Visual-SLAM and to guide you if you are confused about where to start your learning. 
+> The purpose of these roadmaps is to give you an idea about the general overview of Visual-SLAM, and to guide you if you are confused about where to start from. 
 
 <h3 align="center"><strong>Note to Beginners</strong></h3>
 
-> Acknowledge that SLAM has a relatively high entry barrier, not because of the requirement of undertanding of difficult mathematics, but the requirement of equipping yourself with various types of skills. Don't feel overwhelmed - you don't need to learn everything in the beginning if you are just getting started. Instead, enjoy the journey itself and it will be very rewarding.
+> Acknowledge that SLAM has a relatively high entry barrier - it's not because of the requirement of undertanding difficult mathematics, but the requirement of equipping yourself with various types of skills. Don't feel overwhelmed - you don't need to learn everything if you are just getting started. Instead, enjoy the journey itself and progress topic by topic. The result will be very rewarding.
 
 ***
 
