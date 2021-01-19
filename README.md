@@ -29,9 +29,9 @@ I made these charts to share my thoughts and experience on studying Visual-SLAM,
 
 If you think that the roadmaps can be improved in any way, please do suggest.
 
-## Introduction
+## Beginner
 
-![Introduction to Visual-SLAM](./img/beginner.png)
+![Beginner level](./img/beginner.png)
 
 ## XXX Roadmap
 
