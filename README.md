@@ -7,7 +7,11 @@ Visual-SLAM is a special case of '[Simultaneous Localization and Mapping](https:
 
 Below there is a set of charts demonstrating the topics you need to understand in Visual-SLAM, from an absolute beginner difficulty to getting ready to become a Visual-SLAM engineer / researcher.
 
+<br>
+
 ***
+
+<br>
 
 Visual-SLAM is often portrayed as a rather difficult topic - many think good C++ programming skills and deep understanding of mathematics is necessary.
 
@@ -16,6 +20,8 @@ On the other hand, there are not many courses provided for beginners, especially
 I made these charts to share my thoughts and experience on studying Visual-SLAM, and hopefully the beginner learners can get a grasp of where to start from.
 
 > Check out my [Github](https://github.com/changh95) and [blog](http://changh95.github.io).
+
+<br>
 
 ***
 
@@ -31,9 +37,13 @@ I made these charts to share my thoughts and experience on studying Visual-SLAM,
 
 If you think that the roadmaps can be improved in any way, please do suggest.
 
+<br>
+
 ## Beginner
 
 ![Beginner level](./img/beginner.png)
+
+<br>
 
 ## Getting familiar with SLAM
 
@@ -41,6 +51,7 @@ If you think that the roadmaps can be improved in any way, please do suggest.
 
 ![Getting familiar with SLAM](./img/getting-familiar.png)
 
+<br>
 
 ## 🚦 Wrap Up
 
