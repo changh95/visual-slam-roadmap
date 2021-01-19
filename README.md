@@ -35,9 +35,11 @@ If you think that the roadmaps can be improved in any way, please do suggest.
 
 ![Beginner level](./img/beginner.png)
 
-## XXX Roadmap
+## Getting familiar with SLAM
 
-![XXX Roadmap]()
+> Disclaimer: You don't need to know *every single element* in this chart to advance to the next level! 
+
+![Getting familiar with SLAM](./img/getting-familiar.png)
 
 
 ## 🚦 Wrap Up
