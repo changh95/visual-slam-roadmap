@@ -5444,7 +5444,7 @@
                     "typeID": "TextInput",
                     "zOrder": "254",
                     "w": "211",
-                    "measuredW": "86",
+                    "measuredW": "134",
                     "measuredH": "32",
                     "x": "1707",
                     "y": "1903",
@@ -5452,7 +5452,7 @@
                         "align": "center",
                         "color": "16767334",
                         "size": "18",
-                        "text": "Active IR"
+                        "text": "Active IR (ToF)"
                     }
                 },
                 {
