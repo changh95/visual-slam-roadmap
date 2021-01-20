@@ -6218,7 +6218,7 @@
                     "typeID": "TextInput",
                     "zOrder": "289",
                     "w": "205",
-                    "measuredW": "45",
+                    "measuredW": "103",
                     "measuredH": "32",
                     "x": "449",
                     "y": "2313",
@@ -6226,7 +6226,7 @@
                         "align": "center",
                         "color": "40463",
                         "size": "18",
-                        "text": "VIO"
+                        "text": "VIO / VINS"
                     }
                 },
                 {
