@@ -60,6 +60,15 @@ If you think that the roadmaps can be improved in any way, please do suggest.
 
 <br>
 
+## TODO:
+
+- Stereo SLAM
+- RGB-D SLAM
+- VIO / VINS
+- Deep SLAM / Localization
+- Collaborative SLAM
+- Visual-LiDAR Fusion
+
 ## 🚦 Wrap Up
 
 If you think any of the roadmaps can be improved, please do open a PR with any updates and submit any issues. Also, I will continue to improve this, so you might want to watch/star this repository to revisit.
