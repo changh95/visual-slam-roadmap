@@ -53,6 +53,13 @@ If you think that the roadmaps can be improved in any way, please do suggest.
 
 <br>
 
+## Monocular Visual-SLAM
+
+
+![Monocular Visual-SLAM](./img/monocular.png)
+
+<br>
+
 ## 🚦 Wrap Up
 
 If you think any of the roadmaps can be improved, please do open a PR with any updates and submit any issues. Also, I will continue to improve this, so you might want to watch/star this repository to revisit.
