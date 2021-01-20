@@ -2345,7 +2345,7 @@
                     "measuredW": "276",
                     "measuredH": "32",
                     "x": "853",
-                    "y": "2715",
+                    "y": "2821",
                     "properties": {
                         "align": "center",
                         "color": "16776960",
@@ -2361,7 +2361,7 @@
                     "measuredW": "244",
                     "measuredH": "32",
                     "x": "1210",
-                    "y": "2715",
+                    "y": "2821",
                     "properties": {
                         "align": "center",
                         "color": "16767334",
@@ -2993,7 +2993,7 @@
                     "typeID": "Arrow",
                     "zOrder": "0",
                     "w": "1",
-                    "h": "571",
+                    "h": "647",
                     "measuredW": "150",
                     "measuredH": "100",
                     "x": "994",
@@ -3007,12 +3007,12 @@
                             "y": 0.1602634368005056
                         },
                         "p1": {
-                            "x": 0.5106361579079711,
-                            "y": -0.00015086748805632352
+                            "x": 0.5106361579079712,
+                            "y": -0.0001508674880563235
                         },
                         "p2": {
                             "x": 0,
-                            "y": 571.6516640000004
+                            "y": 647
                         },
                         "rightArrow": "false"
                     }
@@ -3778,7 +3778,7 @@
                     "measuredW": "150",
                     "measuredH": "100",
                     "x": "1163",
-                    "y": "2730",
+                    "y": "2836",
                     "properties": {
                         "color": "10027263",
                         "leftArrow": "false",
@@ -3965,7 +3965,7 @@
                     "measuredW": "48",
                     "measuredH": "48",
                     "x": "824",
-                    "y": "2711",
+                    "y": "2817",
                     "properties": {
                         "icon": {
                             "ID": "heart",
@@ -3989,6 +3989,65 @@
                             "size": "small"
                         }
                     }
+                },
+                {
+                    "ID": "249",
+                    "typeID": "TextInput",
+                    "zOrder": "194",
+                    "w": "318",
+                    "measuredW": "270",
+                    "measuredH": "32",
+                    "x": "836",
+                    "y": "2729",
+                    "properties": {
+                        "align": "center",
+                        "color": "16776960",
+                        "size": "18",
+                        "text": "LM-Reloc - von Stumberg 2020"
+                    }
+                },
+                {
+                    "ID": "250",
+                    "typeID": "TextInput",
+                    "zOrder": "195",
+                    "w": "247",
+                    "measuredW": "223",
+                    "measuredH": "32",
+                    "x": "1213",
+                    "y": "2729",
+                    "properties": {
+                        "align": "center",
+                        "color": "16767334",
+                        "size": "18",
+                        "text": "Deep direct relocalization"
+                    }
+                },
+                {
+                    "ID": "251",
+                    "typeID": "Arrow",
+                    "zOrder": "196",
+                    "w": "26",
+                    "h": "1",
+                    "measuredW": "150",
+                    "measuredH": "100",
+                    "x": "1166",
+                    "y": "2744",
+                    "properties": {
+                        "color": "10027263",
+                        "leftArrow": "false",
+                        "p0": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "p1": {
+                            "x": 0.5055232709106823,
+                            "y": 0.012317648221633013
+                        },
+                        "p2": {
+                            "x": 27,
+                            "y": 0
+                        }
+                    }
                 }
             ]
         },
@@ -3999,10 +4058,10 @@
         },
         "branchID": "Master",
         "resourceID": "1DDA5948-4566-4B6B-A955-FD6BDA665FCD",
-        "mockupH": "2740",
+        "mockupH": "2816",
         "mockupW": "1890",
         "measuredW": "2041",
-        "measuredH": "2803",
+        "measuredH": "2879",
         "version": "1.0"
     }
 }
