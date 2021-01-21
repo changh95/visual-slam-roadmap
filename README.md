@@ -81,6 +81,10 @@ The roadmaps are built using [Balsamiq](https://balsamiq.com/products/mockups/).
 - Spread the word
 - Reach out to me directly at hyunggi.chang95[at]gmail.com.
 
+## :rocket: Discussion
+
+To discuss any topics or ask questions, please use the [issue tab](https://github.com/changh95/visual-slam-roadmap/issues).
+
 ## License
 
 <img align="right" src="http://opensource.org/trademarks/opensource/OSI-Approved-License-100x137.png">
