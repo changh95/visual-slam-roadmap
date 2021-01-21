@@ -11,20 +11,13 @@ Below there is a set of charts demonstrating the topics you need to understand i
 
 ***
 
-<br>
-
 Visual-SLAM is often portrayed as a rather difficult topic - many think good C++ programming skills and deep understanding of mathematics is necessary.
 
 On the other hand, there are not many courses provided for beginners, especially in non-English languages. 
 
 I made these charts to share my thoughts and experience on studying Visual-SLAM, and hopefully the beginner learners can get a grasp of where to start from.
 
-> Check out my [Github](https://github.com/changh95) and [blog](http://changh95.github.io).
-
-<br>
-
 ***
-
 <h3 align="center"><strong>Purpose of these Roadmaps</strong></h3>
 
 > The purpose of these roadmaps is to give you an idea about the general overview of Visual-SLAM, and to guide you if you are confused about where to start from. 
@@ -33,9 +26,9 @@ I made these charts to share my thoughts and experience on studying Visual-SLAM,
 
 > Acknowledge that SLAM has a relatively high entry barrier - it's not because of the requirement of undertanding difficult mathematics, but the requirement of equipping yourself with various types of skills. Don't feel overwhelmed - you don't need to learn everything if you are just getting started. Instead, enjoy the journey itself and progress topic by topic. The result will be very rewarding.
 
-***
+<br>
 
-If you think that the roadmaps can be improved in any way, please do suggest.
+***
 
 <br>
 
@@ -74,6 +67,8 @@ If you think that the roadmaps can be improved in any way, please do suggest.
 ## 🚦 Wrap Up
 
 If you think any of the roadmaps can be improved, please do open a PR with any updates and submit any issues. Also, I will continue to improve this, so you might want to watch/star this repository to revisit.
+
+> Also, check out my [Github](https://github.com/changh95) and [blog](http://changh95.github.io) :smiley_cat:
 
 ## 🙌 Contribution
 
