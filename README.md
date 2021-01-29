@@ -55,10 +55,17 @@ I made these charts to share my thoughts and experience on studying Visual-SLAM,
 
 <br>
 
+## RGB-D Visual-SLAM
+
+![RGB-D Visual-SLAM](./img/rgbd.png)
+
+<br>
+
 ## TODO:
 
+> Last updated: 2021.01.29
+
 - Stereo SLAM
-- RGB-D SLAM
 - VIO / VINS
 - Deep SLAM / Localization
 - Collaborative SLAM
