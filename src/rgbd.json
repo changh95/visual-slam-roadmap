@@ -180,7 +180,7 @@
                     "typeID": "Arrow",
                     "zOrder": "10",
                     "w": "1",
-                    "h": "3164",
+                    "h": "2934",
                     "measuredW": "150",
                     "measuredH": "100",
                     "x": "965",
@@ -194,12 +194,12 @@
                             "y": 0
                         },
                         "p1": {
-                            "x": 0.5106361579079708,
+                            "x": 0.5106361579079709,
                             "y": -0.0001508674880563235
                         },
                         "p2": {
                             "x": 0,
-                            "y": 3163.5999999999995
+                            "y": 2934.011116675012
                         },
                         "rightArrow": "false"
                     }
@@ -5622,6 +5622,62 @@
                         "size": "18",
                         "text": "Object shape"
                     }
+                },
+                {
+                    "ID": "296",
+                    "typeID": "Label",
+                    "zOrder": "269",
+                    "measuredW": "271",
+                    "measuredH": "40",
+                    "x": "1450",
+                    "y": "2155",
+                    "properties": {
+                        "bold": "true",
+                        "size": "32",
+                        "text": "Deep Visual-SLAM"
+                    }
+                },
+                {
+                    "ID": "297",
+                    "typeID": "Label",
+                    "zOrder": "270",
+                    "measuredW": "271",
+                    "measuredH": "40",
+                    "x": "1164",
+                    "y": "2671",
+                    "properties": {
+                        "bold": "true",
+                        "size": "32",
+                        "text": "Deep Visual-SLAM"
+                    }
+                },
+                {
+                    "ID": "298",
+                    "typeID": "Label",
+                    "zOrder": "271",
+                    "measuredW": "271",
+                    "measuredH": "40",
+                    "x": "486",
+                    "y": "2922",
+                    "properties": {
+                        "bold": "true",
+                        "size": "32",
+                        "text": "Deep Visual-SLAM"
+                    }
+                },
+                {
+                    "ID": "299",
+                    "typeID": "Label",
+                    "zOrder": "272",
+                    "measuredW": "271",
+                    "measuredH": "40",
+                    "x": "1243",
+                    "y": "3191",
+                    "properties": {
+                        "bold": "true",
+                        "size": "32",
+                        "text": "Deep Visual-SLAM"
+                    }
                 }
             ]
         },
@@ -5632,10 +5688,10 @@
         },
         "branchID": "Master",
         "resourceID": "F9F52ECE-2CA3-41D1-BB0E-30205EC4C1CD",
-        "mockupH": "3281",
+        "mockupH": "3262",
         "mockupW": "1938",
         "measuredW": "2084",
-        "measuredH": "3344",
+        "measuredH": "3325",
         "version": "1.0"
     }
 }
