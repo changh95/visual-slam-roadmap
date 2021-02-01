@@ -70,6 +70,7 @@ I made these charts to share my thoughts and experience on studying Visual-SLAM,
 - Deep SLAM / Localization
 - Collaborative SLAM
 - Visual-LiDAR Fusion
+- Event-based vision
 
 - Useful links for learning
 
