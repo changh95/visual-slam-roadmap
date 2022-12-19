@@ -1,7 +1,7 @@
 
-![Visual-SLAM Developer Roadmap - 2021](./img/title.png)
+![Visual-SLAM Developer Roadmap - 2022](./img/title.png)
 
-> Roadmap to becoming a Visual-SLAM developer in 2021, inspired by [web-developer-roadmap](https://github.com/kamranahmedse/developer-roadmap) and [game-developer-roadmap](https://github.com/utilForever/game-developer-roadmap).
+> Roadmap to becoming a Visual-SLAM developer in 2022, inspired by [web-developer-roadmap](https://github.com/kamranahmedse/developer-roadmap) and [game-developer-roadmap](https://github.com/utilForever/game-developer-roadmap).
 
 Visual-SLAM is a special case of '[Simultaneous Localization and Mapping](https://en.wikipedia.org/wiki/Simultaneous_localization_and_mapping)', which you use a camera device to gather exteroceptive sensory data. 
 
@@ -63,7 +63,7 @@ I made these charts to share my thoughts and experience on studying Visual-SLAM,
 
 ## TODO:
 
-> Last updated: 2021.01.29
+> Last updated: 2022.12.20
 
 - Stereo SLAM
 - VIO / VINS
@@ -99,7 +99,7 @@ To discuss any topics or ask questions, please use the [issue tab](https://githu
 
 The class is licensed under the [MIT License](http://opensource.org/licenses/MIT):
 
-Copyright &copy; 2020 [Hyunggi Chang](http://www.github.com/changh95).
+Copyright &copy; 2022 [Hyunggi Chang](http://www.github.com/changh95).
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
