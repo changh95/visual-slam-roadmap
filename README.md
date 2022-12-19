@@ -78,7 +78,7 @@ I made these charts to share my thoughts and experience on studying Visual-SLAM,
 
 If you think any of the roadmaps can be improved, please do open a PR with any updates and submit any issues. Also, I will continue to improve this, so you might want to watch/star this repository to revisit.
 
-> Also, check out my [Github](https://github.com/changh95) and [blog](http://changh95.github.io) :smiley_cat:
+> Also, check out my [GitHub](https://github.com/changh95) and [blog](http://www.cv-learn.com) :smiley_cat:
 
 ## 🙌 Contribution
 
