@@ -61,13 +61,18 @@ I made these charts to share my thoughts and experience on studying Visual-SLAM,
 
 <br>
 
+## Applying Deep Learning
+
+
+![Applying Deep Learning](./img/applying-deep-learning.png)
+
+
 ## TODO:
 
-> Last updated: 2022.12.20
+> Last updated: 2023.01.14
 
 - Stereo SLAM
 - VIO / VINS
-- Deep SLAM / Localization
 - Collaborative SLAM
 - Visual-LiDAR Fusion
 - Event-based vision
