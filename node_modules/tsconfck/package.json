@@ -1,0 +1,69 @@
+{
+  "name": "tsconfck",
+  "version": "3.0.1",
+  "description": "A utility to work with tsconfig.json without typescript",
+  "license": "MIT",
+  "author": "dominikg",
+  "files": [
+    "bin",
+    "src",
+    "types",
+    "README.md",
+    "LICENSE",
+    "package.json"
+  ],
+  "type": "module",
+  "bin": "bin/tsconfck.js",
+  "types": "types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./types/index.d.ts",
+        "default": "./src/index.js"
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dominikg/tsconfck.git",
+    "directory": "packages/tsconfck"
+  },
+  "keywords": [
+    "typescript",
+    "tsconfig",
+    "tsconfig.json",
+    "jsconfig",
+    "jsconfig.json"
+  ],
+  "bugs": {
+    "url": "https://github.com/dominikg/tsconfck/issues"
+  },
+  "homepage": "https://github.com/dominikg/tsconfck/tree/main/packages/tsconfck#readme",
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@tsconfig/node18": "^18.2.2",
+    "@vitest/coverage-v8": "^1.1.1",
+    "esbuild": "^0.19.11",
+    "tiny-glob": "^0.2.9",
+    "typescript": "^5.3.3",
+    "vitest": "^1.1.1"
+  },
+  "engines": {
+    "node": "^18 || >=20"
+  },
+  "scripts": {
+    "check:publint": "publint --strict",
+    "check:types": "tsc --noEmit",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest",
+    "dts-buddy": "dts-buddy -m \"tsconfck:src/index.js\""
+  }
+}

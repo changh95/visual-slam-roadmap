@@ -1,0 +1,19 @@
+{
+  "name": "jsonlines",
+  "version": "0.1.1",
+  "license": "MIT",
+  "author": "Linus Unnebäck <linus@folkdatorn.se>",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/LinusU/node-jsonlines.git"
+  },
+  "scripts": {
+    "test": "standard && mocha"
+  },
+  "devDependencies": {
+    "concat-stream": "^1.5.0",
+    "mocha": "^2.2.5",
+    "standard": "^5.0.2"
+  }
+}

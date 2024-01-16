@@ -1,0 +1,92 @@
+{
+  "name": "csv-parser",
+  "version": "3.0.0",
+  "description": "Streaming CSV parser that aims for maximum speed as well as compatibility with the csv-spectrum test suite",
+  "license": "MIT",
+  "repository": "mafintosh/csv-parser",
+  "author": "mafintosh",
+  "maintainers": [
+    "Andrew Powell <andrew@shellscape.org>"
+  ],
+  "homepage": "https://github.com/mafintosh/csv-parser",
+  "bugs": "https://github.com/mafintosh/csv-parser/issues",
+  "bin": {
+    "csv-parser": "./bin/csv-parser"
+  },
+  "main": "index.js",
+  "files": [
+    "bin/csv-parser",
+    "index.js",
+    "index.d.ts"
+  ],
+  "engines": {
+    "node": ">= 10"
+  },
+  "scripts": {
+    "bench": "bin/bench",
+    "commitlint": "commitlint",
+    "coverage": "nyc npm run test && nyc report --reporter=text-lcov > coverage.lcov",
+    "lint": "eslint .",
+    "lint-staged": "lint-staged",
+    "security": "npm audit",
+    "test": "ava && tsd"
+  },
+  "dependencies": {
+    "minimist": "^1.2.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.0.0",
+    "@types/node": "^12.0.0",
+    "ava": "^2.4.0",
+    "bops": "^1.0.0",
+    "chalk": "^2.4.2",
+    "concat-stream": "^2.0.0",
+    "csv-spectrum": "^1.0.0",
+    "eslint": "^6.4.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.1.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "execa": "^2.1.0",
+    "globby": "^10.0.1",
+    "husky": "^3.0.0",
+    "lint-staged": "^9.0.2",
+    "loud-rejection": "^2.1.0",
+    "nyc": "^14.1.1",
+    "pre-commit": "^1.2.2",
+    "strip-ansi": "^5.2.0",
+    "text-table": "^0.2.0",
+    "time-span": "^3.1.0",
+    "tsd": "^0.8.0"
+  },
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  },
+  "keywords": [
+    "csv",
+    "parser",
+    "fast",
+    "json"
+  ],
+  "ava": {
+    "files": [
+      "!**/fixtures/**",
+      "!**/helpers/**"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "pre-commit": "lint-staged"
+}

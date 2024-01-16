@@ -1,0 +1,1 @@
+import { ThemeRegistrationRaw } from '../types.mjs';declare const reg: ThemeRegistrationRaw;export default reg

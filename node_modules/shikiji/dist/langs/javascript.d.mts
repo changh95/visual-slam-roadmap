@@ -1,0 +1,1 @@
+import { LanguageRegistration } from '../types.mjs';declare const reg: LanguageRegistration[];export default reg

@@ -1,0 +1,9 @@
+const DEFAULT_PREFERENCES = {
+  devToolbar: {
+    /** Specifies whether the user has the Dev Overlay enabled */
+    enabled: true
+  }
+};
+export {
+  DEFAULT_PREFERENCES
+};

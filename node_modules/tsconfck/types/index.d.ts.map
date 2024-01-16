@@ -1,0 +1,42 @@
+{
+	"version": 3,
+	"file": "index.d.ts",
+	"names": [
+		"find",
+		"findAll",
+		"toJson",
+		"findNative",
+		"TSConfckCache",
+		"parse",
+		"TSConfckParseError",
+		"parseNative",
+		"TSConfckParseNativeError",
+		"TSConfckFindOptions",
+		"TSConfckParseOptions",
+		"TSConfckFindAllOptions",
+		"TSConfckParseResult",
+		"TSConfckParseNativeOptions",
+		"TSConfckParseNativeResult"
+	],
+	"sources": [
+		"../src/find.js",
+		"../src/find-all.js",
+		"../src/to-json.js",
+		"../src/find-native.js",
+		"../src/cache.js",
+		"../src/parse.js",
+		"../src/parse-native.js",
+		"../src/public.d.ts"
+	],
+	"sourcesContent": [
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		null
+	],
+	"mappings": ";;;;;;;;iBAUsBA,IAAIA;;;;;;;;iBCYJC,OAAOA;;;;;;;iBCTbC,MAAMA;;;;;;;;;;iBCDAC,UAAUA;cCXnBC,aAAaA;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;iBC0BJC,KAAKA;cAyUdC,kBAAkBA;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;iBCzUTC,WAAWA;cA6NpBC,wBAAwBA;;;;;;;;;;;;;;;;;;;;;;;;;WCtPpBC,mBAAmBA;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;WAkCnBC,oBAAoBA;;;;WAIpBC,sBAAsBA;;;;;;;;;;;;;;;WAetBC,mBAAmBA;;;;;;;;;;;;;;;;;;;;;;;;;;;;;WA6BnBC,0BAA0BA;;;;;;;;;;;;WAY1BC,yBAAyBA"
+}

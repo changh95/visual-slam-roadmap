@@ -1,0 +1,9 @@
+import type { Arguments as Flags } from 'yargs-parser';
+import type { AstroInlineConfig } from '../@types/astro.js';
+import { Logger } from '../core/logger/core.js';
+export declare function flagsToAstroInlineConfig(flags: Flags): AstroInlineConfig;
+/**
+ * The `logging` is usually created from an `AstroInlineConfig`, but some flows like `add`
+ * doesn't read the AstroConfig directly, so we create a `logging` object from the CLI flags instead.
+ */
+export declare function createLoggerFromFlags(flags: Flags): Logger;

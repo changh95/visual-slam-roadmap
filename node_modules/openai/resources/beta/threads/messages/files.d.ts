@@ -1,0 +1,60 @@
+import * as Core from 'openai/core';
+import { APIResource } from 'openai/resource';
+import * as FilesAPI from 'openai/resources/beta/threads/messages/files';
+import { CursorPage, type CursorPageParams } from 'openai/pagination';
+export declare class Files extends APIResource {
+    /**
+     * Retrieves a message file.
+     */
+    retrieve(threadId: string, messageId: string, fileId: string, options?: Core.RequestOptions): Core.APIPromise<MessageFile>;
+    /**
+     * Returns a list of message files.
+     */
+    list(threadId: string, messageId: string, query?: FileListParams, options?: Core.RequestOptions): Core.PagePromise<MessageFilesPage, MessageFile>;
+    list(threadId: string, messageId: string, options?: Core.RequestOptions): Core.PagePromise<MessageFilesPage, MessageFile>;
+}
+export declare class MessageFilesPage extends CursorPage<MessageFile> {
+}
+/**
+ * A list of files attached to a `message`.
+ */
+export interface MessageFile {
+    /**
+     * The identifier, which can be referenced in API endpoints.
+     */
+    id: string;
+    /**
+     * The Unix timestamp (in seconds) for when the message file was created.
+     */
+    created_at: number;
+    /**
+     * The ID of the [message](https://platform.openai.com/docs/api-reference/messages)
+     * that the [File](https://platform.openai.com/docs/api-reference/files) is
+     * attached to.
+     */
+    message_id: string;
+    /**
+     * The object type, which is always `thread.message.file`.
+     */
+    object: 'thread.message.file';
+}
+export interface FileListParams extends CursorPageParams {
+    /**
+     * A cursor for use in pagination. `before` is an object ID that defines your place
+     * in the list. For instance, if you make a list request and receive 100 objects,
+     * ending with obj_foo, your subsequent call can include before=obj_foo in order to
+     * fetch the previous page of the list.
+     */
+    before?: string;
+    /**
+     * Sort order by the `created_at` timestamp of the objects. `asc` for ascending
+     * order and `desc` for descending order.
+     */
+    order?: 'asc' | 'desc';
+}
+export declare namespace Files {
+    export import MessageFile = FilesAPI.MessageFile;
+    export import MessageFilesPage = FilesAPI.MessageFilesPage;
+    export import FileListParams = FilesAPI.FileListParams;
+}
+//# sourceMappingURL=files.d.ts.map

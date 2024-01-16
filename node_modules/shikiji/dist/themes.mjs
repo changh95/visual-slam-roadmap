@@ -1,0 +1,33 @@
+const bundledThemes = {
+  "css-variables": () => import('./themes/css-variables.mjs'),
+  "dark-plus": () => import('./themes/dark-plus.mjs'),
+  "dracula": () => import('./themes/dracula.mjs'),
+  "dracula-soft": () => import('./themes/dracula-soft.mjs'),
+  "github-dark": () => import('./themes/github-dark.mjs'),
+  "github-dark-dimmed": () => import('./themes/github-dark-dimmed.mjs'),
+  "github-light": () => import('./themes/github-light.mjs'),
+  "hc_light": () => import('./themes/hc_light.mjs'),
+  "light-plus": () => import('./themes/light-plus.mjs'),
+  "material-theme": () => import('./themes/material-theme.mjs'),
+  "material-theme-darker": () => import('./themes/material-theme-darker.mjs'),
+  "material-theme-lighter": () => import('./themes/material-theme-lighter.mjs'),
+  "material-theme-ocean": () => import('./themes/material-theme-ocean.mjs'),
+  "material-theme-palenight": () => import('./themes/material-theme-palenight.mjs'),
+  "min-dark": () => import('./themes/min-dark.mjs'),
+  "min-light": () => import('./themes/min-light.mjs'),
+  "monokai": () => import('./themes/monokai.mjs'),
+  "nord": () => import('./themes/nord.mjs'),
+  "one-dark-pro": () => import('./themes/one-dark-pro.mjs'),
+  "poimandres": () => import('./themes/poimandres.mjs'),
+  "rose-pine": () => import('./themes/rose-pine.mjs'),
+  "rose-pine-dawn": () => import('./themes/rose-pine-dawn.mjs'),
+  "rose-pine-moon": () => import('./themes/rose-pine-moon.mjs'),
+  "slack-dark": () => import('./themes/slack-dark.mjs'),
+  "slack-ochin": () => import('./themes/slack-ochin.mjs'),
+  "solarized-dark": () => import('./themes/solarized-dark.mjs'),
+  "solarized-light": () => import('./themes/solarized-light.mjs'),
+  "vitesse-dark": () => import('./themes/vitesse-dark.mjs'),
+  "vitesse-light": () => import('./themes/vitesse-light.mjs')
+};
+
+export { bundledThemes };

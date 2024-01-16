@@ -1,0 +1,11 @@
+export declare const PROPAGATED_ASSET_FLAG = "astroPropagatedAssets";
+export declare const CONTENT_RENDER_FLAG = "astroRenderContent";
+export declare const CONTENT_FLAG = "astroContentCollectionEntry";
+export declare const DATA_FLAG = "astroDataCollectionEntry";
+export declare const VIRTUAL_MODULE_ID = "astro:content";
+export declare const RESOLVED_VIRTUAL_MODULE_ID: string;
+export declare const LINKS_PLACEHOLDER = "@@ASTRO-LINKS@@";
+export declare const STYLES_PLACEHOLDER = "@@ASTRO-STYLES@@";
+export declare const SCRIPTS_PLACEHOLDER = "@@ASTRO-SCRIPTS@@";
+export declare const CONTENT_FLAGS: readonly ["astroContentCollectionEntry", "astroRenderContent", "astroDataCollectionEntry", "astroPropagatedAssets"];
+export declare const CONTENT_TYPES_FILE = "types.d.ts";

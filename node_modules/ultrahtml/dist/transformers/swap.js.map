@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/transformers/swap.ts"],
+  "sourcesContent": ["import { ElementNode, RenderFn } from '../index.js';\nimport { Node, __unsafeRenderFn } from \"../index.js\";\nimport { querySelectorAll } from \"../selector.js\";\n\nexport default function swap(components: Record<string, string | ((props: Record<string, any>, ...children: any[]) => any)> = {}) {\n  return (doc: Node): Node => {\n    for (const [selector, component] of Object.entries(components)) {\n      for (const node of querySelectorAll(doc, selector)) {\n        if (typeof component === 'string') {\n          node.name = component;\n          if (RenderFn in node) {\n            delete (node as any)[RenderFn]\n          }\n        } else if (typeof component === 'function') {\n          __unsafeRenderFn(node as ElementNode, component)\n        }\n      }\n    }\n    return doc;\n  };\n}\n"],
+  "mappings": "AAAA,OAAsB,YAAAA,MAAgB,cACtC,OAAe,oBAAAC,MAAwB,cACvC,OAAS,oBAAAC,MAAwB,iBAElB,SAARC,EAAsBC,EAAiG,CAAC,EAAG,CAChI,OAAQC,GAAoB,CAC1B,OAAW,CAACC,EAAUC,CAAS,IAAK,OAAO,QAAQH,CAAU,EAC3D,QAAWI,KAAQN,EAAiBG,EAAKC,CAAQ,EAC3C,OAAOC,GAAc,UACvBC,EAAK,KAAOD,EACRP,KAAYQ,GACd,OAAQA,EAAaR,IAEd,OAAOO,GAAc,YAC9BN,EAAiBO,EAAqBD,CAAS,EAIrD,OAAOF,CACT,CACF",
+  "names": ["RenderFn", "__unsafeRenderFn", "querySelectorAll", "swap", "components", "doc", "selector", "component", "node"]
+}

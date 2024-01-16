@@ -1,0 +1,120 @@
+{
+  "name": "react-confetti",
+  "version": "6.1.0",
+  "description": "React component to draw confetti for your party.",
+  "main": "dist/react-confetti.min.js",
+  "types": "dist/types/ReactConfetti.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alampros/react-confetti.git"
+  },
+  "keywords": [
+    "react",
+    "confetti",
+    "component",
+    "react-component"
+  ],
+  "author": "Aaron Lampros <alampros@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alampros/react-confetti/issues"
+  },
+  "homepage": "https://github.com/alampros/react-confetti#readme",
+  "files": [
+    "README.md",
+    "LICENSE.md",
+    "dist/",
+    "src/",
+    "index.js"
+  ],
+  "scripts": {
+    "build": "yarn build-types && yarn build-transpile && yarn build-bundle",
+    "build-types": "tsc",
+    "build-transpile": "babel src --out-dir dist --extensions \".ts\"",
+    "build-bundle": "webpack",
+    "build-storybook": "build-storybook -s ./.storybook/public",
+    "prebuild": "yarn clean",
+    "watch": "webpack --watch",
+    "test": "tsc; yarn run lint",
+    "clean": "git clean -xfd dist/",
+    "cleanall": "git clean -xfd .",
+    "lint": "eslint . --ext .js --ext .ts --ext .tsx",
+    "prepare": "yarn run lint && yarn run build",
+    "semantic-release": "semantic-release",
+    "commit": "git-cz",
+    "develop": "start-storybook -p 3000"
+  },
+  "peerDependencies": {
+    "react": "^16.3.0 || ^17.0.1 || ^18.0.0"
+  },
+  "dependencies": {
+    "tween-functions": "^1.2.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.10.5",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.10.4",
+    "@babel/preset-typescript": "^7.3.3",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/commit-analyzer": "^8.0.1",
+    "@semantic-release/git": "^9.0.0",
+    "@semantic-release/github": "^7.0.7",
+    "@semantic-release/npm": "^7.0.5",
+    "@semantic-release/release-notes-generator": "^9.0.1",
+    "@storybook/addon-actions": "^5.1.10",
+    "@storybook/addon-info": "^5.1.10",
+    "@storybook/addon-knobs": "^5.1.10",
+    "@storybook/addon-links": "^5.1.10",
+    "@storybook/addon-notes": "^5.1.10",
+    "@storybook/addon-storysource": "^5.1.10",
+    "@storybook/addons": "^5.1.10",
+    "@storybook/react": "^5.1.10",
+    "@types/react": "^16.8.24",
+    "@typescript-eslint/eslint-plugin": "^3.6.1",
+    "@typescript-eslint/parser": "^3.6.1",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.5",
+    "commitizen": "^4.0.3",
+    "cz-conventional-changelog": "^3.0.2",
+    "eslint": "^7.4.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-config-standard-react": "^9.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^4.0.8",
+    "eslint-plugin-standard": "^4.0.0",
+    "nodemon": "^2.0.4",
+    "react": "^16.3.0",
+    "react-docgen-typescript-loader": "^3.0.1",
+    "react-dom": "^16.3.0",
+    "react-fps-stats": "^0.1.2",
+    "react-use": "^15.3.2",
+    "semantic-release": "^17.1.1",
+    "typescript": "^3.3.3333",
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/git",
+      "@semantic-release/github"
+    ]
+  },
+  "engines": {
+    "node": ">=10.18"
+  }
+}
