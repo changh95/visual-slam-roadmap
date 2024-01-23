@@ -10,7 +10,7 @@ isNew: false
 hasTopics: true
 dimensions:
   width: 968
-  height: 3009.05
+  height: 1200
 schema:
   headline: 'Getting familiar with SLAM Roadmap'
   description: 'Getting familiar with SLAM roadmap for the self-taught developers and bootcamp grads. We also have resources and short descriptions attached to the roadmap items so you can get everything you want to learn in one place.'
