@@ -1098,12 +1098,13 @@
             "measuredH": "48",
             "measuredW": "48",
             "properties": {
-              "icon": {
-                "ID": "heart",
-                "size": "small"
-              }
+                "color": "10027263",
+                "icon": {
+                  "ID": "check-circle",
+                  "size": "medium"
+                }
             },
-            "typeID": "CircleButton",
+            "typeID": "Icon",
             "w": "47",
             "x": "611",
             "y": "1061",
@@ -1115,12 +1116,13 @@
             "measuredH": "48",
             "measuredW": "48",
             "properties": {
-              "icon": {
-                "ID": "heart",
-                "size": "small"
-              }
+                "color": "10027263",
+                "icon": {
+                  "ID": "check-circle",
+                  "size": "medium"
+                }
             },
-            "typeID": "CircleButton",
+            "typeID": "Icon",
             "w": "47",
             "x": "1008",
             "y": "1441",
@@ -2301,12 +2303,13 @@
             "measuredH": "48",
             "measuredW": "48",
             "properties": {
-              "icon": {
-                "ID": "heart",
-                "size": "small"
-              }
+                "color": "10027263",
+                "icon": {
+                  "ID": "check-circle",
+                  "size": "medium"
+                }
             },
-            "typeID": "CircleButton",
+            "typeID": "Icon",
             "w": "47",
             "x": "829",
             "y": "190",
@@ -2318,12 +2321,13 @@
             "measuredH": "48",
             "measuredW": "48",
             "properties": {
-              "icon": {
-                "ID": "heart",
-                "size": "small"
-              }
+                "color": "10027263",
+                "icon": {
+                  "ID": "check-circle",
+                  "size": "medium"
+                }
             },
-            "typeID": "CircleButton",
+            "typeID": "Icon",
             "w": "47",
             "x": "806",
             "y": "335",
@@ -2335,12 +2339,13 @@
             "measuredH": "48",
             "measuredW": "48",
             "properties": {
-              "icon": {
-                "ID": "heart",
-                "size": "small"
-              }
+                "color": "10027263",
+                "icon": {
+                  "ID": "check-circle",
+                  "size": "medium"
+                }
             },
-            "typeID": "CircleButton",
+            "typeID": "Icon",
             "w": "47",
             "x": "1045",
             "y": "763",
@@ -2352,12 +2357,13 @@
             "measuredH": "48",
             "measuredW": "48",
             "properties": {
-              "icon": {
-                "ID": "heart",
-                "size": "small"
-              }
+                "color": "10027263",
+                "icon": {
+                  "ID": "check-circle",
+                  "size": "medium"
+                }
             },
-            "typeID": "CircleButton",
+            "typeID": "Icon",
             "w": "47",
             "x": "1024",
             "y": "940",
@@ -2369,12 +2375,13 @@
             "measuredH": "48",
             "measuredW": "48",
             "properties": {
-              "icon": {
-                "ID": "heart",
-                "size": "small"
-              }
+                "color": "10027263",
+                "icon": {
+                  "ID": "check-circle",
+                  "size": "medium"
+                }
             },
-            "typeID": "CircleButton",
+            "typeID": "Icon",
             "w": "47",
             "x": "1030",
             "y": "1336",
@@ -2530,12 +2537,13 @@
             "measuredH": "48",
             "measuredW": "48",
             "properties": {
-              "icon": {
-                "ID": "heart",
-                "size": "small"
-              }
+                "color": "10027263",
+                "icon": {
+                  "ID": "check-circle",
+                  "size": "medium"
+                }
             },
-            "typeID": "CircleButton",
+            "typeID": "Icon",
             "w": "47",
             "x": "1025",
             "y": "1707",
@@ -2547,12 +2555,13 @@
             "measuredH": "48",
             "measuredW": "48",
             "properties": {
-              "icon": {
-                "ID": "heart",
-                "size": "small"
-              }
+                "color": "10027263",
+                "icon": {
+                  "ID": "check-circle",
+                  "size": "medium"
+                }
             },
-            "typeID": "CircleButton",
+            "typeID": "Icon",
             "w": "47",
             "x": "1054",
             "y": "1799",
@@ -2708,12 +2717,13 @@
             "measuredH": "48",
             "measuredW": "48",
             "properties": {
-              "icon": {
-                "ID": "heart",
-                "size": "small"
-              }
+                "color": "10027263",
+                "icon": {
+                  "ID": "check-circle",
+                  "size": "medium"
+                }
             },
-            "typeID": "CircleButton",
+            "typeID": "Icon",
             "w": "47",
             "x": "617",
             "y": "749",
@@ -3061,12 +3071,13 @@
             "measuredH": "48",
             "measuredW": "48",
             "properties": {
-              "icon": {
-                "ID": "heart",
-                "size": "small"
-              }
+                "color": "10027263",
+                "icon": {
+                  "ID": "check-circle",
+                  "size": "medium"
+                }
             },
-            "typeID": "CircleButton",
+            "typeID": "Icon",
             "w": "47",
             "x": "618",
             "y": "1762",
@@ -3078,12 +3089,13 @@
             "measuredH": "48",
             "measuredW": "48",
             "properties": {
-              "icon": {
-                "ID": "heart",
-                "size": "small"
-              }
+                "color": "10027263",
+                "icon": {
+                  "ID": "check-circle",
+                  "size": "medium"
+                }
             },
-            "typeID": "CircleButton",
+            "typeID": "Icon",
             "w": "47",
             "x": "604",
             "y": "1406",
@@ -4391,12 +4403,13 @@
             "measuredH": "48",
             "measuredW": "48",
             "properties": {
-              "icon": {
-                "ID": "heart",
-                "size": "medium"
-              }
+                "color": "10027263",
+                "icon": {
+                  "ID": "check-circle",
+                  "size": "medium"
+                }
             },
-            "typeID": "CircleButton",
+            "typeID": "Icon",
             "x": "1393",
             "y": "125",
             "zOrder": "116"
@@ -4406,12 +4419,13 @@
             "measuredH": "48",
             "measuredW": "48",
             "properties": {
-              "icon": {
-                "ID": "plus",
-                "size": "medium"
-              }
+                "color": "3700253",
+                "icon": {
+                  "ID": "check-circle",
+                  "size": "medium"
+                }
             },
-            "typeID": "CircleButton",
+            "typeID": "Icon",
             "x": "1393",
             "y": "192",
             "zOrder": "117"
