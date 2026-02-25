@@ -1,5 +1,7 @@
 # Visual-SLAM Developer Roadmap - 2026
 
+![title](img/title.png)
+
 Visual-SLAM is a special case of '[Simultaneous Localization and Mapping](https://en.wikipedia.org/wiki/Simultaneous_localization_and_mapping)', which you use a camera device to gather exteroceptive sensory data.
 
 Below there is a set of topics you need to understand in Visual-SLAM, from an absolute beginner difficulty to getting ready to become a Visual-SLAM engineer / researcher.
