@@ -1,7 +1,5 @@
 # Visual-SLAM Developer Roadmap - 2026
 
-> Roadmap to becoming a Visual-SLAM developer in 2026, inspired by [web-developer-roadmap](https://github.com/kamranahmedse/developer-roadmap) and [game-developer-roadmap](https://github.com/utilForever/game-developer-roadmap).
-
 Visual-SLAM is a special case of '[Simultaneous Localization and Mapping](https://en.wikipedia.org/wiki/Simultaneous_localization_and_mapping)', which you use a camera device to gather exteroceptive sensory data.
 
 Below there is a set of topics you need to understand in Visual-SLAM, from an absolute beginner difficulty to getting ready to become a Visual-SLAM engineer / researcher.
