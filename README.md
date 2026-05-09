@@ -424,6 +424,8 @@ Monocular SLAM · VIO/VINS · Stereo SLAM · Visual-LiDAR Fusion · RGB-D SLAM �
 | [**RT-DETR**](https://arxiv.org/abs/2304.08069) | Lv (Baidu) 2023 | Real-time DETR, YOLO-speed + Transformer quality |
 | [**SAM**](https://arxiv.org/abs/2304.02643) | Kirillov 2023 | Segment Anything, prompt-based, Foundation Model |
 | [**SAM 2**](https://arxiv.org/abs/2408.00714) | Meta 2024 | Video segmentation, Memory Attention, temporal consistency |
+| [**SAM 3**](https://arxiv.org/abs/2511.16719) | Meta (Carion et al.) 2025 | Open-vocabulary concept segmentation, text/visual prompts (points/boxes/masks), 848M params, DETR detector + SAM 2 tracker, SA-Co benchmark (270K concepts) |
+| [**SAM 3.1**](https://huggingface.co/facebook/sam3.1) | Meta 2026 | Object Multiplex — shared-memory multi-object tracking, faster inference |
 | [**Grounding DINO**](https://arxiv.org/abs/2303.05499) | Liu 2023 | Text-prompted detection → SAM pipeline (Grounded SAM) |
 | [**Open-YOLO 3D**](https://arxiv.org/abs/2512.19088) | Benseddik 2025 | 2D open-vocab detection → 3D instance seg, 16× faster |
 
