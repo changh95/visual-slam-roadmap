@@ -37,17 +37,17 @@ I made this roadmap to share my thoughts and experience on studying Visual-SLAM,
 
 | Level | Topic | Focus |
 |:-----:|-------|-------|
-| **1** | [Beginner](#level-1-beginner) | Programming, Math, Projective Geometry, Camera, Image |
-| **2** | [Getting Familiar](#level-2-getting-familiar-with-slam) | Feature matching, MVG, Optimization, Factor Graph, Mapping, Sensors |
-| **3** | [Monocular SLAM](#level-3-monocular-visual-slam) | Feature/Direct/Hybrid/Learning-based, Foundation Model, Neural Representation, Semantic, Dynamic |
-| **4** | [RGB-D SLAM](#level-4-rgb-d-visual-slam) | KinectFusion, ElasticFusion, BundleFusion, DSP-SLAM |
-| **5** | [Deep Learning + SLAM](#level-5-applying-deep-learning) | A. Frontend · B. Backend · C. Systems · D. Scene Understanding |
-| **6** | [VIO / VINS](#level-6-vio--vins) | Filter-based (MSCKF) vs Optimization-based (VINS-Mono, OKVIS2-X) |
-| **7** | [Stereo SLAM](#level-7-stereo-slam) | S-PTAM, ORB-SLAM2/3 stereo, Stereo DSO |
-| **8** | [Collaborative SLAM](#level-8-collaborative--multi-robot-slam) | CCM-SLAM, Kimera-Multi, Swarm-SLAM |
-| **9** | [LiDAR & Visual-LiDAR](#level-9-lidar--visual-lidar-fusion-slam) | LOAM, FAST-LIO2, LVI-SAM, R3LIVE, FAST-LIVO2 |
-| **10** | [Event Camera SLAM](#level-10-event-camera-slam) | EVO, Ultimate-SLAM, DEVO |
-| **11** | [World Models & Spatial AI](#level-11-world-models--spatial-ai) | GAIA-1, Cosmos, VLM/VLA, Generative 3D |
+| **1** | [Beginner](#level-1-beginner) | Math, programming, and camera/image fundamentals |
+| **2** | [Getting Familiar](#level-2-getting-familiar-with-slam) | Geometry, optimization, and the anatomy of a SLAM system |
+| **3** | [Monocular SLAM](#level-3-monocular-visual-slam) | Classical feature/direct paradigms through learning-based and foundation-model SLAM |
+| **4** | [RGB-D SLAM](#level-4-rgb-d-visual-slam) | Dense tracking and volumetric/surfel fusion with depth sensors |
+| **5** | [Deep Learning + SLAM](#level-5-applying-deep-learning) | Learned frontends, differentiable backends, end-to-end systems, scene understanding |
+| **6** | [VIO / VINS](#level-6-vio--vins) | Fusing cameras with IMUs — filtering vs optimization |
+| **7** | [Stereo SLAM](#level-7-stereo-slam) | Metric scale and depth from stereo pairs |
+| **8** | [Collaborative SLAM](#level-8-collaborative--multi-robot-slam) | Multi-robot mapping, inter-robot loop closure, map merging |
+| **9** | [LiDAR & Visual-LiDAR](#level-9-lidar--visual-lidar-fusion-slam) | LiDAR odometry and tight camera–LiDAR–IMU fusion |
+| **10** | [Event Camera SLAM](#level-10-event-camera-slam) | Asynchronous vision for HDR and high-speed motion |
+| **11** | [World Models & Spatial AI](#level-11-world-models--spatial-ai) | From SLAM maps to learned world representations |
 
 ---
 
