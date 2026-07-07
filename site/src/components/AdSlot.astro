@@ -1,0 +1,16 @@
+---
+import { TRACKING } from '../config.mjs';
+const { slot } = Astro.props;
+const enabled = TRACKING.adsenseClient && slot;
+---
+{enabled && (
+  <div class="mt-10">
+    <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client={TRACKING.adsenseClient}
+      data-ad-slot={slot}
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+    <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+)}

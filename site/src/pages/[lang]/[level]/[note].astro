@@ -1,6 +1,8 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Base from '../../../layouts/Base.astro';
+import AdSlot from '../../../components/AdSlot.astro';
+import { TRACKING } from '../../../config.mjs';
 import { getSections } from '../../../lib/readme.mjs';
 import { ALT_LANGS, getUi } from '../../../lib/i18n.mjs';
 import { extractSummary, articleLd, breadcrumbLd } from '../../../lib/seo.mjs';
@@ -49,5 +51,6 @@ const jsonld = [
     <article class="prose prose-slate max-w-none prose-headings:font-display prose-a:text-scan-500 prose-a:decoration-scan-300/50 hover:prose-a:decoration-scan-500 prose-blockquote:font-mono prose-blockquote:text-sm prose-blockquote:not-italic bg-paper/80 border border-paper-line p-6 sm:p-8">
       <Content />
     </article>
+    <AdSlot slot={TRACKING.adsenseNoteSlot} />
   </main>
 </Base>
