@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getSections, getFocus, renderMd } from '../../lib/readme.mjs';
+
+export function getStaticPaths() {
+  const { levels } = getSections();
+  return levels.map((lv) => ({ params: { level: lv.dir }, props: { lv } }));
+}
+const { lv } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const focus = getFocus()[lv.n];
+const html = renderMd(lv.md);
+const { levels } = getSections();
+const prev = levels.find((l) => l.n === lv.n - 1);
+const next = levels.find((l) => l.n === lv.n + 1);
+---
+<Base title={`Level ${lv.n}: ${lv.title} — Visual-SLAM Roadmap`} description={focus}>
+  <main class="mx-auto max-w-5xl px-5 py-10">
+    <p class="font-mono text-xs text-scan-500 tracking-[0.25em] uppercase">Level {String(lv.n).padStart(2, '0')} / 11</p>
+    <h1 class="font-display font-bold text-3xl sm:text-4xl mt-2">{lv.title}</h1>
+    <p class="mt-2 text-slate-500 max-w-2xl">{focus}</p>
+    <article class="prose prose-slate max-w-none mt-8 prose-headings:font-display prose-a:text-scan-500 prose-a:decoration-scan-300/50 hover:prose-a:decoration-scan-500 prose-table:font-sans prose-table:text-sm bg-paper/80 border border-paper-line p-6 sm:p-8"
+      set:html={html} />
+    <nav class="mt-8 flex justify-between font-mono text-sm">
+      <span>{prev && <a class="text-scan-500 hover:underline" href={`${base}${prev.dir}/`}>&larr; Level {prev.n}: {prev.title}</a>}</span>
+      <span>{next && <a class="text-scan-500 hover:underline" href={`${base}${next.dir}/`}>Level {next.n}: {next.title} &rarr;</a>}</span>
+    </nav>
+  </main>
+</Base>

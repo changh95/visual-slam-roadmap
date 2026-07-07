@@ -1,0 +1,65 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+@theme {
+  --font-display: 'Chakra Petch', ui-sans-serif, sans-serif;
+  --font-sans: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  --color-ink-950: #070d18;
+  --color-ink-900: #0b1424;
+  --color-ink-800: #122036;
+  --color-ink-700: #1b2f4d;
+  --color-scan-300: #7fd6c2;
+  --color-scan-400: #46c0a5;
+  --color-scan-500: #199474;
+  --color-amber-flare: #e8a33d;
+  --color-paper: #faf7f0;
+  --color-paper-line: #e8e2d4;
+  --color-inkline: #24303f;
+}
+
+/* graph-paper background for reading pages */
+.graph-paper {
+  background-color: var(--color-paper);
+  background-image:
+    linear-gradient(var(--color-paper-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-paper-line) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* blueprint background for the cover */
+.blueprint {
+  background-color: var(--color-ink-950);
+  background-image:
+    radial-gradient(ellipse 80% 60% at 70% -10%, rgba(70, 192, 165, 0.13), transparent),
+    linear-gradient(rgba(127, 214, 194, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(127, 214, 194, 0.05) 1px, transparent 1px);
+  background-size: 100% 100%, 44px 44px, 44px 44px;
+}
+
+/* trajectory draw-in */
+.traj-path {
+  stroke-dasharray: 8 7;
+  animation: traj-dash 1.4s ease-out both;
+}
+@keyframes traj-dash {
+  from { stroke-dashoffset: 600; opacity: 0.2; }
+  to { stroke-dashoffset: 0; opacity: 1; }
+}
+.card-rise { animation: card-rise 0.5s ease-out both; }
+@keyframes card-rise {
+  from { transform: translateY(10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .traj-path, .card-rise { animation: none; }
+}
+
+/* prose tweaks for dense technical tables + math */
+.prose blockquote p::before,
+.prose blockquote p::after { content: none; }
+.prose table { display: block; overflow-x: auto; white-space: normal; }
+.prose td, .prose th { min-width: 8rem; }
+.prose td:first-child, .prose th:first-child { min-width: 11rem; }
+.prose .katex-display { overflow-x: auto; overflow-y: hidden; padding: 0.25rem 0; }

@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import { getSections, renderMd } from '../lib/readme.mjs';
+
+const { resources } = getSections();
+const html = renderMd(resources ?? '');
+---
+<Base title="Study Resources — Visual-SLAM Roadmap">
+  <main class="mx-auto max-w-5xl px-5 py-10">
+    <p class="font-mono text-xs text-scan-500 tracking-[0.25em] uppercase">Appendix</p>
+    <h1 class="font-display font-bold text-3xl sm:text-4xl mt-2">Study Resources</h1>
+    <article class="prose prose-slate max-w-none mt-8 prose-headings:font-display prose-a:text-scan-500 prose-table:text-sm bg-paper/80 border border-paper-line p-6 sm:p-8" set:html={html} />
+  </main>
+</Base>

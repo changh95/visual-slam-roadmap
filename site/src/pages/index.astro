@@ -1,0 +1,61 @@
+---
+import Base from '../layouts/Base.astro';
+import { getSections, getFocus, getNoteCounts } from '../lib/readme.mjs';
+
+const base = import.meta.env.BASE_URL;
+const { levels, resources } = getSections();
+const focus = getFocus();
+const counts = getNoteCounts();
+const tint = (n) => (n <= 2 ? 'text-scan-300 border-scan-500/40' : n <= 5 ? 'text-amber-flare border-amber-flare/40' : 'text-slate-300 border-slate-500/40');
+---
+<Base title="Visual-SLAM Developer Roadmap" dark={true}>
+  <main class="mx-auto max-w-5xl px-5">
+    <section class="pt-16 pb-10">
+      <p class="font-mono text-xs text-scan-400 tracking-[0.3em] uppercase">est. 2021 · rev. 2026</p>
+      <h1 class="font-display font-bold text-4xl sm:text-6xl leading-tight mt-3 text-slate-100">
+        Visual-SLAM<br />Developer <span class="text-scan-300">Roadmap</span>
+      </h1>
+      <p class="mt-5 max-w-2xl text-slate-400 leading-relaxed">
+        A guided path from camera basics to world models — 11 levels, 400+ study notes
+        covering the theory, the landmark papers with their actual equations and results,
+        and hands-on code exercises.
+      </p>
+      <svg viewBox="0 0 640 90" class="mt-8 w-full max-w-3xl" aria-hidden="true" fill="none">
+        <path class="traj-path" d="M8 70 C90 20, 150 82, 230 48 S 380 12, 460 44 S 600 78, 632 30" stroke="var(--color-scan-400)" stroke-width="2"/>
+        <path d="M230 48 C 200 90, 60 95, 30 74" stroke="var(--color-amber-flare)" stroke-width="1.4" stroke-dasharray="3 5" opacity="0.8"/>
+        {[ [8,70],[110,46],[230,48],[340,26],[460,44],[560,64],[632,30] ].map(([x,y]) => (
+          <circle cx={x} cy={y} r="4" fill="var(--color-ink-950)" stroke="var(--color-scan-300)" stroke-width="2"/>
+        ))}
+        <text x="30" y="92" font-size="9" fill="var(--color-amber-flare)" font-family="IBM Plex Mono, monospace">loop closure</text>
+      </svg>
+    </section>
+
+    <section class="pb-16">
+      <h2 class="font-mono text-xs text-slate-500 uppercase tracking-[0.25em] mb-5">// keyframes 01–11</h2>
+      <ol class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {levels.map((lv, i) => (
+          <li class="card-rise" style={`animation-delay:${i * 60}ms`}>
+            <a href={`${base}${lv.dir}/`}
+               class={`group block h-full border ${tint(lv.n)} bg-ink-900/70 hover:bg-ink-800 transition-colors p-5`}>
+              <div class="flex items-baseline justify-between">
+                <span class="font-display font-bold text-2xl">{String(lv.n).padStart(2, '0')}</span>
+                <span class="font-mono text-[10px] text-slate-500">{counts[lv.dir]} notes</span>
+              </div>
+              <h3 class="font-display font-semibold text-lg text-slate-100 mt-2 group-hover:text-scan-300 transition-colors">{lv.title}</h3>
+              <p class="mt-2 text-sm text-slate-400 leading-snug">{focus[lv.n]}</p>
+            </a>
+          </li>
+        ))}
+        {resources && (
+          <li class="card-rise" style={`animation-delay:${levels.length * 60}ms`}>
+            <a href={`${base}resources/`} class="group block h-full border border-dashed border-slate-500/40 bg-ink-900/40 hover:bg-ink-800 transition-colors p-5">
+              <span class="font-display font-bold text-2xl text-slate-400">+</span>
+              <h3 class="font-display font-semibold text-lg text-slate-100 mt-2 group-hover:text-scan-300">Study Resources</h3>
+              <p class="mt-2 text-sm text-slate-400 leading-snug">Lectures, books, surveys, and code exercises</p>
+            </a>
+          </li>
+        )}
+      </ol>
+    </section>
+  </main>
+</Base>
