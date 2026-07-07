@@ -6,7 +6,7 @@ export const TRACKING = {
   adsenseClient: 'ca-pub-5473245269912288',
   // AdSense display-ad unit slot ID shown at the bottom of every note page.
   // Create: AdSense → Ads → By ad unit → Display ad → copy data-ad-slot value.
-  adsenseNoteSlot: '',
+  adsenseNoteSlot: '2335164071',
   // Google Analytics 4 measurement ID, e.g. 'G-XXXXXXXXXX'
   gaMeasurementId: '',
   // Google Search Console <meta name="google-site-verification"> token
