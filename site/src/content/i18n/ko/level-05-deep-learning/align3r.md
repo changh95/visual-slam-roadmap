@@ -35,8 +35,8 @@ $$\arg\min_{\mathbf{D},\pi,\sigma}\sum_{e\in\mathcal{E}}\sum_{v\in e}\mathbf{C}^
 
 ## 관련 문서
 
-- [DUSt3R](../level-03-monocular-slam/dust3r.md)
+- [DUSt3R](dust3r.md)
 - [MonST3R](../level-03-monocular-slam/monst3r.md)
 - [Depth Anything V2](depth-anything-v2.md)
 - [Marigold](marigold.md)
-- [MASt3R-SLAM](../level-03-monocular-slam/mast3r-slam.md)
+- [MASt3R-SLAM](mast3r-slam.md)

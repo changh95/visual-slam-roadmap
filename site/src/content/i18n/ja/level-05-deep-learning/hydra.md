@@ -41,5 +41,5 @@ Hydraは、3D Dynamic Scene Graphをオフラインの構築物からリアル�
 - [Clio](clio.md) — タスク駆動のオープンセットシーングラフ
 - [Khronos](khronos.md) — 動的シーンのための空間時間的拡張
 - [ConceptGraphs](conceptgraphs.md) — オープン語彙3Dシーングラフ
-- [GNC](gnc.md) — シーングラフバックエンドで使われるロバストソルバー
+- [GNC](../level-02-getting-familiar/gnc.md) — シーングラフバックエンドで使われるロバストソルバー
 - [Pose graph optimization](../level-02-getting-familiar/pose-graph-optimization.md) — 変形グラフ補正が拡張する古典的な仕組み

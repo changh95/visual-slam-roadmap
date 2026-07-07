@@ -40,4 +40,4 @@ DeMoN是"给网络输入两张图像,输出几何信息"这一系列方法的先
 - [DeepV2D](deepv2d.md)
 - [SfM-Learner](sfm-learner.md)
 - [FlowNet](flownet.md)
-- [DUSt3R](../level-03-monocular-slam/dust3r.md)
+- [DUSt3R](dust3r.md)

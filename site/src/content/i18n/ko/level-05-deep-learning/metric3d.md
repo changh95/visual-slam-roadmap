@@ -42,5 +42,5 @@ SLAM은 *metric* 깊이를 필요로 한다 — relative 깊이는 단안 시스
 - [MiDaS](midas.md) — scale을 무시하는 relative-depth 기준선
 - [ZoeDepth](zoedepth.md) — metric 깊이로 가는 metric-bins 방식의 대안 경로
 - [Depth Anything V2](depth-anything-v2.md) — 깊이 foundation model 계보에서의 데이터 스케일링 후속작
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md) — Metric3D가 KITTI에서 그 깊이를 투입하는 SLAM 시스템
+- [DROID-SLAM](droid-slam.md) — Metric3D가 KITTI에서 그 깊이를 투입하는 SLAM 시스템
 - [Pinhole camera model](../level-01-beginner/pinhole-camera-model.md) — 모호성을 만드는 intrinsic

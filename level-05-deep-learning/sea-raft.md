@@ -41,6 +41,6 @@ SEA-RAFT is the practical choice when a SLAM front-end needs dense flow at real-
 
 - [RAFT](raft.md) — the base architecture and training target
 - [FlowFormer](flowformer.md) — the heavier Transformer alternative
-- [TartanVO](../level-03-monocular-slam/tartanvo.md) — learned VO also built on TartanAir's rigid-scene data
-- [DPVO](../level-03-monocular-slam/dpvo.md) — sparse learned odometry with RAFT-style updates
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md) — RAFT machinery in a full SLAM system
+- [TartanVO](tartanvo.md) — learned VO also built on TartanAir's rigid-scene data
+- [DPVO](dpvo.md) — sparse learned odometry with RAFT-style updates
+- [DROID-SLAM](droid-slam.md) — RAFT machinery in a full SLAM system

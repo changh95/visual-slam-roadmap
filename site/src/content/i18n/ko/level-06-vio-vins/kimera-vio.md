@@ -37,5 +37,5 @@ Kimera는 깔끔하고 모듈화된 오픈소스 스택이 원시 스테레오+I
 - [Kimera / 3D Dynamic Scene Graph](../level-05-deep-learning/kimera-3d-dynamic-scene-graph.md) — 이 VIO 위에 구축된 장면 이해 계층.
 - [Kimera-Multi](../level-08-collaborative-slam/kimera-multi.md) — 다중 로봇 확장.
 - [Incremental smoothing](../level-02-getting-familiar/incremental-smoothing.md) — 그 아래에 있는 iSAM2 메커니즘.
-- [GNC](../level-05-deep-learning/gnc.md) — 이후 Kimera-RPGO에서 채택된 강건 최적화.
+- [GNC](../level-02-getting-familiar/gnc.md) — 이후 Kimera-RPGO에서 채택된 강건 최적화.
 - [MSCKF](msckf.md) — 구조 없는 측정 아이디어의 필터링 조상.

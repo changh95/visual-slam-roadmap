@@ -41,6 +41,6 @@ SEA-RAFT는 SLAM 프론트엔드가 실시간 속도로 밀집 flow를 필요로
 
 - [RAFT](raft.md) — 기반 아키텍처 및 학습 목표
 - [FlowFormer](flowformer.md) — 더 무거운 Transformer 대안
-- [TartanVO](../level-03-monocular-slam/tartanvo.md) — TartanAir의 강체 장면 데이터로 구축된 학습 기반 VO
-- [DPVO](../level-03-monocular-slam/dpvo.md) — RAFT 스타일 업데이트를 사용하는 sparse 학습 기반 odometry
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md) — 완전한 SLAM 시스템 안의 RAFT 기계 장치
+- [TartanVO](tartanvo.md) — TartanAir의 강체 장면 데이터로 구축된 학습 기반 VO
+- [DPVO](dpvo.md) — RAFT 스타일 업데이트를 사용하는 sparse 학습 기반 odometry
+- [DROID-SLAM](droid-slam.md) — 완전한 SLAM 시스템 안의 RAFT 기계 장치

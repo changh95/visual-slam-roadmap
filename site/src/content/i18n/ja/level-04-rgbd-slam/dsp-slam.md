@@ -43,4 +43,4 @@ DSP-SLAMは、学習済みインプリシット形状事前分布をオンライ
 - [MoreFusion](morefusion.md) — 操作のための姿勢推定を伴う物体レベル融合
 - [ORB-SLAM2](../level-03-monocular-slam/orb-slam2.md) — 基盤となるSLAMバックボーン
 - [NodeSLAM](../level-05-deep-learning/nodeslam.md) — 密な深度からの形状事前分布SLAM、最も近い同時代の研究
-- [vMAP](../level-03-monocular-slam/vmap.md) — 次のステップとしての物体ごとのニューラルフィールド
+- [vMAP](../level-05-deep-learning/vmap.md) — 次のステップとしての物体ごとのニューラルフィールド

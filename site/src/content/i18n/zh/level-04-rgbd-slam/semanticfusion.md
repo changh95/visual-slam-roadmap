@@ -41,4 +41,4 @@ SemanticFusion开创了"深度语义SLAM"这一方向:它证明了CNN感知与�
 - [Fusion++](fusionpp.md)
 - [Kimera / 3D动态场景图](../level-05-deep-learning/kimera-3d-dynamic-scene-graph.md)
 - [MaskFusion](../level-03-monocular-slam/maskfusion.md)
-- [ConceptFusion](../level-03-monocular-slam/conceptfusion.md)
+- [ConceptFusion](../level-05-deep-learning/conceptfusion.md)

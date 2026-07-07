@@ -45,6 +45,6 @@ NodeSLAMは現代のオブジェクトレベルSLAMのパラダイムを確立�
 
 - [CodeSLAM](codeslam.md) — NodeSLAMが物体レベルに引き上げるフレームレベルの潜在コードの発想
 - [DSP-SLAM](../level-04-rgbd-slam/dsp-slam.md) — ORB-SLAM2バックボーン上のDeepSDF物体事前知識
-- [vMAP](../level-03-monocular-slam/vmap.md) — オブジェクトレベルの神経フィールド後継手法
+- [vMAP](vmap.md) — オブジェクトレベルの神経フィールド後継手法
 - [Fusion++](../level-04-rgbd-slam/fusionpp.md) — 学習された形状事前知識を用いないオブジェクトレベルTSDFマッピング
 - [MoreFusion](../level-04-rgbd-slam/morefusion.md) — 同じ研究室・同時代のマニピュレーション向けオブジェクトレベル融合

@@ -42,5 +42,5 @@ DeepVO는 대부분의 커리큘럼에서 "학습된 SLAM"이 시작되는 지�
 - [UndeepVO](undeepvo.md)
 - [PoseNet](posenet.md)
 - [FlowNet](flownet.md)
-- [TartanVO](../level-03-monocular-slam/tartanvo.md)
+- [TartanVO](tartanvo.md)
 - [DeepSLAM](deepslam.md)

@@ -40,4 +40,4 @@ DeMoNは「2枚の画像をネットワークに入力すると幾何が出て�
 - [DeepV2D](deepv2d.md)
 - [SfM-Learner](sfm-learner.md)
 - [FlowNet](flownet.md)
-- [DUSt3R](../level-03-monocular-slam/dust3r.md)
+- [DUSt3R](dust3r.md)

@@ -45,6 +45,6 @@ NodeSLAM 确立了现代物体级 SLAM 的范式：将学习到的形状先验�
 
 - [CodeSLAM](codeslam.md) — NodeSLAM 将其提升到物体层面的帧级潜在编码思想
 - [DSP-SLAM](../level-04-rgbd-slam/dsp-slam.md) — 在 ORB-SLAM2 骨架上运行的 DeepSDF 物体先验
-- [vMAP](../level-03-monocular-slam/vmap.md) — 物体级神经场后续工作
+- [vMAP](vmap.md) — 物体级神经场后续工作
 - [Fusion++](../level-04-rgbd-slam/fusionpp.md) — 不使用学习形状先验的物体级 TSDF 建图
 - [MoreFusion](../level-04-rgbd-slam/morefusion.md) — 同一实验室同一时期面向操作任务的物体级融合方法

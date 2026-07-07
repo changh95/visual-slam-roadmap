@@ -55,4 +55,4 @@ Differentiability는 레벨 5의 두 절반을 잇는 다리다: 이는 학습�
 - [Lietorch](lietorch.md)
 - [GradSLAM](gradslam.md)
 - [DISK](disk.md)
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md)
+- [DROID-SLAM](droid-slam.md)

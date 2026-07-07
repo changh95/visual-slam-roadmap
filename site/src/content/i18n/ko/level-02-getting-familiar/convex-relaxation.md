@@ -42,5 +42,5 @@ SLAM 백엔드는 안전이 중요한 시스템에서 신뢰받지만, 지역 �
 - [Pose graph optimization](pose-graph-optimization.md)
 - [Robust pose-graph optimization](robust-pose-graph-optimization.md)
 - [MaxCon](maxcon.md)
-- [SE-Sync](../level-05-deep-learning/se-sync.md)
-- [TEASER++](../level-05-deep-learning/teaserpp.md)
+- [SE-Sync](se-sync.md)
+- [TEASER++](teaserpp.md)

@@ -41,5 +41,5 @@ Hydra将3D Dynamic Scene Graph从一种离线构建方法转变为实时空间�
 - [Clio](clio.md) — 任务驱动的开放集场景图
 - [Khronos](khronos.md) — 面向动态场景的时空扩展
 - [ConceptGraphs](conceptgraphs.md) — 开放词汇的三维场景图
-- [GNC](gnc.md) — 场景图后端所用的鲁棒求解器
+- [GNC](../level-02-getting-familiar/gnc.md) — 场景图后端所用的鲁棒求解器
 - [Pose graph optimization](../level-02-getting-familiar/pose-graph-optimization.md) — 变形图修正所扩展的经典机制

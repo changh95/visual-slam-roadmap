@@ -41,4 +41,4 @@ SemanticFusion은 "심층 의미론적 SLAM"을 개척했다: CNN 인지와 밀�
 - [Fusion++](fusionpp.md)
 - [Kimera / 3D Dynamic Scene Graph](../level-05-deep-learning/kimera-3d-dynamic-scene-graph.md)
 - [MaskFusion](../level-03-monocular-slam/maskfusion.md)
-- [ConceptFusion](../level-03-monocular-slam/conceptfusion.md)
+- [ConceptFusion](../level-05-deep-learning/conceptfusion.md)

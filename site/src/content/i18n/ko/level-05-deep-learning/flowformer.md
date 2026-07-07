@@ -41,5 +41,5 @@ Dense optical flow는 현대의 학습 기반 SLAM front-end (DROID-SLAM, DPVO �
 - [RAFT](raft.md) — FlowFormer가 토큰화하는 cost volume의 합성곱 all-pairs 전신
 - [SEA-RAFT](sea-raft.md) — 학습 개선을 통해 Transformer에 필적하는 효율성 중심의 대조점
 - [FlowNet 2.0](flownet-2-0.md) — deep flow에서의 더 이른 반복적 정제 계보
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md) — dense 순환 flow를 중심으로 구축된 SLAM 시스템
+- [DROID-SLAM](droid-slam.md) — dense 순환 flow를 중심으로 구축된 SLAM 시스템
 - [LoFTR](loftr.md) — detector-free 이미지 매칭에 적용된 Transformer attention

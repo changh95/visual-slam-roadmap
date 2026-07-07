@@ -49,4 +49,4 @@ DeepV2D는 DeMoN에서 DROID-SLAM으로 이어지는 계보의 핵심 연결점�
 - [BA-Net](ba-net.md)
 - [DeepTAM](deeptam.md)
 - [RAFT](raft.md)
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md)
+- [DROID-SLAM](droid-slam.md)

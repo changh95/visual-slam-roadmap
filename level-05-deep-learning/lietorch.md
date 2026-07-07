@@ -37,8 +37,8 @@ Every deep SLAM or deep VO system that learns through pose optimization needs de
 ## Related
 
 - [Theseus](theseus.md) — differentiable nonlinear least squares built on the same needs
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md) — flagship system built on Lietorch
-- [DPVO](../level-03-monocular-slam/dpvo.md) — sparse patch-based successor, also Lietorch-based
+- [DROID-SLAM](droid-slam.md) — flagship system built on Lietorch
+- [DPVO](dpvo.md) — sparse patch-based successor, also Lietorch-based
 - [DeepV2D](deepv2d.md) — the deep RGB-D SLAM system re-trained with Lietorch's geodesic loss
 - [Lie groups](../level-02-getting-familiar/lie-groups.md) — the underlying mathematics
 - [Differentiability](differentiability.md) — why gradients through geometry matter in deep SLAM

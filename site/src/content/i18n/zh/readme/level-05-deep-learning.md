@@ -94,8 +94,8 @@
 | 系统 | 作者/年份 | 关键概念 |
 |--------|-------------|--------------|
 | [**BA-Net**](level-05-deep-learning/ba-net.md) | [Tang 2019](https://arxiv.org/abs/1806.04807) | FPN+可微分LM层，端到端SfM(ICLR) |
-| [**DROID-SLAM**](level-03-monocular-slam/droid-slam.md) | [Teed 2021](https://arxiv.org/abs/2108.10869) | 稠密光流+可微分稠密BA，全像素重投影 |
-| [**DPVO**](level-03-monocular-slam/dpvo.md) | [Teed 2023](https://arxiv.org/abs/2208.04726) | 基于图像块的轻量化DROID-SLAM，30+ FPS实时 |
+| [**DROID-SLAM**](level-05-deep-learning/droid-slam.md) | [Teed 2021](https://arxiv.org/abs/2108.10869) | 稠密光流+可微分稠密BA，全像素重投影 |
+| [**DPVO**](level-05-deep-learning/dpvo.md) | [Teed 2023](https://arxiv.org/abs/2208.04726) | 基于图像块的轻量化DROID-SLAM，30+ FPS实时 |
 | [**Theseus**](level-05-deep-learning/theseus.md) | [Pineda (Meta) 2022](https://arxiv.org/abs/2207.09442) | 可微分非线性优化库(PyTorch) |
 | [**Lietorch**](level-05-deep-learning/lietorch.md) | [Teed 2021](https://github.com/princeton-vl/lietorch) | 面向PyTorch的李群运算(SE(3)/SO(3)) |
 
@@ -103,19 +103,19 @@
 
 | 系统 | 作者/年份 | 关键概念 |
 |--------|-------------|--------------|
-| [**SE-Sync**](level-05-deep-learning/se-sync.md) | [Rosen 2019](https://arxiv.org/abs/1611.00128) | 通过SDP+黎曼优化实现可证明的位姿图优化(arXiv 2016, IJRR 2019) |
-| [**TEASER++**](level-05-deep-learning/teaserpp.md) | [Yang 2020](https://arxiv.org/abs/2001.07715) | 点云配准，对90%以上外点鲁棒，TLS+最大团(T-RO/RSS 2020) |
-| [**GNC**](level-05-deep-learning/gnc.md) | [Yang 2020](https://arxiv.org/abs/1909.08605) | 渐进非凸化(Graduated Non-Convexity)，从凸优化连续过渡到鲁棒代价函数 |
-| [**QUASAR**](level-05-deep-learning/quasar.md) | [Yang 2019](https://arxiv.org/abs/1905.12536) | 可证明最优的旋转搜索(含外点的Wahba问题)，四元数QCQP+SDP松弛 |
+| [**SE-Sync**](level-02-getting-familiar/se-sync.md) | [Rosen 2019](https://arxiv.org/abs/1611.00128) | 通过SDP+黎曼优化实现可证明的位姿图优化(arXiv 2016, IJRR 2019) |
+| [**TEASER++**](level-02-getting-familiar/teaserpp.md) | [Yang 2020](https://arxiv.org/abs/2001.07715) | 点云配准，对90%以上外点鲁棒，TLS+最大团(T-RO/RSS 2020) |
+| [**GNC**](level-02-getting-familiar/gnc.md) | [Yang 2020](https://arxiv.org/abs/1909.08605) | 渐进非凸化(Graduated Non-Convexity)，从凸优化连续过渡到鲁棒代价函数 |
+| [**QUASAR**](level-02-getting-familiar/quasar.md) | [Yang 2019](https://arxiv.org/abs/1905.12536) | 可证明最优的旋转搜索(含外点的Wahba问题)，四元数QCQP+SDP松弛 |
 
 #### 高斯信念传播与图处理器
 
 | 系统 | 作者/年份 | 关键概念 |
 |--------|-------------|--------------|
-| [**FutureMapping 1**](level-05-deep-learning/futuremapping-1.md) | [Davison 2018](https://arxiv.org/abs/1803.11288) | Spatial AI的计算结构，用于SLAM的高斯信念传播(GBP) |
-| [**FutureMapping 2**](level-05-deep-learning/futuremapping-2.md) | [Davison 2019](https://arxiv.org/abs/1910.14139) | 将GBP作为Spatial AI的核心基础，GBP的可视化介绍 |
-| [**BA on Graph Processor**](level-05-deep-learning/ba-on-graph-processor.md) | [Ortiz 2020](https://arxiv.org/abs/2003.03134) | 在Graphcore IPU上进行光束法平差，基于分块(tile)的并行化 |
-| [**DANCeRS**](level-05-deep-learning/dancers.md) | [Patwardhan 2025](https://arxiv.org/abs/2508.18153) | 基于GBP的机器人集群分布式共识 |
+| [**FutureMapping 1**](level-02-getting-familiar/futuremapping-1.md) | [Davison 2018](https://arxiv.org/abs/1803.11288) | Spatial AI的计算结构，用于SLAM的高斯信念传播(GBP) |
+| [**FutureMapping 2**](level-02-getting-familiar/futuremapping-2.md) | [Davison 2019](https://arxiv.org/abs/1910.14139) | 将GBP作为Spatial AI的核心基础，GBP的可视化介绍 |
+| [**BA on Graph Processor**](level-02-getting-familiar/ba-on-graph-processor.md) | [Ortiz 2020](https://arxiv.org/abs/2003.03134) | 在Graphcore IPU上进行光束法平差，基于分块(tile)的并行化 |
+| [**DANCeRS**](level-02-getting-familiar/dancers.md) | [Patwardhan 2025](https://arxiv.org/abs/2508.18153) | 基于GBP的机器人集群分布式共识 |
 
 ### C. 端到端深度VO/SLAM系统
 
@@ -135,8 +135,8 @@
 | [DeepSLAM](level-05-deep-learning/deepslam.md) | [Li 2020](https://ieeexplore.ieee.org/document/9047170) | TrackingNet、MappingNet、LoopNet |
 | [MonoRec](level-05-deep-learning/monorec.md) | [Wimbauer 2021](https://arxiv.org/abs/2011.11814) | 自监督单目3D重建，运动物体处理 |
 | [TANDEM](level-05-deep-learning/tandem.md) | [Koestler 2021](https://arxiv.org/abs/2111.07418) | 通过MVS深度实现实时跟踪+稠密建图，基于DSO |
-| [**DROID-SLAM**](level-03-monocular-slam/droid-slam.md) | [Teed 2021](https://arxiv.org/abs/2108.10869) | 稠密BA+关联，TartanAir/EuRoC上SOTA(→ 见可微分BA部分) |
-| [**DPVO**](level-03-monocular-slam/dpvo.md) | [Teed 2023](https://arxiv.org/abs/2208.04726) | 基于图像块的轻量化DROID(→ 见可微分BA部分) |
+| [**DROID-SLAM**](level-05-deep-learning/droid-slam.md) | [Teed 2021](https://arxiv.org/abs/2108.10869) | 稠密BA+关联，TartanAir/EuRoC上SOTA(→ 见可微分BA部分) |
+| [**DPVO**](level-05-deep-learning/dpvo.md) | [Teed 2023](https://arxiv.org/abs/2208.04726) | 基于图像块的轻量化DROID(→ 见可微分BA部分) |
 
 #### 潜表征SLAM
 

@@ -37,8 +37,8 @@ $$\mathcal{L}(\mathbf{T}_1,\ldots,\mathbf{T}_K) = \sum_k \|\operatorname{Log}(\m
 ## 相关条目
 
 - [Theseus](theseus.md) — 基于同样需求构建的可微非线性最小二乘
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md) — 基于Lietorch构建的旗舰系统
-- [DPVO](../level-03-monocular-slam/dpvo.md) — 稀疏patch式后继系统，同样基于Lietorch
+- [DROID-SLAM](droid-slam.md) — 基于Lietorch构建的旗舰系统
+- [DPVO](dpvo.md) — 稀疏patch式后继系统，同样基于Lietorch
 - [DeepV2D](deepv2d.md) — 用Lietorch的测地线损失重新训练的深度RGB-D SLAM系统
 - [Lie groups](../level-02-getting-familiar/lie-groups.md) — 底层数学基础
 - [Differentiability](differentiability.md) — 为什么几何梯度在深度SLAM中很重要

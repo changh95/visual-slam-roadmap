@@ -42,5 +42,5 @@ DeepVOは、多くのカリキュラムにおいて「学習型SLAM」が始ま�
 - [UndeepVO](undeepvo.md)
 - [PoseNet](posenet.md)
 - [FlowNet](flownet.md)
-- [TartanVO](../level-03-monocular-slam/tartanvo.md)
+- [TartanVO](tartanvo.md)
 - [DeepSLAM](deepslam.md)

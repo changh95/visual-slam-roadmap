@@ -94,8 +94,8 @@
 | 시스템 | 저자/연도 | 핵심 개념 |
 |--------|-------------|--------------|
 | [**BA-Net**](level-05-deep-learning/ba-net.md) | [Tang 2019](https://arxiv.org/abs/1806.04807) | FPN + 미분 가능 LM 레이어, 종단간 SfM (ICLR) |
-| [**DROID-SLAM**](level-03-monocular-slam/droid-slam.md) | [Teed 2021](https://arxiv.org/abs/2108.10869) | 밀도 옵티컬 플로우 + 미분 가능 밀도 BA, 모든 픽셀 재투영 |
-| [**DPVO**](level-03-monocular-slam/dpvo.md) | [Teed 2023](https://arxiv.org/abs/2208.04726) | 패치 기반 DROID-SLAM, 30+ FPS 실시간 |
+| [**DROID-SLAM**](level-05-deep-learning/droid-slam.md) | [Teed 2021](https://arxiv.org/abs/2108.10869) | 밀도 옵티컬 플로우 + 미분 가능 밀도 BA, 모든 픽셀 재투영 |
+| [**DPVO**](level-05-deep-learning/dpvo.md) | [Teed 2023](https://arxiv.org/abs/2208.04726) | 패치 기반 DROID-SLAM, 30+ FPS 실시간 |
 | [**Theseus**](level-05-deep-learning/theseus.md) | [Pineda (Meta) 2022](https://arxiv.org/abs/2207.09442) | 미분 가능 비선형 최적화 라이브러리(PyTorch) |
 | [**Lietorch**](level-05-deep-learning/lietorch.md) | [Teed 2021](https://github.com/princeton-vl/lietorch) | PyTorch를 위한 리 군 연산(SE(3)/SO(3)) |
 
@@ -103,19 +103,19 @@
 
 | 시스템 | 저자/연도 | 핵심 개념 |
 |--------|-------------|--------------|
-| [**SE-Sync**](level-05-deep-learning/se-sync.md) | [Rosen 2019](https://arxiv.org/abs/1611.00128) | SDP + 리만 최적화를 통한 인증 가능한 포즈 그래프 최적화 (arXiv 2016, IJRR 2019) |
-| [**TEASER++**](level-05-deep-learning/teaserpp.md) | [Yang 2020](https://arxiv.org/abs/2001.07715) | 포인트 클라우드 정합, 90%+ 이상치에 강건, TLS + Max Clique (T-RO/RSS 2020) |
-| [**GNC**](level-05-deep-learning/gnc.md) | [Yang 2020](https://arxiv.org/abs/1909.08605) | Graduated Non-Convexity, 볼록 → 강건 비용으로의 연속화(continuation) |
-| [**QUASAR**](level-05-deep-learning/quasar.md) | [Yang 2019](https://arxiv.org/abs/1905.12536) | 인증 가능한 최적 회전 탐색(이상치가 있는 Wahba 문제), 쿼터니언 QCQP + SDP 완화 |
+| [**SE-Sync**](level-02-getting-familiar/se-sync.md) | [Rosen 2019](https://arxiv.org/abs/1611.00128) | SDP + 리만 최적화를 통한 인증 가능한 포즈 그래프 최적화 (arXiv 2016, IJRR 2019) |
+| [**TEASER++**](level-02-getting-familiar/teaserpp.md) | [Yang 2020](https://arxiv.org/abs/2001.07715) | 포인트 클라우드 정합, 90%+ 이상치에 강건, TLS + Max Clique (T-RO/RSS 2020) |
+| [**GNC**](level-02-getting-familiar/gnc.md) | [Yang 2020](https://arxiv.org/abs/1909.08605) | Graduated Non-Convexity, 볼록 → 강건 비용으로의 연속화(continuation) |
+| [**QUASAR**](level-02-getting-familiar/quasar.md) | [Yang 2019](https://arxiv.org/abs/1905.12536) | 인증 가능한 최적 회전 탐색(이상치가 있는 Wahba 문제), 쿼터니언 QCQP + SDP 완화 |
 
 #### 가우시안 신뢰 전파 및 그래프 프로세서
 
 | 시스템 | 저자/연도 | 핵심 개념 |
 |--------|-------------|--------------|
-| [**FutureMapping 1**](level-05-deep-learning/futuremapping-1.md) | [Davison 2018](https://arxiv.org/abs/1803.11288) | 공간 AI의 연산 구조, SLAM을 위한 GBP |
-| [**FutureMapping 2**](level-05-deep-learning/futuremapping-2.md) | [Davison 2019](https://arxiv.org/abs/1910.14139) | 핵심 공간 AI 프리미티브로서의 GBP, GBP에 대한 시각적 입문 |
-| [**BA on Graph Processor**](level-05-deep-learning/ba-on-graph-processor.md) | [Ortiz 2020](https://arxiv.org/abs/2003.03134) | Graphcore IPU에서의 번들 조정, 타일 기반 병렬성 |
-| [**DANCeRS**](level-05-deep-learning/dancers.md) | [Patwardhan 2025](https://arxiv.org/abs/2508.18153) | 로봇 군집에서의 GBP 기반 분산 합의 |
+| [**FutureMapping 1**](level-02-getting-familiar/futuremapping-1.md) | [Davison 2018](https://arxiv.org/abs/1803.11288) | 공간 AI의 연산 구조, SLAM을 위한 GBP |
+| [**FutureMapping 2**](level-02-getting-familiar/futuremapping-2.md) | [Davison 2019](https://arxiv.org/abs/1910.14139) | 핵심 공간 AI 프리미티브로서의 GBP, GBP에 대한 시각적 입문 |
+| [**BA on Graph Processor**](level-02-getting-familiar/ba-on-graph-processor.md) | [Ortiz 2020](https://arxiv.org/abs/2003.03134) | Graphcore IPU에서의 번들 조정, 타일 기반 병렬성 |
+| [**DANCeRS**](level-02-getting-familiar/dancers.md) | [Patwardhan 2025](https://arxiv.org/abs/2508.18153) | 로봇 군집에서의 GBP 기반 분산 합의 |
 
 ### C. 종단간 딥 VO / SLAM 시스템
 
@@ -135,8 +135,8 @@
 | [DeepSLAM](level-05-deep-learning/deepslam.md) | [Li 2020](https://ieeexplore.ieee.org/document/9047170) | TrackingNet, MappingNet, LoopNet |
 | [MonoRec](level-05-deep-learning/monorec.md) | [Wimbauer 2021](https://arxiv.org/abs/2011.11814) | 자기지도 학습 단안 3D 재구성, 움직이는 객체 |
 | [TANDEM](level-05-deep-learning/tandem.md) | [Koestler 2021](https://arxiv.org/abs/2111.07418) | MVS 깊이를 통한 실시간 추적 + 밀도 매핑, DSO 기반 |
-| [**DROID-SLAM**](level-03-monocular-slam/droid-slam.md) | [Teed 2021](https://arxiv.org/abs/2108.10869) | 밀도 BA + 상관, TartanAir/EuRoC에서 SOTA (→ 미분 가능 BA 참고) |
-| [**DPVO**](level-03-monocular-slam/dpvo.md) | [Teed 2023](https://arxiv.org/abs/2208.04726) | 패치 기반 경량 DROID (→ 미분 가능 BA 참고) |
+| [**DROID-SLAM**](level-05-deep-learning/droid-slam.md) | [Teed 2021](https://arxiv.org/abs/2108.10869) | 밀도 BA + 상관, TartanAir/EuRoC에서 SOTA (→ 미분 가능 BA 참고) |
+| [**DPVO**](level-05-deep-learning/dpvo.md) | [Teed 2023](https://arxiv.org/abs/2208.04726) | 패치 기반 경량 DROID (→ 미분 가능 BA 참고) |
 
 #### 잠재 표현 SLAM
 

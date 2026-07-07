@@ -42,5 +42,5 @@ $$\mathcal{L}_{\text{NLL}}=\sum_{m=1}^{M}-\log(\operatorname{Softmax}(\mathcal{S
 - [RoMa](roma.md) — 前身方法及核心架构
 - [LoFTR](loftr.md) — 更早的无检测器匹配谱系
 - [Foundation models](foundation-models.md) — 鲁棒粗特征的来源
-- [MASt3R](../level-03-monocular-slam/mast3r.md) — 与3D重建融合的稠密匹配
+- [MASt3R](mast3r.md) — 与3D重建融合的稠密匹配
 - [DeDoDe](dedode.md) — 同一团队的解耦式稀疏检测器/描述子方法

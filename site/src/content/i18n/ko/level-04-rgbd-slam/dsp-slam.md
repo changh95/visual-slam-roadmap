@@ -43,4 +43,4 @@ DSP-SLAM은 온라인 객체 재건을 위해 학습된 암묵적 형상 사전�
 - [MoreFusion](morefusion.md) — 조작(manipulation)을 위한 포즈 추정을 갖춘 객체 수준 융합
 - [ORB-SLAM2](../level-03-monocular-slam/orb-slam2.md) — 기반이 되는 SLAM 백본
 - [NodeSLAM](../level-05-deep-learning/nodeslam.md) — 밀도 깊이로부터의 형상 사전 SLAM, 가장 가까운 동시대 연구
-- [vMAP](../level-03-monocular-slam/vmap.md) — 다음 단계로서의 객체별 신경 필드
+- [vMAP](../level-05-deep-learning/vmap.md) — 다음 단계로서의 객체별 신경 필드

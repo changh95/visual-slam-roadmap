@@ -41,4 +41,4 @@ SAM은 SLAM 시스템에 요청 시 클래스에 무관한 객체 마스크를 �
 - [Grounding DINO](grounding-dino.md) — SAM에 입력되는 텍스트 프롬프트 박스
 - [ConceptGraphs](conceptgraphs.md) — SAM 마스크로 구축된 개방형 어휘 3D 장면 그래프
 - [Clio](clio.md) — SAM 스타일 마스크의 태스크 주도 개방형 어휘 매핑 소비자
-- [ConceptFusion](../level-03-monocular-slam/conceptfusion.md) — 개방형 집합 멀티모달 3D 매핑
+- [ConceptFusion](conceptfusion.md) — 개방형 집합 멀티모달 3D 매핑

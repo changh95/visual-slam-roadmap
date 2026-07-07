@@ -55,4 +55,4 @@ Differentiabilityは、レベル5の2つの半分を結ぶ橋である：それ�
 - [Lietorch](lietorch.md)
 - [GradSLAM](gradslam.md)
 - [DISK](disk.md)
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md)
+- [DROID-SLAM](droid-slam.md)

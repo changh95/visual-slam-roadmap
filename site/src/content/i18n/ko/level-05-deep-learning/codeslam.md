@@ -49,5 +49,5 @@ CodeSLAM은 DTAM 이후 dense SLAM을 막고 있던 질문에 답했습니다: d
 - [SceneCode](scenecode.md)
 - [NodeSLAM](nodeslam.md)
 - [CodeMapping](codemapping.md)
-- [iMAP](../level-03-monocular-slam/imap.md)
+- [iMAP](imap.md)
 - [DTAM](../level-03-monocular-slam/dtam.md)

@@ -45,6 +45,6 @@ NodeSLAM established the modern object-level SLAM paradigm: learned shape priors
 
 - [CodeSLAM](codeslam.md) — the frame-level latent-code idea NodeSLAM lifts to objects
 - [DSP-SLAM](../level-04-rgbd-slam/dsp-slam.md) — DeepSDF object priors on an ORB-SLAM2 backbone
-- [vMAP](../level-03-monocular-slam/vmap.md) — object-level neural-field successor
+- [vMAP](vmap.md) — object-level neural-field successor
 - [Fusion++](../level-04-rgbd-slam/fusionpp.md) — object-level TSDF mapping without learned shape priors
 - [MoreFusion](../level-04-rgbd-slam/morefusion.md) — object-level fusion for manipulation from the same lab era

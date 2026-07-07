@@ -62,7 +62,7 @@ Level 5のほぼすべての論文は、学習型対手作りのスペクトル�
 - [SuperPoint](superpoint.md)
 - [SuperGlue](superglue.md)
 - [DeepVO](deepvo.md)
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md)
+- [DROID-SLAM](droid-slam.md)
 - [Differentiability](differentiability.md)
 - [NetVLAD](netvlad.md)
 - [Foundation models](foundation-models.md)

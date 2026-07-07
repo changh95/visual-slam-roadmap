@@ -94,8 +94,8 @@
 | システム | 著者/年 | キーコンセプト |
 |--------|-------------|--------------|
 | [**BA-Net**](level-05-deep-learning/ba-net.md) | [Tang 2019](https://arxiv.org/abs/1806.04807) | FPN+微分可能なLM層、end-to-endなSfM(ICLR) |
-| [**DROID-SLAM**](level-03-monocular-slam/droid-slam.md) | [Teed 2021](https://arxiv.org/abs/2108.10869) | 高密度オプティカルフロー+微分可能な高密度BA、全画素の再投影 |
-| [**DPVO**](level-03-monocular-slam/dpvo.md) | [Teed 2023](https://arxiv.org/abs/2208.04726) | パッチベースのDROID-SLAM、30FPS以上のリアルタイム動作 |
+| [**DROID-SLAM**](level-05-deep-learning/droid-slam.md) | [Teed 2021](https://arxiv.org/abs/2108.10869) | 高密度オプティカルフロー+微分可能な高密度BA、全画素の再投影 |
+| [**DPVO**](level-05-deep-learning/dpvo.md) | [Teed 2023](https://arxiv.org/abs/2208.04726) | パッチベースのDROID-SLAM、30FPS以上のリアルタイム動作 |
 | [**Theseus**](level-05-deep-learning/theseus.md) | [Pineda (Meta) 2022](https://arxiv.org/abs/2207.09442) | 微分可能な非線形最適化ライブラリ(PyTorch) |
 | [**Lietorch**](level-05-deep-learning/lietorch.md) | [Teed 2021](https://github.com/princeton-vl/lietorch) | PyTorch向けのリー群演算(SE(3)/SO(3)) |
 
@@ -103,19 +103,19 @@
 
 | システム | 著者/年 | キーコンセプト |
 |--------|-------------|--------------|
-| [**SE-Sync**](level-05-deep-learning/se-sync.md) | [Rosen 2019](https://arxiv.org/abs/1611.00128) | SDP+リーマン最適化による証明可能なポーズグラフ最適化(arXiv 2016、IJRR 2019) |
-| [**TEASER++**](level-05-deep-learning/teaserpp.md) | [Yang 2020](https://arxiv.org/abs/2001.07715) | 点群レジストレーション、90%以上の外れ値にロバスト、TLS+最大クリーク(T-RO/RSS 2020) |
-| [**GNC**](level-05-deep-learning/gnc.md) | [Yang 2020](https://arxiv.org/abs/1909.08605) | Graduated Non-Convexity、凸関数からロバストコストへの連続変形 |
-| [**QUASAR**](level-05-deep-learning/quasar.md) | [Yang 2019](https://arxiv.org/abs/1905.12536) | 証明可能な最適回転探索(外れ値を含むWahba問題)、クォータニオンQCQP+SDP緩和 |
+| [**SE-Sync**](level-02-getting-familiar/se-sync.md) | [Rosen 2019](https://arxiv.org/abs/1611.00128) | SDP+リーマン最適化による証明可能なポーズグラフ最適化(arXiv 2016、IJRR 2019) |
+| [**TEASER++**](level-02-getting-familiar/teaserpp.md) | [Yang 2020](https://arxiv.org/abs/2001.07715) | 点群レジストレーション、90%以上の外れ値にロバスト、TLS+最大クリーク(T-RO/RSS 2020) |
+| [**GNC**](level-02-getting-familiar/gnc.md) | [Yang 2020](https://arxiv.org/abs/1909.08605) | Graduated Non-Convexity、凸関数からロバストコストへの連続変形 |
+| [**QUASAR**](level-02-getting-familiar/quasar.md) | [Yang 2019](https://arxiv.org/abs/1905.12536) | 証明可能な最適回転探索(外れ値を含むWahba問題)、クォータニオンQCQP+SDP緩和 |
 
 #### ガウス信念伝播とグラフプロセッサ
 
 | システム | 著者/年 | キーコンセプト |
 |--------|-------------|--------------|
-| [**FutureMapping 1**](level-05-deep-learning/futuremapping-1.md) | [Davison 2018](https://arxiv.org/abs/1803.11288) | Spatial AIの計算構造、SLAMのためのGBP |
-| [**FutureMapping 2**](level-05-deep-learning/futuremapping-2.md) | [Davison 2019](https://arxiv.org/abs/1910.14139) | Spatial AIの中核プリミティブとしてのGBP、GBPへの視覚的な入門 |
-| [**BA on Graph Processor**](level-05-deep-learning/ba-on-graph-processor.md) | [Ortiz 2020](https://arxiv.org/abs/2003.03134) | Graphcore IPU上でのバンドル調整、タイルベースの並列処理 |
-| [**DANCeRS**](level-05-deep-learning/dancers.md) | [Patwardhan 2025](https://arxiv.org/abs/2508.18153) | GBPベースのロボット群における分散合意形成 |
+| [**FutureMapping 1**](level-02-getting-familiar/futuremapping-1.md) | [Davison 2018](https://arxiv.org/abs/1803.11288) | Spatial AIの計算構造、SLAMのためのGBP |
+| [**FutureMapping 2**](level-02-getting-familiar/futuremapping-2.md) | [Davison 2019](https://arxiv.org/abs/1910.14139) | Spatial AIの中核プリミティブとしてのGBP、GBPへの視覚的な入門 |
+| [**BA on Graph Processor**](level-02-getting-familiar/ba-on-graph-processor.md) | [Ortiz 2020](https://arxiv.org/abs/2003.03134) | Graphcore IPU上でのバンドル調整、タイルベースの並列処理 |
+| [**DANCeRS**](level-02-getting-familiar/dancers.md) | [Patwardhan 2025](https://arxiv.org/abs/2508.18153) | GBPベースのロボット群における分散合意形成 |
 
 ### C. End-to-Endな深層VO/SLAMシステム
 
@@ -135,8 +135,8 @@
 | [DeepSLAM](level-05-deep-learning/deepslam.md) | [Li 2020](https://ieeexplore.ieee.org/document/9047170) | TrackingNet、MappingNet、LoopNet |
 | [MonoRec](level-05-deep-learning/monorec.md) | [Wimbauer 2021](https://arxiv.org/abs/2011.11814) | 自己教師ありモノキュラ3次元再構成、移動物体対応 |
 | [TANDEM](level-05-deep-learning/tandem.md) | [Koestler 2021](https://arxiv.org/abs/2111.07418) | MVS深度によるリアルタイムトラッキング+高密度マッピング、DSOベース |
-| [**DROID-SLAM**](level-03-monocular-slam/droid-slam.md) | [Teed 2021](https://arxiv.org/abs/2108.10869) | 高密度BA+相関、TartanAir/EuRoCでSOTA(→ 微分可能BAを参照) |
-| [**DPVO**](level-03-monocular-slam/dpvo.md) | [Teed 2023](https://arxiv.org/abs/2208.04726) | パッチベースの軽量DROID(→ 微分可能BAを参照) |
+| [**DROID-SLAM**](level-05-deep-learning/droid-slam.md) | [Teed 2021](https://arxiv.org/abs/2108.10869) | 高密度BA+相関、TartanAir/EuRoCでSOTA(→ 微分可能BAを参照) |
+| [**DPVO**](level-05-deep-learning/dpvo.md) | [Teed 2023](https://arxiv.org/abs/2208.04726) | パッチベースの軽量DROID(→ 微分可能BAを参照) |
 
 #### 潜在表現SLAM
 

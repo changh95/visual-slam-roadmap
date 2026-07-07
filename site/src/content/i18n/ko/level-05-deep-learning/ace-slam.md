@@ -38,7 +38,7 @@ ACE-SLAM은 DSAC, ACE, ACE Zero를 거치며 오프라인 재위치 인식 기�
 
 - [ACE](ace.md)
 - [ACE Zero](ace-zero.md)
-- [iMAP](../level-03-monocular-slam/imap.md)
-- [NICE-SLAM](../level-03-monocular-slam/nice-slam.md)
+- [iMAP](imap.md)
+- [NICE-SLAM](nice-slam.md)
 - [ACE-G](ace-g.md)
 - [SuperPoint](superpoint.md)

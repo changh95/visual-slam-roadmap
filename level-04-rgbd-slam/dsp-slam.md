@@ -43,4 +43,4 @@ DSP-SLAM was the first SLAM system to integrate learned implicit shape priors fo
 - [MoreFusion](morefusion.md) — object-level fusion with pose estimation for manipulation
 - [ORB-SLAM2](../level-03-monocular-slam/orb-slam2.md) — the underlying SLAM backbone
 - [NodeSLAM](../level-05-deep-learning/nodeslam.md) — shape-prior SLAM from dense depth, the closest contemporary
-- [vMAP](../level-03-monocular-slam/vmap.md) — per-object neural fields as the next step
+- [vMAP](../level-05-deep-learning/vmap.md) — per-object neural fields as the next step

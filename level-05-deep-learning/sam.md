@@ -41,4 +41,4 @@ SAM gave SLAM systems class-agnostic object masks on demand — the missing ingr
 - [Grounding DINO](grounding-dino.md) — text-prompted boxes that feed SAM
 - [ConceptGraphs](conceptgraphs.md) — open-vocabulary 3D scene graphs built on SAM masks
 - [Clio](clio.md) — task-driven open-vocabulary mapping consumer of SAM-style masks
-- [ConceptFusion](../level-03-monocular-slam/conceptfusion.md) — open-set multimodal 3D mapping
+- [ConceptFusion](conceptfusion.md) — open-set multimodal 3D mapping

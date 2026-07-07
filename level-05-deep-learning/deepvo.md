@@ -42,5 +42,5 @@ DeepVO is where "learned SLAM" starts in most curricula: it demonstrated both th
 - [UndeepVO](undeepvo.md)
 - [PoseNet](posenet.md)
 - [FlowNet](flownet.md)
-- [TartanVO](../level-03-monocular-slam/tartanvo.md)
+- [TartanVO](tartanvo.md)
 - [DeepSLAM](deepslam.md)

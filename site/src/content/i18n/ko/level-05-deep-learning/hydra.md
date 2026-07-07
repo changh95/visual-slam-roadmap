@@ -41,5 +41,5 @@ Hydra는 3D Dynamic Scene Graph를 오프라인 구성물에서 실시간 spatia
 - [Clio](clio.md) — 작업 기반 개방형 scene graph
 - [Khronos](khronos.md) — 동적 장면을 위한 시공간적 확장
 - [ConceptGraphs](conceptgraphs.md) — 개방형 어휘 3D scene graph
-- [GNC](gnc.md) — scene graph 백엔드에 사용되는 강건한 솔버
+- [GNC](../level-02-getting-familiar/gnc.md) — scene graph 백엔드에 사용되는 강건한 솔버
 - [Pose graph optimization](../level-02-getting-familiar/pose-graph-optimization.md) — deformation graph 보정이 확장하는 고전적 기법

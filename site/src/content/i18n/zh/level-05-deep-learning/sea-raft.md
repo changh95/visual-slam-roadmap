@@ -41,6 +41,6 @@ $$MixLap(x;\alpha,\beta_1,\beta_2,\mu) = \alpha\cdot\frac{e^{-\frac{|x-\mu|}{e^{
 
 - [RAFT](raft.md) — 基础架构和训练目标
 - [FlowFormer](flowformer.md) — 更重的Transformer替代方案
-- [TartanVO](../level-03-monocular-slam/tartanvo.md) — 同样建立在TartanAir刚性场景数据上的学习型VO
-- [DPVO](../level-03-monocular-slam/dpvo.md) — 采用RAFT风格更新的稀疏学习型里程计
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md) — 在完整SLAM系统中使用RAFT机制
+- [TartanVO](tartanvo.md) — 同样建立在TartanAir刚性场景数据上的学习型VO
+- [DPVO](dpvo.md) — 采用RAFT风格更新的稀疏学习型里程计
+- [DROID-SLAM](droid-slam.md) — 在完整SLAM系统中使用RAFT机制

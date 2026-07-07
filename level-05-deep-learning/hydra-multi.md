@@ -49,7 +49,7 @@ Hydra-Multi was the first system to build 3D scene graphs collaboratively across
 
 - [Hydra](hydra.md) — the single-robot scene-graph system each robot runs
 - [Kimera-Multi](../level-08-collaborative-slam/kimera-multi.md) — multi-robot metric-semantic SLAM from the same lab
-- [GNC](gnc.md) — the robust solver behind alignment, optimization, and merge validation
+- [GNC](../level-02-getting-familiar/gnc.md) — the robust solver behind alignment, optimization, and merge validation
 - [Inter-robot loop closure](../level-08-collaborative-slam/inter-robot-loop-closure.md) — the key mechanism for aligning robot maps
 - [Map merging](../level-08-collaborative-slam/map-merging.md) — the general problem Hydra-Multi solves at scene-graph level
 - [Centralized vs Decentralized](../level-08-collaborative-slam/centralized-vs-decentralized.md) — Hydra-Multi takes the centralized route

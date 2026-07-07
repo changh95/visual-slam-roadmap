@@ -37,5 +37,5 @@ Kimera证明了一个干净、模块化的开源系统栈能够在CPU上实时�
 - [Kimera / 3D Dynamic Scene Graph](../level-05-deep-learning/kimera-3d-dynamic-scene-graph.md) — 建立在这一VIO之上的场景理解层。
 - [Kimera-Multi](../level-08-collaborative-slam/kimera-multi.md) — 多机器人扩展版本。
 - [Incremental smoothing](../level-02-getting-familiar/incremental-smoothing.md) — 底层使用的iSAM2机制。
-- [GNC](../level-05-deep-learning/gnc.md) — 后来被Kimera-RPGO采用的鲁棒优化方法。
+- [GNC](../level-02-getting-familiar/gnc.md) — 后来被Kimera-RPGO采用的鲁棒优化方法。
 - [MSCKF](msckf.md) — 无结构测量思想的滤波器先祖。

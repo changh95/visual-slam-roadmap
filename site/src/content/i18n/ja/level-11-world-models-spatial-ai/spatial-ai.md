@@ -48,8 +48,8 @@ Spatial AIは、現代のロードマップの背後にある「なぜ」の大�
 
 ## 関連ノート
 
-- [FutureMapping 1](../level-05-deep-learning/futuremapping-1.md)
-- [FutureMapping 2](../level-05-deep-learning/futuremapping-2.md)
+- [FutureMapping 1](../level-02-getting-familiar/futuremapping-1.md)
+- [FutureMapping 2](../level-02-getting-familiar/futuremapping-2.md)
 - [Kimera / 3D Dynamic Scene Graph](../level-05-deep-learning/kimera-3d-dynamic-scene-graph.md)
 - [Hydra](../level-05-deep-learning/hydra.md)
 - [World model](world-model.md)

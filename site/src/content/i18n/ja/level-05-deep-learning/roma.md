@@ -42,4 +42,4 @@ RoMaは、凍結された基盤モデルの特徴がマッチングのロバス�
 - [LoFTR](loftr.md) — より早期の検出器フリーTransformerマッチング
 - [DeDoDe](dedode.md) — 同じグループによる分離型の検出/記述
 - [Foundation models](foundation-models.md) — 凍結された事前学習特徴が汎化する理由
-- [MASt3R](../level-03-monocular-slam/mast3r.md) — 3D再構成と融合した密なマッチング
+- [MASt3R](mast3r.md) — 3D再構成と融合した密なマッチング

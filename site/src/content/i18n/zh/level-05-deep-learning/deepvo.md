@@ -42,5 +42,5 @@ $$\boldsymbol{\theta}^{*}=\operatorname*{argmin}_{\boldsymbol{\theta}}\frac{1}{N
 - [UndeepVO](undeepvo.md)
 - [PoseNet](posenet.md)
 - [FlowNet](flownet.md)
-- [TartanVO](../level-03-monocular-slam/tartanvo.md)
+- [TartanVO](tartanvo.md)
 - [DeepSLAM](deepslam.md)

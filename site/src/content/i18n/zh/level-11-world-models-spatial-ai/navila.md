@@ -36,4 +36,4 @@ NaVILA 是基础模型对基于经典 SLAM 的导航技术栈发起挑战的一�
 - [LLaVA](llava.md)
 - [VLM vs VLA](vlm-vs-vla.md)
 - [Spatial AI](spatial-ai.md)
-- [MASt3R](../level-03-monocular-slam/mast3r.md)
+- [MASt3R](../level-05-deep-learning/mast3r.md)

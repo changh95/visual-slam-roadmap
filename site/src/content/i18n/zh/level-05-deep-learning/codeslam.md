@@ -49,5 +49,5 @@ CodeSLAM回答了一个自DTAM以来一直阻碍稠密SLAM发展的问题:如何
 - [SceneCode](scenecode.md)
 - [NodeSLAM](nodeslam.md)
 - [CodeMapping](codemapping.md)
-- [iMAP](../level-03-monocular-slam/imap.md)
+- [iMAP](imap.md)
 - [DTAM](../level-03-monocular-slam/dtam.md)

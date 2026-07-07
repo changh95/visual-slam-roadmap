@@ -48,6 +48,6 @@
 - [Kimera-VIO](../level-06-vio-vins/kimera-vio.md) — 시각-관성 프론트엔드에 대한 자세한 내용
 - [Hydra](hydra.md) — DSG 구축을 실시간이고 점진적으로 만듦
 - [Kimera-Multi](../level-08-collaborative-slam/kimera-multi.md) — 다중 로봇 확장
-- [GNC](gnc.md) — 동일 연구실의 강건한 추정 기법으로, 이후 scene graph 최적화기에 사용됨
+- [GNC](../level-02-getting-familiar/gnc.md) — 동일 연구실의 강건한 추정 기법으로, 이후 scene graph 최적화기에 사용됨
 - [SemanticFusion](../level-04-rgbd-slam/semanticfusion.md) — dense SLAM에서의 초기 의미론적 레이블 융합
 - [Pose graph optimization](../level-02-getting-familiar/pose-graph-optimization.md) — 로봇 및 인간 궤적 추정의 근간이 되는 백엔드 기법

@@ -36,4 +36,4 @@ NaVILAは、古典的なSLAMベースのナビゲーションスタックに対�
 - [LLaVA](llava.md)
 - [VLM vs VLA](vlm-vs-vla.md)
 - [Spatial AI](spatial-ai.md)
-- [MASt3R](../level-03-monocular-slam/mast3r.md)
+- [MASt3R](../level-05-deep-learning/mast3r.md)

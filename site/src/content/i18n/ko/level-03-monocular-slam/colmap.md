@@ -45,8 +45,8 @@ COLMAP은 SLAM 시스템과 학습 기반 재구성 방법 모두를 비교하�
 
 - [GLOMAP](glomap.md)
 - [InstantSfM](instantsfm.md)
-- [DUSt3R](dust3r.md)
+- [DUSt3R](../level-05-deep-learning/dust3r.md)
 - [hloc](../level-05-deep-learning/hloc.md)
-- [BARF](barf.md)
+- [BARF](../level-05-deep-learning/barf.md)
 - [Triangulation](../level-01-beginner/triangulation.md)
 - [Schur complement / Sparsity](../level-02-getting-familiar/schur-complement-sparsity.md)

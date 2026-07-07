@@ -42,4 +42,4 @@ DeepSLAM은 "모든 모듈을 네트워크로 교체하되 아키텍처는 유�
 - [SfM-Learner](sfm-learner.md)
 - [MonoDepth](monodepth.md)
 - [Visual Place Recognition (VPR)](../level-03-monocular-slam/visual-place-recognition-vpr.md)
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md)
+- [DROID-SLAM](droid-slam.md)

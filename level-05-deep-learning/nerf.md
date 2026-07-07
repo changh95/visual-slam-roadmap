@@ -38,8 +38,8 @@ NeRF is the foundational work behind the entire neural-implicit SLAM wave: iMAP,
 
 ## Related
 
-- [iMAP](../level-03-monocular-slam/imap.md) — first NeRF-style SLAM system
-- [NICE-SLAM](../level-03-monocular-slam/nice-slam.md) — hierarchical feature-grid successor
-- [NeRF-SLAM](../level-03-monocular-slam/nerf-slam.md) — radiance fields fused with DROID-SLAM tracking
-- [BARF](../level-03-monocular-slam/barf.md) — joint pose and NeRF optimization
-- [Co-SLAM](../level-03-monocular-slam/co-slam.md) — joint coordinate/parametric encoding for real-time neural SLAM
+- [iMAP](imap.md) — first NeRF-style SLAM system
+- [NICE-SLAM](nice-slam.md) — hierarchical feature-grid successor
+- [NeRF-SLAM](nerf-slam.md) — radiance fields fused with DROID-SLAM tracking
+- [BARF](barf.md) — joint pose and NeRF optimization
+- [Co-SLAM](co-slam.md) — joint coordinate/parametric encoding for real-time neural SLAM

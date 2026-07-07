@@ -45,5 +45,5 @@ $$E(\delta) = \sum_{i \in \Omega} \sum_{j \in \mathcal{N}_i} a_{ij} \left\lVert 
 
 - [RAFT](raft.md) — 2D光流基础方法
 - [FlowNet3D](flownet3d.md) — 更早的、不含刚性先验的点云场景流方法
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md) — 同一批作者;在完整SLAM系统中使用稠密BA层
+- [DROID-SLAM](droid-slam.md) — 同一批作者;在完整SLAM系统中使用稠密BA层
 - [VDO-SLAM](../level-03-monocular-slam/vdo-slam.md) — 跟踪物体运动的动态SLAM系统

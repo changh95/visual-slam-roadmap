@@ -40,4 +40,4 @@ DeMoN is the ancestor of the "feed the network two images, get geometry out" fam
 - [DeepV2D](deepv2d.md)
 - [SfM-Learner](sfm-learner.md)
 - [FlowNet](flownet.md)
-- [DUSt3R](../level-03-monocular-slam/dust3r.md)
+- [DUSt3R](dust3r.md)

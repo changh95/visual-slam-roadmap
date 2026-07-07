@@ -42,5 +42,5 @@ $$\mathcal{L}_{\text{NLL}}=\sum_{m=1}^{M}-\log(\operatorname{Softmax}(\mathcal{S
 - [RoMa](roma.md) — 전작이자 핵심 아키텍처
 - [LoFTR](loftr.md) — 앞선 검출기 없는 매칭 계보
 - [Foundation models](foundation-models.md) — 강인한 조대 특징의 원천
-- [MASt3R](../level-03-monocular-slam/mast3r.md) — 밀집 매칭과 3D 복원의 융합
+- [MASt3R](mast3r.md) — 밀집 매칭과 3D 복원의 융합
 - [DeDoDe](dedode.md) — 같은 그룹의 분리된 sparse 검출기/descriptor

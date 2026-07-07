@@ -45,5 +45,5 @@ $$E(\delta) = \sum_{i \in \Omega} \sum_{j \in \mathcal{N}_i} a_{ij} \left\lVert 
 
 - [RAFT](raft.md) — 2D optical flow의 기반
 - [FlowNet3D](flownet3d.md) — 강체성 사전 정보 없는 초기의 포인트 클라우드 scene flow
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md) — 동일 저자들; 밀집 BA 레이어를 갖춘 완전한 SLAM 시스템
+- [DROID-SLAM](droid-slam.md) — 동일 저자들; 밀집 BA 레이어를 갖춘 완전한 SLAM 시스템
 - [VDO-SLAM](../level-03-monocular-slam/vdo-slam.md) — 물체 모션을 추적하는 동적 SLAM

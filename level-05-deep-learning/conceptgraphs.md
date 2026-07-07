@@ -38,8 +38,8 @@ ConceptGraphs showed that 2D foundation models can be lifted into 3D by ordinary
 
 - [SAM](sam.md)
 - [CLIP](../level-11-world-models-spatial-ai/clip.md)
-- [ConceptFusion](../level-03-monocular-slam/conceptfusion.md)
+- [ConceptFusion](conceptfusion.md)
 - [Hydra](hydra.md)
 - [Clio](clio.md)
-- [OpenScene](../level-03-monocular-slam/openscene.md)
+- [OpenScene](openscene.md)
 - [Grounding DINO](grounding-dino.md)

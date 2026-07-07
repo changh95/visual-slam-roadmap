@@ -43,5 +43,5 @@ CodeMapping清晰地展示了主导可部署系统的那种实用的"混合式"�
 - [DeepFactors](deepfactors.md)
 - [TANDEM](tandem.md)
 - [ORB-SLAM3](../level-03-monocular-slam/orb-slam3.md)
-- [MonoGS](../level-03-monocular-slam/monogs.md)
+- [MonoGS](monogs.md)
 - [Kimera / 3D动态场景图](kimera-3d-dynamic-scene-graph.md) — 与之比较的几何式实时网格化方法

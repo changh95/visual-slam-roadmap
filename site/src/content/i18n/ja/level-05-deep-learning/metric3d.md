@@ -42,5 +42,5 @@ SLAMは*メトリック*深度を必要とする——相対深度は単眼シ�
 - [MiDaS](midas.md) — スケールを無視する相対深度ベースライン
 - [ZoeDepth](zoedepth.md) — メトリックビンによるメトリック深度への別のアプローチ
 - [Depth Anything V2](depth-anything-v2.md) — 深度基盤モデル系列におけるデータスケーリングの後継
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md) — Metric3DがKITTIでその深度を組み込むSLAMシステム
+- [DROID-SLAM](droid-slam.md) — Metric3DがKITTIでその深度を組み込むSLAMシステム
 - [Pinhole camera model](../level-01-beginner/pinhole-camera-model.md) — 曖昧さを生み出す内部パラメータ

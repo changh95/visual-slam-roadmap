@@ -39,8 +39,8 @@ Dynamic environments are the standing failure mode of geometry-based SLAM, tradi
 
 ## Related
 
-- [DUSt3R](dust3r.md)
-- [MASt3R](mast3r.md)
+- [DUSt3R](../level-05-deep-learning/dust3r.md)
+- [MASt3R](../level-05-deep-learning/mast3r.md)
 - [DynaSLAM](dynaslam.md)
 - [VDO-SLAM](vdo-slam.md)
 - [SEA-RAFT](../level-05-deep-learning/sea-raft.md) — the class of off-the-shelf flow it leans on

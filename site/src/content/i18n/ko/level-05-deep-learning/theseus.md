@@ -48,6 +48,6 @@ $$\mathrm{D}_{\phi}\theta^{\star}(\bar{\phi}) = -\mathrm{D}_{\theta}^{-1} g\big(
 - [BA-Net](ba-net.md) — 네트워크 레이어로서의 미분 가능 bundle adjustment로, 직접적인 선행 연구입니다.
 - [Lietorch](lietorch.md) — PyTorch에서의 미분 가능 Lie 그룹 연산으로, 같은 종류의 문제에 사용됩니다.
 - [GradSLAM](gradslam.md) — 완전히 미분 가능한 밀집 SLAM 파이프라인.
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md) — 미분 가능 BA 레이어를 중심으로 구축된 종단간 SLAM 시스템.
+- [DROID-SLAM](droid-slam.md) — 미분 가능 BA 레이어를 중심으로 구축된 종단간 SLAM 시스템.
 - [Differentiability](differentiability.md) — 이 모든 시스템의 근간이 되는 개념.
 - [MAP inference as sparse nonlinear least squares](../level-02-getting-familiar/map-inference-as-sparse-nonlinear-least-squares.md) — 미분 가능하게 만들어지는 고전적 문제.

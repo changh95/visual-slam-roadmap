@@ -40,4 +40,4 @@ DeMoN은 "네트워크에 두 이미지를 입력하면 기하학적 정보가 �
 - [DeepV2D](deepv2d.md)
 - [SfM-Learner](sfm-learner.md)
 - [FlowNet](flownet.md)
-- [DUSt3R](../level-03-monocular-slam/dust3r.md)
+- [DUSt3R](dust3r.md)

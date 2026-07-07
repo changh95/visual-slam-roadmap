@@ -42,4 +42,4 @@ RoMa demonstrated that frozen foundation-model features dramatically improve mat
 - [LoFTR](loftr.md) — earlier detector-free Transformer matching
 - [DeDoDe](dedode.md) — same group; decoupled detection/description
 - [Foundation models](foundation-models.md) — why frozen pre-trained features generalize
-- [MASt3R](../level-03-monocular-slam/mast3r.md) — dense matching fused with 3D reconstruction
+- [MASt3R](mast3r.md) — dense matching fused with 3D reconstruction

@@ -43,7 +43,7 @@ $$\min_{\{T_i\}} \sum_{(i,j)} \rho\left(\|\mathbf{e}_{ij}\|_{\Sigma_{ij}^{-1}}\r
 ## 相关条目
 
 - [位姿图优化](pose-graph-optimization.md)
-- [GNC](../level-05-deep-learning/gnc.md)
+- [GNC](gnc.md)
 - [DOOR-SLAM](../level-08-collaborative-slam/door-slam.md)
 - [机器人间回环检测](../level-08-collaborative-slam/inter-robot-loop-closure.md)
 - [视觉场景识别(VPR)](../level-03-monocular-slam/visual-place-recognition-vpr.md)

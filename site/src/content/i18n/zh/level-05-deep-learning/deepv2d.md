@@ -49,4 +49,4 @@ DeepV2D是从DeMoN到DROID-SLAM这一脉络中的关键一环:它表明,在学�
 - [BA-Net](ba-net.md)
 - [DeepTAM](deeptam.md)
 - [RAFT](raft.md)
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md)
+- [DROID-SLAM](droid-slam.md)

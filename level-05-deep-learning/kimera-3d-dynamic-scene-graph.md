@@ -48,6 +48,6 @@ This is the paper that reconciled visual-inertial SLAM with dense human mesh tra
 - [Kimera-VIO](../level-06-vio-vins/kimera-vio.md) — the visual-inertial front-end in detail
 - [Hydra](hydra.md) — makes DSG construction real-time and incremental
 - [Kimera-Multi](../level-08-collaborative-slam/kimera-multi.md) — multi-robot extension
-- [GNC](gnc.md) — robust estimation from the same lab, used in later scene-graph optimizers
+- [GNC](../level-02-getting-familiar/gnc.md) — robust estimation from the same lab, used in later scene-graph optimizers
 - [SemanticFusion](../level-04-rgbd-slam/semanticfusion.md) — earlier semantic label fusion in dense SLAM
 - [Pose graph optimization](../level-02-getting-familiar/pose-graph-optimization.md) — the back-end machinery behind robot and human trajectory estimation

@@ -43,6 +43,6 @@ TANDEM은 고전적+학습 하이브리드 설계 패턴을 명료하게 보여�
 - [MonoRec](monorec.md) — 단안 비디오로부터의 관련 밀집 복원
 - [DeepFactors](deepfactors.md) — 비교 대상인 코드 기반 밀집 SLAM
 - [CodeMapping](codemapping.md) — 코드를 통한 희소 SLAM + 학습된 밀집 깊이
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md) — 완전 학습 기반 대안
-- [iMAP](../level-03-monocular-slam/imap.md) — TANDEM이 단안으로 대응하는 RGB-D 신경 암묵적 시스템
-- [NICE-SLAM](../level-03-monocular-slam/nice-slam.md) — 신경 암묵적 밀집 SLAM 대안
+- [DROID-SLAM](droid-slam.md) — 완전 학습 기반 대안
+- [iMAP](imap.md) — TANDEM이 단안으로 대응하는 RGB-D 신경 암묵적 시스템
+- [NICE-SLAM](nice-slam.md) — 신경 암묵적 밀집 SLAM 대안

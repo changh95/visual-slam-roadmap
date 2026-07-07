@@ -42,5 +42,5 @@ SLAM 后端被安全关键系统所信赖，但局部优化并不能保证返回
 - [Pose graph optimization](pose-graph-optimization.md)
 - [Robust pose-graph optimization](robust-pose-graph-optimization.md)
 - [MaxCon](maxcon.md)
-- [SE-Sync](../level-05-deep-learning/se-sync.md)
-- [TEASER++](../level-05-deep-learning/teaserpp.md)
+- [SE-Sync](se-sync.md)
+- [TEASER++](teaserpp.md)

@@ -45,8 +45,8 @@ COLMAPは、SLAMシステムと学習ベースの再構成手法の両方が比�
 
 - [GLOMAP](glomap.md)
 - [InstantSfM](instantsfm.md)
-- [DUSt3R](dust3r.md)
+- [DUSt3R](../level-05-deep-learning/dust3r.md)
 - [hloc](../level-05-deep-learning/hloc.md)
-- [BARF](barf.md)
+- [BARF](../level-05-deep-learning/barf.md)
 - [Triangulation](../level-01-beginner/triangulation.md)
 - [Schur complement / Sparsity](../level-02-getting-familiar/schur-complement-sparsity.md)

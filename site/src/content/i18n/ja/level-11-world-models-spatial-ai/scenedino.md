@@ -47,6 +47,6 @@ SLAMマップは、センサーが見ていない場所では空洞になる; �
 
 - [Spatial AI](spatial-ai.md)
 - [Foundation models](../level-05-deep-learning/foundation-models.md)
-- [OpenScene](../level-03-monocular-slam/openscene.md)
+- [OpenScene](../level-05-deep-learning/openscene.md)
 - [NeRF](../level-05-deep-learning/nerf.md)
 - [World Labs / Marble](world-labs-marble.md)

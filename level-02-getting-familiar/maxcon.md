@@ -55,4 +55,4 @@ Every geometric estimation step in SLAM — essential matrix, PnP, loop-closure 
 - [PROSAC](prosac.md)
 - [Convex relaxation](convex-relaxation.md)
 - [M-Estimator](m-estimator.md)
-- [TEASER++](../level-05-deep-learning/teaserpp.md)
+- [TEASER++](teaserpp.md)

@@ -41,4 +41,4 @@ SAMはSLAMシステムに、要求に応じたクラス不問のオブジェク�
 - [Grounding DINO](grounding-dino.md) — SAMに入力するテキストプロンプトによるボックス
 - [ConceptGraphs](conceptgraphs.md) — SAMマスクに基づくオープン語彙3Dシーングラフ
 - [Clio](clio.md) — SAM型マスクを利用するタスク駆動型オープン語彙マッピング
-- [ConceptFusion](../level-03-monocular-slam/conceptfusion.md) — オープンセット・マルチモーダル3Dマッピング
+- [ConceptFusion](conceptfusion.md) — オープンセット・マルチモーダル3Dマッピング

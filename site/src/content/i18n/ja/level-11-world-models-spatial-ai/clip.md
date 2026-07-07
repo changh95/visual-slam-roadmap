@@ -37,6 +37,6 @@ CLIPはオープンボキャブラリSLAMを実現する技術である。CLIP�
 - [SigLIP](siglip.md)
 - [BLIP-2](blip-2.md)
 - [VLM vs VLA](vlm-vs-vla.md)
-- [LERF](../level-03-monocular-slam/lerf.md)
-- [ConceptFusion](../level-03-monocular-slam/conceptfusion.md)
+- [LERF](../level-05-deep-learning/lerf.md)
+- [ConceptFusion](../level-05-deep-learning/conceptfusion.md)
 - [Foundation models](../level-05-deep-learning/foundation-models.md)

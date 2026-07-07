@@ -48,6 +48,6 @@
 - [Kimera-VIO](../level-06-vio-vins/kimera-vio.md) — 視覚慣性フロントエンドの詳細
 - [Hydra](hydra.md) — DSG構築をリアルタイム・逐次化する
 - [Kimera-Multi](../level-08-collaborative-slam/kimera-multi.md) — マルチロボット拡張
-- [GNC](gnc.md) — 同じ研究室によるロバスト推定、後のシーングラフオプティマイザで使用
+- [GNC](../level-02-getting-familiar/gnc.md) — 同じ研究室によるロバスト推定、後のシーングラフオプティマイザで使用
 - [SemanticFusion](../level-04-rgbd-slam/semanticfusion.md) — 密なSLAMにおける先行するセマンティックラベル融合
 - [Pose graph optimization](../level-02-getting-familiar/pose-graph-optimization.md) — ロボットと人間の軌道推定の背後にあるバックエンドの仕組み

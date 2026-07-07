@@ -41,5 +41,5 @@ $$\Delta\mathbf{f}(\mathbf{x})=\mathrm{ConvGRU}(\mathrm{Concat}(\mathbf{c_x},\ma
 - [RAFT](raft.md) — FlowFormerがトークン化する、全ペアコストボリュームを持つ畳み込み型の先行研究
 - [SEA-RAFT](sea-raft.md) — 学習の改善によってTransformerに匹敵する、効率重視の対抗手法
 - [FlowNet 2.0](flownet-2-0.md) — 深層フローにおける反復洗練のより初期の系譜
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md) — 密な再帰的フローを中心に構築されたSLAMシステム
+- [DROID-SLAM](droid-slam.md) — 密な再帰的フローを中心に構築されたSLAMシステム
 - [LoFTR](loftr.md) — Transformerのアテンションを検出器不要の画像マッチングに適用した手法

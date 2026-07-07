@@ -49,4 +49,4 @@ DeepV2D is a key link in the lineage from DeMoN to DROID-SLAM: it showed that it
 - [BA-Net](ba-net.md)
 - [DeepTAM](deeptam.md)
 - [RAFT](raft.md)
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md)
+- [DROID-SLAM](droid-slam.md)

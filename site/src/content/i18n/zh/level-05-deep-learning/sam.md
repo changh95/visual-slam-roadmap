@@ -41,4 +41,4 @@ SAM为SLAM系统按需提供了类别无关的物体掩码——这正是开放�
 - [Grounding DINO](grounding-dino.md) — 提供给SAM的文本提示框
 - [ConceptGraphs](conceptgraphs.md) — 基于SAM掩码构建的开放词汇3D场景图
 - [Clio](clio.md) — 使用SAM风格掩码的任务驱动开放词汇建图
-- [ConceptFusion](../level-03-monocular-slam/conceptfusion.md) — 开放集多模态3D建图
+- [ConceptFusion](conceptfusion.md) — 开放集多模态3D建图

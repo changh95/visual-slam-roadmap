@@ -43,5 +43,5 @@ CodeMapping は、デプロイ可能なシステムを支配する実用的な�
 - [DeepFactors](deepfactors.md)
 - [TANDEM](tandem.md)
 - [ORB-SLAM3](../level-03-monocular-slam/orb-slam3.md)
-- [MonoGS](../level-03-monocular-slam/monogs.md)
+- [MonoGS](monogs.md)
 - [Kimera / 3D Dynamic Scene Graph](kimera-3d-dynamic-scene-graph.md) — 比較対象となる幾何学的なリアルタイムメッシュ化アプローチ

@@ -38,8 +38,8 @@ ConceptGraphsは、通常のマルチビュー対応付けによって2Dファ�
 
 - [SAM](sam.md)
 - [CLIP](../level-11-world-models-spatial-ai/clip.md)
-- [ConceptFusion](../level-03-monocular-slam/conceptfusion.md)
+- [ConceptFusion](conceptfusion.md)
 - [Hydra](hydra.md)
 - [Clio](clio.md)
-- [OpenScene](../level-03-monocular-slam/openscene.md)
+- [OpenScene](openscene.md)
 - [Grounding DINO](grounding-dino.md)

@@ -54,7 +54,7 @@ Neural implicit SLAM (iMAP, NICE-SLAM) began as a slow, room-scale RGB-D affair;
 
 - [FAST-LIO2](fast-lio2.md) — classical direct registration baseline it competes with
 - [SuMa](suma.md) — earlier dense (surfel) LiDAR map representation
-- [iMAP](../level-03-monocular-slam/imap.md) — origin of neural implicit SLAM
-- [NICE-SLAM](../level-03-monocular-slam/nice-slam.md) — hierarchical neural implicit RGB-D SLAM predecessor
-- [Point-SLAM](../level-03-monocular-slam/point-slam.md) — neural point representation for RGB-D SLAM
+- [iMAP](../level-05-deep-learning/imap.md) — origin of neural implicit SLAM
+- [NICE-SLAM](../level-05-deep-learning/nice-slam.md) — hierarchical neural implicit RGB-D SLAM predecessor
+- [Point-SLAM](../level-05-deep-learning/point-slam.md) — neural point representation for RGB-D SLAM
 - [Pose graph optimization](../level-02-getting-familiar/pose-graph-optimization.md) — the global adjustment that the elastic map absorbs

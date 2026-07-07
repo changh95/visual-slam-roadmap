@@ -45,6 +45,6 @@ NodeSLAM은 현대적인 객체 수준 SLAM 패러다임을 확립했다: 학습
 
 - [CodeSLAM](codeslam.md) — NodeSLAM이 객체 수준으로 끌어올린 프레임 수준 latent code 아이디어
 - [DSP-SLAM](../level-04-rgbd-slam/dsp-slam.md) — ORB-SLAM2 백본 위의 DeepSDF 물체 사전
-- [vMAP](../level-03-monocular-slam/vmap.md) — 객체 수준 신경 필드 후속 연구
+- [vMAP](vmap.md) — 객체 수준 신경 필드 후속 연구
 - [Fusion++](../level-04-rgbd-slam/fusionpp.md) — 학습된 형상 사전 없는 객체 수준 TSDF 매핑
 - [MoreFusion](../level-04-rgbd-slam/morefusion.md) — 같은 연구실, 같은 시기의 조작을 위한 객체 수준 융합

@@ -41,7 +41,7 @@ BA-Net은 "미분 가능 bundle adjustment"의 창시 논문입니다: SfM/SLAM�
 
 ## 관련 문서
 
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md)
+- [DROID-SLAM](droid-slam.md)
 - [Theseus](theseus.md)
 - [DeMoN](demon.md)
 - [CodeSLAM](codeslam.md)

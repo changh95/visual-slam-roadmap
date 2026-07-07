@@ -53,5 +53,5 @@ RAFT's "correlation volume + iterative recurrent refinement" recipe became the w
 - [RAFT-3D](raft-3d.md) — extension to 3D scene flow with rigid-motion embeddings
 - [SEA-RAFT](sea-raft.md) — simple, efficient, real-time RAFT variant
 - [FlowFormer](flowformer.md) — Transformer-based successor for cost-volume reasoning
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md) — RAFT machinery turned into a full SLAM system
-- [DPVO](../level-03-monocular-slam/dpvo.md) — sparse patch-based odometry from the same lineage
+- [DROID-SLAM](droid-slam.md) — RAFT machinery turned into a full SLAM system
+- [DPVO](dpvo.md) — sparse patch-based odometry from the same lineage

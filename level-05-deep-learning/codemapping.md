@@ -43,5 +43,5 @@ CodeMapping is a clean example of the pragmatic "hybrid" design that dominates d
 - [DeepFactors](deepfactors.md)
 - [TANDEM](tandem.md)
 - [ORB-SLAM3](../level-03-monocular-slam/orb-slam3.md)
-- [MonoGS](../level-03-monocular-slam/monogs.md)
+- [MonoGS](monogs.md)
 - [Kimera / 3D Dynamic Scene Graph](kimera-3d-dynamic-scene-graph.md) — the geometric real-time meshing approach it compares against

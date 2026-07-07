@@ -36,4 +36,4 @@ NaVILA는 고전적 SLAM 기반 내비게이션 스택에 대한 기반 모델�
 - [LLaVA](llava.md)
 - [VLM vs VLA](vlm-vs-vla.md)
 - [Spatial AI](spatial-ai.md)
-- [MASt3R](../level-03-monocular-slam/mast3r.md)
+- [MASt3R](../level-05-deep-learning/mast3r.md)

@@ -39,9 +39,9 @@ I made this roadmap to share my thoughts and experience on studying Visual-SLAM,
 |:-----:|-------|-------|
 | **1** | [Beginner](#level-1-beginner) | Math, programming, and camera/image fundamentals |
 | **2** | [Getting Familiar](#level-2-getting-familiar-with-slam) | Geometry, optimization, and the anatomy of a SLAM system |
-| **3** | [Monocular SLAM](#level-3-monocular-visual-slam) | Classical feature/direct paradigms through learning-based and foundation-model SLAM |
+| **3** | [Monocular SLAM](#level-3-monocular-visual-slam) | Classical monocular SLAM — feature-based, direct, semi-direct, SfM, dynamic scenes |
 | **4** | [RGB-D SLAM](#level-4-rgb-d-visual-slam) | Dense tracking and volumetric/surfel fusion with depth sensors |
-| **5** | [Deep Learning + SLAM](#level-5-applying-deep-learning) | Learned frontends, differentiable backends, end-to-end systems, scene understanding |
+| **5** | [Deep Learning + SLAM](#level-5-applying-deep-learning) | Learned frontends, differentiable backends, end-to-end systems, foundation-model & neural SLAM, scene understanding |
 | **6** | [VIO / VINS](#level-6-vio--vins) | Fusing cameras with IMUs — filtering vs optimization |
 | **7** | [Stereo SLAM](#level-7-stereo-slam) | Metric scale and depth from stereo pairs |
 | **8** | [Collaborative SLAM](#level-8-collaborative--multi-robot-slam) | Multi-robot mapping, inter-robot loop closure, map merging |
@@ -133,6 +133,16 @@ I made this roadmap to share my thoughts and experience on studying Visual-SLAM,
 - [RANSAC](level-02-getting-familiar/ransac.md), [PROSAC](level-02-getting-familiar/prosac.md), [M-Estimator](level-02-getting-familiar/m-estimator.md), [MAXCON](level-02-getting-familiar/maxcon.md), [Convex relaxation](level-02-getting-familiar/convex-relaxation.md)
 - **[Robust pose-graph optimization](level-02-getting-familiar/robust-pose-graph-optimization.md)**: Switchable constraints, Dynamic covariance scaling (DCS), Pairwise consistency maximization (PCM)
 
+
+### Certifiably Optimal Algorithms
+
+| System | Author/Year | Key Concepts |
+|--------|-------------|--------------|
+| [**SE-Sync**](level-02-getting-familiar/se-sync.md) | [Rosen 2019](https://arxiv.org/abs/1611.00128) | Certifiable pose graph optimization via SDP + Riemannian opt (arXiv 2016, IJRR 2019) |
+| [**TEASER++**](level-02-getting-familiar/teaserpp.md) | [Yang 2020](https://arxiv.org/abs/2001.07715) | Point cloud registration, 90%+ outlier robust, TLS + Max Clique (T-RO/RSS 2020) |
+| [**GNC**](level-02-getting-familiar/gnc.md) | [Yang 2020](https://arxiv.org/abs/1909.08605) | Graduated Non-Convexity, continuation from convex → robust cost |
+| [**QUASAR**](level-02-getting-familiar/quasar.md) | [Yang 2019](https://arxiv.org/abs/1905.12536) | Certifiably optimal rotation search (Wahba problem with outliers), quaternion QCQP + SDP relaxation |
+
 ### Least Squares Optimization
 - [Reprojection error](level-02-getting-familiar/reprojection-error.md), [Bundle adjustment](level-02-getting-familiar/bundle-adjustment.md)
 - [Non-linear optimization](level-02-getting-familiar/non-linear-optimization.md), [Lie algebra](level-02-getting-familiar/lie-groups.md)
@@ -156,6 +166,16 @@ I made this roadmap to share my thoughts and experience on studying Visual-SLAM,
 - **[Incremental smoothing](level-02-getting-familiar/incremental-smoothing.md)**: iSAM / iSAM2
 - **[Marginalization](level-02-getting-familiar/marginalization.md)** and fixed-lag smoothing
 - Reference: [Dellaert & Kaess, *Factor Graphs for Robot Perception* (2017)](https://www.cs.cmu.edu/~kaess/pub/Dellaert17fnt.pdf); GTSAM tutorials
+
+
+### Gaussian Belief Propagation
+
+| System | Author/Year | Key Concepts |
+|--------|-------------|--------------|
+| [**FutureMapping 1**](level-02-getting-familiar/futuremapping-1.md) | [Davison 2018](https://arxiv.org/abs/1803.11288) | Computational structure of Spatial AI, GBP for SLAM |
+| [**FutureMapping 2**](level-02-getting-familiar/futuremapping-2.md) | [Davison 2019](https://arxiv.org/abs/1910.14139) | GBP as core Spatial AI primitive, visual intro to GBP |
+| [**BA on Graph Processor**](level-02-getting-familiar/ba-on-graph-processor.md) | [Ortiz 2020](https://arxiv.org/abs/2003.03134) | Bundle Adjustment on Graphcore IPU, tile-based parallelism |
+| [**DANCeRS**](level-02-getting-familiar/dancers.md) | [Patwardhan 2025](https://arxiv.org/abs/2508.18153) | GBP-based distributed consensus in robot swarms |
 
 ### Mapping
 - [Point cloud](level-02-getting-familiar/point-cloud.md), [Occupancy grid mapping](level-02-getting-familiar/occupancy-grid-mapping.md), [TSDF](level-04-rgbd-slam/tsdf-vs-surfel-maps.md), [Surfel](level-04-rgbd-slam/tsdf-vs-surfel-maps.md), [Voxel map](level-02-getting-familiar/voxel-map.md)
@@ -227,83 +247,14 @@ I made this roadmap to share my thoughts and experience on studying Visual-SLAM,
 | [**Stereo DSO**](level-07-stereo-slam/stereo-dso.md) | [Wang 2017](https://arxiv.org/abs/1708.07878) | → Stereo SLAM |
 | [VI-DSO](level-06-vio-vins/vi-dso.md) | [von Stumberg 2018](https://arxiv.org/abs/1804.05625) | → VIO/VINS |
 
-### Learning-based SLAM
 
-| System | Author/Year | Key Concepts |
-|--------|-------------|--------------|
-| [**DROID-SLAM**](level-03-monocular-slam/droid-slam.md) | [Teed 2021](https://arxiv.org/abs/2108.10869) | Differentiable BA, dense optical flow, end-to-end learned (→ also in Level 5) |
-| [TartanVO](level-03-monocular-slam/tartanvo.md) | [Wang 2021](https://arxiv.org/abs/2011.00359) | Generalizable visual odometry |
-| [**DPVO**](level-03-monocular-slam/dpvo.md) | [Teed 2023](https://arxiv.org/abs/2208.04726) | Patch-based lightweight DROID-SLAM, real-time VO (→ also in Level 5) |
-| [**DPV-SLAM**](level-03-monocular-slam/dpv-slam.md) | [Lipson 2024](https://arxiv.org/abs/2408.01654) | DPVO + loop closure, full SLAM (ECCV 2024) |
-| [MAC-VO](level-03-monocular-slam/mac-vo.md) | [Qiu 2024](https://arxiv.org/abs/2409.09479) | Learning-based VO, metric-aware |
-| [**VoT**](level-03-monocular-slam/vot.md) | [Yugay 2025](https://arxiv.org/abs/2510.03348) | Visual Odometry with Transformers (later retitled FVO) |
-
-### Foundation Model SLAM
-
-| System | Author/Year | Key Concepts |
-|--------|-------------|--------------|
-| [**DUSt3R**](level-03-monocular-slam/dust3r.md) | [Wang 2024](https://arxiv.org/abs/2312.14132) | Pointmap regression from image pairs, no calibration needed |
-| [**MASt3R**](level-03-monocular-slam/mast3r.md) | [Leroy 2024](https://arxiv.org/abs/2406.09756) | DUSt3R + local feature matching |
-| [**MASt3R-SLAM**](level-03-monocular-slam/mast3r-slam.md) | [Murai 2024](https://arxiv.org/abs/2412.12392) | Real-time dense SLAM from MASt3R priors |
-| [**VGGT**](level-03-monocular-slam/vggt.md) | [Wang (Meta) 2025](https://arxiv.org/abs/2503.11651) | Feed-forward inference of poses, depths, pointmaps, tracks from N views (**CVPR 2025 Best Paper**) |
-| [**VGGT-SLAM**](level-03-monocular-slam/vggt-slam.md) | [Maggio 2025](https://arxiv.org/abs/2505.12549) | Dense RGB SLAM optimized on the SL(4) manifold, VGGT frontend |
-| [**VGGT-SLAM 2.0**](level-03-monocular-slam/vggt-slam-2-0.md) | [Maggio 2026](https://arxiv.org/abs/2601.19887) | Real-time dense feed-forward scene reconstruction |
-| [**VGGT-Geo**](level-03-monocular-slam/vggt-geo.md) | [Qin 2026](https://www.mdpi.com/2220-9964/15/2/85) | Probabilistic geometric fusion of VGGT priors for dense indoor SLAM |
-| [**IGGT**](level-03-monocular-slam/iggt.md) | [Li 2025](https://arxiv.org/abs/2510.22706) | Instance-grounded geometry transformer — unified 3D reconstruction + instance-level understanding |
-| [**AMB3R**](level-03-monocular-slam/amb3r.md) | [Wang 2025](https://arxiv.org/abs/2511.20343) | Accurate feed-forward metric-scale 3D reconstruction with backend, SfM/SLAM support |
-| [**MASt3R-Fusion**](level-03-monocular-slam/mast3r-fusion.md) | [Zhou 2025](https://arxiv.org/abs/2509.20757) | MASt3R feed-forward visual model + IMU + GNSS fusion |
-
-#### SfM Tools
+### SfM Tools
 
 | System | Author/Year | Key Concepts |
 |--------|-------------|--------------|
 | [**COLMAP**](level-03-monocular-slam/colmap.md) | [Schönberger 2016](https://colmap.github.io/) | De-facto standard incremental SfM + MVS pipeline (C++/CUDA, pycolmap bindings) |
 | [**GLOMAP**](level-03-monocular-slam/glomap.md) | [Pan 2024](https://arxiv.org/abs/2407.20219) | Global SfM revisited — COLMAP-compatible, much faster mapping |
 | [**InstantSfM**](level-03-monocular-slam/instantsfm.md) | [Zhong 2025](https://arxiv.org/abs/2510.13310) | GPU-native sparse-aware SfM pipeline, large speedups over COLMAP |
-
-### Neural Representation SLAM
-
-#### NeRF-based
-
-| System | Author/Year | Key Concepts |
-|--------|-------------|--------------|
-| [**iMAP**](level-03-monocular-slam/imap.md) | [Sucar 2021](https://arxiv.org/abs/2103.12352) | First NeRF-SLAM, single MLP, real-time tracking/mapping |
-| [**BARF**](level-03-monocular-slam/barf.md) | [Lin 2021](https://arxiv.org/abs/2104.06405) | Bundle-Adjusting NeRF, coarse-to-fine positional encoding, joint pose+NeRF opt (not full SLAM — pose+NeRF co-optimization) |
-| [**NICE-SLAM**](level-03-monocular-slam/nice-slam.md) | [Zhu & Peng 2022](https://arxiv.org/abs/2112.12130) | Hierarchical feature grid (coarse/mid/fine), scalable |
-| [**Co-SLAM**](level-03-monocular-slam/co-slam.md) | [Wang 2023](https://arxiv.org/abs/2304.14377) | Hash grid (Instant-NGP) + coordinate encoding, 5-10× faster than NICE-SLAM |
-| [**ESLAM**](level-03-monocular-slam/eslam.md) | [Johari 2023](https://arxiv.org/abs/2211.11704) | Tri-plane representation, O(N²) vs O(N³) memory |
-| [**Point-SLAM**](level-03-monocular-slam/point-slam.md) | [Sandström 2023](https://arxiv.org/abs/2304.04278) | Neural point cloud based |
-| [**NeRF-SLAM**](level-03-monocular-slam/nerf-slam.md) | [Rosinol 2023](https://arxiv.org/abs/2210.13641) | NeRF + classical SLAM pipeline |
-| [**NICER-SLAM**](level-03-monocular-slam/nicer-slam.md) | [Zhu 2024](https://arxiv.org/abs/2302.03594) | RGB-only NeRF-SLAM (no depth sensor), monocular depth integration |
-| [**vMAP**](level-03-monocular-slam/vmap.md) | [Kong 2023](https://arxiv.org/abs/2302.01838) | Object-level NeRF-SLAM, per-object neural fields |
-| [**GO-SLAM**](level-03-monocular-slam/go-slam.md) | [Zhang 2023](https://arxiv.org/abs/2309.02436) | Global optimization + NeRF-SLAM, loop closure + global BA |
-
-#### 3DGS-based
-
-| System | Author/Year | Key Concepts |
-|--------|-------------|--------------|
-| [**SplaTAM**](level-03-monocular-slam/splatam.md) | [Keetha 2024](https://arxiv.org/abs/2312.02126) | Among the first 3DGS SLAM systems (concurrent with GS-SLAM, MonoGS), RGB-D, silhouette-guided densification |
-| [**MonoGS**](level-03-monocular-slam/monogs.md) | [Matsuki 2024](https://arxiv.org/abs/2312.06741) | First monocular 3DGS SLAM (CVPR 2024 highlight), direct rasterization-based tracking, analytic camera Jacobians |
-| [**GS-ICP SLAM**](level-03-monocular-slam/gs-icp-slam.md) | [Ha 2024](https://arxiv.org/abs/2403.12550) | Gaussian-to-Gaussian ICP (Mahalanobis distance), geometric tracking |
-| [**Photo-SLAM**](level-03-monocular-slam/photo-slam.md) | [Huang 2024](https://arxiv.org/abs/2311.16728) | Explicit geometry + implicit appearance (MLP color), anti-aliasing |
-| [**RTG-SLAM**](level-03-monocular-slam/rtg-slam.md) | [Peng 2024](https://arxiv.org/abs/2404.19706) | Real-time focus, adaptive Gaussian budget, Jetson Orin 25 FPS |
-| [**EGG-Fusion**](level-03-monocular-slam/egg-fusion.md) | [Pan 2025](https://arxiv.org/abs/2512.01296) | Geometry-aware Gaussian surfel fusion on the fly, information-filter-based, real-time |
-| [**Online 3DGS Modeling**](level-03-monocular-slam/online-3dgs-modeling.md) | [Lee 2025](https://arxiv.org/abs/2508.14014) | Online 3D Gaussian Splatting modeling with novel view selection |
-| [**ActiveSplat**](level-03-monocular-slam/activesplat.md) | [Li 2025](https://arxiv.org/abs/2410.21955) | Active mapping with 3DGS + Voronoi-based path planning |
-| [**OpenGS-SLAM**](level-03-monocular-slam/opengs-slam.md) | [Yang 2025](https://arxiv.org/abs/2503.01646) | Open-set dense semantic 3DGS SLAM, object-level scene understanding |
-| [**LEGS**](level-03-monocular-slam/legs.md) | [Yu 2024](https://arxiv.org/abs/2409.18108) | Language Embedded Gaussian Splats, real-time language-queryable 3D |
-
-### Semantic / Language-Grounded SLAM
-
-| System | Author/Year | Key Concepts |
-|--------|-------------|--------------|
-| [**ConceptFusion**](level-03-monocular-slam/conceptfusion.md) | [Jatavallabhula (MIT) 2023](https://arxiv.org/abs/2302.07241) | CLIP features fused into 3D map, open-vocabulary language queries |
-| [**LERF**](level-03-monocular-slam/lerf.md) | [Kerr 2023](https://arxiv.org/abs/2303.09553) | Language Embedded Radiance Fields, DINO multi-scale, NeRF + CLIP |
-| [**OpenScene**](level-03-monocular-slam/openscene.md) | [Peng (ETH) 2023](https://arxiv.org/abs/2211.15654) | Language features back-projected to 3D point clouds |
-| [**ConceptGraphs**](level-05-deep-learning/conceptgraphs.md) | [Gu 2023](https://arxiv.org/abs/2309.16650) | Open-vocabulary 3D Scene Graph, SAM + CLIP + LLM spatial relations |
-| [**SpatialLM**](level-03-monocular-slam/spatiallm.md) | [Mao 2025](https://github.com/manycore-research/SpatialLM) | Point cloud → LLM, structured indoor modeling as Python scripts |
-
-> Also see: [**LEGS**](https://arxiv.org/abs/2409.18108), [**OpenGS-SLAM**](https://arxiv.org/abs/2503.01646) (3DGS-based section above); [**Open-YOLO 3D**](https://arxiv.org/abs/2406.02548) (Level 5 Object Detection)
 
 ### Dynamic Environment SLAM
 
@@ -340,7 +291,7 @@ I made this roadmap to share my thoughts and experience on studying Visual-SLAM,
 | System | Author/Year | Key Concepts |
 |--------|-------------|--------------|
 | [ICP](level-04-rgbd-slam/icp.md) | [Besl & McKay 1992](https://ieeexplore.ieee.org/document/121791) | Iterative Closest Point, closest-point correspondence, closed-form rigid transform, local convergence (needs initialization), foundation of 3D-3D registration |
-| **DTAM** | Newcombe 2011 | → see Level 3 Direct SLAM |
+| [**DTAM**](level-03-monocular-slam/dtam.md) | Newcombe 2011 | → see Level 3 Direct SLAM |
 | [**KinectFusion**](level-04-rgbd-slam/kinectfusion.md) | [Newcombe 2011](https://ieeexplore.ieee.org/document/6162880) | GPGPU, Tracking (project depth → 3D, surface normal, coarse-to-fine ICP), Mapping (volumetric integration, TSDF), Robust to small scene changes, Cannot model deformation, Map growth cubic, Room-size only |
 | [Double Window Optimisation](level-04-rgbd-slam/double-window-optimisation.md) | [Strasdat 2011](https://ieeexplore.ieee.org/document/6126517) | Inner window (local BA) + outer window (pose graph), covisibility graph, constant-time optimization |
 | [Kintinuous](level-04-rgbd-slam/kintinuous.md) | [Whelan 2012](https://ieeexplore.ieee.org/document/6907054) | Volume shift, Geometric, Photometric, dBoW+SURF, Optimization, Loop closure |
@@ -351,7 +302,7 @@ I made this roadmap to share my thoughts and experience on studying Visual-SLAM,
 | [MRS-Map](level-04-rgbd-slam/mrs-map.md) | [Stückler 2014](https://doi.org/10.1016/j.jvcir.2013.02.008) | Multi-resolution surfel maps in an octree, shape + color statistics per surfel, noise-aware RGB-D registration, real-time on CPU |
 | [**ElasticFusion**](level-04-rgbd-slam/elasticfusion.md) | [Whelan 2015](https://ieeexplore.ieee.org/document/7274882) | Active: frame-to-model tracking (photometric + geometric), joint optimization, fused surfel-based model reconstruction · Inactive: local loop closure (model-to-model local surface, submodel separation), global loop closure (randomised fern encoding, non-rigid space deformation) |
 | [DynamicFusion](level-04-rgbd-slam/dynamicfusion.md) | [Newcombe 2015](https://ieeexplore.ieee.org/document/7298631) | 6D motion field, Deformable scene |
-| **ORB-SLAM2** (RGB-D mode) | Mur-Artal 2017 | Bundle adjustment, Sparse reconstruction (→ also in Level 3) |
+| [**ORB-SLAM2**](level-03-monocular-slam/orb-slam2.md) (RGB-D mode) | Mur-Artal 2017 | Bundle adjustment, Sparse reconstruction (→ also in Level 3) |
 | [**BundleFusion**](level-04-rgbd-slam/bundlefusion.md) | [Dai 2016](https://arxiv.org/abs/1604.01093) | Local-to-global optimization, Sparse RGB feature, Coarse global pose estimation, Fine pose refinement (geometric + photometric) |
 | [SemanticFusion](level-04-rgbd-slam/semanticfusion.md) | [McCormac 2016](https://arxiv.org/abs/1609.05130) | Deep Learning CNN, Deep Semantic SLAM |
 | [InfiniTAM v3](level-04-rgbd-slam/infinitam-v3.md) | [Prisacariu 2017](https://arxiv.org/abs/1708.00783) | Tracking (scene raycast, depth image, RGB image), Relocalization (random ferns), Mapping (TSDF reconstruction, voxel hashing, surfel reconstruction) |
@@ -360,7 +311,7 @@ I made this roadmap to share my thoughts and experience on studying Visual-SLAM,
 | [BAD SLAM](level-04-rgbd-slam/bad-slam.md) | [Schöps 2019](https://openaccess.thecvf.com/content_CVPR_2019/html/Schops_BAD_SLAM_Bundle_Adjusted_Direct_RGB-D_SLAM_CVPR_2019_paper.html) | Direct RGB-D bundle adjustment, surfel map, real-time GPU BA, ETH3D benchmark |
 | [**RTAB-Map**](level-04-rgbd-slam/rtab-map.md) (RGB-D / LiDAR) | [Labbé 2019](https://doi.org/10.1002/rob.21831) | Multi-sensor RGB-D/LiDAR support, light-source detection (2016) |
 | [**MoreFusion**](level-04-rgbd-slam/morefusion.md) | [Wada 2020](https://arxiv.org/abs/2004.04336) | DL instance segmentation, Object-level volumetric fusion, Volumetric pose prediction, 3D scene reconstruction, Collision-based refinement, Semantic SLAM, Object pose estimation, CAD object fitting |
-| **NodeSLAM** | Sucar 2020 | Occupancy VAE, Object-level SLAM (→ also in Level 5 Latent Representation) |
+| [**NodeSLAM**](level-05-deep-learning/nodeslam.md) | Sucar 2020 | Occupancy VAE, Object-level SLAM (→ also in Level 5 Latent Representation) |
 | [**DSP-SLAM**](level-04-rgbd-slam/dsp-slam.md) | [Wang (UCL) 2021](https://arxiv.org/abs/2108.09481) | DeepSDF shape prior + ORB-SLAM2, object-level dense reconstruction (mono/stereo/LiDAR) |
 
 ---
@@ -372,11 +323,12 @@ I made this roadmap to share my thoughts and experience on studying Visual-SLAM,
 - **[Differentiability](level-05-deep-learning/differentiability.md)** — Making classical optimization (RANSAC, BA) differentiable so it can be trained through
 - **[Foundation models](level-05-deep-learning/foundation-models.md)** — Large pretrained models (CLIP, SAM, DUSt3R-family) as reusable perception backbones
 
-> Level 5 is organized into four pillars:
+> Level 5 is organized into five pillars:
 > **A. Frontend** — learned perception components replacing hand-crafted modules
 > **B. Backend** — learned/certifiable optimization replacing classical solvers
 > **C. Systems** — end-to-end deep VO/SLAM pipelines
 > **D. Scene Understanding** — semantic, language, and relational reasoning on SLAM maps
+> **E. Foundation-Model & Neural SLAM** — pointmap transformers, NeRF- and 3DGS-based dense SLAM systems
 
 ### A. Deep Frontend — Perception
 
@@ -463,28 +415,10 @@ I made this roadmap to share my thoughts and experience on studying Visual-SLAM,
 | System | Author/Year | Key Concepts |
 |--------|-------------|--------------|
 | [**BA-Net**](level-05-deep-learning/ba-net.md) | [Tang 2019](https://arxiv.org/abs/1806.04807) | FPN + differentiable LM layer, end-to-end SfM (ICLR) |
-| [**DROID-SLAM**](level-03-monocular-slam/droid-slam.md) | [Teed 2021](https://arxiv.org/abs/2108.10869) | Dense optical flow + differentiable dense BA, all-pixels reprojection |
-| [**DPVO**](level-03-monocular-slam/dpvo.md) | [Teed 2023](https://arxiv.org/abs/2208.04726) | Patch-based DROID-SLAM, 30+ FPS real-time |
+| [**DROID-SLAM**](level-05-deep-learning/droid-slam.md) | [Teed 2021](https://arxiv.org/abs/2108.10869) | Dense optical flow + differentiable dense BA, all-pixels reprojection |
+| [**DPVO**](level-05-deep-learning/dpvo.md) | [Teed 2023](https://arxiv.org/abs/2208.04726) | Patch-based DROID-SLAM, 30+ FPS real-time |
 | [**Theseus**](level-05-deep-learning/theseus.md) | [Pineda (Meta) 2022](https://arxiv.org/abs/2207.09442) | Differentiable nonlinear optimization library (PyTorch) |
 | [**Lietorch**](level-05-deep-learning/lietorch.md) | [Teed 2021](https://github.com/princeton-vl/lietorch) | Lie group operations for PyTorch (SE(3)/SO(3)) |
-
-#### Certifiably Optimal Algorithms
-
-| System | Author/Year | Key Concepts |
-|--------|-------------|--------------|
-| [**SE-Sync**](level-05-deep-learning/se-sync.md) | [Rosen 2019](https://arxiv.org/abs/1611.00128) | Certifiable pose graph optimization via SDP + Riemannian opt (arXiv 2016, IJRR 2019) |
-| [**TEASER++**](level-05-deep-learning/teaserpp.md) | [Yang 2020](https://arxiv.org/abs/2001.07715) | Point cloud registration, 90%+ outlier robust, TLS + Max Clique (T-RO/RSS 2020) |
-| [**GNC**](level-05-deep-learning/gnc.md) | [Yang 2020](https://arxiv.org/abs/1909.08605) | Graduated Non-Convexity, continuation from convex → robust cost |
-| [**QUASAR**](level-05-deep-learning/quasar.md) | [Yang 2019](https://arxiv.org/abs/1905.12536) | Certifiably optimal rotation search (Wahba problem with outliers), quaternion QCQP + SDP relaxation |
-
-#### Gaussian Belief Propagation & Graph Processors
-
-| System | Author/Year | Key Concepts |
-|--------|-------------|--------------|
-| [**FutureMapping 1**](level-05-deep-learning/futuremapping-1.md) | [Davison 2018](https://arxiv.org/abs/1803.11288) | Computational structure of Spatial AI, GBP for SLAM |
-| [**FutureMapping 2**](level-05-deep-learning/futuremapping-2.md) | [Davison 2019](https://arxiv.org/abs/1910.14139) | GBP as core Spatial AI primitive, visual intro to GBP |
-| [**BA on Graph Processor**](level-05-deep-learning/ba-on-graph-processor.md) | [Ortiz 2020](https://arxiv.org/abs/2003.03134) | Bundle Adjustment on Graphcore IPU, tile-based parallelism |
-| [**DANCeRS**](level-05-deep-learning/dancers.md) | [Patwardhan 2025](https://arxiv.org/abs/2508.18153) | GBP-based distributed consensus in robot swarms |
 
 ### C. End-to-End Deep VO / SLAM Systems
 
@@ -504,8 +438,17 @@ I made this roadmap to share my thoughts and experience on studying Visual-SLAM,
 | [DeepSLAM](level-05-deep-learning/deepslam.md) | [Li 2020](https://ieeexplore.ieee.org/document/9047170) | TrackingNet, MappingNet, LoopNet |
 | [MonoRec](level-05-deep-learning/monorec.md) | [Wimbauer 2021](https://arxiv.org/abs/2011.11814) | Self-supervised monocular 3D reconstruction, moving objects |
 | [TANDEM](level-05-deep-learning/tandem.md) | [Koestler 2021](https://arxiv.org/abs/2111.07418) | Real-time tracking + dense mapping via MVS depth, DSO-based |
-| [**DROID-SLAM**](level-03-monocular-slam/droid-slam.md) | [Teed 2021](https://arxiv.org/abs/2108.10869) | Dense BA + correlation, SOTA on TartanAir/EuRoC (→ see Differentiable BA) |
-| [**DPVO**](level-03-monocular-slam/dpvo.md) | [Teed 2023](https://arxiv.org/abs/2208.04726) | Patch-based lightweight DROID (→ see Differentiable BA) |
+
+
+#### Learning-based SLAM Systems
+
+| System | Author/Year | Key Concepts |
+|--------|-------------|--------------|
+| [**DROID-SLAM**](level-05-deep-learning/droid-slam.md) | [Teed 2021](https://arxiv.org/abs/2108.10869) | Differentiable BA, dense optical flow, end-to-end learned |
+| [TartanVO](level-05-deep-learning/tartanvo.md) | [Wang 2021](https://arxiv.org/abs/2011.00359) | Generalizable visual odometry |
+| [**DPV-SLAM**](level-05-deep-learning/dpv-slam.md) | [Lipson 2024](https://arxiv.org/abs/2408.01654) | DPVO + loop closure, full SLAM (ECCV 2024) |
+| [MAC-VO](level-05-deep-learning/mac-vo.md) | [Qiu 2024](https://arxiv.org/abs/2409.09479) | Learning-based VO, metric-aware |
+| [**VoT**](level-05-deep-learning/vot.md) | [Yugay 2025](https://arxiv.org/abs/2510.03348) | Visual Odometry with Transformers (later retitled FVO) |
 
 #### Latent Representation SLAM
 
@@ -519,7 +462,7 @@ I made this roadmap to share my thoughts and experience on studying Visual-SLAM,
 
 #### Neural Rendering (reference)
 
-> NeRF/3DGS-based SLAM systems → see **Level 3: Neural Representation SLAM**
+> NeRF/3DGS-based SLAM systems → see **Pillar E below**
 
 | System | Author/Year | Key Concepts |
 |--------|-------------|--------------|
@@ -543,7 +486,68 @@ I made this roadmap to share my thoughts and experience on studying Visual-SLAM,
 | [**Hydra-Multi**](level-05-deep-learning/hydra-multi.md) | [Chang 2023](https://arxiv.org/abs/2304.13487) | Distributed multi-robot 3D Scene Graph |
 | [**Clio**](level-05-deep-learning/clio.md) | [Maggio (MIT SPARK) 2024](https://arxiv.org/abs/2404.13696) | Open-set task-driven Scene Graph, CLIP embeddings per node |
 | [**Khronos**](level-05-deep-learning/khronos.md) | [Schmid (MIT SPARK) 2024](https://arxiv.org/abs/2402.13817) | Spatio-temporal Scene Graph, dynamic object history tracking |
-| [**ConceptGraphs**](level-05-deep-learning/conceptgraphs.md) | [Gu 2023](https://arxiv.org/abs/2309.16650) | Open-vocabulary 3D Scene Graph, SAM + CLIP + LLM relations (→ also in L3 Semantic) |
+| [**ConceptGraphs**](level-05-deep-learning/conceptgraphs.md) | [Gu 2023](https://arxiv.org/abs/2309.16650) | Open-vocabulary 3D Scene Graph, SAM + CLIP + LLM relations |
+
+---
+
+
+#### Semantic / Language-Grounded SLAM
+
+| System | Author/Year | Key Concepts |
+|--------|-------------|--------------|
+| [**ConceptFusion**](level-05-deep-learning/conceptfusion.md) | [Jatavallabhula (MIT) 2023](https://arxiv.org/abs/2302.07241) | CLIP features fused into 3D map, open-vocabulary language queries |
+| [**LERF**](level-05-deep-learning/lerf.md) | [Kerr 2023](https://arxiv.org/abs/2303.09553) | Language Embedded Radiance Fields, DINO multi-scale, NeRF + CLIP |
+| [**OpenScene**](level-05-deep-learning/openscene.md) | [Peng (ETH) 2023](https://arxiv.org/abs/2211.15654) | Language features back-projected to 3D point clouds |
+| [**SpatialLM**](level-05-deep-learning/spatiallm.md) | [Mao 2025](https://github.com/manycore-research/SpatialLM) | Point cloud → LLM, structured indoor modeling as Python scripts |
+
+> Also see: [**LEGS**](https://arxiv.org/abs/2409.18108), [**OpenGS-SLAM**](https://arxiv.org/abs/2503.01646) (Pillar E above); [**Open-YOLO 3D**](https://arxiv.org/abs/2406.02548) (Level 5 Object Detection)
+
+### E. Foundation-Model & Neural-Representation SLAM
+
+#### Foundation-Model SLAM
+
+| System | Author/Year | Key Concepts |
+|--------|-------------|--------------|
+| [**DUSt3R**](level-05-deep-learning/dust3r.md) | [Wang 2024](https://arxiv.org/abs/2312.14132) | Pointmap regression from image pairs, no calibration needed |
+| [**MASt3R**](level-05-deep-learning/mast3r.md) | [Leroy 2024](https://arxiv.org/abs/2406.09756) | DUSt3R + local feature matching |
+| [**MASt3R-SLAM**](level-05-deep-learning/mast3r-slam.md) | [Murai 2024](https://arxiv.org/abs/2412.12392) | Real-time dense SLAM from MASt3R priors |
+| [**VGGT**](level-05-deep-learning/vggt.md) | [Wang (Meta) 2025](https://arxiv.org/abs/2503.11651) | Feed-forward inference of poses, depths, pointmaps, tracks from N views (**CVPR 2025 Best Paper**) |
+| [**VGGT-SLAM**](level-05-deep-learning/vggt-slam.md) | [Maggio 2025](https://arxiv.org/abs/2505.12549) | Dense RGB SLAM optimized on the SL(4) manifold, VGGT frontend |
+| [**VGGT-SLAM 2.0**](level-05-deep-learning/vggt-slam-2-0.md) | [Maggio 2026](https://arxiv.org/abs/2601.19887) | Real-time dense feed-forward scene reconstruction |
+| [**VGGT-Geo**](level-05-deep-learning/vggt-geo.md) | [Qin 2026](https://www.mdpi.com/2220-9964/15/2/85) | Probabilistic geometric fusion of VGGT priors for dense indoor SLAM |
+| [**IGGT**](level-05-deep-learning/iggt.md) | [Li 2025](https://arxiv.org/abs/2510.22706) | Instance-grounded geometry transformer — unified 3D reconstruction + instance-level understanding |
+| [**AMB3R**](level-05-deep-learning/amb3r.md) | [Wang 2025](https://arxiv.org/abs/2511.20343) | Accurate feed-forward metric-scale 3D reconstruction with backend, SfM/SLAM support |
+| [**MASt3R-Fusion**](level-05-deep-learning/mast3r-fusion.md) | [Zhou 2025](https://arxiv.org/abs/2509.20757) | MASt3R feed-forward visual model + IMU + GNSS fusion |
+
+#### NeRF-based
+
+| System | Author/Year | Key Concepts |
+|--------|-------------|--------------|
+| [**iMAP**](level-05-deep-learning/imap.md) | [Sucar 2021](https://arxiv.org/abs/2103.12352) | First NeRF-SLAM, single MLP, real-time tracking/mapping |
+| [**BARF**](level-05-deep-learning/barf.md) | [Lin 2021](https://arxiv.org/abs/2104.06405) | Bundle-Adjusting NeRF, coarse-to-fine positional encoding, joint pose+NeRF opt (not full SLAM — pose+NeRF co-optimization) |
+| [**NICE-SLAM**](level-05-deep-learning/nice-slam.md) | [Zhu & Peng 2022](https://arxiv.org/abs/2112.12130) | Hierarchical feature grid (coarse/mid/fine), scalable |
+| [**Co-SLAM**](level-05-deep-learning/co-slam.md) | [Wang 2023](https://arxiv.org/abs/2304.14377) | Hash grid (Instant-NGP) + coordinate encoding, 5-10× faster than NICE-SLAM |
+| [**ESLAM**](level-05-deep-learning/eslam.md) | [Johari 2023](https://arxiv.org/abs/2211.11704) | Tri-plane representation, O(N²) vs O(N³) memory |
+| [**Point-SLAM**](level-05-deep-learning/point-slam.md) | [Sandström 2023](https://arxiv.org/abs/2304.04278) | Neural point cloud based |
+| [**NeRF-SLAM**](level-05-deep-learning/nerf-slam.md) | [Rosinol 2023](https://arxiv.org/abs/2210.13641) | NeRF + classical SLAM pipeline |
+| [**NICER-SLAM**](level-05-deep-learning/nicer-slam.md) | [Zhu 2024](https://arxiv.org/abs/2302.03594) | RGB-only NeRF-SLAM (no depth sensor), monocular depth integration |
+| [**vMAP**](level-05-deep-learning/vmap.md) | [Kong 2023](https://arxiv.org/abs/2302.01838) | Object-level NeRF-SLAM, per-object neural fields |
+| [**GO-SLAM**](level-05-deep-learning/go-slam.md) | [Zhang 2023](https://arxiv.org/abs/2309.02436) | Global optimization + NeRF-SLAM, loop closure + global BA |
+
+#### 3DGS-based
+
+| System | Author/Year | Key Concepts |
+|--------|-------------|--------------|
+| [**SplaTAM**](level-05-deep-learning/splatam.md) | [Keetha 2024](https://arxiv.org/abs/2312.02126) | Among the first 3DGS SLAM systems (concurrent with GS-SLAM, MonoGS), RGB-D, silhouette-guided densification |
+| [**MonoGS**](level-05-deep-learning/monogs.md) | [Matsuki 2024](https://arxiv.org/abs/2312.06741) | First monocular 3DGS SLAM (CVPR 2024 highlight), direct rasterization-based tracking, analytic camera Jacobians |
+| [**GS-ICP SLAM**](level-05-deep-learning/gs-icp-slam.md) | [Ha 2024](https://arxiv.org/abs/2403.12550) | Gaussian-to-Gaussian ICP (Mahalanobis distance), geometric tracking |
+| [**Photo-SLAM**](level-05-deep-learning/photo-slam.md) | [Huang 2024](https://arxiv.org/abs/2311.16728) | Explicit geometry + implicit appearance (MLP color), anti-aliasing |
+| [**RTG-SLAM**](level-05-deep-learning/rtg-slam.md) | [Peng 2024](https://arxiv.org/abs/2404.19706) | Real-time focus, adaptive Gaussian budget, Jetson Orin 25 FPS |
+| [**EGG-Fusion**](level-05-deep-learning/egg-fusion.md) | [Pan 2025](https://arxiv.org/abs/2512.01296) | Geometry-aware Gaussian surfel fusion on the fly, information-filter-based, real-time |
+| [**Online 3DGS Modeling**](level-05-deep-learning/online-3dgs-modeling.md) | [Lee 2025](https://arxiv.org/abs/2508.14014) | Online 3D Gaussian Splatting modeling with novel view selection |
+| [**ActiveSplat**](level-05-deep-learning/activesplat.md) | [Li 2025](https://arxiv.org/abs/2410.21955) | Active mapping with 3DGS + Voronoi-based path planning |
+| [**OpenGS-SLAM**](level-05-deep-learning/opengs-slam.md) | [Yang 2025](https://arxiv.org/abs/2503.01646) | Open-set dense semantic 3DGS SLAM, object-level scene understanding |
+| [**LEGS**](level-05-deep-learning/legs.md) | [Yu 2024](https://arxiv.org/abs/2409.18108) | Language Embedded Gaussian Splats, real-time language-queryable 3D |
 
 ---
 

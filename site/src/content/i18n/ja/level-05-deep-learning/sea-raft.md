@@ -41,6 +41,6 @@ SEA-RAFTは、SLAMのフロントエンドがリアルタイムのレートで�
 
 - [RAFT](raft.md) — ベースとなるアーキテクチャと学習目標
 - [FlowFormer](flowformer.md) — より重いTransformerによる代替案
-- [TartanVO](../level-03-monocular-slam/tartanvo.md) — TartanAirの剛体シーンデータで構築された学習型VO
-- [DPVO](../level-03-monocular-slam/dpvo.md) — RAFT型更新を用いる疎な学習型オドメトリ
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md) — RAFTの機構を組み込んだ完全なSLAMシステム
+- [TartanVO](tartanvo.md) — TartanAirの剛体シーンデータで構築された学習型VO
+- [DPVO](dpvo.md) — RAFT型更新を用いる疎な学習型オドメトリ
+- [DROID-SLAM](droid-slam.md) — RAFTの機構を組み込んだ完全なSLAMシステム

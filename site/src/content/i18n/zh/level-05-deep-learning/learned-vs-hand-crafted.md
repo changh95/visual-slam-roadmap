@@ -62,7 +62,7 @@ Level 5中几乎每一篇论文都是"学习型与手工设计"这一光谱上�
 - [SuperPoint](superpoint.md)
 - [SuperGlue](superglue.md)
 - [DeepVO](deepvo.md)
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md)
+- [DROID-SLAM](droid-slam.md)
 - [Differentiability](differentiability.md)
 - [NetVLAD](netvlad.md)
 - [Foundation models](foundation-models.md)

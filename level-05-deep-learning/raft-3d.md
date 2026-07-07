@@ -45,5 +45,5 @@ Dynamic environments are a core SLAM failure mode: moving objects violate the st
 
 - [RAFT](raft.md) — the 2D optical flow foundation
 - [FlowNet3D](flownet3d.md) — earlier point-cloud scene flow without rigidity priors
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md) — same authors; dense BA layer in a full SLAM system
+- [DROID-SLAM](droid-slam.md) — same authors; dense BA layer in a full SLAM system
 - [VDO-SLAM](../level-03-monocular-slam/vdo-slam.md) — dynamic SLAM that tracks object motions

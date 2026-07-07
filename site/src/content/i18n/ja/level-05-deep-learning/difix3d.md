@@ -39,6 +39,6 @@ $$\mathcal{L}_{\text{Gram}} = \frac{1}{L}\sum_{l=1}^{L} \beta_l \left\| G_l(\hat
 
 - [NeRF](nerf.md) — この一連の研究がアーティファクトを対象とするニューラルレンダリング表現
 - [Marigold](marigold.md) — 3D知覚のために拡散事前分布を再利用する別の例
-- [MonoGS](../level-03-monocular-slam/monogs.md) — レンダリング可能なマップを生成するGaussian-splatting SLAM
-- [NeRF-SLAM](../level-03-monocular-slam/nerf-slam.md) — リアルタイムSLAMから構築された放射輝度場マップ
-- [SplaTAM](../level-03-monocular-slam/splatam.md) — レンダリングされたマップがこの種の後処理から利益を得る3DGS SLAM
+- [MonoGS](monogs.md) — レンダリング可能なマップを生成するGaussian-splatting SLAM
+- [NeRF-SLAM](nerf-slam.md) — リアルタイムSLAMから構築された放射輝度場マップ
+- [SplaTAM](splatam.md) — レンダリングされたマップがこの種の後処理から利益を得る3DGS SLAM

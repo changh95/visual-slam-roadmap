@@ -48,6 +48,6 @@ $$\mathrm{D}_{\phi}\theta^{\star}(\bar{\phi}) = -\mathrm{D}_{\theta}^{-1} g\big(
 - [BA-Net](ba-net.md) — ネットワーク層としての微分可能バンドル調整であり、直接の先行研究。
 - [Lietorch](lietorch.md) — PyTorchにおける微分可能なリー群演算であり、同種の問題に用いられる。
 - [GradSLAM](gradslam.md) — 完全に微分可能な稠密SLAMパイプライン。
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md) — 微分可能なBA層を中心に構築されたエンドツーエンドSLAMシステム。
+- [DROID-SLAM](droid-slam.md) — 微分可能なBA層を中心に構築されたエンドツーエンドSLAMシステム。
 - [Differentiability](differentiability.md) — これらすべてのシステムの根底にある概念。
 - [MAP inference as sparse nonlinear least squares](../level-02-getting-familiar/map-inference-as-sparse-nonlinear-least-squares.md) — 微分可能にされている古典的な問題。

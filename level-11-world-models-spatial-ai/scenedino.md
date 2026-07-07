@@ -45,6 +45,6 @@ SLAM maps are hollow where the sensor has not looked; scene completion fills tha
 
 - [Spatial AI](spatial-ai.md)
 - [Foundation models](../level-05-deep-learning/foundation-models.md)
-- [OpenScene](../level-03-monocular-slam/openscene.md)
+- [OpenScene](../level-05-deep-learning/openscene.md)
 - [NeRF](../level-05-deep-learning/nerf.md)
 - [World Labs / Marble](world-labs-marble.md)

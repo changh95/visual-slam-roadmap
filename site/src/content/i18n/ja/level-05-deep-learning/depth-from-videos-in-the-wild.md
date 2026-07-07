@@ -47,4 +47,4 @@ $$t(x,y)=t_{0}+m(x,y)\,\delta t(x,y).$$
 - [Self-supervised depth](../level-03-monocular-slam/self-supervised-depth.md)
 - [Neural Ray Surfaces](neural-ray-surfaces.md)
 - [MonoDepth](monodepth.md)
-- [DUSt3R](../level-03-monocular-slam/dust3r.md)
+- [DUSt3R](dust3r.md)

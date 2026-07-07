@@ -54,7 +54,7 @@
 
 - [FAST-LIO2](fast-lio2.md) — 경쟁하는 고전적 직접 등록 기준선
 - [SuMa](suma.md) — 이전의 밀집(서펠) LiDAR 맵 표현
-- [iMAP](../level-03-monocular-slam/imap.md) — 신경 암묵적 SLAM의 기원
-- [NICE-SLAM](../level-03-monocular-slam/nice-slam.md) — 계층적 신경 암묵적 RGB-D SLAM 선행 연구
-- [Point-SLAM](../level-03-monocular-slam/point-slam.md) — RGB-D SLAM을 위한 신경 포인트 표현
+- [iMAP](../level-05-deep-learning/imap.md) — 신경 암묵적 SLAM의 기원
+- [NICE-SLAM](../level-05-deep-learning/nice-slam.md) — 계층적 신경 암묵적 RGB-D SLAM 선행 연구
+- [Point-SLAM](../level-05-deep-learning/point-slam.md) — RGB-D SLAM을 위한 신경 포인트 표현
 - [Pose graph optimization](../level-02-getting-familiar/pose-graph-optimization.md) — 탄성 맵이 흡수하는 전역 조정

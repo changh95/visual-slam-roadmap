@@ -47,4 +47,4 @@ This paper removed the last practical barrier to learning geometry from unlimite
 - [Self-supervised depth](../level-03-monocular-slam/self-supervised-depth.md)
 - [Neural Ray Surfaces](neural-ray-surfaces.md)
 - [MonoDepth](monodepth.md)
-- [DUSt3R](../level-03-monocular-slam/dust3r.md)
+- [DUSt3R](dust3r.md)

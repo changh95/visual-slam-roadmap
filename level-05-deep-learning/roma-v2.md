@@ -42,5 +42,5 @@ Dense, certainty-aware matching is becoming the front-end of choice for relocali
 - [RoMa](roma.md) — the predecessor and core architecture
 - [LoFTR](loftr.md) — earlier detector-free matching lineage
 - [Foundation models](foundation-models.md) — the source of robust coarse features
-- [MASt3R](../level-03-monocular-slam/mast3r.md) — dense matching fused with 3D reconstruction
+- [MASt3R](mast3r.md) — dense matching fused with 3D reconstruction
 - [DeDoDe](dedode.md) — same group's decoupled sparse detector/descriptor

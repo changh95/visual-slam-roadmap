@@ -37,6 +37,6 @@ CLIP은 오픈 어휘 SLAM을 가능하게 하는 핵심 기술입니다: CLIP �
 - [SigLIP](siglip.md)
 - [BLIP-2](blip-2.md)
 - [VLM 대 VLA](vlm-vs-vla.md)
-- [LERF](../level-03-monocular-slam/lerf.md)
-- [ConceptFusion](../level-03-monocular-slam/conceptfusion.md)
+- [LERF](../level-05-deep-learning/lerf.md)
+- [ConceptFusion](../level-05-deep-learning/conceptfusion.md)
 - [기반 모델](../level-05-deep-learning/foundation-models.md)

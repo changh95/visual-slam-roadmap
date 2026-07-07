@@ -42,4 +42,4 @@ DeepSLAM将"用网络替换每个模块,但保留架构"这一策略推向了极
 - [SfM-Learner](sfm-learner.md)
 - [MonoDepth](monodepth.md)
 - [Visual Place Recognition (VPR)](../level-03-monocular-slam/visual-place-recognition-vpr.md)
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md)
+- [DROID-SLAM](droid-slam.md)

@@ -37,6 +37,6 @@ CLIP是开放词汇SLAM的关键使能技术：通过将CLIP特征附加到三�
 - [SigLIP](siglip.md)
 - [BLIP-2](blip-2.md)
 - [VLM vs VLA](vlm-vs-vla.md)
-- [LERF](../level-03-monocular-slam/lerf.md)
-- [ConceptFusion](../level-03-monocular-slam/conceptfusion.md)
+- [LERF](../level-05-deep-learning/lerf.md)
+- [ConceptFusion](../level-05-deep-learning/conceptfusion.md)
 - [Foundation models](../level-05-deep-learning/foundation-models.md)

@@ -38,8 +38,8 @@ ConceptGraphs表明,2D基础模型可以通过普通的多视角关联被提升�
 
 - [SAM](sam.md)
 - [CLIP](../level-11-world-models-spatial-ai/clip.md)
-- [ConceptFusion](../level-03-monocular-slam/conceptfusion.md)
+- [ConceptFusion](conceptfusion.md)
 - [Hydra](hydra.md)
 - [Clio](clio.md)
-- [OpenScene](../level-03-monocular-slam/openscene.md)
+- [OpenScene](openscene.md)
 - [Grounding DINO](grounding-dino.md)

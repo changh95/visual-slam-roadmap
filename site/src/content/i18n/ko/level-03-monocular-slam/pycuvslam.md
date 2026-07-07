@@ -38,7 +38,7 @@ PyCuVSLAM은 두 가지 업계 흐름을 동시에 대표한다: 제품급 구�
 ## 관련 문서
 
 - [ORB-SLAM3](orb-slam3.md)
-- [DPVO](dpvo.md)
+- [DPVO](../level-05-deep-learning/dpvo.md)
 - [C++/Python interop](../level-02-getting-familiar/cpp-python-interop.md)
 - [Edge deployment](../level-02-getting-familiar/edge-deployment.md)
 - [OpenVINS](../level-06-vio-vins/openvins.md)

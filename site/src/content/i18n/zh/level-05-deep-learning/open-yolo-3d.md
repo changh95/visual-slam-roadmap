@@ -44,5 +44,5 @@ ScanNet200 验证集（312 个场景，200 个类别；Mask3D 提议；单张 A1
 - [Grounding DINO](grounding-dino.md) — 文本提示的开放词汇二维检测
 - [SAM](sam.md) — 该方法在推理时所避开的分割基础模型
 - [ConceptGraphs](conceptgraphs.md) — 受益于快速标注的开放词汇三维场景图
-- [OpenScene](../level-03-monocular-slam/openscene.md) — 点级的开放词汇三维理解
+- [OpenScene](openscene.md) — 点级的开放词汇三维理解
 - [Clio](clio.md) — 恰恰需要这种快速标注能力的任务驱动开放集建图方法

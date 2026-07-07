@@ -49,5 +49,5 @@ CodeSLAM は、DTAM 以来密な SLAM を阻んできた問いに答えた: 密�
 - [SceneCode](scenecode.md)
 - [NodeSLAM](nodeslam.md)
 - [CodeMapping](codemapping.md)
-- [iMAP](../level-03-monocular-slam/imap.md)
+- [iMAP](imap.md)
 - [DTAM](../level-03-monocular-slam/dtam.md)

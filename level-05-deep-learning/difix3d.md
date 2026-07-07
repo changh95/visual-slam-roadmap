@@ -39,6 +39,6 @@ Dense SLAM systems built on radiance fields or 3D Gaussians (SplaTAM, MonoGS, an
 
 - [NeRF](nerf.md) — the neural rendering representation whose artifacts this line of work targets
 - [Marigold](marigold.md) — another example of repurposing diffusion priors for 3D perception
-- [MonoGS](../level-03-monocular-slam/monogs.md) — Gaussian-splatting SLAM producing renderable maps
-- [NeRF-SLAM](../level-03-monocular-slam/nerf-slam.md) — radiance-field map built from real-time SLAM
-- [SplaTAM](../level-03-monocular-slam/splatam.md) — 3DGS SLAM whose rendered maps benefit from this kind of post-processing
+- [MonoGS](monogs.md) — Gaussian-splatting SLAM producing renderable maps
+- [NeRF-SLAM](nerf-slam.md) — radiance-field map built from real-time SLAM
+- [SplaTAM](splatam.md) — 3DGS SLAM whose rendered maps benefit from this kind of post-processing

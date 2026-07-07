@@ -41,7 +41,7 @@ BA-Net是"可微光束法平差"这一方向的开创性论文:它证明了SfM/S
 
 ## 相关条目
 
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md)
+- [DROID-SLAM](droid-slam.md)
 - [Theseus](theseus.md)
 - [DeMoN](demon.md)
 - [CodeSLAM](codeslam.md)

@@ -37,8 +37,8 @@ pose 최적화를 통해 학습하는 모든 딥 SLAM 또는 딥 VO 시스템은
 ## 관련 문서
 
 - [Theseus](theseus.md) — 동일한 요구에서 만들어진 미분 가능한 비선형 최소자승법
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md) — Lietorch 기반의 대표적 시스템
-- [DPVO](../level-03-monocular-slam/dpvo.md) — 희소 patch 기반 후속 시스템으로, 역시 Lietorch 기반
+- [DROID-SLAM](droid-slam.md) — Lietorch 기반의 대표적 시스템
+- [DPVO](dpvo.md) — 희소 patch 기반 후속 시스템으로, 역시 Lietorch 기반
 - [DeepV2D](deepv2d.md) — Lietorch의 geodesic 손실로 재학습된 딥 RGB-D SLAM 시스템
 - [Lie groups](../level-02-getting-familiar/lie-groups.md) — 기저가 되는 수학
 - [Differentiability](differentiability.md) — 딥 SLAM에서 기하학을 통한 기울기가 중요한 이유

@@ -39,8 +39,8 @@ $$\hat{\mathbf{X}} = \arg\min_{\mathbf{X},\mathbf{P}_W,\sigma}\; \mathcal{L}_{\m
 
 ## 관련 문서
 
-- [DUSt3R](dust3r.md)
-- [MASt3R](mast3r.md)
+- [DUSt3R](../level-05-deep-learning/dust3r.md)
+- [MASt3R](../level-05-deep-learning/mast3r.md)
 - [DynaSLAM](dynaslam.md)
 - [VDO-SLAM](vdo-slam.md)
 - [SEA-RAFT](../level-05-deep-learning/sea-raft.md) — 이 연구가 의존하는 기성품 플로우 종류

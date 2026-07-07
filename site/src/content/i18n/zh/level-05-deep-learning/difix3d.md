@@ -39,6 +39,6 @@ $$\mathcal{L}_{\text{Gram}} = \frac{1}{L}\sum_{l=1}^{L} \beta_l \left\| G_l(\hat
 
 - [NeRF](nerf.md) — 这一系列工作所针对的神经渲染表示,其伪影正是研究对象
 - [Marigold](marigold.md) — 另一个将扩散先验重新用于3D感知的例子
-- [MonoGS](../level-03-monocular-slam/monogs.md) — 产出可渲染地图的高斯溅射SLAM
-- [NeRF-SLAM](../level-03-monocular-slam/nerf-slam.md) — 由实时SLAM构建的辐射场地图
-- [SplaTAM](../level-03-monocular-slam/splatam.md) — 3DGS SLAM,其渲染地图可从此类后处理中获益
+- [MonoGS](monogs.md) — 产出可渲染地图的高斯溅射SLAM
+- [NeRF-SLAM](nerf-slam.md) — 由实时SLAM构建的辐射场地图
+- [SplaTAM](splatam.md) — 3DGS SLAM,其渲染地图可从此类后处理中获益

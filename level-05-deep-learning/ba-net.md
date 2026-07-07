@@ -41,7 +41,7 @@ BA-Net is the founding paper of "differentiable bundle adjustment": it demonstra
 
 ## Related
 
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md)
+- [DROID-SLAM](droid-slam.md)
 - [Theseus](theseus.md)
 - [DeMoN](demon.md)
 - [CodeSLAM](codeslam.md)

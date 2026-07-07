@@ -39,6 +39,6 @@ Offline SfM is the workhorse behind SLAM research: it produces pseudo-ground-tru
 - [COLMAP](colmap.md)
 - [GLOMAP](glomap.md)
 - [Schur complement / Sparsity](../level-02-getting-familiar/schur-complement-sparsity.md)
-- [VGGT](vggt.md)
+- [VGGT](../level-05-deep-learning/vggt.md)
 - [MAP inference as sparse nonlinear least squares](../level-02-getting-familiar/map-inference-as-sparse-nonlinear-least-squares.md)
 - [Depth Anything](../level-05-deep-learning/depth-anything.md)

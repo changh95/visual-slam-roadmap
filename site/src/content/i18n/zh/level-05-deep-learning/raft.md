@@ -53,5 +53,5 @@ RAFT"相关性体+迭代循环细化"的方案成为了SLAM中学习式数据关
 - [RAFT-3D](raft-3d.md) — 扩展到3D场景流并带刚体运动嵌入
 - [SEA-RAFT](sea-raft.md) — 简单、高效、实时的RAFT变体
 - [FlowFormer](flowformer.md) — 基于Transformer的代价体推理后继方法
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md) — 将RAFT机制转化为完整SLAM系统
-- [DPVO](../level-03-monocular-slam/dpvo.md) — 出自同一谱系的基于稀疏patch的里程计
+- [DROID-SLAM](droid-slam.md) — 将RAFT机制转化为完整SLAM系统
+- [DPVO](dpvo.md) — 出自同一谱系的基于稀疏patch的里程计

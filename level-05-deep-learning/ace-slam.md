@@ -38,7 +38,7 @@ ACE-SLAM shows that scene coordinate regression — matured through DSAC, ACE, a
 
 - [ACE](ace.md)
 - [ACE Zero](ace-zero.md)
-- [iMAP](../level-03-monocular-slam/imap.md)
-- [NICE-SLAM](../level-03-monocular-slam/nice-slam.md)
+- [iMAP](imap.md)
+- [NICE-SLAM](nice-slam.md)
 - [ACE-G](ace-g.md)
 - [SuperPoint](superpoint.md)

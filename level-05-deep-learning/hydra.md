@@ -41,5 +41,5 @@ Hydra turned the 3D Dynamic Scene Graph from an offline construction into a real
 - [Clio](clio.md) — task-driven open-set scene graphs
 - [Khronos](khronos.md) — spatio-temporal extension for dynamic scenes
 - [ConceptGraphs](conceptgraphs.md) — open-vocabulary 3D scene graphs
-- [GNC](gnc.md) — the robust solver used in the scene-graph backend
+- [GNC](../level-02-getting-familiar/gnc.md) — the robust solver used in the scene-graph backend
 - [Pose graph optimization](../level-02-getting-familiar/pose-graph-optimization.md) — the classical machinery the deformation-graph correction extends

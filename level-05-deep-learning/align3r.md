@@ -35,8 +35,8 @@ Consistent depth across frames is exactly what dense visual odometry and mapping
 
 ## Related
 
-- [DUSt3R](../level-03-monocular-slam/dust3r.md)
+- [DUSt3R](dust3r.md)
 - [MonST3R](../level-03-monocular-slam/monst3r.md)
 - [Depth Anything V2](depth-anything-v2.md)
 - [Marigold](marigold.md)
-- [MASt3R-SLAM](../level-03-monocular-slam/mast3r-slam.md)
+- [MASt3R-SLAM](mast3r-slam.md)

@@ -49,7 +49,7 @@ Hydra-Multi는 로봇 팀 전체에서 협력적으로 3D scene graph를 구축�
 
 - [Hydra](hydra.md) — 각 로봇이 실행하는 단일 로봇 scene graph 시스템
 - [Kimera-Multi](../level-08-collaborative-slam/kimera-multi.md) — 동일 연구실의 다중 로봇 metric-semantic SLAM
-- [GNC](gnc.md) — 정렬, 최적화, 병합 검증의 근간이 되는 강건한 솔버
+- [GNC](../level-02-getting-familiar/gnc.md) — 정렬, 최적화, 병합 검증의 근간이 되는 강건한 솔버
 - [Inter-robot loop closure](../level-08-collaborative-slam/inter-robot-loop-closure.md) — 로봇 맵을 정렬하는 핵심 메커니즘
 - [Map merging](../level-08-collaborative-slam/map-merging.md) — Hydra-Multi가 scene graph 수준에서 해결하는 일반적 문제
 - [Centralized vs Decentralized](../level-08-collaborative-slam/centralized-vs-decentralized.md) — Hydra-Multi는 중앙집중식 경로를 택함

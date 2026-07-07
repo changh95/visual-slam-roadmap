@@ -37,8 +37,8 @@ DEVO는 심층 VO 혁명이 이벤트 카메라에 도달한 순간을 나타냅
 
 ## 관련 문서
 
-- [DPVO](../level-03-monocular-slam/dpvo.md)
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md)
+- [DPVO](../level-05-deep-learning/dpvo.md)
+- [DROID-SLAM](../level-05-deep-learning/droid-slam.md)
 - [ESVO](esvo.md)
 - [EDS](eds.md)
 - [Event representations](event-representations.md)

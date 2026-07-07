@@ -43,4 +43,4 @@ DSP-SLAM是第一个将学习型隐式形状先验整合进在线物体重建的
 - [MoreFusion](morefusion.md) —— 带位姿估计以用于操作的物体级融合
 - [ORB-SLAM2](../level-03-monocular-slam/orb-slam2.md) —— 底层SLAM骨干
 - [NodeSLAM](../level-05-deep-learning/nodeslam.md) —— 由稠密深度驱动的形状先验SLAM,最接近的同期工作
-- [vMAP](../level-03-monocular-slam/vmap.md) —— 作为下一步的逐物体神经场
+- [vMAP](../level-05-deep-learning/vmap.md) —— 作为下一步的逐物体神经场

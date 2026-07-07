@@ -44,5 +44,5 @@ ScanNet200 검증 세트(장면 312개, 200개 범주; Mask3D 제안; 단일 A10
 - [Grounding DINO](grounding-dino.md) — 텍스트 프롬프트 기반 개방형 어휘 2D 검출
 - [SAM](sam.md) — 추론 시점에 회피하는 세그멘테이션 파운데이션 모델
 - [ConceptGraphs](conceptgraphs.md) — 빠른 라벨링으로부터 이득을 얻는 개방형 어휘 3D scene graph
-- [OpenScene](../level-03-monocular-slam/openscene.md) — 점 수준 개방형 어휘 3D 이해
+- [OpenScene](openscene.md) — 점 수준 개방형 어휘 3D 이해
 - [Clio](clio.md) — 정확히 이런 종류의 빠른 라벨링을 필요로 하는 과제 지향적 개방형 집합 매핑

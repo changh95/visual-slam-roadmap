@@ -56,4 +56,4 @@ Every residual in SLAM is occasionally wrong: mismatched features, moving object
 - [Non-linear optimization](non-linear-optimization.md)
 - [Bundle Adjustment](bundle-adjustment.md)
 - [Robust pose-graph optimization](robust-pose-graph-optimization.md)
-- [GNC](../level-05-deep-learning/gnc.md)
+- [GNC](gnc.md)

@@ -37,8 +37,8 @@ DEVO marks the moment the deep-VO revolution reached event cameras: classical ev
 
 ## Related
 
-- [DPVO](../level-03-monocular-slam/dpvo.md)
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md)
+- [DPVO](../level-05-deep-learning/dpvo.md)
+- [DROID-SLAM](../level-05-deep-learning/droid-slam.md)
 - [ESVO](esvo.md)
 - [EDS](eds.md)
 - [Event representations](event-representations.md)

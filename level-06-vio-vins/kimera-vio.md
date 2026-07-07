@@ -37,5 +37,5 @@ Kimera showed that a clean, modular open-source stack can go from raw stereo+IMU
 - [Kimera / 3D Dynamic Scene Graph](../level-05-deep-learning/kimera-3d-dynamic-scene-graph.md) — the scene-understanding layer built on this VIO.
 - [Kimera-Multi](../level-08-collaborative-slam/kimera-multi.md) — the multi-robot extension.
 - [Incremental smoothing](../level-02-getting-familiar/incremental-smoothing.md) — the iSAM2 machinery underneath.
-- [GNC](../level-05-deep-learning/gnc.md) — robust optimization later adopted in Kimera-RPGO.
+- [GNC](../level-02-getting-familiar/gnc.md) — robust optimization later adopted in Kimera-RPGO.
 - [MSCKF](msckf.md) — the filtering ancestor of the structureless measurement idea.

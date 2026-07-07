@@ -49,4 +49,4 @@ DeepV2Dは、DeMoNからDROID-SLAMへと至る系譜の重要な結節点であ�
 - [BA-Net](ba-net.md)
 - [DeepTAM](deeptam.md)
 - [RAFT](raft.md)
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md)
+- [DROID-SLAM](droid-slam.md)

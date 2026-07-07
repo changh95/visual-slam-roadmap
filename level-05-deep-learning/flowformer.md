@@ -41,5 +41,5 @@ Dense optical flow is the correspondence engine inside modern learned SLAM front
 - [RAFT](raft.md) — the convolutional all-pairs predecessor whose cost volume FlowFormer tokenizes
 - [SEA-RAFT](sea-raft.md) — efficiency-focused counterpoint that matches Transformers via training improvements
 - [FlowNet 2.0](flownet-2-0.md) — earlier iterative-refinement lineage in deep flow
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md) — SLAM system built around dense recurrent flow
+- [DROID-SLAM](droid-slam.md) — SLAM system built around dense recurrent flow
 - [LoFTR](loftr.md) — Transformer attention applied to detector-free image matching

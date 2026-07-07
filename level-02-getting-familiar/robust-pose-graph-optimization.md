@@ -43,7 +43,7 @@ One false loop closure can destroy a map that took an hour to build, so robustne
 ## Related
 
 - [Pose graph optimization](pose-graph-optimization.md)
-- [GNC](../level-05-deep-learning/gnc.md)
+- [GNC](gnc.md)
 - [DOOR-SLAM](../level-08-collaborative-slam/door-slam.md)
 - [Inter-robot loop closure](../level-08-collaborative-slam/inter-robot-loop-closure.md)
 - [Visual Place Recognition (VPR)](../level-03-monocular-slam/visual-place-recognition-vpr.md)

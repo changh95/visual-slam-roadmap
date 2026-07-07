@@ -41,7 +41,7 @@ BA-Net は「微分可能バンドル調整」の創始論文である: SfM/SLAM
 
 ## 関連ノート
 
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md)
+- [DROID-SLAM](droid-slam.md)
 - [Theseus](theseus.md)
 - [DeMoN](demon.md)
 - [CodeSLAM](codeslam.md)

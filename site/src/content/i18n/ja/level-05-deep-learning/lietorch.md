@@ -37,8 +37,8 @@ $$\mathcal{L}(\mathbf{T}_1,\ldots,\mathbf{T}_K) = \sum_k \|\operatorname{Log}(\m
 ## 関連ノート
 
 - [Theseus](theseus.md) — 同じニーズの上に構築された微分可能非線形最小二乗法
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md) — Lietorchを基盤とする代表的システム
-- [DPVO](../level-03-monocular-slam/dpvo.md) — 疎パッチベースの後継、同様にLietorchベース
+- [DROID-SLAM](droid-slam.md) — Lietorchを基盤とする代表的システム
+- [DPVO](dpvo.md) — 疎パッチベースの後継、同様にLietorchベース
 - [DeepV2D](deepv2d.md) — Lietorchの測地損失で再学習された深層RGB-D SLAMシステム
 - [Lie groups](../level-02-getting-familiar/lie-groups.md) — 基礎となる数学
 - [Differentiability](differentiability.md) — 深層SLAMにおいて幾何を通じた勾配が重要な理由

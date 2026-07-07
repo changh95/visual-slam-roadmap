@@ -49,7 +49,7 @@ Hydra-Multiは、ロボット群にわたって協調的に3Dシーングラフ�
 
 - [Hydra](hydra.md) — 各ロボットが実行する単一ロボット向けシーングラフシステム
 - [Kimera-Multi](../level-08-collaborative-slam/kimera-multi.md) — 同じ研究室によるマルチロボットメトリック・セマンティックSLAM
-- [GNC](gnc.md) — 位置合わせ、最適化、統合検証の背後にあるロバストソルバー
+- [GNC](../level-02-getting-familiar/gnc.md) — 位置合わせ、最適化、統合検証の背後にあるロバストソルバー
 - [Inter-robot loop closure](../level-08-collaborative-slam/inter-robot-loop-closure.md) — ロボットのマップを位置合わせするための鍵となる仕組み
 - [Map merging](../level-08-collaborative-slam/map-merging.md) — Hydra-Multiがシーングラフレベルで解決する一般的な問題
 - [Centralized vs Decentralized](../level-08-collaborative-slam/centralized-vs-decentralized.md) — Hydra-Multiは集中型の方式を採用している

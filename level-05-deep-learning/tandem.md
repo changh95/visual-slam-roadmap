@@ -43,6 +43,6 @@ TANDEM is a clean demonstration of the classical-plus-learned hybrid design patt
 - [MonoRec](monorec.md) — related dense reconstruction from monocular video
 - [DeepFactors](deepfactors.md) — code-based dense SLAM compared against
 - [CodeMapping](codemapping.md) — sparse SLAM + learned dense depth via codes
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md) — the fully learned alternative
-- [iMAP](../level-03-monocular-slam/imap.md) — the RGB-D neural-implicit system TANDEM matches monocularly
-- [NICE-SLAM](../level-03-monocular-slam/nice-slam.md) — neural implicit dense SLAM alternative
+- [DROID-SLAM](droid-slam.md) — the fully learned alternative
+- [iMAP](imap.md) — the RGB-D neural-implicit system TANDEM matches monocularly
+- [NICE-SLAM](nice-slam.md) — neural implicit dense SLAM alternative

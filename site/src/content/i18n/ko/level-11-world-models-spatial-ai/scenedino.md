@@ -45,6 +45,6 @@ SLAM 맵은 센서가 바라보지 않은 곳에서 비어 있습니다; 장면 
 
 - [Spatial AI](spatial-ai.md)
 - [Foundation models](../level-05-deep-learning/foundation-models.md)
-- [OpenScene](../level-03-monocular-slam/openscene.md)
+- [OpenScene](../level-05-deep-learning/openscene.md)
 - [NeRF](../level-05-deep-learning/nerf.md)
 - [World Labs / Marble](world-labs-marble.md)

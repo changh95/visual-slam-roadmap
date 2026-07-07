@@ -43,5 +43,5 @@ CodeMapping은 배포 가능한 시스템을 지배하는 실용적인 "하이�
 - [DeepFactors](deepfactors.md)
 - [TANDEM](tandem.md)
 - [ORB-SLAM3](../level-03-monocular-slam/orb-slam3.md)
-- [MonoGS](../level-03-monocular-slam/monogs.md)
+- [MonoGS](monogs.md)
 - [Kimera / 3D Dynamic Scene Graph](kimera-3d-dynamic-scene-graph.md) — 이 논문이 비교 대상으로 삼는 geometric 실시간 meshing 접근법

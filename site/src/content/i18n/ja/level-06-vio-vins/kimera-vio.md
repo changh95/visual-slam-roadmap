@@ -37,5 +37,5 @@ Kimeraは、クリーンでモジュラーなオープンソースのスタッ�
 - [Kimera / 3D Dynamic Scene Graph](../level-05-deep-learning/kimera-3d-dynamic-scene-graph.md) — このVIOの上に構築されたシーン理解レイヤー。
 - [Kimera-Multi](../level-08-collaborative-slam/kimera-multi.md) — マルチロボット拡張。
 - [インクリメンタルスムージング](../level-02-getting-familiar/incremental-smoothing.md) — 背後にあるiSAM2の機構。
-- [GNC](../level-05-deep-learning/gnc.md) — 後にKimera-RPGOに採用されたロバスト最適化。
+- [GNC](../level-02-getting-familiar/gnc.md) — 後にKimera-RPGOに採用されたロバスト最適化。
 - [MSCKF](msckf.md) — structureless測定アイデアのフィルタ系祖先。

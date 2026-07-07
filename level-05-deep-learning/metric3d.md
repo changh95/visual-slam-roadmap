@@ -42,5 +42,5 @@ SLAM needs *metric* depth — relative depth cannot anchor scale for monocular s
 - [MiDaS](midas.md) — relative-depth baseline that ignores scale
 - [ZoeDepth](zoedepth.md) — the metric-bins alternative route to metric depth
 - [Depth Anything V2](depth-anything-v2.md) — data-scaling successor in the depth foundation-model line
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md) — the SLAM system Metric3D plugs its depth into on KITTI
+- [DROID-SLAM](droid-slam.md) — the SLAM system Metric3D plugs its depth into on KITTI
 - [Pinhole camera model](../level-01-beginner/pinhole-camera-model.md) — the intrinsics that create the ambiguity

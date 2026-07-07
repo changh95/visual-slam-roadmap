@@ -42,5 +42,5 @@ SLAM需要*度量*深度——相对深度无法为单目系统锚定尺度，�
 - [MiDaS](midas.md) — 忽略尺度的相对深度基线
 - [ZoeDepth](zoedepth.md) — 通往度量深度的另一条路线——度量分箱方法
 - [Depth Anything V2](depth-anything-v2.md) — 深度基础模型谱系中的数据扩展后继者
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md) — Metric3D在KITTI上将其深度接入的SLAM系统
+- [DROID-SLAM](droid-slam.md) — Metric3D在KITTI上将其深度接入的SLAM系统
 - [Pinhole camera model](../level-01-beginner/pinhole-camera-model.md) — 造成这种歧义的内参

@@ -39,6 +39,6 @@ radiance field나 3D Gaussian 위에 구축된 dense SLAM 시스템(SplaTAM, Mon
 
 - [NeRF](nerf.md) — 이 연구 계열이 다루는 아티팩트를 가진 신경 렌더링 표현
 - [Marigold](marigold.md) — diffusion 사전 정보를 3D 인지에 재활용하는 또 다른 예
-- [MonoGS](../level-03-monocular-slam/monogs.md) — 렌더링 가능한 맵을 만드는 Gaussian-splatting SLAM
-- [NeRF-SLAM](../level-03-monocular-slam/nerf-slam.md) — 실시간 SLAM으로부터 구축된 radiance-field 맵
-- [SplaTAM](../level-03-monocular-slam/splatam.md) — 이런 종류의 후처리로 이득을 보는 렌더링된 맵을 가진 3DGS SLAM
+- [MonoGS](monogs.md) — 렌더링 가능한 맵을 만드는 Gaussian-splatting SLAM
+- [NeRF-SLAM](nerf-slam.md) — 실시간 SLAM으로부터 구축된 radiance-field 맵
+- [SplaTAM](splatam.md) — 이런 종류의 후처리로 이득을 보는 렌더링된 맵을 가진 3DGS SLAM

@@ -44,5 +44,5 @@ ScanNet200検証セット（312シーン、200カテゴリ；Mask3D候補領域�
 - [Grounding DINO](grounding-dino.md) — テキストプロンプト型オープン語彙2D検出
 - [SAM](sam.md) — 推論時に回避するセグメンテーション基盤モデル
 - [ConceptGraphs](conceptgraphs.md) — 高速ラベリングの恩恵を受けるオープン語彙3Dシーングラフ
-- [OpenScene](../level-03-monocular-slam/openscene.md) — ポイントレベルのオープン語彙3D理解
+- [OpenScene](openscene.md) — ポイントレベルのオープン語彙3D理解
 - [Clio](clio.md) — まさにこの種の高速ラベリングを必要とするタスク駆動型オープンセットマッピング

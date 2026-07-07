@@ -56,4 +56,4 @@ SLAM中的每一个残差偶尔都会出错：误匹配的特征、运动的物�
 - [非线性优化](non-linear-optimization.md)
 - [Bundle Adjustment](bundle-adjustment.md)
 - [鲁棒位姿图优化](robust-pose-graph-optimization.md)
-- [GNC](../level-05-deep-learning/gnc.md)
+- [GNC](gnc.md)

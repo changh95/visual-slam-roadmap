@@ -48,6 +48,6 @@
 - [Kimera-VIO](../level-06-vio-vins/kimera-vio.md) — 详细介绍其视觉-惯性前端
 - [Hydra](hydra.md) — 使DSG构建实现实时化与增量化
 - [Kimera-Multi](../level-08-collaborative-slam/kimera-multi.md) — 多机器人扩展
-- [GNC](gnc.md) — 出自同一实验室的鲁棒估计方法,被用于后续的场景图优化器
+- [GNC](../level-02-getting-familiar/gnc.md) — 出自同一实验室的鲁棒估计方法,被用于后续的场景图优化器
 - [SemanticFusion](../level-04-rgbd-slam/semanticfusion.md) — 稠密SLAM中更早期的语义标签融合方法
 - [Pose graph optimization](../level-02-getting-familiar/pose-graph-optimization.md) — 支撑机器人和人体轨迹估计的后端机制

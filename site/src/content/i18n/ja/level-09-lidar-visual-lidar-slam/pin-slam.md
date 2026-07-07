@@ -54,7 +54,7 @@
 
 - [FAST-LIO2](fast-lio2.md) — それが競合する古典的な直接レジストレーションのベースライン
 - [SuMa](suma.md) — 以前の密な(サーフェル)LiDARマップ表現
-- [iMAP](../level-03-monocular-slam/imap.md) — ニューラル暗黙SLAMの起源
-- [NICE-SLAM](../level-03-monocular-slam/nice-slam.md) — 階層的ニューラル暗黙RGB-D SLAMの前身
-- [Point-SLAM](../level-03-monocular-slam/point-slam.md) — RGB-D SLAM向けのニューラルポイント表現
+- [iMAP](../level-05-deep-learning/imap.md) — ニューラル暗黙SLAMの起源
+- [NICE-SLAM](../level-05-deep-learning/nice-slam.md) — 階層的ニューラル暗黙RGB-D SLAMの前身
+- [Point-SLAM](../level-05-deep-learning/point-slam.md) — RGB-D SLAM向けのニューラルポイント表現
 - [Pose graph optimization](../level-02-getting-familiar/pose-graph-optimization.md) — 弾性マップが吸収する大域的調整

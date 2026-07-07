@@ -62,7 +62,7 @@ Level 5의 거의 모든 논문은 learned-vs-hand-crafted 스펙트럼 위의 �
 - [SuperPoint](superpoint.md)
 - [SuperGlue](superglue.md)
 - [DeepVO](deepvo.md)
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md)
+- [DROID-SLAM](droid-slam.md)
 - [Differentiability](differentiability.md)
 - [NetVLAD](netvlad.md)
 - [Foundation models](foundation-models.md)

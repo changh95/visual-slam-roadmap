@@ -42,4 +42,4 @@ RoMa는 동결된 파운데이션 모델 특징이 매칭 강인성을 극적으
 - [LoFTR](loftr.md) — 앞선 검출기 없는 Transformer 매칭
 - [DeDoDe](dedode.md) — 같은 그룹의 검출/기술 분리 방법
 - [Foundation models](foundation-models.md) — 동결된 사전 학습 특징이 일반화되는 이유
-- [MASt3R](../level-03-monocular-slam/mast3r.md) — 밀집 매칭과 3D 복원의 융합
+- [MASt3R](mast3r.md) — 밀집 매칭과 3D 복원의 융합

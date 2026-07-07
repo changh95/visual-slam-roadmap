@@ -54,7 +54,7 @@
 
 - [FAST-LIO2](fast-lio2.md) — 与其竞争的经典直接配准基线
 - [SuMa](suma.md) — 更早的稠密（面元）激光雷达地图表示
-- [iMAP](../level-03-monocular-slam/imap.md) — 神经隐式 SLAM 的起源
-- [NICE-SLAM](../level-03-monocular-slam/nice-slam.md) — 分层神经隐式 RGB-D SLAM 前身
-- [Point-SLAM](../level-03-monocular-slam/point-slam.md) — 面向 RGB-D SLAM 的神经点表示
+- [iMAP](../level-05-deep-learning/imap.md) — 神经隐式 SLAM 的起源
+- [NICE-SLAM](../level-05-deep-learning/nice-slam.md) — 分层神经隐式 RGB-D SLAM 前身
+- [Point-SLAM](../level-05-deep-learning/point-slam.md) — 面向 RGB-D SLAM 的神经点表示
 - [Pose graph optimization](../level-02-getting-familiar/pose-graph-optimization.md) — 弹性地图所吸收的全局调整

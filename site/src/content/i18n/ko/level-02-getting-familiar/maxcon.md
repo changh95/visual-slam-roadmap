@@ -55,4 +55,4 @@ SLAM의 모든 기하학적 추정 단계 — 본질 행렬, PnP, 루프 클로�
 - [PROSAC](prosac.md)
 - [컨벡스 완화](convex-relaxation.md)
 - [M-Estimator](m-estimator.md)
-- [TEASER++](../level-05-deep-learning/teaserpp.md)
+- [TEASER++](teaserpp.md)

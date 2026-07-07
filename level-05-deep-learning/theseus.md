@@ -48,6 +48,6 @@ Classical SLAM back-ends (g2o, Ceres, GTSAM) are highly optimized but not differ
 - [BA-Net](ba-net.md) — differentiable bundle adjustment as a network layer, a direct precursor.
 - [Lietorch](lietorch.md) — differentiable Lie group operations in PyTorch, used for the same class of problems.
 - [GradSLAM](gradslam.md) — fully differentiable dense SLAM pipeline.
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md) — end-to-end SLAM system built around a differentiable BA layer.
+- [DROID-SLAM](droid-slam.md) — end-to-end SLAM system built around a differentiable BA layer.
 - [Differentiability](differentiability.md) — the concept underlying all of these systems.
 - [MAP inference as sparse nonlinear least squares](../level-02-getting-familiar/map-inference-as-sparse-nonlinear-least-squares.md) — the classical problem being made differentiable.

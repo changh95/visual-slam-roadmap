@@ -42,4 +42,4 @@ DeepSLAM shows the "replace every module with a network, keep the architecture" 
 - [SfM-Learner](sfm-learner.md)
 - [MonoDepth](monodepth.md)
 - [Visual Place Recognition (VPR)](../level-03-monocular-slam/visual-place-recognition-vpr.md)
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md)
+- [DROID-SLAM](droid-slam.md)

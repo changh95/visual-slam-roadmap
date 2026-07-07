@@ -48,6 +48,6 @@ $$\mathrm{D}_{\phi}\theta^{\star}(\bar{\phi}) = -\mathrm{D}_{\theta}^{-1} g\big(
 - [BA-Net](ba-net.md) — 作为网络层的可微分光束法平差,是其直接前身。
 - [Lietorch](lietorch.md) — PyTorch中的可微分李群运算,用于同类问题。
 - [GradSLAM](gradslam.md) — 完全可微分的稠密SLAM管线。
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md) — 围绕可微分BA层构建的端到端SLAM系统。
+- [DROID-SLAM](droid-slam.md) — 围绕可微分BA层构建的端到端SLAM系统。
 - [Differentiability](differentiability.md) — 支撑所有这些系统的底层概念。
 - [MAP inference as sparse nonlinear least squares](../level-02-getting-familiar/map-inference-as-sparse-nonlinear-least-squares.md) — 被赋予可微性的经典问题。

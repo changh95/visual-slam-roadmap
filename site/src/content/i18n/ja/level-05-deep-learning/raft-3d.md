@@ -45,5 +45,5 @@ $$E(\delta) = \sum_{i \in \Omega} \sum_{j \in \mathcal{N}_i} a_{ij} \left\lVert 
 
 - [RAFT](raft.md) — 2Dオプティカルフローの基盤
 - [FlowNet3D](flownet3d.md) — 剛性事前分布を持たない、より早期の点群シーンフロー
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md) — 同じ著者ら。完全なSLAMシステム内の密なBA層
+- [DROID-SLAM](droid-slam.md) — 同じ著者ら。完全なSLAMシステム内の密なBA層
 - [VDO-SLAM](../level-03-monocular-slam/vdo-slam.md) — 物体の運動を追跡する動的SLAM

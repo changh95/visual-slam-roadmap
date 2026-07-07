@@ -53,5 +53,5 @@ RAFT의 "correlation volume + 반복적 순환 정제" 방식은 SLAM에서 학�
 - [RAFT-3D](raft-3d.md) — 강체 운동 임베딩을 사용한 3D scene flow로의 확장
 - [SEA-RAFT](sea-raft.md) — 단순하고 효율적인 실시간 RAFT 변형
 - [FlowFormer](flowformer.md) — cost-volume 추론을 위한 Transformer 기반 후속작
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md) — RAFT 기법을 완전한 SLAM 시스템으로 만든 사례
-- [DPVO](../level-03-monocular-slam/dpvo.md) — 동일 계보에서 나온 sparse patch 기반 odometry
+- [DROID-SLAM](droid-slam.md) — RAFT 기법을 완전한 SLAM 시스템으로 만든 사례
+- [DPVO](dpvo.md) — 동일 계보에서 나온 sparse patch 기반 odometry

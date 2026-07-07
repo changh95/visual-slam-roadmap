@@ -49,7 +49,7 @@ Hydra-Multi是首个在机器人团队间协作构建三维场景图的系统,�
 
 - [Hydra](hydra.md) — 每个机器人运行的单机器人场景图系统
 - [Kimera-Multi](../level-08-collaborative-slam/kimera-multi.md) — 出自同一实验室的多机器人度量-语义SLAM
-- [GNC](gnc.md) — 支撑对齐、优化与合并验证的鲁棒求解器
+- [GNC](../level-02-getting-familiar/gnc.md) — 支撑对齐、优化与合并验证的鲁棒求解器
 - [Inter-robot loop closure](../level-08-collaborative-slam/inter-robot-loop-closure.md) — 对齐机器人地图的关键机制
 - [Map merging](../level-08-collaborative-slam/map-merging.md) — Hydra-Multi在场景图层面解决的一般性问题
 - [Centralized vs Decentralized](../level-08-collaborative-slam/centralized-vs-decentralized.md) — Hydra-Multi采用的是集中式路线

@@ -42,4 +42,4 @@ RoMa证明了冻结的基础模型特征能大幅提升匹配的鲁棒性——�
 - [LoFTR](loftr.md) — 更早的无检测器Transformer匹配方法
 - [DeDoDe](dedode.md) — 同一团队;解耦的检测/描述方法
 - [Foundation models](foundation-models.md) — 解释冻结预训练特征为何能泛化
-- [MASt3R](../level-03-monocular-slam/mast3r.md) — 与3D重建融合的稠密匹配
+- [MASt3R](mast3r.md) — 与3D重建融合的稠密匹配

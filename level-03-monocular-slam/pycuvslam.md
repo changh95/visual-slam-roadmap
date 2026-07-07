@@ -38,7 +38,7 @@ PyCuVSLAM represents two industry trends at once: hardware-accelerated SLAM as a
 ## Related
 
 - [ORB-SLAM3](orb-slam3.md)
-- [DPVO](dpvo.md)
+- [DPVO](../level-05-deep-learning/dpvo.md)
 - [C++/Python interop](../level-02-getting-familiar/cpp-python-interop.md)
 - [Edge deployment](../level-02-getting-familiar/edge-deployment.md)
 - [OpenVINS](../level-06-vio-vins/openvins.md)

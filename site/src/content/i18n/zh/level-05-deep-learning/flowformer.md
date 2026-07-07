@@ -41,5 +41,5 @@ $$\Delta\mathbf{f}(\mathbf{x})=\mathrm{ConvGRU}(\mathrm{Concat}(\mathbf{c_x},\ma
 - [RAFT](raft.md) — FlowFormer所token化的代价体积所源自的卷积全对预测前身
 - [SEA-RAFT](sea-raft.md) — 注重效率的对照方案,通过训练改进达到与Transformer相当的效果
 - [FlowNet 2.0](flownet-2-0.md) — 深度光流中更早的迭代精化谱系
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md) — 围绕稠密循环光流构建的SLAM系统
+- [DROID-SLAM](droid-slam.md) — 围绕稠密循环光流构建的SLAM系统
 - [LoFTR](loftr.md) — 将Transformer注意力应用于无检测器图像匹配

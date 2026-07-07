@@ -56,4 +56,4 @@ SLAM의 모든 잔차는 때때로 잘못됩니다: 잘못 매칭된 특징, 움
 - [Non-linear optimization](non-linear-optimization.md)
 - [Bundle Adjustment](bundle-adjustment.md)
 - [Robust pose-graph optimization](robust-pose-graph-optimization.md)
-- [GNC](../level-05-deep-learning/gnc.md)
+- [GNC](gnc.md)

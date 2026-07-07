@@ -55,4 +55,4 @@ Differentiability is the bridge between the two halves of Level 5: it lets learn
 - [Lietorch](lietorch.md)
 - [GradSLAM](gradslam.md)
 - [DISK](disk.md)
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md)
+- [DROID-SLAM](droid-slam.md)

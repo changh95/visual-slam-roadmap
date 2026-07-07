@@ -48,5 +48,5 @@ Scale ambiguity dictates system design: it is *the* reason phones and headsets a
 - [Scale observability](../level-07-stereo-slam/scale-observability.md)
 - [VI-DSO](../level-06-vio-vins/vi-dso.md)
 - [Metric3D](../level-05-deep-learning/metric3d.md)
-- [MASt3R](mast3r.md)
+- [MASt3R](../level-05-deep-learning/mast3r.md)
 - [CubeSLAM](cubeslam.md)

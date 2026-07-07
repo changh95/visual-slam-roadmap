@@ -1,4 +1,7 @@
 import { defineConfig } from 'astro/config';
+import { readFileSync } from 'node:fs';
+
+const redirects = JSON.parse(readFileSync(new URL('./redirects.json', import.meta.url), 'utf8'));
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import remarkMath from 'remark-math';
@@ -10,6 +13,7 @@ export default defineConfig({
   site: 'https://www.cv-learn.com',
   base: '/visual-slam-roadmap',
   trailingSlash: 'always',
+  redirects,
   integrations: [
     sitemap({
       i18n: {

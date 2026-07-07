@@ -38,8 +38,8 @@ ConceptGraphs는 2D 파운데이션 모델이 새로운 3D 네트워크 없이�
 
 - [SAM](sam.md)
 - [CLIP](../level-11-world-models-spatial-ai/clip.md)
-- [ConceptFusion](../level-03-monocular-slam/conceptfusion.md)
+- [ConceptFusion](conceptfusion.md)
 - [Hydra](hydra.md)
 - [Clio](clio.md)
-- [OpenScene](../level-03-monocular-slam/openscene.md)
+- [OpenScene](openscene.md)
 - [Grounding DINO](grounding-dino.md)

@@ -53,5 +53,5 @@ RAFTの「相関ボリューム+反復的リカレント精緻化」というレ
 - [RAFT-3D](raft-3d.md) — 剛体運動埋め込みを用いた3Dシーンフローへの拡張
 - [SEA-RAFT](sea-raft.md) — 単純で効率的、リアルタイムのRAFT変種
 - [FlowFormer](flowformer.md) — コストボリューム推論のためのTransformerベースの後継
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md) — RAFTの機構を完全なSLAMシステムに転用したもの
-- [DPVO](../level-03-monocular-slam/dpvo.md) — 同じ系譜からの疎パッチベースオドメトリ
+- [DROID-SLAM](droid-slam.md) — RAFTの機構を完全なSLAMシステムに転用したもの
+- [DPVO](dpvo.md) — 同じ系譜からの疎パッチベースオドメトリ

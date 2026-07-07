@@ -55,4 +55,4 @@ SLAMにおけるすべての幾何推定ステップ — 基礎行列、PnP、�
 - [PROSAC](prosac.md)
 - [凸緩和](convex-relaxation.md)
 - [M推定量](m-estimator.md)
-- [TEASER++](../level-05-deep-learning/teaserpp.md)
+- [TEASER++](teaserpp.md)

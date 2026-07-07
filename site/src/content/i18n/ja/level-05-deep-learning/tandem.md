@@ -43,6 +43,6 @@ TANDEMは、古典的手法と学習手法を組み合わせるハイブリッ�
 - [MonoRec](monorec.md) — 単眼動画からの関連する稠密再構成手法
 - [DeepFactors](deepfactors.md) — 比較対象となったコードベースの稠密SLAM
 - [CodeMapping](codemapping.md) — 疎SLAM＋コードによる学習済み稠密深度
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md) — 完全学習ベースの代替手法
-- [iMAP](../level-03-monocular-slam/imap.md) — TANDEMが単眼で対抗するRGB-Dニューラルインプリシットシステム
-- [NICE-SLAM](../level-03-monocular-slam/nice-slam.md) — ニューラルインプリシット稠密SLAMの代替手法
+- [DROID-SLAM](droid-slam.md) — 完全学習ベースの代替手法
+- [iMAP](imap.md) — TANDEMが単眼で対抗するRGB-Dニューラルインプリシットシステム
+- [NICE-SLAM](nice-slam.md) — ニューラルインプリシット稠密SLAMの代替手法

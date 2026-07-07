@@ -36,4 +36,4 @@ NaVILA is a concrete example of the foundation-model challenge to classical SLAM
 - [LLaVA](llava.md)
 - [VLM vs VLA](vlm-vs-vla.md)
 - [Spatial AI](spatial-ai.md)
-- [MASt3R](../level-03-monocular-slam/mast3r.md)
+- [MASt3R](../level-05-deep-learning/mast3r.md)

@@ -44,8 +44,8 @@ SfM tools like COLMAP are the standard way to generate ground-truth trajectories
 
 - [COLMAP](colmap.md)
 - [InstantSfM](instantsfm.md)
-- [VGGT](vggt.md)
-- [MASt3R](mast3r.md)
+- [VGGT](../level-05-deep-learning/vggt.md)
+- [MASt3R](../level-05-deep-learning/mast3r.md)
 - [Schur complement / Sparsity](../level-02-getting-familiar/schur-complement-sparsity.md)
 - [Epipolar geometry](../level-01-beginner/epipolar-geometry.md)
 - [Robust pose-graph optimization](../level-02-getting-familiar/robust-pose-graph-optimization.md)

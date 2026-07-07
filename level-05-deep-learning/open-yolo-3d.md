@@ -44,5 +44,5 @@ Open-vocabulary semantics is what lets a robot answer language queries about its
 - [Grounding DINO](grounding-dino.md) — text-prompted open-vocabulary 2D detection
 - [SAM](sam.md) — the segmentation foundation model it avoids at inference time
 - [ConceptGraphs](conceptgraphs.md) — open-vocabulary 3D scene graphs that benefit from fast labeling
-- [OpenScene](../level-03-monocular-slam/openscene.md) — point-level open-vocabulary 3D understanding
+- [OpenScene](openscene.md) — point-level open-vocabulary 3D understanding
 - [Clio](clio.md) — task-driven open-set mapping that needs exactly this kind of fast labeling

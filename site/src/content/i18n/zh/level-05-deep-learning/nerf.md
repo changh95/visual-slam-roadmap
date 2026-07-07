@@ -38,8 +38,8 @@ NeRF 是整个神经隐式 SLAM 浪潮的奠基性工作：iMAP、NICE-SLAM、Co
 
 ## 相关条目
 
-- [iMAP](../level-03-monocular-slam/imap.md) — 首个 NeRF 风格的 SLAM 系统
-- [NICE-SLAM](../level-03-monocular-slam/nice-slam.md) — 分层特征网格后续工作
-- [NeRF-SLAM](../level-03-monocular-slam/nerf-slam.md) — 将辐射场与 DROID-SLAM 跟踪相融合
-- [BARF](../level-03-monocular-slam/barf.md) — 位姿与 NeRF 联合优化
-- [Co-SLAM](../level-03-monocular-slam/co-slam.md) — 面向实时神经 SLAM 的联合坐标/参数化编码
+- [iMAP](imap.md) — 首个 NeRF 风格的 SLAM 系统
+- [NICE-SLAM](nice-slam.md) — 分层特征网格后续工作
+- [NeRF-SLAM](nerf-slam.md) — 将辐射场与 DROID-SLAM 跟踪相融合
+- [BARF](barf.md) — 位姿与 NeRF 联合优化
+- [Co-SLAM](co-slam.md) — 面向实时神经 SLAM 的联合坐标/参数化编码

@@ -37,8 +37,8 @@ DEVO标志着深度学习VO革命抵达事件相机领域的时刻:经典事件�
 
 ## 相关条目
 
-- [DPVO](../level-03-monocular-slam/dpvo.md)
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md)
+- [DPVO](../level-05-deep-learning/dpvo.md)
+- [DROID-SLAM](../level-05-deep-learning/droid-slam.md)
 - [ESVO](esvo.md)
 - [EDS](eds.md)
 - [Event representations](event-representations.md)

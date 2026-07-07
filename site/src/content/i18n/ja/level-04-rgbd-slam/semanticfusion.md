@@ -41,4 +41,4 @@ SemanticFusionは「深層意味SLAM」を先駆的に開拓した。CNNによ�
 - [Fusion++](fusionpp.md)
 - [Kimera / 3D Dynamic Scene Graph](../level-05-deep-learning/kimera-3d-dynamic-scene-graph.md)
 - [MaskFusion](../level-03-monocular-slam/maskfusion.md)
-- [ConceptFusion](../level-03-monocular-slam/conceptfusion.md)
+- [ConceptFusion](../level-05-deep-learning/conceptfusion.md)

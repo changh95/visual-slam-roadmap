@@ -38,8 +38,8 @@ NeRF는 신경 암묵적 SLAM 전체 흐름의 기초가 되는 연구이다: iM
 
 ## 관련 문서
 
-- [iMAP](../level-03-monocular-slam/imap.md) — 최초의 NeRF 스타일 SLAM 시스템
-- [NICE-SLAM](../level-03-monocular-slam/nice-slam.md) — 계층적 특징 그리드 후속 연구
-- [NeRF-SLAM](../level-03-monocular-slam/nerf-slam.md) — DROID-SLAM 추적과 결합된 radiance field
-- [BARF](../level-03-monocular-slam/barf.md) — 포즈와 NeRF의 공동 최적화
-- [Co-SLAM](../level-03-monocular-slam/co-slam.md) — 실시간 신경 SLAM을 위한 좌표/파라메트릭 인코딩 결합
+- [iMAP](imap.md) — 최초의 NeRF 스타일 SLAM 시스템
+- [NICE-SLAM](nice-slam.md) — 계층적 특징 그리드 후속 연구
+- [NeRF-SLAM](nerf-slam.md) — DROID-SLAM 추적과 결합된 radiance field
+- [BARF](barf.md) — 포즈와 NeRF의 공동 최적화
+- [Co-SLAM](co-slam.md) — 실시간 신경 SLAM을 위한 좌표/파라메트릭 인코딩 결합

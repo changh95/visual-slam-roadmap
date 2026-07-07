@@ -38,8 +38,8 @@ NeRFは、神経暗黙表現SLAMの一大潮流全体の基盤となる研究で
 
 ## 関連ノート
 
-- [iMAP](../level-03-monocular-slam/imap.md) — 初のNeRF様SLAMシステム
-- [NICE-SLAM](../level-03-monocular-slam/nice-slam.md) — 階層的特徴グリッドの後継手法
-- [NeRF-SLAM](../level-03-monocular-slam/nerf-slam.md) — DROID-SLAMのトラッキングと融合されたラディアンスフィールド
-- [BARF](../level-03-monocular-slam/barf.md) — 姿勢とNeRFの同時最適化
-- [Co-SLAM](../level-03-monocular-slam/co-slam.md) — リアルタイム神経SLAMのための座標／パラメトリック共同エンコーディング
+- [iMAP](imap.md) — 初のNeRF様SLAMシステム
+- [NICE-SLAM](nice-slam.md) — 階層的特徴グリッドの後継手法
+- [NeRF-SLAM](nerf-slam.md) — DROID-SLAMのトラッキングと融合されたラディアンスフィールド
+- [BARF](barf.md) — 姿勢とNeRFの同時最適化
+- [Co-SLAM](co-slam.md) — リアルタイム神経SLAMのための座標／パラメトリック共同エンコーディング

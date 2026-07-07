@@ -43,6 +43,6 @@ TANDEM清晰地展示了"经典+学习"混合设计模式:对位姿保留易于�
 - [MonoRec](monorec.md) — 相关的单目视频稠密重建方法
 - [DeepFactors](deepfactors.md) — 用于对比的基于编码的稠密SLAM
 - [CodeMapping](codemapping.md) — 稀疏SLAM结合通过编码学习的稠密深度
-- [DROID-SLAM](../level-03-monocular-slam/droid-slam.md) — 完全学习式的替代方案
-- [iMAP](../level-03-monocular-slam/imap.md) — TANDEM在单目条件下所匹敌的RGB-D神经隐式系统
-- [NICE-SLAM](../level-03-monocular-slam/nice-slam.md) — 神经隐式稠密SLAM的替代方案
+- [DROID-SLAM](droid-slam.md) — 完全学习式的替代方案
+- [iMAP](imap.md) — TANDEM在单目条件下所匹敌的RGB-D神经隐式系统
+- [NICE-SLAM](nice-slam.md) — 神经隐式稠密SLAM的替代方案

@@ -51,27 +51,27 @@
 
 | 系统 | 作者/年份 | 关键概念 |
 |--------|-------------|--------------|
-| [**DROID-SLAM**](level-03-monocular-slam/droid-slam.md) | [Teed 2021](https://arxiv.org/abs/2108.10869) | 可微分BA、稠密光流、端到端学习(→ 也见于第5级) |
-| [TartanVO](level-03-monocular-slam/tartanvo.md) | [Wang 2021](https://arxiv.org/abs/2011.00359) | 可泛化的视觉里程计 |
-| [**DPVO**](level-03-monocular-slam/dpvo.md) | [Teed 2023](https://arxiv.org/abs/2208.04726) | 基于图像块(Patch)的轻量化DROID-SLAM，实时VO(→ 也见于第5级) |
-| [**DPV-SLAM**](level-03-monocular-slam/dpv-slam.md) | [Lipson 2024](https://arxiv.org/abs/2408.01654) | DPVO+回环检测，完整SLAM(ECCV 2024) |
-| [MAC-VO](level-03-monocular-slam/mac-vo.md) | [Qiu 2024](https://arxiv.org/abs/2409.09479) | 基于学习的VO，度量感知(metric-aware) |
-| [**VoT**](level-03-monocular-slam/vot.md) | [Yugay 2025](https://arxiv.org/abs/2510.03348) | 基于Transformer的视觉里程计(后改名为FVO) |
+| [**DROID-SLAM**](level-05-deep-learning/droid-slam.md) | [Teed 2021](https://arxiv.org/abs/2108.10869) | 可微分BA、稠密光流、端到端学习(→ 也见于第5级) |
+| [TartanVO](level-05-deep-learning/tartanvo.md) | [Wang 2021](https://arxiv.org/abs/2011.00359) | 可泛化的视觉里程计 |
+| [**DPVO**](level-05-deep-learning/dpvo.md) | [Teed 2023](https://arxiv.org/abs/2208.04726) | 基于图像块(Patch)的轻量化DROID-SLAM，实时VO(→ 也见于第5级) |
+| [**DPV-SLAM**](level-05-deep-learning/dpv-slam.md) | [Lipson 2024](https://arxiv.org/abs/2408.01654) | DPVO+回环检测，完整SLAM(ECCV 2024) |
+| [MAC-VO](level-05-deep-learning/mac-vo.md) | [Qiu 2024](https://arxiv.org/abs/2409.09479) | 基于学习的VO，度量感知(metric-aware) |
+| [**VoT**](level-05-deep-learning/vot.md) | [Yugay 2025](https://arxiv.org/abs/2510.03348) | 基于Transformer的视觉里程计(后改名为FVO) |
 
 ### 基础模型SLAM
 
 | 系统 | 作者/年份 | 关键概念 |
 |--------|-------------|--------------|
-| [**DUSt3R**](level-03-monocular-slam/dust3r.md) | [Wang 2024](https://arxiv.org/abs/2312.14132) | 从图像对回归点图(Pointmap)，无需标定 |
-| [**MASt3R**](level-03-monocular-slam/mast3r.md) | [Leroy 2024](https://arxiv.org/abs/2406.09756) | DUSt3R+局部特征匹配 |
-| [**MASt3R-SLAM**](level-03-monocular-slam/mast3r-slam.md) | [Murai 2024](https://arxiv.org/abs/2412.12392) | 基于MASt3R先验的实时稠密SLAM |
-| [**VGGT**](level-03-monocular-slam/vggt.md) | [Wang (Meta) 2025](https://arxiv.org/abs/2503.11651) | 从N个视角前馈推断位姿、深度、点图、轨迹(**CVPR 2025最佳论文**) |
-| [**VGGT-SLAM**](level-03-monocular-slam/vggt-slam.md) | [Maggio 2025](https://arxiv.org/abs/2505.12549) | 在SL(4)流形上优化的稠密RGB SLAM，VGGT前端 |
-| [**VGGT-SLAM 2.0**](level-03-monocular-slam/vggt-slam-2-0.md) | [Maggio 2026](https://arxiv.org/abs/2601.19887) | 实时稠密前馈场景重建 |
-| [**VGGT-Geo**](level-03-monocular-slam/vggt-geo.md) | [Qin 2026](https://www.mdpi.com/2220-9964/15/2/85) | 对VGGT先验进行概率几何融合，用于稠密室内SLAM |
-| [**IGGT**](level-03-monocular-slam/iggt.md) | [Li 2025](https://arxiv.org/abs/2510.22706) | 实例基础几何Transformer(Instance-grounded geometry transformer) — 统一3D重建与实例级理解 |
-| [**AMB3R**](level-03-monocular-slam/amb3r.md) | [Wang 2025](https://arxiv.org/abs/2511.20343) | 带后端的高精度前馈度量尺度3D重建，支持SfM/SLAM |
-| [**MASt3R-Fusion**](level-03-monocular-slam/mast3r-fusion.md) | [Zhou 2025](https://arxiv.org/abs/2509.20757) | MASt3R前馈视觉模型+IMU+GNSS融合 |
+| [**DUSt3R**](level-05-deep-learning/dust3r.md) | [Wang 2024](https://arxiv.org/abs/2312.14132) | 从图像对回归点图(Pointmap)，无需标定 |
+| [**MASt3R**](level-05-deep-learning/mast3r.md) | [Leroy 2024](https://arxiv.org/abs/2406.09756) | DUSt3R+局部特征匹配 |
+| [**MASt3R-SLAM**](level-05-deep-learning/mast3r-slam.md) | [Murai 2024](https://arxiv.org/abs/2412.12392) | 基于MASt3R先验的实时稠密SLAM |
+| [**VGGT**](level-05-deep-learning/vggt.md) | [Wang (Meta) 2025](https://arxiv.org/abs/2503.11651) | 从N个视角前馈推断位姿、深度、点图、轨迹(**CVPR 2025最佳论文**) |
+| [**VGGT-SLAM**](level-05-deep-learning/vggt-slam.md) | [Maggio 2025](https://arxiv.org/abs/2505.12549) | 在SL(4)流形上优化的稠密RGB SLAM，VGGT前端 |
+| [**VGGT-SLAM 2.0**](level-05-deep-learning/vggt-slam-2-0.md) | [Maggio 2026](https://arxiv.org/abs/2601.19887) | 实时稠密前馈场景重建 |
+| [**VGGT-Geo**](level-05-deep-learning/vggt-geo.md) | [Qin 2026](https://www.mdpi.com/2220-9964/15/2/85) | 对VGGT先验进行概率几何融合，用于稠密室内SLAM |
+| [**IGGT**](level-05-deep-learning/iggt.md) | [Li 2025](https://arxiv.org/abs/2510.22706) | 实例基础几何Transformer(Instance-grounded geometry transformer) — 统一3D重建与实例级理解 |
+| [**AMB3R**](level-05-deep-learning/amb3r.md) | [Wang 2025](https://arxiv.org/abs/2511.20343) | 带后端的高精度前馈度量尺度3D重建，支持SfM/SLAM |
+| [**MASt3R-Fusion**](level-05-deep-learning/mast3r-fusion.md) | [Zhou 2025](https://arxiv.org/abs/2509.20757) | MASt3R前馈视觉模型+IMU+GNSS融合 |
 
 #### SfM工具
 
@@ -87,41 +87,41 @@
 
 | 系统 | 作者/年份 | 关键概念 |
 |--------|-------------|--------------|
-| [**iMAP**](level-03-monocular-slam/imap.md) | [Sucar 2021](https://arxiv.org/abs/2103.12352) | 首个NeRF-SLAM，单一MLP，实时跟踪/建图 |
-| [**BARF**](level-03-monocular-slam/barf.md) | [Lin 2021](https://arxiv.org/abs/2104.06405) | 光束法平差式NeRF(Bundle-Adjusting NeRF)，由粗到精的位置编码，位姿与NeRF联合优化(非完整SLAM — 仅位姿+NeRF联合优化) |
-| [**NICE-SLAM**](level-03-monocular-slam/nice-slam.md) | [Zhu & Peng 2022](https://arxiv.org/abs/2112.12130) | 分层特征网格(粗/中/细)，可扩展 |
-| [**Co-SLAM**](level-03-monocular-slam/co-slam.md) | [Wang 2023](https://arxiv.org/abs/2304.14377) | 哈希网格(Instant-NGP)+坐标编码，比NICE-SLAM快5-10倍 |
-| [**ESLAM**](level-03-monocular-slam/eslam.md) | [Johari 2023](https://arxiv.org/abs/2211.11704) | 三平面表征，O(N²)对比O(N³)的内存占用 |
-| [**Point-SLAM**](level-03-monocular-slam/point-slam.md) | [Sandström 2023](https://arxiv.org/abs/2304.04278) | 基于神经点云 |
-| [**NeRF-SLAM**](level-03-monocular-slam/nerf-slam.md) | [Rosinol 2023](https://arxiv.org/abs/2210.13641) | NeRF+传统SLAM流水线 |
-| [**NICER-SLAM**](level-03-monocular-slam/nicer-slam.md) | [Zhu 2024](https://arxiv.org/abs/2302.03594) | 仅RGB的NeRF-SLAM(无深度传感器)，融合单目深度估计 |
-| [**vMAP**](level-03-monocular-slam/vmap.md) | [Kong 2023](https://arxiv.org/abs/2302.01838) | 物体级NeRF-SLAM，逐物体神经场 |
-| [**GO-SLAM**](level-03-monocular-slam/go-slam.md) | [Zhang 2023](https://arxiv.org/abs/2309.02436) | 全局优化+NeRF-SLAM，回环检测+全局BA |
+| [**iMAP**](level-05-deep-learning/imap.md) | [Sucar 2021](https://arxiv.org/abs/2103.12352) | 首个NeRF-SLAM，单一MLP，实时跟踪/建图 |
+| [**BARF**](level-05-deep-learning/barf.md) | [Lin 2021](https://arxiv.org/abs/2104.06405) | 光束法平差式NeRF(Bundle-Adjusting NeRF)，由粗到精的位置编码，位姿与NeRF联合优化(非完整SLAM — 仅位姿+NeRF联合优化) |
+| [**NICE-SLAM**](level-05-deep-learning/nice-slam.md) | [Zhu & Peng 2022](https://arxiv.org/abs/2112.12130) | 分层特征网格(粗/中/细)，可扩展 |
+| [**Co-SLAM**](level-05-deep-learning/co-slam.md) | [Wang 2023](https://arxiv.org/abs/2304.14377) | 哈希网格(Instant-NGP)+坐标编码，比NICE-SLAM快5-10倍 |
+| [**ESLAM**](level-05-deep-learning/eslam.md) | [Johari 2023](https://arxiv.org/abs/2211.11704) | 三平面表征，O(N²)对比O(N³)的内存占用 |
+| [**Point-SLAM**](level-05-deep-learning/point-slam.md) | [Sandström 2023](https://arxiv.org/abs/2304.04278) | 基于神经点云 |
+| [**NeRF-SLAM**](level-05-deep-learning/nerf-slam.md) | [Rosinol 2023](https://arxiv.org/abs/2210.13641) | NeRF+传统SLAM流水线 |
+| [**NICER-SLAM**](level-05-deep-learning/nicer-slam.md) | [Zhu 2024](https://arxiv.org/abs/2302.03594) | 仅RGB的NeRF-SLAM(无深度传感器)，融合单目深度估计 |
+| [**vMAP**](level-05-deep-learning/vmap.md) | [Kong 2023](https://arxiv.org/abs/2302.01838) | 物体级NeRF-SLAM，逐物体神经场 |
+| [**GO-SLAM**](level-05-deep-learning/go-slam.md) | [Zhang 2023](https://arxiv.org/abs/2309.02436) | 全局优化+NeRF-SLAM，回环检测+全局BA |
 
 #### 基于3D高斯溅射(3DGS)
 
 | 系统 | 作者/年份 | 关键概念 |
 |--------|-------------|--------------|
-| [**SplaTAM**](level-03-monocular-slam/splatam.md) | [Keetha 2024](https://arxiv.org/abs/2312.02126) | 最早的3DGS SLAM系统之一(与GS-SLAM、MonoGS同期)，RGB-D，基于轮廓引导的稠密化 |
-| [**MonoGS**](level-03-monocular-slam/monogs.md) | [Matsuki 2024](https://arxiv.org/abs/2312.06741) | 首个单目3DGS SLAM(CVPR 2024 highlight)，基于直接光栅化的跟踪，解析相机雅可比矩阵 |
-| [**GS-ICP SLAM**](level-03-monocular-slam/gs-icp-slam.md) | [Ha 2024](https://arxiv.org/abs/2403.12550) | 高斯到高斯ICP(马氏距离)，几何跟踪 |
-| [**Photo-SLAM**](level-03-monocular-slam/photo-slam.md) | [Huang 2024](https://arxiv.org/abs/2311.16728) | 显式几何+隐式外观(MLP颜色)，抗锯齿 |
-| [**RTG-SLAM**](level-03-monocular-slam/rtg-slam.md) | [Peng 2024](https://arxiv.org/abs/2404.19706) | 专注实时性，自适应高斯预算，Jetson Orin上25 FPS |
-| [**EGG-Fusion**](level-03-monocular-slam/egg-fusion.md) | [Pan 2025](https://arxiv.org/abs/2512.01296) | 在线几何感知高斯面元融合，基于信息滤波器，实时 |
-| [**Online 3DGS Modeling**](level-03-monocular-slam/online-3dgs-modeling.md) | [Lee 2025](https://arxiv.org/abs/2508.14014) | 具备新视角选择的在线3D高斯溅射建模 |
-| [**ActiveSplat**](level-03-monocular-slam/activesplat.md) | [Li 2025](https://arxiv.org/abs/2410.21955) | 结合3DGS与基于Voronoi的路径规划的主动建图 |
-| [**OpenGS-SLAM**](level-03-monocular-slam/opengs-slam.md) | [Yang 2025](https://arxiv.org/abs/2503.01646) | 开放集稠密语义3DGS SLAM，物体级场景理解 |
-| [**LEGS**](level-03-monocular-slam/legs.md) | [Yu 2024](https://arxiv.org/abs/2409.18108) | 语言嵌入高斯溅射(Language Embedded Gaussian Splats)，实时语言可查询的3D场景 |
+| [**SplaTAM**](level-05-deep-learning/splatam.md) | [Keetha 2024](https://arxiv.org/abs/2312.02126) | 最早的3DGS SLAM系统之一(与GS-SLAM、MonoGS同期)，RGB-D，基于轮廓引导的稠密化 |
+| [**MonoGS**](level-05-deep-learning/monogs.md) | [Matsuki 2024](https://arxiv.org/abs/2312.06741) | 首个单目3DGS SLAM(CVPR 2024 highlight)，基于直接光栅化的跟踪，解析相机雅可比矩阵 |
+| [**GS-ICP SLAM**](level-05-deep-learning/gs-icp-slam.md) | [Ha 2024](https://arxiv.org/abs/2403.12550) | 高斯到高斯ICP(马氏距离)，几何跟踪 |
+| [**Photo-SLAM**](level-05-deep-learning/photo-slam.md) | [Huang 2024](https://arxiv.org/abs/2311.16728) | 显式几何+隐式外观(MLP颜色)，抗锯齿 |
+| [**RTG-SLAM**](level-05-deep-learning/rtg-slam.md) | [Peng 2024](https://arxiv.org/abs/2404.19706) | 专注实时性，自适应高斯预算，Jetson Orin上25 FPS |
+| [**EGG-Fusion**](level-05-deep-learning/egg-fusion.md) | [Pan 2025](https://arxiv.org/abs/2512.01296) | 在线几何感知高斯面元融合，基于信息滤波器，实时 |
+| [**Online 3DGS Modeling**](level-05-deep-learning/online-3dgs-modeling.md) | [Lee 2025](https://arxiv.org/abs/2508.14014) | 具备新视角选择的在线3D高斯溅射建模 |
+| [**ActiveSplat**](level-05-deep-learning/activesplat.md) | [Li 2025](https://arxiv.org/abs/2410.21955) | 结合3DGS与基于Voronoi的路径规划的主动建图 |
+| [**OpenGS-SLAM**](level-05-deep-learning/opengs-slam.md) | [Yang 2025](https://arxiv.org/abs/2503.01646) | 开放集稠密语义3DGS SLAM，物体级场景理解 |
+| [**LEGS**](level-05-deep-learning/legs.md) | [Yu 2024](https://arxiv.org/abs/2409.18108) | 语言嵌入高斯溅射(Language Embedded Gaussian Splats)，实时语言可查询的3D场景 |
 
 ### 语义/语言引导SLAM
 
 | 系统 | 作者/年份 | 关键概念 |
 |--------|-------------|--------------|
-| [**ConceptFusion**](level-03-monocular-slam/conceptfusion.md) | [Jatavallabhula (MIT) 2023](https://arxiv.org/abs/2302.07241) | CLIP特征融合进3D地图，开放词汇语言查询 |
-| [**LERF**](level-03-monocular-slam/lerf.md) | [Kerr 2023](https://arxiv.org/abs/2303.09553) | 语言嵌入辐射场(Language Embedded Radiance Fields)，DINO多尺度特征，NeRF+CLIP |
-| [**OpenScene**](level-03-monocular-slam/openscene.md) | [Peng (ETH) 2023](https://arxiv.org/abs/2211.15654) | 语言特征反投影到3D点云 |
+| [**ConceptFusion**](level-05-deep-learning/conceptfusion.md) | [Jatavallabhula (MIT) 2023](https://arxiv.org/abs/2302.07241) | CLIP特征融合进3D地图，开放词汇语言查询 |
+| [**LERF**](level-05-deep-learning/lerf.md) | [Kerr 2023](https://arxiv.org/abs/2303.09553) | 语言嵌入辐射场(Language Embedded Radiance Fields)，DINO多尺度特征，NeRF+CLIP |
+| [**OpenScene**](level-05-deep-learning/openscene.md) | [Peng (ETH) 2023](https://arxiv.org/abs/2211.15654) | 语言特征反投影到3D点云 |
 | [**ConceptGraphs**](level-05-deep-learning/conceptgraphs.md) | [Gu 2023](https://arxiv.org/abs/2309.16650) | 开放词汇3D场景图，SAM+CLIP+LLM空间关系 |
-| [**SpatialLM**](level-03-monocular-slam/spatiallm.md) | [Mao 2025](https://github.com/manycore-research/SpatialLM) | 点云→LLM，将结构化室内建模表示为Python脚本 |
+| [**SpatialLM**](level-05-deep-learning/spatiallm.md) | [Mao 2025](https://github.com/manycore-research/SpatialLM) | 点云→LLM，将结构化室内建模表示为Python脚本 |
 
 > 另见: [**LEGS**](https://arxiv.org/abs/2409.18108)、[**OpenGS-SLAM**](https://arxiv.org/abs/2503.01646)(见上文基于3DGS部分)；[**Open-YOLO 3D**](https://arxiv.org/abs/2406.02548)(第5级 物体检测)
 
