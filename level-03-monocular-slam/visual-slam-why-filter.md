@@ -4,13 +4,21 @@
 
 **One-line summary** — Rigorously showed that keyframe-based bundle adjustment outperforms EKF filtering for the same computational budget, formalizing visual SLAM's paradigm shift from filtering to optimization.
 
+## Problem
+
+By 2012 the field had two working recipes for real-time monocular SLAM: MonoSLAM (2007) jointly estimated camera pose and landmarks with an Extended Kalman Filter, while PTAM (2007) introduced keyframe-based bundle adjustment. Both ran in real time, but the community lacked a principled comparison — filtering processes *every* frame and maintains a dense covariance, while keyframe BA selects informative frames and re-optimizes geometry, so raw accuracy numbers alone could not settle which use of a fixed compute budget is better. Strasdat, Montiel, and Davison posed exactly that question: for the same computational budget, which paradigm buys more accuracy?
+
 ## Key ideas
 
-- **The question**: MonoSLAM (EKF filtering) and PTAM (keyframe bundle adjustment) both ran in real time, but the community lacked a principled comparison of the two paradigms.
-- **Accuracy per unit of compute**: the analysis compares approaches at a fixed computational budget, using the entropy of the posterior over poses and landmarks as an information-theoretic accuracy measure.
-- **Why BA wins**: filtering spends its budget processing every frame and maintaining a dense covariance with $O(N^2)$ cost in map size, while keyframe BA spends it on informative frames and many landmarks, exploiting sparsity via the Schur complement.
-- **Linearization matters**: the EKF fixes linearization points at the prior and cannot revisit them, losing information; BA relinearizes at each iteration around the current best estimate.
-- **Scale-aware and motion-only BA**: the same optimization machinery covers full BA, motion-only BA (tracking against a fixed map), and scale-drift-aware variants used in monocular SLAM.
+- **Entropy-based accuracy metric**: accuracy is measured as the Shannon entropy of the posterior distribution over poses and landmarks — an information-theoretic measure that permits fair comparison between estimators with different state dimensions.
+- **Accuracy per unit of compute**: for a fixed budget, filtering can process $N_f$ frames at $O(N_f M^2)$ cost in the number of landmarks $M$ (dense covariance updates), while keyframe BA spends the same budget on $K$ informative keyframes and many more landmarks, with the Schur complement exploiting the sparse structure. The analysis shows BA reaches lower entropy (higher accuracy) for equivalent budgets.
+- **Landmarks beat frames**: a central practical conclusion — increasing the *number of landmarks* improves accuracy far more than increasing the number of processed frames, and BA is precisely the paradigm that can afford many landmarks.
+- **Linearization matters**: the EKF fixes its linearization point when a measurement is absorbed and can never revisit it, so errors from linearizing at suboptimal estimates accumulate as information loss; BA relinearizes all residuals around the current best estimate at every iteration.
+- **One machinery, many modes**: the same optimization framework covers full BA, motion-only BA (tracking against a fixed map), and scale-drift-aware BA on $\mathrm{Sim}(3)$ used for monocular loop closure — the toolkit modern keyframe SLAM is assembled from.
+
+## Results & impact
+
+On simulated and real sequences, keyframe BA achieved 2–10× lower pose error than the EKF for the same computational budget, with the advantage growing with scene size as the EKF's $O(N^2)$ covariance update becomes increasingly wasteful. The paper provided the theoretical justification for the filtering-to-optimization shift PTAM had demonstrated empirically, cemented keyframe BA as the standard visual SLAM backend, and directly motivated the designs of ORB-SLAM, LSD-SLAM, DSO, and virtually all subsequent systems. Its accuracy-versus-budget methodology itself became a standard way to evaluate SLAM design choices.
 
 ## Why it matters for SLAM
 

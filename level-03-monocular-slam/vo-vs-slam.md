@@ -19,9 +19,32 @@ A compact comparison:
 | Cost | Low, bounded | Higher; grows with map size |
 | Failure recovery | Lost is lost | Relocalize against the map |
 
-The boundary is a spectrum rather than a wall. DSO and SVO are VO systems; LDSO is "DSO + loop closure", i.e. the same front-end promoted to SLAM. ORB-SLAM's tracking thread alone is essentially a VO system — the local mapping and loop closing threads are what make it SLAM. In VIO the same distinction appears as *odometry* (MSCKF, VINS front-end) versus *full SLAM with map reuse* (ORB-SLAM3, VINS-Mono with loop closure enabled).
+## What a VO pipeline actually does
+
+Concretely, a feature-based VO iteration looks like this — worth internalising because it is also the tracking thread of every feature-based SLAM system:
+
+1. **Detect/track** features in the new frame (FAST/ORB detection, or KLT tracking from the previous frame).
+2. **Associate** with the previous frame(s): descriptor matching or tracked correspondences, pruned by RANSAC.
+3. **Estimate relative pose**: essential matrix from 2D-2D matches (initialisation), or PnP against locally triangulated 3D points (steady state).
+4. **Triangulate** new points from the estimated motion, to keep the local 3D structure alive.
+5. **Locally refine**: a small bundle adjustment over the last few frames/keyframes (windowed BA).
+
+Direct VO replaces steps 1-3 with photometric alignment: minimise pixel intensity error between frames over the pose (and per-pixel depths), skipping explicit correspondences. Either way, the output is a chain of relative poses — and every stage after step 3 exists to slow drift, not eliminate it.
+
+The corresponding metrics: **RPE (relative pose error)** measures the error of pose increments over fixed distances/time offsets — drift rate, VO's honest score. **ATE (absolute trajectory error)** measures global position error after aligning the estimate to ground truth — dominated by whether loops were closed, SLAM's score. A system with excellent RPE and poor ATE is a good odometer without global consistency; the reverse suggests strong loop closure over a noisy front-end.
+
+## The boundary is a spectrum
+
+DSO and SVO are VO systems; LDSO is "DSO + loop closure", i.e. the same front-end promoted to SLAM. ORB-SLAM's tracking thread alone is essentially a VO system — the local mapping and loop closing threads are what make it SLAM. In VIO the same distinction appears as *odometry* (MSCKF, VINS front-end) versus *full SLAM with map reuse* (ORB-SLAM3, VINS-Mono with loop closure enabled).
 
 Which one you need is an engineering decision. If only short-horizon ego-motion matters (e.g. feeding a controller, drone stabilisation), VO's bounded compute and simplicity win. If the robot revisits places, operates for long periods, or must localise in a prior map, you need SLAM — nothing else stops unbounded drift.
+
+## Common pitfalls
+
+- **Comparing ATE across categories**: judging a VO system by ATE on a loopy sequence (or a SLAM system by RPE alone) misreads what each is designed to do; check which metric and which alignment (6-DoF vs 7-DoF for monocular) a paper reports.
+- **Assuming loop closure is free**: promoting VO to SLAM adds a place-recognition database, verification logic, global optimisation, and — critically — new failure modes (false loops). A robust VO can beat a fragile SLAM in practice.
+- **Unbounded map growth**: "just keep everything" SLAM degrades over hours of operation; keyframe culling and map management are part of the SLAM contract, not optional extras.
+- **Relocalization ≠ loop closure**: both use place recognition, but relocalization recovers *tracking* against the existing map, while loop closure adds *constraints* that deform the map; conflating them muddles system design discussions.
 
 ## Why it matters for SLAM
 

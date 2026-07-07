@@ -4,7 +4,7 @@ Given $n$ 3D points $\{\mathbf{X}_i\}$ in a known map and their 2D projections $
 
 ## P3P
 
-The Perspective-3-Point problem uses exactly 3 correspondences — the minimal case. The geometry leads to a polynomial system with up to 4 real solutions; a 4th correspondence disambiguates. Because it needs so few points, P3P is the minimal solver of choice inside RANSAC: fewer points per sample means far fewer iterations to find an outlier-free sample.
+The Perspective-3-Point problem uses exactly 3 correspondences — the minimal case, matching the 6 degrees of freedom of the pose (each 2D point gives 2 constraints). The geometry reduces to the classical "law of cosines" system: the three angles between viewing rays are known from the image, and the three inter-point distances are known from the map, yielding a polynomial system with up to 4 real solutions; a 4th correspondence disambiguates. Because it needs so few points, P3P is the minimal solver of choice inside RANSAC — the number of iterations required grows exponentially with sample size, so $s = 3$ is a huge advantage over larger solvers.
 
 ## EPnP
 
@@ -12,13 +12,28 @@ EPnP (Lepetit et al., 2009) expresses the $n$ 3D points as weighted sums of 4 vi
 
 ## DLT and the role of SVD
 
-The Direct Linear Transform solves for the full $3 \times 4$ projection matrix $P$ from $n \geq 6$ correspondences as a homogeneous linear system, using SVD: the solution is the right singular vector with the smallest singular value. The pose is then extracted via decomposition of $P = \mathbf{K}[R|\mathbf{t}]$. DLT is simpler but less accurate than EPnP; in practice, either serves as an initialization that is refined by minimizing reprojection error (motion-only bundle adjustment) with Gauss-Newton or Levenberg-Marquardt.
+The Direct Linear Transform solves for the full $3 \times 4$ projection matrix $P$ from $n \geq 6$ correspondences as a homogeneous linear system, using SVD: the solution is the right singular vector with the smallest singular value. The pose is then extracted via decomposition of $P = \mathbf{K}[R|\mathbf{t}]$ (RQ decomposition when the intrinsics are also unknown). DLT is simpler but less accurate than EPnP; in practice, either serves as an initialization that is refined by minimizing reprojection error.
+
+## Nonlinear refinement (motion-only bundle adjustment)
+
+Whatever solver provides the initial pose, the accurate answer comes from minimizing the reprojection error over the pose only, with the map points held fixed:
+
+$$T^* = \arg\min_{T \in SE(3)} \sum_{i} \rho\!\left(\big\|\mathbf{u}_i - \pi(T\,\mathbf{X}_i)\big\|^2\right)$$
+
+where $\pi$ is the camera projection and $\rho$ a robust kernel (e.g., Huber) that limits the influence of surviving outliers. This is solved with Gauss-Newton or Levenberg-Marquardt in a few iterations — it is the "motion-only BA" step that runs on every frame in feature-based SLAM.
 
 ## Typical pipeline
 
 1. Match current-frame keypoints against map points (descriptor matching or projection-guided search).
 2. RANSAC with P3P to reject outlier matches and get an initial pose.
 3. Refine the pose on all inliers by nonlinear least squares (robust kernel on reprojection error).
+
+## Common pitfalls
+
+- **Degenerate point configurations**: DLT fails when the 3D points are coplanar (or worse, collinear); EPnP and P3P handle planes better, but check your solver's assumptions.
+- **Ambiguous solutions at low point counts**: P3P's up-to-4 solutions must be disambiguated — feeding the wrong root to refinement converges to a wrong but low-residual pose.
+- **Map-point quality bounds pose quality**: PnP treats the 3D points as perfect; badly triangulated landmarks (low parallax) systematically bias the pose. This is why full bundle adjustment, which also moves the points, eventually outperforms per-frame PnP.
+- **Uncalibrated distortion**: PnP on distorted pixel coordinates without undistorting first produces consistent-looking but biased poses.
 
 ## Why it matters for SLAM
 
@@ -31,5 +46,6 @@ PnP is the tracking backbone of feature-based SLAM: ORB-SLAM tracks every frame 
 - [Triangulation](../level-01-beginner/triangulation.md)
 - [Landmark](landmark.md)
 - [Visual Place Recognition (VPR)](../level-03-monocular-slam/visual-place-recognition-vpr.md)
+- [ORB-SLAM](../level-03-monocular-slam/orb-slam.md)
 
 [Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

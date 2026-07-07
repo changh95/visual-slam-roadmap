@@ -16,7 +16,32 @@ Because $C$ is block-diagonal, $C^{-1}$ costs almost nothing (invert each $3 \ti
 
 Two further layers of sparsity matter in practice. First, the reduced camera matrix $B - EC^{-1}E^T$ is itself sparse: entry $(i, j)$ is non-zero only if keyframes $i$ and $j$ observe a common point (the covisibility structure), so sparse Cholesky factorization with good variable ordering (COLAMD) applies. Second, the same elimination viewpoint generalises: in factor-graph terms, the Schur complement is just variable elimination, the operation underlying marginalization in sliding-window VIO and incremental smoothers like iSAM2.
 
-Every serious solver — Ceres (`SPARSE_SCHUR`), g2o, GTSAM — implements this. Knowing it explains why BA scales, why "marginalizing" old states creates fill-in (dense blocks) in the remaining Hessian, and why solver choice and ordering can change runtime by orders of magnitude.
+## Where the formula comes from
+
+The Schur complement is nothing more exotic than block Gaussian elimination. Write out the two block rows of the normal equations:
+
+$$B\,\Delta\mathbf{x}_{\text{cam}} + E\,\Delta\mathbf{x}_{\text{pts}} = -\mathbf{b}_{\text{cam}}$$
+$$E^T \Delta\mathbf{x}_{\text{cam}} + C\,\Delta\mathbf{x}_{\text{pts}} = -\mathbf{b}_{\text{pts}}$$
+
+Solve the second row for the point update, $\Delta\mathbf{x}_{\text{pts}} = -C^{-1}\left(\mathbf{b}_{\text{pts}} + E^T \Delta\mathbf{x}_{\text{cam}}\right)$, and substitute into the first — the reduced camera system above appears immediately, and the same expression *is* the back-substitution rule once $\Delta\mathbf{x}_{\text{cam}}$ is known. Statistically, the reduced system is the information-matrix form of the *marginal* over the cameras: eliminating the points does not approximate anything, it re-expresses the same Gaussian exactly.
+
+**Counting the win.** A dense solve of the full system costs $O((6m + 3n)^3)$. With the Schur trick: inverting $C$ is $n$ independent $3\times 3$ inversions ($O(n)$), forming the reduced system is bounded by the number of observations, and the remaining solve is $O((6m)^3)$ worst-case — usually far less thanks to covisibility sparsity. With $m$ in the hundreds and $n$ in the hundreds of thousands, the point elimination is the difference between milliseconds and minutes. When $m$ itself grows large (city-scale SfM), even the reduced system stops being cheap to factor, and solvers switch to iterative methods (preconditioned conjugate gradient on the Schur complement — Ceres' `ITERATIVE_SCHUR`).
+
+In Ceres, all of this is one configuration choice:
+
+```cpp
+ceres::Solver::Options options;
+options.linear_solver_type = ceres::SPARSE_SCHUR;  // or DENSE_SCHUR, ITERATIVE_SCHUR
+```
+
+with the solver automatically detecting the pose/point elimination ordering (or taking an explicit `ParameterBlockOrdering`). Every serious solver — Ceres, g2o, GTSAM — implements the same trick; knowing it explains why BA scales, why marginalizing old states creates fill-in (dense blocks) in the remaining Hessian, and why solver choice and ordering can change runtime by orders of magnitude.
+
+## Common pitfalls
+
+- **Eliminating in the wrong order** — the trick works because points are many, cheap, and mutually independent; eliminating *poses* first couples all their points together and densifies the system. Elimination order is a correctness-of-performance decision.
+- **Confusing marginalization with deletion** — dropping old states and *marginalizing* them are different: marginalization keeps their information as a dense prior over their neighbours (fill-in). That density is why sliding-window VIO systems carefully choose what to marginalize versus discard.
+- **Gauge freedom** — full BA has 7 unobservable DoF for monocular (6 + scale); without fixing a pose (or adding priors), the reduced camera matrix is singular and the solver limps or fails.
+- **Ill-conditioning from far points** — points at near-infinite depth make their $3\times3$ blocks nearly singular; inverse-depth parameterisation or depth priors keep $C^{-1}$ well-behaved.
 
 ## Why it matters for SLAM
 

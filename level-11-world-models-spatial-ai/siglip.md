@@ -4,13 +4,24 @@
 
 **One-line summary** — SigLIP replaces CLIP's softmax contrastive loss with a simple pairwise sigmoid loss, decoupling training from batch-level normalization so language-image pretraining scales to huge batches, works better at small batches, and trains efficiently on modest hardware.
 
+## Problem
+
+Standard contrastive language-image pretraining (CLIP) uses a softmax cross-entropy loss whose normalization requires a *global view* of all pairwise similarities in the batch. This couples loss quality to batch size in both directions: large batches demand expensive all-to-all communication across accelerators, while small batches starve the softmax of negatives and degrade quality — putting CLIP-grade pretraining out of reach for labs without datacenter-scale clusters. SigLIP asks whether the global normalization is necessary at all.
+
 ## Key ideas
 
-- **Pairwise sigmoid loss**: Every image-text pair $(i, j)$ in a batch is treated as an independent binary classification — matched ($y_{ij}=1$) or not ($y_{ij}=0$) — using $\sigma(z_{ij}/\tau + b)$ on the embedding similarity $z_{ij}$. No softmax normalization over the whole batch is required.
-- **No global view needed**: Because each pair is scored independently, the loss needs no all-to-all communication across devices, removing a major distributed-training bottleneck of softmax CLIP and disentangling loss quality from batch size.
-- **Bias initialization**: A learned bias $b$ initialized negative counteracts the overwhelming ratio of negative to positive pairs ($N^2 - N$ vs $N$) at the start of training.
-- **Efficiency headline**: Combined with Locked-image Tuning, the authors train a SigLiT model reaching 84.5% ImageNet zero-shot accuracy in two days on only four TPUv4 chips — language-image pretraining without a datacenter-scale cluster.
-- **Drop-in objective**: Architectures are unchanged from CLIP (ViT image encoder + Transformer text encoder); SigLIP is purely a better training objective.
+- **Pairwise sigmoid loss**: every image-text pair $(i,j)$ in a batch of $N$ is treated as an independent binary classification — matched ($y_{ij}=1$ when $i=j$) or not:
+  $$\mathcal{L} = -\frac{1}{N}\sum_{i=1}^{N}\sum_{j=1}^{N}\Big[y_{ij}\log\sigma\big(\tfrac{z_{ij}}{\tau}+b\big) + (1-y_{ij})\log\big(1-\sigma\big(\tfrac{z_{ij}}{\tau}+b\big)\big)\Big]$$
+  where $z_{ij}$ is the embedding similarity, $\tau$ a learned temperature, and $b$ a learned bias. The loss operates solely on image-text pairs and needs no normalization over the rest of the batch.
+- **No global view needed**: because each pair is scored independently, no all-to-all similarity matrix normalization is required — removing a major distributed-training bottleneck and *disentangling batch size from the loss*.
+- **Bias initialization**: with $N^2 - N$ negatives against $N$ positives, an untamed sigmoid loss is initially dominated by negative gradients; initializing $b$ to a suitably negative value encodes the prior that a random pair is almost surely unmatched, stabilizing early training.
+- **Batch-size science**: the disentanglement lets the authors study examples-vs-pairs trade-offs and the negative-to-positive ratio directly. Pushing batch size to the extreme — up to one million — they find benefits quickly diminish, with a more reasonable batch size of 32k being sufficient.
+- **Efficiency headline**: combined with Locked-image Tuning, a SigLiT model reaches 84.5% ImageNet zero-shot accuracy trained in two days on only four TPUv4 chips.
+- **Drop-in objective**: architectures are unchanged from CLIP (ViT image encoder + Transformer text encoder); SigLIP is purely a better training objective, and the models were publicly released.
+
+## Results & impact
+
+SigLIP simultaneously allows further scaling up of batch size *and* performs better than softmax contrastive training at smaller batch sizes — the 84.5% ImageNet zero-shot SigLiT result on four TPUv4 chips made high-quality language-image pretraining accessible far outside big-lab infrastructure. SigLIP subsequently became the default CLIP replacement across the multimodal stack, serving as the vision encoder (often fused with DINOv2) in OpenVLA and many post-2024 VLMs.
 
 ## Why it matters for SLAM
 

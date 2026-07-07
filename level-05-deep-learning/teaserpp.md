@@ -4,13 +4,27 @@
 
 **One-line summary** — First fast and certifiable 3D point cloud registration algorithm, robust to 90%+ outlier correspondences via truncated least squares and maximum-clique inlier selection (T-RO/RSS 2020).
 
+## Problem
+
+Registering two 3D point sets from putative correspondences is a core robotics routine, but real correspondences — from noisy descriptors or ambiguous geometry — can be overwhelmingly wrong. ICP needs a good initial guess and RANSAC degrades sharply as the outlier fraction climbs, while earlier certifiable solvers were far too slow for online use.
+
+Before TEASER there was no algorithm that was simultaneously *fast* and *certifiable* for registration in the presence of large amounts of outlier correspondences — the regime that LiDAR loop closure and global relocalization actually live in.
+
 ## Key ideas
 
 - **Truncated Least Squares (TLS)**: Replaces the $\ell_2$ registration cost with $\rho_c(r) = \min(r^2, c^2)$, so measurements beyond threshold $c$ contribute a constant — outliers cannot drag the solution, unlike ICP or vanilla least squares.
-- **Decoupled cascade**: The joint scale-rotation-translation TLS problem is split into three sequential subproblems using translation/rotation-invariant measurements; scale and translation are solved exactly by adaptive voting in polynomial time.
-- **Max-clique inlier pruning**: A pairwise-consistency graph is built over correspondences (inliers must agree on distances); its maximum clique isolates a mutually consistent inlier set before estimation, discarding most gross outliers cheaply.
-- **Certifiable rotation via SDP**: The remaining TLS rotation search is relaxed to a semidefinite program (the QUASAR machinery) with a dual certificate of global optimality.
-- Tolerates extreme outlier rates (90%+) while running in real time, orders of magnitude faster than earlier certifiable solvers.
+- **Graph-theoretic decoupling**: Translation- and rotation-invariant measurements decouple the joint problem into a *cascade*: solve scale, then rotation, then translation. TLS scale and component-wise translation are solved exactly in polynomial time by adaptive voting.
+- **Max-clique inlier pruning**: A pairwise-consistency graph is built over correspondences (true inliers must agree on invariant distances); its maximum clique isolates a mutually consistent inlier set, drastically pruning gross outliers before any estimation.
+- **Certifiable rotation via tight SDP**: The remaining TLS rotation search is relaxed to a semidefinite program (the QUASAR machinery), and the relaxation stays tight even at extreme outlier rates — yielding a certificate of global optimality.
+- **TEASER++ = speed**: Since solving large SDPs is slow, TEASER++ solves the rotation subproblem with graduated non-convexity (GNC) and then *certifies* global optimality efficiently via Douglas–Rachford splitting — certifiable performance at millisecond speeds.
+- **Theoretical error bounds**: The paper provides bounds on the estimation errors of both algorithms — the first of their kind for robust registration problems.
+
+## Results & impact
+
+- On standard, object-detection, and 3DMatch benchmarks, both algorithms dominate the state of the art and are robust to more than 99% outlier correspondences.
+- TEASER++ runs in milliseconds — real-time registration with optimality certificates.
+- So robust it can solve registration *without correspondences at all*, largely outperforming ICP and beating Go-ICP in accuracy while being orders of magnitude faster.
+- The open-source C++ library is widely integrated into LiDAR SLAM, relocalization, and multi-robot map-merging systems (e.g., Kimera-Multi-style pipelines), making certifiable robust registration a practical commodity.
 
 ## Why it matters for SLAM
 

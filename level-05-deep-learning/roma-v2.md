@@ -4,13 +4,25 @@
 
 **One-line summary** — Successor to RoMa that pushes dense feature matching to be "harder, better, faster, denser": more robust matches, higher accuracy, and lower runtime cost than the original.
 
+## Problem
+
+Dense feature matching has become the gold standard for two-view correspondence thanks to its accuracy and robustness, but two weaknesses remained: existing dense matchers still fail or perform poorly on many hard real-world scenarios, and the high-precision models are slow, limiting their applicability.
+
+RoMa v2 attacks these weaknesses "on a wide front" through a series of systematic improvements — architecture, loss, training data, pipeline structure, and kernels — rather than a single new trick.
+
 ## Key ideas
 
-- **Same core paradigm as RoMa**: Foundation-model features provide semantically robust coarse correspondence, refined coarse-to-fine to dense sub-pixel matches with per-match certainty.
-- **Harder**: Improved robustness on difficult wide-baseline and appearance-change pairs — the regime where dense matchers are used instead of sparse keypoints.
-- **Better / denser**: Higher-quality and denser correspondence fields, benefiting downstream two-view geometry and reconstruction.
-- **Faster**: Efficiency improvements make dense matching more practical to run inside real pipelines rather than only offline evaluation.
-- Dense matchers of this family output a warp + certainty per pixel, which downstream RANSAC/pose solvers consume after certainty filtering.
+- **New matching architecture and loss**: A redesigned matcher and loss formulation, combined with a curated, diverse training distribution, let the model solve many complex matching tasks its predecessor failed on ("harder").
+- **Decoupled two-stage pipeline**: Matching and refinement are split into a matching-then-refinement pipeline, which makes training faster and the system more modular than RoMa's tightly coupled coarse-to-fine decoder.
+- **Custom CUDA refinement kernel**: A purpose-built kernel significantly reduces refinement memory usage — the practical bottleneck for dense (per-pixel) matching at high resolution ("denser", "faster").
+- **DINOv3 foundation features**: Upgrades the frozen foundation backbone from DINOv2 to the more recent DINOv3, plus multiple other insights, making the model more robust and less biased.
+- **Same output contract as RoMa**: A dense warp with per-match certainty per pixel, consumed by downstream RANSAC/pose solvers after certainty filtering — so it is a drop-in upgrade in existing pipelines.
+
+## Results & impact
+
+- In an extensive set of experiments, sets a new state of the art in dense matching, being significantly more accurate than its predecessors.
+- Faster training and reduced refinement memory move dense matching closer to online/real-time use — the main obstacle to running RoMa-class matchers inside SLAM loops.
+- Code is public (github.com/Parskatt/romav2), continuing the line's role as the reference implementation for dense matching.
 
 ## Why it matters for SLAM
 

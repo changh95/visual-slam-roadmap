@@ -2,14 +2,23 @@
 
 > Jevtić 2025 · [Paper](https://arxiv.org/abs/2507.06230)
 
-**One-line summary** — SceneDINO brings self-supervised DINO-style features into 3D, inferring geometry and expressive 3D features from imagery in a single feed-forward pass and turning them into semantic scene completion without task-specific 3D labels.
+**One-line summary** — SceneDINO brings self-supervised DINO-style features into 3D, inferring geometry and expressive 3D features from a single image in one feed-forward pass and turning them into semantic scene completion without task-specific 3D labels.
+
+## Problem
+
+Semantic scene completion (SSC) asks a model to infer both the 3D geometry *and* the semantics of a scene from a single image — including occluded and never-observed regions ("is there likely a wall behind this corner?"). Prior SSC methods rely heavily on expensive ground-truth annotations: labeled 3D voxel grids that are costly to produce and tie the model to the domain they were collected in. SceneDINO approaches SSC in a fully *unsupervised* setting, asking how far self-supervised representation learning can carry 3D scene understanding without any semantic or geometric ground truth.
 
 ## Key ideas
 
-- **Semantic scene completion (SSC)**: A robot only observes what is in its sensor frustum; SSC asks the model to predict the occupancy and semantics of the *whole* scene, including occluded and never-observed regions — "is there likely a wall behind this corner?"
-- **Self-supervised features instead of labels**: Classical SSC methods train on expensive annotated 3D voxel datasets and are brittle under domain shift. SceneDINO instead builds on self-supervised vision-foundation features (DINO family), which already encode geometry- and semantics-aware structure learned from internet-scale images.
-- **Feed-forward, not per-scene optimization**: Unlike NeRF-style test-time optimization, a single forward pass lifts image features into a 3D representation — the speed profile needed for online robotics use.
-- **Feature distillation into 3D**: 2D foundation-model features are distilled into a 3D feature field with multi-view consistency, and semantics are then obtained from the features in an unsupervised manner, rather than from ground-truth voxel labels.
+- **Self-supervision only**: training exclusively uses multi-view consistency self-supervision — no semantic labels, no geometric ground truth of any form. The method adapts techniques from self-supervised representation learning and 2D unsupervised scene understanding to the SSC task.
+- **Feed-forward 3D feature fields**: given a single input image, SceneDINO infers the scene's 3D geometry together with expressive 3D DINO features in a single feed-forward pass — no per-scene test-time optimization, which is the speed profile online robotics needs.
+- **3D feature distillation**: a novel distillation approach lifts 2D DINO foundation-model features into a multi-view-consistent 3D feature representation; because DINO features already encode geometry- and semantics-aware structure learned from internet-scale images, the 3D features are useful before any labels are involved.
+- **Unsupervised semantics on top of features**: 3D semantics are then obtained from the distilled feature field in an unsupervised manner, rather than predicted against ground-truth voxel labels — semantics become a *readout* of the representation, not a supervised target.
+- **Cheap supervised readout when labels exist**: linear probing the 3D features (fitting only a linear classifier) is enough to match the segmentation accuracy of a current fully supervised SSC approach — strong evidence that the representation, not the label supervision, is doing the heavy lifting.
+
+## Results & impact
+
+SceneDINO reaches state-of-the-art segmentation accuracy in both 3D and 2D *unsupervised* scene understanding, and its linearly probed 3D features match the segmentation accuracy of a current supervised SSC approach. The authors additionally showcase domain generalization and multi-view consistency, positioning the work as "first steps towards a strong foundation for single image 3D scene understanding." It is a clean demonstration that foundation-model features can replace 3D annotation pipelines for scene-level understanding.
 
 ## Why it matters for SLAM
 

@@ -19,6 +19,41 @@ A common and productive pattern is *prototype in Python, port to C++*: validate 
 
 Practical habits worth adopting early: use virtual environments (venv/conda/uv) per project, pin dependency versions for reproducibility, and remember that NumPy uses row-major conventions and OpenCV images are indexed `[row, col]` = `[y, x]` — a classic source of transposed-coordinate bugs.
 
+## A taste of SLAM tooling in Python
+
+The single most useful script to have in your toolbox is trajectory evaluation. Aligning an estimate to ground truth with the closed-form least-squares rigid alignment (Umeyama's method, via SVD) and computing ATE RMSE is a dozen lines of NumPy:
+
+```python
+import numpy as np
+
+def align_and_ate(P_est, P_gt):          # both Nx3
+    mu_e, mu_g = P_est.mean(0), P_gt.mean(0)
+    U, S, Vt = np.linalg.svd((P_gt - mu_g).T @ (P_est - mu_e))
+    D = np.diag([1, 1, np.sign(np.linalg.det(U @ Vt))])
+    R = U @ D @ Vt                        # rotation aligning est -> gt
+    t = mu_g - R @ mu_e
+    err = P_gt - (P_est @ R.T + t)        # residuals after alignment
+    return np.sqrt((err ** 2).sum(1).mean())   # ATE RMSE
+```
+
+This is essentially what the widely used `evo` package (`pip install evo`) does — in practice, use `evo` for TUM/KITTI/EuRoC formats, plots, and RPE, but knowing the math above keeps its output from being a black box.
+
+## Making Python fast enough
+
+Python's slowness is almost entirely a *loops* problem. The rules of thumb:
+
+- **Vectorise with NumPy** — transforming 100k points is one matrix multiply (`(R @ pts.T).T + t`), not a `for` loop; the difference is routinely 100x.
+- **Know where the GIL bites** — Python threads do not parallelise CPU-bound pure-Python code; NumPy/OpenCV calls release the GIL, and `multiprocessing` sidesteps it for batch experiments.
+- **Profile before optimising** — `cProfile` and line-profilers usually reveal one hot loop; move exactly that into NumPy, Numba, or a small pybind11 extension rather than porting everything.
+- **Mind dtypes** — accidental `float64` doubles memory traffic versus `float32`; image arrays arriving as `uint8` overflow silently under arithmetic (`img1 - img2` wraps around).
+
+## Common pitfalls
+
+- **Coordinate/layout confusion** — `img[y, x]`, `pts` as `(x, y)`: OpenCV mixes both conventions across its API (see the OpenCV note).
+- **Aliasing vs copying** — NumPy slicing returns *views*; mutating a slice mutates the original array. Use `.copy()` when you mean a copy.
+- **Environment rot** — `opencv-python` vs `opencv-contrib-python` conflicts, CUDA/PyTorch version mismatches; one pinned environment file per project prevents week-long debugging sessions.
+- **Quaternion conventions** — different libraries disagree on `(w, x, y, z)` vs `(x, y, z, w)` ordering (e.g. SciPy uses `xyzw`); wrong order produces rotations that are subtly wrong rather than obviously broken.
+
 ## Why it matters for SLAM
 
 Modern SLAM research lives at the intersection of geometry and learning, and the learning half speaks Python. Even for classical systems, the evaluation, visualisation, and dataset tooling ecosystem is Python-based; being fluent in it makes you dramatically faster at running experiments and understanding what your C++ system is actually doing.

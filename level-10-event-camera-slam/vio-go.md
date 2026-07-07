@@ -4,12 +4,18 @@
 
 **One-line summary** — VIO-GO is a recent event-based visual-inertial odometry approach that focuses on optimizing the pipeline's parameters for high-dynamic-range (HDR) scenarios, targeting the practical tuning sensitivity that limits event VIO deployment.
 
+## Problem
+
+Event-based VIO pipelines are notoriously sensitive to configuration: contrast-threshold assumptions, event accumulation window sizes, and noise handling all vary with the sensor unit and the scene, and defaults tuned in the lab can degrade silently in the field. HDR scenes — harsh sunlight, tunnels, indoor-outdoor transitions — are simultaneously where event cameras hold their clearest advantage over frames and where mismatched parameters hurt most.
+
 ## Key ideas
 
-- **HDR as the target regime**: high dynamic range scenes (harsh sunlight, tunnels, indoor-outdoor transitions) are where event cameras hold the clearest advantage over frames, so the work optimizes an event-based VIO pipeline specifically for these conditions rather than for average-case benchmarks.
-- **Parameters matter as much as architecture**: event-based pipelines are notoriously sensitive to configuration — contrast-threshold assumptions, event accumulation window sizes, and noise handling all change with the sensor and the scene. VIO-GO's contribution is in systematically optimizing these parameters instead of treating them as fixed defaults.
+- **HDR as the target regime**: rather than optimizing for average-case benchmarks, the work tunes an event-based VIO pipeline specifically for the high-dynamic-range conditions that motivate choosing an event camera in the first place.
+- **Parameters matter as much as architecture**: the contribution lies in systematically optimizing pipeline parameters instead of treating them as fixed defaults — addressing a quieter, practical reason event VIO underperforms outside the lab.
 - **Events + IMU fusion**: as in the broader event VIO lineage (Ultimate-SLAM, ESVIO), inertial measurements anchor scale and dynamics while events supply the visual constraints that survive HDR conditions.
 - **Deployability focus**: the emphasis on tuned, robust operation in adverse illumination reflects a field-wide shift from proof-of-concept event odometry toward configurations that can be trusted outside the lab.
+
+*(This entry is intentionally brief: the work is recent, and readers should take specifics — parameter choices, benchmarks, and numbers — directly from the paper.)*
 
 ## Why it matters for SLAM
 

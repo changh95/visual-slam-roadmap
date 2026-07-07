@@ -4,13 +4,26 @@
 
 **One-line summary** — Extends RAFT from 2D optical flow to 3D scene flow by estimating a dense per-pixel field of rigid-body ($SE(3)$) motions, refined iteratively with geometric consistency.
 
+## Problem
+
+Scene flow — given a pair of stereo or RGB-D video frames, estimate the pixelwise 3D motion — is what a robot actually needs to separate camera ego-motion from independently moving objects, but optical flow only delivers 2D displacements and earlier 3D methods (e.g., FlowNet3D) predict unconstrained per-point translations.
+
+Free-form 3D flow ignores the strongest prior about real scenes: they are composed of rigid objects, so predictions come out noisy and physically implausible. RAFT-3D asks how to build that rigidity prior into a RAFT-style dense estimation architecture without requiring object instance labels.
+
 ## Key ideas
 
-- **Scene flow, not just optical flow**: Given RGB-D frame pairs, the goal is the 3D motion of every point — needed to separate camera ego-motion from independently moving objects.
-- **Rigid-motion embeddings**: Instead of predicting unconstrained per-pixel 3D translations (as FlowNet3D does), each pixel carries an $SE(3)$ transform. This encodes the prior that real scenes are made of locally rigid objects, and pixels on the same object should share a motion.
-- **Soft grouping**: The learned embeddings softly cluster pixels into rigidly moving regions, so rigid-body motion segmentation emerges as a byproduct.
-- **RAFT-style iteration**: Correlation lookups plus a ConvGRU update operator iteratively refine the $SE(3)$ field, with a differentiable optimization layer enforcing that the induced 2D flow stays consistent with image evidence.
-- Strong results on FlyingThings3D and KITTI scene flow, producing physically plausible motion fields rather than noisy free-form flow.
+- **Dense $SE(3)$ motion field instead of 2D flow**: RAFT-3D keeps RAFT's recipe — per-pixel features, correlation lookups, iterative ConvGRU updates — but the state it refines is a dense field of pixelwise $SE(3)$ rigid-body transforms rather than a 2D displacement field.
+- **Rigid-motion embeddings**: Each pixel carries a learned embedding representing a *soft grouping* of pixels into rigid objects; pixels whose embeddings agree are encouraged to share one rigid motion. Rigid-body motion segmentation therefore emerges as a byproduct, with no object instance supervision.
+- **Dense-SE3 differentiable layer**: Integral to the embeddings is Dense-SE3, a differentiable optimization layer that enforces geometric consistency of the embeddings at every iteration — each GRU step is followed by a least-squares update that keeps the $SE(3)$ field consistent with the image evidence.
+- **Geometry in the loop, not post-hoc**: Because the consistency layer is differentiable, the network learns features and embeddings that make the embedded geometric optimization succeed — the same design philosophy that later powered DROID-SLAM's dense bundle adjustment layer.
+- **2D flow for free**: Composing the per-pixel $SE(3)$ transform with depth and projection induces a 2D flow field, so the rigid 3D representation remains directly comparable against image evidence during iterative refinement.
+- **Structured output for downstream use**: The result is a per-pixel rigid transform plus an implicit object grouping — directly usable for ego-motion estimation, dynamic-object segmentation, and object velocity estimation.
+
+## Results & impact
+
+- On FlyingThings3D, under the two-view evaluation, improved the best published accuracy ($d < 0.05$) from 34.3% to 83.7% — a dramatic jump attributable to the rigidity prior.
+- On KITTI scene flow, achieved an error of 5.77, outperforming the best published method (6.31), despite using no object instance supervision.
+- Produces physically plausible motion fields with emergent rigid-body segmentation, and its differentiable geometric-layer design fed directly into the same authors' DROID-SLAM.
 
 ## Why it matters for SLAM
 

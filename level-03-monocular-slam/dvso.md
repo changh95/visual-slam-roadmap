@@ -4,13 +4,21 @@
 
 **One-line summary** — Deep Virtual Stereo Odometry feeds CNN depth predictions into DSO as "virtual stereo" measurements, achieving stereo-level accuracy and metric scale from a single camera.
 
+## Problem
+
+Monocular VO that relies purely on geometric cues is "prone to scale drift and require[s] sufficient motion parallax in successive frames for motion estimation and 3D reconstruction." Stereo rigs fix both problems but cost hardware, calibration, and baseline constraints. DVSO ("Deep Virtual Stereo Odometry") asks whether a depth-prediction network can stand in for the second camera: keep DSO's photometric bundle adjustment, but add the constraints a stereo camera would have provided.
+
 ## Key ideas
 
-- **Virtual stereo concept**: a CNN trained to predict monocular depth acts as a virtual second camera; its predictions enter DSO's photometric bundle adjustment as virtual stereo residuals constraining point depths.
-- **Two-stage StackNet**: a coarse depth network followed by a refinement network progressively improves single-image depth quality.
-- **Semi-supervised training**: combines self-supervised left-right stereo photometric consistency with sparse depth supervision distilled from Stereo DSO reconstructions — dense photometric signal plus accurate sparse geometry.
-- **Scale recovery**: because the CNN is trained on stereo imagery with known baseline, its depth is metric, resolving monocular scale ambiguity and easing depth initialisation.
-- **Large accuracy gain**: on KITTI odometry, DVSO reported roughly halving DSO's translational error, reaching accuracy comparable to stereo VO methods.
+- **Virtual stereo concept**: deep depth predictions are incorporated into DSO "as direct virtual stereo measurements" — the CNN acts as a virtual second camera whose predictions enter the photometric bundle adjustment as additional residuals constraining point depths, coupled through a virtual stereo baseline.
+- **Two-stage StackNet**: a novel network "refines predicted depth from a single image in a two-stage process" — a coarse depth network followed by a refinement network that progressively improves single-image depth quality.
+- **Semi-supervised training**: the network is trained "on photoconsistency in stereo images and on consistency with accurate sparse depth reconstructions from Stereo DSO" — dense self-supervised photometric signal plus accurate sparse geometric supervision, with no manual labels.
+- **Self-improving loop**: the supervision comes from Stereo DSO, a geometric system, so the pipeline distils classical stereo geometry into a network that then upgrades *monocular* DSO — geometry teaching learning teaching geometry.
+- **Scale recovery**: because the CNN is trained on stereo imagery with known baseline, its depth is metric, resolving monocular scale ambiguity and easing DSO's depth initialisation.
+
+## Results & impact
+
+From the abstract: the depth predictions "excel state-of-the-art approaches for monocular depth on the KITTI benchmark," and DVSO "clearly exceeds previous monocular and deep learning based methods in accuracy," even achieving "comparable performance to the state-of-the-art stereo methods, while only relying on a single camera." Stereo-class accuracy from one camera: DVSO made the case that a learned depth prior is effectively a sensor upgrade.
 
 ## Why it matters for SLAM
 
@@ -23,5 +31,6 @@ DVSO showed that learned depth can close the performance gap between monocular a
 - [D3VO](d3vo.md)
 - [CNN-SLAM](cnn-slam.md)
 - [MonoDepth](../level-05-deep-learning/monodepth.md)
+- [Scale ambiguity](scale-ambiguity.md)
 
 [Back to Level 3](../README.md#level-3-monocular-visual-slam)

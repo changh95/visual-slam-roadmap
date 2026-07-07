@@ -1,8 +1,26 @@
 # VLM vs VLA
 
-**Vision-Language Models (VLMs)** are neural networks trained jointly on images and text. They *reason about* visual input: classify it against arbitrary text labels, describe it, answer questions about it. CLIP learns a shared image-text embedding space via contrastive training; BLIP-2 bridges a frozen image encoder to a frozen LLM with a small Q-Former; LLaVA connects CLIP features to a language model and instruction-tunes the result into a visual chatbot. The output of a VLM is always *language* (or an embedding) — it perceives and understands, but it does not act.
+**Vision-Language Models (VLMs)** are neural networks trained jointly on images and text. They *reason about* visual input: classify it against arbitrary text labels, describe it, answer questions about it. **Vision-Language-Action Models (VLAs)** extend VLMs by one crucial step: they additionally output **robot actions**. The distinction sounds small; architecturally and philosophically it is the difference between a perception module and a policy.
 
-**Vision-Language-Action Models (VLAs)** extend VLMs by one crucial step: they additionally output **robot actions**. The standard trick, introduced by RT-2, is to discretize continuous robot commands (end-effector deltas, gripper state, or navigation headings) into bins and represent them as tokens in the model's vocabulary. Acting then becomes next-token prediction: given the current camera image and a language instruction, the model autoregressively generates action tokens which are decoded into motor commands. OpenVLA open-sourced this recipe at 7B parameters; NaVILA extends it from tabletop manipulation to legged-robot navigation.
+## VLMs: perception and reasoning
+
+The VLM lineage in this level illustrates three architectural generations:
+
+- **CLIP** learns a shared image-text embedding space via contrastive training on 400M web pairs — output is an *embedding*, and "reasoning" is similarity search (zero-shot classification, retrieval).
+- **BLIP-2** bridges a frozen image encoder to a frozen LLM with a small Q-Former, so the output becomes *generated language* conditioned on the image — captioning, VQA, instruction following — at a fraction of end-to-end training cost.
+- **LLaVA** goes even simpler: a single linear projection connects a frozen CLIP encoder's visual tokens to an LLM, and instruction tuning on visual conversations turns the result into a visual chatbot.
+
+Whatever the internals, the output of a VLM is always language, embeddings, or scores — it perceives and understands, but it does not act.
+
+## VLAs: closing the loop to action
+
+The standard trick, introduced by RT-2, is to **discretize continuous robot commands into tokens**: end-effector position/rotation deltas, gripper state, or navigation headings are binned (e.g., 256 bins per degree of freedom) and each bin is assigned a token in the model's vocabulary. Acting then becomes next-token prediction: given the current camera image and a language instruction, the model autoregressively generates action tokens that are decoded into motor commands.
+
+- **RT-2** co-fine-tunes a large VLM on web data *and* robot demonstrations, so the same network answers questions and emits actions.
+- **OpenVLA** open-sourced the recipe at 7B parameters, notably fusing two vision encoders — DINOv2 (spatial, object-centric features) and SigLIP (semantic, text-aligned features) — before the language backbone, evidence that vision-encoder quality is a real bottleneck in VLA performance.
+- **NaVILA** extends the recipe from tabletop manipulation to legged-robot navigation.
+
+## Side-by-side
 
 | | VLM | VLA |
 |---|---|---|
@@ -12,9 +30,17 @@
 | Examples | CLIP, SigLIP, BLIP-2, LLaVA | RT-2, OpenVLA, NaVILA |
 | Role in a robot | Perception and semantic reasoning | End-to-end (or high-level) control policy |
 
-The reason VLAs are built *on top of* VLMs, rather than trained from scratch on robot data, is transfer: robot demonstration datasets are tiny compared to the internet, but a VLM backbone already knows what objects are, how they are described, and roughly how the world works. RT-2's headline result was *emergent generalization* — manipulating objects and following instructions never seen in robot training, purely because the underlying VLM had seen them on the web.
+## Why build VLAs on top of VLMs?
 
-A design tension worth understanding: VLAs collapse perception, reasoning, and control into one network, which optimizes end-to-end but gives up the explicit geometric state (map, pose) that modular robotic stacks maintain. Most current VLAs have no metric memory at all — which is precisely where SLAM re-enters the picture.
+Transfer. Robot demonstration datasets are tiny compared to the internet, but a VLM backbone already knows what objects are, how they are described, and roughly how the world works. RT-2's headline result was *emergent generalization* — manipulating objects and following instructions never seen in robot training, purely because the underlying VLM had seen them on the web. Training a VLA from scratch on robot data alone throws that prior away.
+
+## The design tension — and where SLAM fits
+
+VLAs collapse perception, reasoning, and control into one network, which optimizes end-to-end but gives up the explicit geometric state (map, pose) that modular robotic stacks maintain. In the modular pattern the stack reads:
+
+$$\text{Perceive} \xrightarrow{\text{SLAM}} \text{Map + Pose} \xrightarrow{\text{VLM}} \text{Scene understanding} \xrightarrow{\text{VLA}} \text{Action}$$
+
+The end-to-end alternative skips explicit geometry entirely. Which wins likely depends on the task: precise manipulation in known spaces and long-horizon navigation favor explicit SLAM state; short-horizon, open-world instruction following may favor end-to-end policies. Most current VLAs have no metric memory at all — which is precisely where SLAM re-enters the picture.
 
 ## Why it matters for SLAM
 
@@ -27,5 +53,6 @@ VLMs are already reshaping SLAM: CLIP-style embeddings attached to 3D maps yield
 - [RT-2](rt-2.md)
 - [OpenVLA](openvla.md)
 - [NaVILA](navila.md)
+- [Spatial AI](spatial-ai.md)
 
 [Back to Level 11](../README.md#level-11-world-models--spatial-ai)

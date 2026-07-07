@@ -6,16 +6,25 @@ $$
 (u, v) = \left( \left\lfloor \frac{\phi}{2\pi} W \right\rfloor,\; \left\lfloor \frac{\theta - \theta_{\min}}{\theta_{\max} - \theta_{\min}} H \right\rfloor \right)
 $$
 
-for a $W \times H$ image. This works because a spinning LiDAR *is* effectively a rotating 1D sensor array — the range image simply recovers the sensor's native 2D structure that gets flattened into an unordered point list.
+for a $W \times H$ image. This works because a spinning LiDAR *is* effectively a rotating 1D sensor array — the range image simply recovers the sensor's native 2D structure that gets flattened into an unordered point list. Concretely, a 64-beam sensor gives $H = 64$ rows, and the horizontal resolution follows from the azimuth step (an angular step of $0.2°$ would give $W = 360/0.2 = 1800$ columns).
 
-Why is this representation so useful?
+## Why the representation is so useful
 
-- **Cheap neighborhoods**: a point's neighbors sit in adjacent pixels, so normals and local curvature can be estimated without any 3D nearest-neighbor search.
-- **Projective data association**: SuMa renders its surfel map into a synthetic range image from the current pose estimate and finds ICP correspondences by pixel-to-pixel lookup — dramatically faster than k-d tree search, and GPU-friendly.
-- **2D deep learning on LiDAR**: RangeNet++ runs an encoder-decoder CNN on range images for real-time semantic segmentation, which SuMa++ then uses to filter dynamic objects (cars, pedestrians) out of registration.
-- **Compactness**: a full sweep becomes a dense image, convenient for compression, visibility checks, and occlusion reasoning.
+- **Cheap neighborhoods**: a point's neighbors sit in adjacent pixels, so normals and local curvature can be estimated from neighboring pixels without any 3D nearest-neighbor search.
+- **Projective data association**: SuMa renders its surfel map into a *synthetic* range image $\hat{\mathcal{R}}$ from the current pose estimate; the scan point at pixel $(u,v)$ is matched to the rendered surfel at the same pixel, and the pose is refined with a point-to-plane objective
 
-The main caveats: the projection discretizes (multiple points can fall into one pixel, and resolution varies with range), it assumes a single viewpoint per sweep (motion during the sweep must be compensated), and solid-state LiDARs with irregular scan patterns do not map as cleanly onto an image grid.
+  $$\mathbf{T}^* = \arg\min_{\mathbf{T}} \sum_k \big(\mathbf{n}_k^\top (\mathbf{T}\mathbf{p}_k - \hat{\mathbf{p}}_k)\big)^2 .$$
+
+  Pixel-to-pixel lookup replaces k-d tree search — dramatically faster, and GPU-friendly since rendering *is* the association step.
+- **2D deep learning on LiDAR**: RangeNet++ runs an encoder-decoder CNN on range images for real-time semantic segmentation. SuMa++ uses those per-pixel labels to filter dynamic objects out of registration — points labeled car, person, or bicycle are simply excluded from the ICP correspondence set, $\mathcal{P}_{\text{ICP}} = \{p_k \mid \text{label}(p_k) \notin \mathcal{C}_{\text{dynamic}}\}$ — and to weight correspondences whose labels agree.
+- **Compactness**: a full sweep becomes a dense image, convenient for compression, visibility checks, and occlusion reasoning — rendering the map from a pose immediately tells you what *should* be visible from there.
+
+## Common pitfalls
+
+- **Quantization collisions**: multiple 3D points can land in one pixel (keep the nearest), and angular resolution means the same pixel covers a growing physical area with range — neighborhood-based normals get noisy far from the sensor.
+- **Row geometry is hardware, not math**: real spinning LiDARs have non-uniformly spaced beam elevations, so indexing rows by the sensor's ring index is more faithful than the linear-in-$\theta$ formula above.
+- **One viewpoint per sweep**: the projection assumes all points were captured from a single pose; motion during the sweep must be compensated (de-skewing) before projection, or the image is smeared.
+- **Solid-state LiDARs break the model**: irregular, non-repeating scan patterns (e.g., Livox-style) do not map cleanly onto an image grid — one reason the direct point-cloud methods (FAST-LIO2 lineage) took over as those sensors spread.
 
 ## Why it matters for SLAM
 
@@ -27,5 +36,6 @@ The range image is the bridge between LiDAR processing and the mature toolbox of
 - [SuMa++](sumapp.md) — semantic segmentation of range images for dynamic filtering
 - [LiDAR](../level-02-getting-familiar/lidar.md) — sensor fundamentals
 - [ICP](../level-04-rgbd-slam/icp.md) — the registration algorithm that projective lookup accelerates
+- [LOAM](loam.md) — the contrasting branch that works on the raw point list
 
 [Back to Level 9](../README.md#level-9-lidar--visual-lidar-fusion-slam)

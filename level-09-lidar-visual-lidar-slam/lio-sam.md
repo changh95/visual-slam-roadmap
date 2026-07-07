@@ -4,13 +4,25 @@
 
 **One-line summary** — LIO-SAM reformulated LiDAR-inertial odometry as factor-graph smoothing, letting IMU preintegration, scan-matching, GPS, and loop closures all enter one principled MAP estimation problem.
 
+## Problem
+
+LOAM-style pipelines had no principled way to fuse IMU or GPS: inertial data served only as a motion prior, wasting information and struggling under aggressive motion, and absolute measurements could not be integrated cleanly. At the same time, matching every scan against a global map does not stay real-time as the map grows. LIO-SAM solves both problems at once — a factor graph accepts heterogeneous relative and absolute measurements as factors, and scan-matching at a *local* scale keeps computation bounded.
+
 ## Key ideas
 
-- **Factor graph backend**: poses and IMU biases are estimated by jointly optimizing IMU preintegration factors, LiDAR odometry factors, optional GPS (absolute) factors, and loop-closure factors — heterogeneous relative and absolute measurements in a single framework (implemented on GTSAM/iSAM2).
-- **IMU preintegration does double duty**: it de-skews the point cloud (per-point motion correction within a sweep) and provides the initial guess for LiDAR scan-matching; in turn, the optimized LiDAR odometry is used to estimate the IMU bias.
-- **Keyframes + local sliding window**: instead of matching scans against a global map, new keyframes are registered to a fixed-size set of recent "sub-keyframes," keeping computation bounded and real-time.
-- **LOAM-style features**: retains edge/planar feature matching for scan registration, but embeds it in the smoothing framework instead of LOAM's two-stage pipeline.
-- Extensively evaluated on datasets from three platforms across various scales and environments; the open-source ROS implementation became one of the most used LiDAR SLAM codebases.
+- **Factor graph backend**: poses and IMU biases are estimated by jointly optimizing IMU preintegration factors, LiDAR odometry factors, optional GPS (absolute) factors, and loop-closure factors,
+
+  $$\mathbf{X}^* = \arg\min_{\mathbf{X}} \sum \|\mathbf{r}^{\text{IMU}}\|^2_{\Sigma_I} + \sum \|\mathbf{r}^{\text{LiDAR}}\|^2_{\Sigma_L} + \sum \|\mathbf{r}^{\text{GPS}}\|^2_{\Sigma_G} + \sum \|\mathbf{r}^{\text{loop}}\|^2_{\Sigma_{lp}},$$
+
+  where $\mathbf{X}$ contains keyframe poses and IMU biases (implemented on GTSAM/iSAM2).
+- **IMU preintegration does double duty**: it de-skews the point cloud (per-point motion correction within a sweep) and provides the initial guess for LiDAR scan-matching optimization; in turn, the optimized LiDAR odometry solution is used to estimate the IMU bias.
+- **Keyframes + sliding window of sub-keyframes**: to ensure real-time performance, old LiDAR scans are marginalized rather than matched against a global map; a new keyframe is registered to a fixed-size set of prior "sub-keyframes" merged into a local map — scan-matching at local rather than global scale is one of the paper's headline efficiency choices.
+- **Selective keyframing**: keyframes are added only after sufficient motion, keeping the graph compact over long trajectories.
+- **LOAM-style features retained**: edge/planar feature matching still does the geometric work of registration, but it is embedded in the smoothing framework instead of LOAM's two-stage pipeline.
+
+## Results & impact
+
+The method was extensively evaluated on datasets gathered from three platforms over various scales and environments (the paper's platforms span handheld, unmanned ground and surface vehicles). The system runs in real time, and GPS factors bound global drift where available. Beyond the numbers, LIO-SAM's open-source ROS implementation became one of the most widely used LiDAR SLAM codebases, and its factor-per-measurement architecture made it the natural base for extensions — most directly LVI-SAM, which adds an entire visual-inertial subsystem.
 
 ## Why it matters for SLAM
 

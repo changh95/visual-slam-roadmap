@@ -4,13 +4,27 @@
 
 **One-line summary** — First real-time end-to-end Transformer detector, matching YOLO speed while keeping DETR's clean NMS-free set prediction ("DETRs Beat YOLOs on Real-time Object Detection").
 
+## Problem
+
+The YOLO series dominates real-time detection through a reasonable speed/accuracy trade-off, but both its speed and its accuracy are negatively affected by NMS post-processing (threshold tuning, variable latency, duplicate suppression heuristics). End-to-end Transformer detectors (DETRs) eliminate NMS via set prediction, but their computational cost — especially the multi-scale Transformer encoder, quadratic in the number of spatial positions — kept them out of the real-time regime and prevented them from fully exploiting the advantage of excluding NMS.
+
+RT-DETR set out to build the first real-time end-to-end object detector, resolving this dilemma.
+
 ## Key ideas
 
-- **Attacking DETR's bottleneck**: DETR's multi-scale Transformer encoder is quadratic in spatial positions. RT-DETR replaces it with an *efficient hybrid encoder*: self-attention only within each scale (cheap), plus a lightweight FPN-style cross-scale fusion.
-- **IoU-aware query selection**: Initial object queries are chosen as the top-k encoder features by predicted quality, giving the decoder a much better starting point than learned static queries.
-- **No NMS**: Retains Hungarian-matching set prediction — exactly one prediction per object, no anchor tuning, no non-maximum suppression post-processing.
-- **Tunable speed/accuracy**: Swappable backbones and adjustable decoder depth at inference time let one design span edge devices to server GPUs.
-- On COCO, RT-DETR variants outperformed comparable YOLO models on both accuracy and speed — the first Transformer detector to do so.
+- **Efficient hybrid encoder**: The expensive multi-scale encoder is decomposed into *intra-scale interaction* (self-attention only within each scale, which is cheap since each scale is small) and *cross-scale fusion* (a lightweight FPN-style path), expeditiously processing multi-scale features without full cross-scale attention.
+- **Uncertainty-minimal query selection**: Initial object queries are selected as high-quality encoder features (rather than learned static queries), giving the decoder a much better starting point and improving accuracy.
+- **No NMS**: Retains Hungarian-matching set prediction — exactly one prediction per object, no anchor tuning, no non-maximum suppression post-processing, and therefore deterministic latency.
+- **Two-step design methodology**: First maintain accuracy while improving speed (encoder redesign), then maintain speed while improving accuracy (query selection) — an unusually explicit engineering recipe.
+- **Flexible speed tuning**: Adjusting the number of decoder layers at inference time trades accuracy for speed *without retraining*, so one trained model adapts to various deployment scenarios.
+- **Swappable backbones**: The design supports different backbones (ResNet variants and beyond) plus scaled-down models, spanning compute budgets from edge devices to server GPUs.
+
+## Results & impact
+
+- RT-DETR-R50 / R101 achieves 53.1% / 54.3% AP on COCO at 108 / 74 FPS on a T4 GPU, outperforming previously advanced YOLOs in both speed and accuracy — the first Transformer detector to do so.
+- RT-DETR-R50 outperforms DINO-R50 by 2.2% AP while being about 21x faster; scaled-down RT-DETRs also beat the lighter YOLO S/M models.
+- With Objects365 pre-training, RT-DETR-R50 / R101 reaches 55.3% / 56.2% AP.
+- Adopted as a real-time detection backbone in perception stacks (e.g., paired with SAM-family models for grounded segmentation) where NMS-free deterministic output simplifies system design.
 
 ## Why it matters for SLAM
 

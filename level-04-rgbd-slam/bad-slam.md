@@ -4,13 +4,23 @@
 
 **One-line summary** — A direct bundle-adjustment RGB-D SLAM that jointly optimizes camera poses and a dense surfel map in real time on the GPU, released together with the high-precision ETH3D SLAM benchmark.
 
+## Problem
+
+Most RGB-D SLAM systems decouple tracking (frame-to-model alignment) from mapping (TSDF or surfel fusion) and optimize each separately — the map is built assuming poses are right, and poses are estimated assuming the map is right. True bundle adjustment, jointly optimizing all camera poses and 3D structure, yields higher accuracy but was considered impractical for dense representations. A second problem was evaluation: existing RGB-D benchmarks had limited ground-truth accuracy, making it hard to even measure the difference between high-precision systems.
+
 ## Key ideas
 
-- **True BA for dense SLAM**: most RGB-D systems decouple tracking (frame-to-model alignment) from mapping (fusion); BAD SLAM instead treats surfel positions and camera poses as joint optimization variables — direct bundle adjustment over dense geometry.
-- **Direct residuals**: the cost combines photometric and geometric (depth) residuals of surfels projected into keyframes, avoiding sparse feature extraction entirely.
-- **GPU-accelerated solver**: the Gauss-Newton system is assembled and solved on the GPU with preconditioned conjugate gradient, making joint optimization over many surfels and keyframes feasible in real time.
-- **Alternating optimization**: the system alternates between optimizing camera poses with surfels fixed and surfel attributes with poses fixed, converging in a few iterations per frame.
-- **ETH3D SLAM benchmark**: the paper introduced a benchmark with much more accurate ground truth than existing RGB-D datasets, enabling meaningful evaluation of high-precision systems.
+- **True BA for dense SLAM**: surfel positions and camera poses are treated as joint optimization variables — direct bundle adjustment over dense geometry, rather than the usual alternate-and-hope tracking/fusion loop.
+- **Direct photometric + geometric residuals**: the cost sums, over each keyframe $k$ and each visible surfel $j$, a photometric term comparing the image intensity at the surfel's projection against the surfel's stored color, and a geometric term comparing the measured depth against the surfel's projected depth:
+  $$E = \sum_{k}\sum_{j \in \mathcal{V}_k} \Big[ w_I\big(I_k(\pi(\mathbf{T}_k \mathbf{s}_j)) - c_j\big)^2 + w_D\big(D_k(\pi(\mathbf{T}_k \mathbf{s}_j)) - [\mathbf{T}_k \mathbf{s}_j]_z\big)^2 \Big]$$
+  No sparse features are extracted anywhere in the pipeline.
+- **GPU-accelerated solver**: the Gauss-Newton system is assembled and solved on the GPU with preconditioned conjugate gradient (PCG), making joint optimization over thousands of surfels and tens of keyframes feasible in real time.
+- **Alternating optimization**: the system alternates between optimizing camera poses with surfels fixed and surfel attributes with poses fixed, converging within a few iterations per frame — a practical decomposition of the huge joint problem.
+- **ETH3D SLAM benchmark**: the paper introduced a benchmark with far more accurate ground truth than prior RGB-D datasets, precise enough to reveal accuracy differences that older benchmarks could not resolve.
+
+## Results & impact
+
+BAD SLAM achieved the lowest trajectory error on its new ETH3D benchmark, outperforming ElasticFusion, BundleFusion, and ORB-SLAM2, while running in real time on a high-end GPU. Beyond the system itself, the ETH3D SLAM benchmark became a standard evaluation suite for RGB-D SLAM — and its high-precision ground truth exposed how many established systems were less robust than older benchmarks suggested.
 
 ## Why it matters for SLAM
 

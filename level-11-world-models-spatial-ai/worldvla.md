@@ -4,12 +4,22 @@
 
 **One-line summary** — WorldVLA unifies a vision-language-action model and a world model in one autoregressive transformer that predicts both robot action tokens and future image tokens, so learning environment physics and generating actions reinforce each other.
 
+## Problem
+
+Robot learning pipelines have split into two camps that ignore each other's strengths. Vision-language-action models (RT-2, OpenVLA) map observations and instructions to actions, but have no mechanism for predicting the *consequences* of those actions. World models (GAIA-1, Cosmos) predict how the visual world evolves, but produce no actions. Kept separate, the policy can select actions inconsistent with any plausible world evolution, and the world model never learns what dynamics matter for control. WorldVLA asks whether one model can do both — unifying action and image understanding *and* generation in a single framework.
+
 ## Key ideas
 
-- **Two models, one sequence**: Conventional pipelines keep the world model ("what will happen") and the policy ("what to do") separate, which lets policies pick actions inconsistent with predicted dynamics. WorldVLA interleaves visual, language, and action tokens in a single autoregressive sequence, so one next-token objective trains both capabilities.
-- **Bidirectional benefit**: The world-model half learns how actions change the visual world — implicit physics — which grounds the action-model half; conversely, action prediction gives the world model a purposeful, control-oriented representation of dynamics.
-- **Discretized everything**: Images are encoded to discrete visual tokens and continuous robot actions to discrete action tokens, making a GPT-style decoder-only transformer the shared engine, in the lineage of RT-2's actions-as-tokens and GAIA-1's tokenized world modeling.
-- **Imagination for control**: Because the same model can roll future observation tokens forward under candidate actions, it supports look-ahead: evaluating what an action sequence would do before executing it, in the spirit of model-predictive control.
+- **One autoregressive model, two capabilities**: WorldVLA integrates a VLA model and a world model in a single framework — an autoregressive transformer that unifies action and image understanding and generation, rather than bolting a policy onto a separate dynamics model.
+- **World model half learns physics for control**: the world-model component predicts future images by leveraging both action and image understanding, with the explicit purpose of learning the underlying physics of the environment to improve action generation — dynamics knowledge is acquired *in service of* acting.
+- **Action half feeds perception back**: the action model generates subsequent actions from image observations; this strengthens the shared visual understanding, which in turn improves the world model's visual generation. The two halves are mutually enhancing rather than merely co-located.
+- **Discretized everything**: images and continuous robot actions are both represented as discrete tokens in one sequence, making a GPT-style decoder-only transformer the shared engine — the lineage of RT-2's actions-as-tokens and GAIA-1's tokenized world modeling, now fused.
+- **Diagnosing autoregressive action chunks**: the authors find that generating *sequences* of actions autoregressively degrades performance — the model's limited generalization for action prediction lets errors from earlier actions propagate into later ones within a chunk.
+- **Attention-mask fix**: their remedy is an attention mask strategy that selectively masks prior actions while generating the current action, cutting off the error-propagation path and yielding significant improvement on action chunk generation.
+
+## Results & impact
+
+WorldVLA outperforms comparable standalone action models and standalone world models, which the authors present as direct evidence of mutual enhancement between world modeling and action generation in one network. The attention-mask strategy shows significant performance improvement on the action-chunk-generation task. (The abstract reports these findings qualitatively; benchmark specifics are in the paper.) Conceptually, WorldVLA is an early concrete instance of the widely anticipated VLA-world-model merger.
 
 ## Why it matters for SLAM
 

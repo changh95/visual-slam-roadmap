@@ -4,13 +4,25 @@
 
 **One-line summary** — FAST-LIO2 showed that registering raw LiDAR points directly to the map inside a tightly-coupled iterated Kalman filter — with an incremental k-d tree (ikd-Tree) as the map — is faster *and* more accurate than feature-based LiDAR-inertial odometry.
 
+## Problem
+
+Feature-based LiDAR pipelines discard most of each scan during edge/planar extraction, throwing away subtle environmental structure and failing where distinct features are scarce. Worse, hand-engineered feature extractors are tuned to a particular scanning pattern, so every new LiDAR — especially the emerging solid-state sensors with small fields of view and irregular scan patterns — requires re-engineering. FAST-LIO2 asks whether *all* raw points can be registered directly to the map, fast enough for real-time onboard operation.
+
 ## Key ideas
 
-- **Feature-free, direct registration**: raw scan points are matched to the map with point-to-plane residuals, exploiting subtle environmental structure that edge/planar feature extractors discard; this also makes the system naturally adaptable to LiDARs with different scanning patterns (spinning and solid-state alike).
-- **Tightly-coupled iterated EKF**: IMU measurements propagate the state (pose, velocity, biases) between scans and de-skew the cloud; the iterated measurement update with all point residuals keeps the filter accurate under fast motion.
-- **ikd-Tree**: a purpose-built incremental k-d tree supporting point insertion, deletion, dynamic re-balancing, and downsampling on the tree — outperforming octrees, R*-trees, and static k-d trees for the SLAM workload, and enabling the map to grow continuously with $O(\log N)$ queries.
-- **Efficient and robust**: benchmarked across 19 sequences from multiple open datasets with consistently higher accuracy at much lower computation than contemporaries; reported up to 100 Hz odometry/mapping in large outdoor environments and reliable estimation under rotations up to 1000 deg/s.
-- Runs on UAV, handheld, Intel and ARM platforms; both the system and ikd-Tree are open source.
+- **Feature-free, direct registration**: raw scan points are matched to the map without extracting features, using point-to-plane residuals of the form
+
+  $$r_i = \mathbf{n}_i^\top\big(\mathbf{R}\,\mathbf{p}_i^L + \mathbf{t} - \mathbf{q}_i\big),$$
+
+  where $\mathbf{p}_i^L$ is the point in the LiDAR frame and $(\mathbf{n}_i, \mathbf{q}_i)$ define a small plane fitted to its nearest map neighbors. This exploits subtle features that extractors discard (raising accuracy) and adapts naturally to any scanning pattern.
+- **Tightly-coupled iterated EKF**: IMU measurements propagate the state (pose, velocity, biases) between scans and de-skew the cloud point-by-point; the *iterated* measurement update re-linearizes the point-to-plane residuals until convergence, keeping the filter accurate under fast motion where a single-shot EKF update would suffer linearization error.
+- **ikd-Tree**: a purpose-built incremental k-d tree supporting point insertion, deletion, dynamic re-balancing, and downsampling *on the tree*. Compared with existing dynamic structures (octree, R\*-tree, nanoflann k-d tree) it achieves superior overall performance for the SLAM workload — the map grows continuously with logarithmic-time queries and never needs a full rebuild.
+- **Map update inside the loop**: registration and mapping are the same operation — after each update, the scan's points are inserted into the ikd-Tree, so odometry and mapping run at the same rate.
+- **Versatility as a first-class goal**: one codebase covers multi-line spinning and solid-state LiDARs, UAV and handheld platforms, and Intel and ARM processors.
+
+## Results & impact
+
+An exhaustive benchmark on 19 sequences from a variety of open LiDAR datasets showed consistently higher accuracy at much lower computation than other state-of-the-art LiDAR-inertial systems. The paper reports up to 100 Hz odometry and mapping in large outdoor environments, and reliable pose estimation in cluttered indoor scenes with rotations up to 1000 deg/s. Both the system and the ikd-Tree data structure are open source, and the ikd-Tree in particular became a widely reused component well beyond this paper.
 
 ## Why it matters for SLAM
 
