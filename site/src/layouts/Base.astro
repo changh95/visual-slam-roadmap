@@ -8,34 +8,127 @@ import '@fontsource/ibm-plex-sans/600.css';
 import '@fontsource/ibm-plex-mono/400.css';
 import '@fontsource/ibm-plex-mono/500.css';
 import 'katex/dist/katex.min.css';
+import { LANGS, LABELS, getUi } from '../lib/i18n.mjs';
+import { TRACKING } from '../config.mjs';
 
-const { title, description = 'A study roadmap for Visual-SLAM: 11 levels, 400+ notes on the theory and the papers.', dark = false } = Astro.props;
-const base = import.meta.env.BASE_URL;
+const {
+  title,
+  description = 'A study roadmap for Visual-SLAM: 11 levels, 400+ notes on the theory and the papers.',
+  dark = false,
+  lang = 'en',
+  ogType = 'website',
+  jsonld = [],
+} = Astro.props;
+const base = import.meta.env.BASE_URL; // '/visual-slam-roadmap/'
+const ui = getUi(lang);
+const OG_LOCALE = { en: 'en_US', ko: 'ko_KR', zh: 'zh_CN', ja: 'ja_JP' };
+
+// current path without base and without lang prefix, e.g. 'level-03-monocular-slam/orb-slam/'
+let rest = Astro.url.pathname.startsWith(base) ? Astro.url.pathname.slice(base.length) : Astro.url.pathname.replace(/^\//, '');
+const rm = rest.match(/^(ko|zh|ja)\/(.*)$/);
+if (rm) rest = rm[2];
+const langHref = (l) => `${base}${l === 'en' ? '' : l + '/'}${rest}`;
+const abs = (p) => new URL(p, Astro.site).href;
+const canonical = abs(Astro.url.pathname);
+const ogImage = abs(`${base}og.png`);
 ---
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={description} />
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content={dark ? '#070d18' : '#faf7f0'} />
     <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
+    <link rel="sitemap" href={`${base}sitemap-index.xml`} />
+    {LANGS.map((l) => <link rel="alternate" hreflang={l === 'zh' ? 'zh-CN' : l} href={abs(langHref(l))} />)}
+    <link rel="alternate" hreflang="x-default" href={abs(langHref('en'))} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="Visual-SLAM Developer Roadmap" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content={OG_LOCALE[lang]} />
+    {LANGS.filter((l) => l !== lang).map((l) => <meta property="og:locale:alternate" content={OG_LOCALE[l]} />)}
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    {TRACKING.googleSiteVerification && <meta name="google-site-verification" content={TRACKING.googleSiteVerification} />}
+    {TRACKING.naverSiteVerification && <meta name="naver-site-verification" content={TRACKING.naverSiteVerification} />}
+
+    <!-- Google AdSense -->
+    {TRACKING.adsenseClient && (
+      <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${TRACKING.adsenseClient}`} crossorigin="anonymous"></script>
+    )}
+
+    <!-- Google Analytics 4 -->
+    {TRACKING.gaMeasurementId && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${TRACKING.gaMeasurementId}`}></script>
+        <script is:inline define:vars={{ gaId: TRACKING.gaMeasurementId }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', gaId, { anonymize_ip: true });
+        </script>
+      </>
+    )}
+
+    <!-- Microsoft Clarity -->
+    {TRACKING.clarityId && (
+      <script is:inline define:vars={{ clarityId: TRACKING.clarityId }}>
+        (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", clarityId);
+      </script>
+    )}
+
+    {jsonld.map((obj) => <script type="application/ld+json" set:html={JSON.stringify(obj)} />)}
   </head>
   <body class={dark ? 'blueprint min-h-screen text-slate-200 font-sans' : 'graph-paper min-h-screen text-inkline font-sans'}>
     <header class={dark
       ? 'border-b border-scan-500/20'
       : 'border-b border-paper-line bg-paper/90 backdrop-blur sticky top-0 z-10'}>
-      <nav class="mx-auto max-w-5xl px-5 py-3 flex items-baseline gap-4">
-        <a href={base} class={`font-display font-semibold tracking-wide text-sm uppercase ${dark ? 'text-scan-300' : 'text-scan-500'} hover:opacity-80`}>
+      <nav class="mx-auto max-w-5xl px-5 py-3 flex items-center gap-4">
+        <a href={`${base}${lang === 'en' ? '' : lang + '/'}`} class={`font-display font-semibold tracking-wide text-sm uppercase ${dark ? 'text-scan-300' : 'text-scan-500'} hover:opacity-80`}>
           VSLAM<span class="opacity-60">//</span>Roadmap
         </a>
-        <span class={`hidden sm:inline font-mono text-xs ${dark ? 'text-slate-500' : 'text-slate-400'}`}>changh95 / visual-slam-roadmap</span>
-        <a href="https://github.com/changh95/visual-slam-roadmap" class={`ml-auto font-mono text-xs ${dark ? 'text-slate-400 hover:text-scan-300' : 'text-slate-500 hover:text-scan-500'}`}>GitHub &nearr;</a>
+        <a href="https://github.com/changh95/visual-slam-roadmap" class={`ml-auto hidden sm:inline font-mono text-xs ${dark ? 'text-slate-400 hover:text-scan-300' : 'text-slate-500 hover:text-scan-500'}`}>GitHub &nearr;</a>
+        <div class={`flex font-mono text-[11px] border ${dark ? 'border-scan-500/30 divide-scan-500/30' : 'border-paper-line bg-paper divide-paper-line'} divide-x ml-auto sm:ml-0`} role="group" aria-label="Language">
+          {LANGS.map((l) => (
+            <a href={langHref(l)} data-lang={l} aria-current={l === lang ? 'true' : undefined}
+               class={`px-2 py-1 transition-colors ${l === lang
+                 ? (dark ? 'bg-scan-500/20 text-scan-300' : 'bg-scan-500/10 text-scan-500 font-medium')
+                 : (dark ? 'text-slate-400 hover:text-scan-300' : 'text-slate-500 hover:text-scan-500')}`}>{LABELS[l]}</a>
+          ))}
+        </div>
       </nav>
     </header>
     <slot />
-    <footer class={`mx-auto max-w-5xl px-5 py-10 font-mono text-xs ${dark ? 'text-slate-500' : 'text-slate-400'}`}>
-      MIT License &copy; 2026 Hyunggi Chang · built from the <a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap">roadmap repository</a>
+    <footer class={`mx-auto max-w-5xl px-5 py-10 font-mono text-xs space-y-2 ${dark ? 'text-slate-500' : 'text-slate-400'}`}>
+      <p><a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap/pulls">{ui.suggestions}</a></p>
+      <p>MIT License &copy; 2026 Hyunggi Chang · built from the <a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap">roadmap repository</a></p>
     </footer>
+    <script>
+      document.querySelectorAll('a[data-lang]').forEach((a) => {
+        a.addEventListener('click', () => {
+          try { localStorage.setItem('vslam-lang', a.dataset.lang); } catch {}
+        });
+      });
+    </script>
   </body>
 </html>

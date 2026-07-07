@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import { getSections } from '../../lib/readme.mjs';
+import { extractSummary, articleLd, breadcrumbLd } from '../../lib/seo.mjs';
 
 export async function getStaticPaths() {
   const notes = await getCollection('notes');
@@ -16,8 +17,18 @@ const base = import.meta.env.BASE_URL;
 const [levelDir] = entry.id.split('/');
 const lv = getSections().levels.find((l) => l.dir === levelDir);
 const title = (entry.body.match(/^# (.+)$/m) || [, entry.id])[1];
+const desc = extractSummary(entry.body);
+const path = `/${entry.id}/`;
+const jsonld = [
+  articleLd({ title, description: desc, path, lang: 'en' }),
+  breadcrumbLd([
+    ['Visual-SLAM Roadmap', '/'],
+    ...(lv ? [[`Level ${lv.n}: ${lv.title}`, `/${lv.dir}/`]] : []),
+    [title, path],
+  ]),
+];
 ---
-<Base title={`${title} — Visual-SLAM Roadmap`}>
+<Base title={`${title} — Visual-SLAM Roadmap`} description={desc} ogType="article" jsonld={jsonld}>
   <main class="mx-auto max-w-3xl px-5 py-10">
     <nav class="font-mono text-xs text-slate-500 mb-6">
       <a class="text-scan-500 hover:underline" href={base}>roadmap</a>

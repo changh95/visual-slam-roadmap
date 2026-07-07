@@ -13,25 +13,25 @@ import { rewriteTarget, LEVEL_DIRS } from './remark-md-links.mjs';
 const ROOT = path.resolve(process.cwd(), '..');
 const readme = fs.readFileSync(path.join(ROOT, 'README.md'), 'utf8');
 
-function remarkRootLinks() {
-  return (tree) => {
-    visit(tree, 'link', (node) => {
-      node.url = rewriteTarget(node.url, '');
-    });
-  };
+function makeProcessor(lang) {
+  return unified()
+    .use(remarkParse)
+    .use(remarkGfm)
+    .use(remarkMath)
+    .use(() => (tree) => {
+      visit(tree, 'link', (node) => {
+        node.url = rewriteTarget(node.url, '', lang);
+      });
+    })
+    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypeKatex, { strict: false })
+    .use(rehypeStringify, { allowDangerousHtml: true });
 }
 
-const processor = unified()
-  .use(remarkParse)
-  .use(remarkGfm)
-  .use(remarkMath)
-  .use(remarkRootLinks)
-  .use(remarkRehype, { allowDangerousHtml: true })
-  .use(rehypeKatex, { strict: false })
-  .use(rehypeStringify, { allowDangerousHtml: true });
-
-export function renderMd(md) {
-  return String(processor.processSync(md));
+const processors = {};
+export function renderMd(md, lang = 'en') {
+  processors[lang] ??= makeProcessor(lang);
+  return String(processors[lang].processSync(md));
 }
 
 /** Split README into level sections + study resources. */

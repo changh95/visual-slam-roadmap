@@ -1,6 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import { getSections, getFocus, getNoteCounts } from '../lib/readme.mjs';
+import { getUi } from '../lib/i18n.mjs';
+import { websiteLd } from '../lib/seo.mjs';
 
 const base = import.meta.env.BASE_URL;
 const { levels, resources } = getSections();
@@ -8,7 +10,7 @@ const focus = getFocus();
 const counts = getNoteCounts();
 const tint = (n) => (n <= 2 ? 'text-scan-300 border-scan-500/40' : n <= 5 ? 'text-amber-flare border-amber-flare/40' : 'text-slate-300 border-slate-500/40');
 ---
-<Base title="Visual-SLAM Developer Roadmap" dark={true}>
+<Base title="Visual-SLAM Developer Roadmap — 11 levels, 400+ study notes" dark={true} description={getUi('en').tagline} jsonld={[websiteLd('en', getUi('en').tagline)]}>
   <main class="mx-auto max-w-5xl px-5">
     <section class="pt-16 pb-10">
       <p class="font-mono text-xs text-scan-400 tracking-[0.3em] uppercase">est. 2021 · rev. 2026</p>

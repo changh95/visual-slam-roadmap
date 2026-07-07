@@ -1,0 +1,35 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { getSections, renderMd } from '../../../lib/readme.mjs';
+import { ALT_LANGS, getUi, getSectionMd } from '../../../lib/i18n.mjs';
+
+export function getStaticPaths() {
+  const { levels } = getSections();
+  return ALT_LANGS.flatMap((lang) =>
+    levels.map((lv) => ({ params: { lang, level: lv.dir }, props: { lv } })),
+  );
+}
+const { lv } = Astro.props;
+const { lang } = Astro.params;
+const base = import.meta.env.BASE_URL;
+const ui = getUi(lang);
+const title = ui.titles[String(lv.n)] ?? lv.title;
+const md = getSectionMd(lang, lv.dir) ?? lv.md; // fall back to English section
+const html = renderMd(md, lang);
+const { levels } = getSections();
+const prev = levels.find((l) => l.n === lv.n - 1);
+const next = levels.find((l) => l.n === lv.n + 1);
+---
+<Base title={`${title} — Visual-SLAM Roadmap`} description={ui.focus[String(lv.n)]} lang={lang}>
+  <main class="mx-auto max-w-5xl px-5 py-10">
+    <p class="font-mono text-xs text-scan-500 tracking-[0.25em] uppercase">{ui.levelOf.replace('{n}', String(lv.n).padStart(2, '0'))}</p>
+    <h1 class="font-display font-bold text-3xl sm:text-4xl mt-2">{title}</h1>
+    <p class="mt-2 text-slate-500 max-w-2xl">{ui.focus[String(lv.n)]}</p>
+    <article class="prose prose-slate max-w-none mt-8 prose-headings:font-display prose-a:text-scan-500 prose-a:decoration-scan-300/50 hover:prose-a:decoration-scan-500 prose-table:font-sans prose-table:text-sm bg-paper/80 border border-paper-line p-6 sm:p-8"
+      set:html={html} />
+    <nav class="mt-8 flex justify-between font-mono text-sm">
+      <span>{prev && <a class="text-scan-500 hover:underline" href={`${base}${lang}/${prev.dir}/`}>&larr; {String(prev.n).padStart(2, '0')} · {ui.titles[String(prev.n)] ?? prev.title}</a>}</span>
+      <span>{next && <a class="text-scan-500 hover:underline" href={`${base}${lang}/${next.dir}/`}>{String(next.n).padStart(2, '0')} · {ui.titles[String(next.n)] ?? next.title} &rarr;</a>}</span>
+    </nav>
+  </main>
+</Base>

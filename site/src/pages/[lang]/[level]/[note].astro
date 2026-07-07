@@ -1,0 +1,53 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import { getSections } from '../../../lib/readme.mjs';
+import { ALT_LANGS, getUi } from '../../../lib/i18n.mjs';
+import { extractSummary, articleLd, breadcrumbLd } from '../../../lib/seo.mjs';
+
+export async function getStaticPaths() {
+  const COLL = { ko: 'notesKo', zh: 'notesZh', ja: 'notesJa' };
+  const en = await getCollection('notes');
+  const paths = [];
+  for (const lang of ALT_LANGS) {
+    const translated = new Map((await getCollection(COLL[lang])).map((e) => [e.id, e]));
+    for (const enEntry of en) {
+      const [level, note] = enEntry.id.split('/');
+      // fall back to the English note when a translation is missing
+      const entry = translated.get(enEntry.id) ?? enEntry;
+      paths.push({ params: { lang, level, note }, props: { entry, fallback: !translated.has(enEntry.id) } });
+    }
+  }
+  return paths;
+}
+const { entry, fallback } = Astro.props;
+const { lang } = Astro.params;
+const { Content } = await render(entry);
+const base = import.meta.env.BASE_URL;
+const ui = getUi(lang);
+const [levelDir] = entry.id.split('/');
+const lv = getSections().levels.find((l) => l.dir === levelDir);
+const title = (entry.body.match(/^# (.+)$/m) || [, entry.id])[1];
+const desc = extractSummary(entry.body);
+const path = `/${lang}/${entry.id}/`;
+const jsonld = [
+  articleLd({ title, description: desc, path, lang }),
+  breadcrumbLd([
+    ['Visual-SLAM Roadmap', `/${lang}/`],
+    ...(lv ? [[`${ui.titles[String(lv.n)] ?? lv.title}`, `/${lang}/${lv.dir}/`]] : []),
+    [title, path],
+  ]),
+];
+---
+<Base title={`${title} — Visual-SLAM Roadmap`} description={desc} lang={lang} ogType="article" jsonld={jsonld}>
+  <main class="mx-auto max-w-3xl px-5 py-10">
+    <nav class="font-mono text-xs text-slate-500 mb-6">
+      <a class="text-scan-500 hover:underline" href={`${base}${lang}/`}>{ui.roadmapCrumb}</a>
+      <span class="mx-1">/</span>
+      {lv && <a class="text-scan-500 hover:underline" href={`${base}${lang}/${lv.dir}/`}>{ui.levelCrumb} {String(lv.n).padStart(2, '0')} · {ui.titles[String(lv.n)] ?? lv.title}</a>}
+    </nav>
+    <article class="prose prose-slate max-w-none prose-headings:font-display prose-a:text-scan-500 prose-a:decoration-scan-300/50 hover:prose-a:decoration-scan-500 prose-blockquote:font-mono prose-blockquote:text-sm prose-blockquote:not-italic bg-paper/80 border border-paper-line p-6 sm:p-8">
+      <Content />
+    </article>
+  </main>
+</Base>

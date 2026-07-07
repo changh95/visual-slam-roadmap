@@ -18,15 +18,16 @@ export const LEVEL_DIRS = {
 };
 
 /** Rewrite a markdown link target to a site route.
- * @param url   original link target
- * @param baseDir directory of the containing file, relative to repo root ('' for README)
+ * @param url     original link target
+ * @param baseDir directory of the containing file relative to repo root ('' for README)
+ * @param lang    site language for the produced route ('en' → no prefix)
  */
-export function rewriteTarget(url, baseDir) {
+export function rewriteTarget(url, baseDir, lang = 'en') {
+  const pre = lang === 'en' ? '' : `${lang}/`;
   if (/^(https?:|mailto:|\/)/.test(url)) return url;
-  // pure anchors: README level anchors map to level pages
   if (url.startsWith('#')) {
     const m = url.match(/^#level-(\d+)-/);
-    if (m) return `${BASE}/${LEVEL_DIRS[Number(m[1])]}/`;
+    if (m) return `${BASE}/${pre}${LEVEL_DIRS[Number(m[1])]}/`;
     return url;
   }
   const [target, anchor] = url.split('#');
@@ -35,23 +36,25 @@ export function rewriteTarget(url, baseDir) {
   if (resolved === 'README.md' || resolved === '../README.md') {
     if (anchor) {
       const m = anchor.match(/^level-(\d+)-/);
-      if (m) return `${BASE}/${LEVEL_DIRS[Number(m[1])]}/`;
+      if (m) return `${BASE}/${pre}${LEVEL_DIRS[Number(m[1])]}/`;
     }
-    return `${BASE}/`;
+    return `${BASE}/${pre}`;
   }
   const route = resolved.replace(/\.md$/, '');
-  return `${BASE}/${route}/` + (anchor ? `#${anchor}` : '');
+  return `${BASE}/${pre}${route}/` + (anchor ? `#${anchor}` : '');
 }
 
 export default function remarkMdLinks() {
   return (tree, file) => {
     let baseDir = '';
-    if (file && file.path) {
-      const m = String(file.path).match(/(level-\d{2}-[a-z0-9-]+)\//);
-      if (m) baseDir = m[1];
-    }
+    let lang = 'en';
+    const p = String((file && file.path) || '');
+    const im = p.match(/i18n\/(ko|zh|ja)\//);
+    if (im) lang = im[1];
+    const m = p.match(/(level-\d{2}-[a-z0-9-]+)\//);
+    if (m) baseDir = m[1];
     visit(tree, 'link', (node) => {
-      node.url = rewriteTarget(node.url, baseDir);
+      node.url = rewriteTarget(node.url, baseDir, lang);
     });
   };
 }
