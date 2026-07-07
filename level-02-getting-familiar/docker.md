@@ -62,5 +62,3 @@ SLAM systems have notoriously heavy and brittle dependency stacks (specific Open
 - [CI/CD](ci-cd.md)
 - [Git/GitHub](git-github.md)
 - [Edge deployment](edge-deployment.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

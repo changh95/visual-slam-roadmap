@@ -54,5 +54,3 @@ ICP is the tracking engine of dense RGB-D SLAM (KinectFusion aligns each depth f
 - [KinectFusion](../level-04-rgbd-slam/kinectfusion.md)
 - [Basic Linear Algebra](../level-01-beginner/basic-linear-algebra.md)
 - [Metrics](metrics.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

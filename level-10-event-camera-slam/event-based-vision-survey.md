@@ -6,27 +6,28 @@
 
 ## Problem
 
-Event cameras offer properties that are transformative for robotics in challenging scenarios — microsecond temporal resolution, very high dynamic range (140 dB vs. 60 dB), low power consumption, and high pixel bandwidth (on the order of kHz) resulting in reduced motion blur. But their unconventional output — a sparse, asynchronous stream of per-pixel brightness changes — is incompatible with the conventional computer-vision toolbox, and novel methods are required to unlock the sensors' potential. By the late 2010s the resulting literature had grown fast and fragmented; the field needed a unified overview and shared vocabulary.
+Event cameras offer properties that are transformative for robotics in challenging scenarios — microsecond temporal resolution and latency, very high dynamic range (140 dB vs. 60 dB), and low power consumption (about 10 mW at the die level, under 100 mW for full embedded systems). But their unconventional output — a sparse, asynchronous stream of per-pixel brightness changes — is incompatible with the conventional computer-vision toolbox: the data is asynchronous and sparse where images are synchronous and dense, each event carries only binary change information that depends on motion as well as scene brightness, and the noise process of quantizing temporal contrast is not fully characterized. By the late 2010s the resulting literature had grown fast and fragmented; the field needed a unified overview and shared vocabulary.
 
-## Key ideas
+## Method & architecture
 
-- **Sensor principle, precisely stated**: event cameras asynchronously measure per-pixel brightness changes and output a stream of events encoding the time, location, and sign of each change — the survey grounds every algorithm in this working principle.
-- **Taxonomy of event representations**: the survey systematizes how asynchronous streams are converted for processing — event frames/histograms, time surfaces, voxel grids, and point/spike-based forms — establishing the shared vocabulary the field still uses.
-- **Algorithm taxonomy by task**: from low-level vision (feature detection and tracking, optical flow) to high-level vision (reconstruction, segmentation, recognition), plus ego-motion/SLAM and control, covering both model-based methods (e.g., contrast maximization) and learning-based ones (CNNs on event tensors, spiking neural networks).
-- **Event-based brightness constancy**: the survey connects events to classical optics via $\nabla L \cdot \mathbf{v} + \partial L / \partial t = 0$ — motion estimation becomes finding the flow or trajectory that best *focuses* (maximizes the contrast of) the warped event image.
-- **Paradigm question**: the survey frames the central methodological choice — process events natively (event-by-event, exploiting asynchrony) versus aggregate them into frame-like structures and reuse conventional vision machinery.
-- **Hardware and neuromorphic context**: covers the sensor families (DVS, DAVIS, ATIS) and specialized processors including spiking neural networks, connecting the algorithms to the silicon they are meant to exploit — the search for "a more efficient, bio-inspired way for machines to perceive and interact with the world."
+The survey grounds everything in the **event generation model**: a pixel with log-brightness $L \doteq \log(I)$ fires an event $e_k \doteq (\mathbf{x}_k, t_k, p_k)$ when the brightness increment since its last event,
 
-## Results & impact
+$$\Delta L(\mathbf{x}_k, t_k) \doteq L(\mathbf{x}_k, t_k) - L(\mathbf{x}_k, t_k - \Delta t_k),$$
 
-- As a survey its impact is organizational rather than experimental: it distills hundreds of references into one coherent taxonomy, and its terminology (time surfaces, voxel grids, contrast maximization) became the field's standard vocabulary.
-- Written by the leading groups in the area (including Gallego, Delbruck, Scaramuzza, Davison, Leutenegger, Daniilidis), it functions as the community's reference document and the default first citation of nearly every event-vision paper since.
-- It explicitly highlights the challenges that remain — which is precisely the list (intensity loss, noise, loop closure, learning on events) that later systems like DEVO and ESVIO set out to address.
-- It pairs naturally with the community-maintained Awesome-Event-based-Vision repository, which catalogs the datasets (Event Camera Dataset, MVSEC, DSEC), simulators (ESIM, v2e), and codebases the survey discusses.
+reaches the contrast threshold: $\Delta L(\mathbf{x}_k, t_k) = p_k\,C$ with polarity $p_k \in \{+1, -1\}$ and $C > 0$ (typically 10–50% illumination change). Two consequences organize much of the field: events approximate the temporal derivative, $\frac{\partial L}{\partial t}(\mathbf{x}_k, t_k) \approx \frac{p_k C}{\Delta t_k}$, and — via brightness constancy — *events are caused by moving edges*: $\Delta L \approx -\nabla L \cdot \mathbf{v}\,\Delta t$, so a gradient moving parallel to itself generates no events. From this base the survey builds its taxonomies:
+
+- **Event representations**: individual events (for filters and spiking neural networks), event packets, event frames / 2D histograms, time surfaces (per-pixel last-event timestamps, i.e., motion history), voxel grids (space-time histograms preserving timestamps), 3D point sets, and *motion-compensated event images* — warping events by a motion hypothesis and maximizing the sharpness/contrast of the resulting image of warped events (the contrast-maximization framework).
+- **Processing paradigms**: event-by-event methods (probabilistic filters, SNNs — minimum latency) vs. methods for groups/packets of events (better signal-to-noise ratio, some latency); orthogonally, model-based vs. data-driven approaches.
+- **Algorithms by task**: feature detection and tracking, optical flow, 3D reconstruction (instantaneous stereo and monocular multi-view for SLAM), pose estimation and SLAM (traced from rotation-only and planar setups to full 6-DOF event-only systems like EVO), image reconstruction, segmentation, recognition, and neuromorphic control.
+- **Hardware context**: the sensor families (DVS, DAVIS, ATIS, and higher-resolution successors) with a spec comparison from the manufacturers, plus neuromorphic processors (SNN hardware) and event-based control, connecting algorithms to the silicon they exploit.
+
+## Results
+
+As a survey its contribution is organizational rather than experimental: it distills the field's hundreds of references into one coherent model-grounded taxonomy, and its terminology (time surfaces, voxel grids, motion compensation) became the standard vocabulary. Its discussion section honestly states that there is no agreement on the best representation or method — the trade-offs (latency vs. power vs. accuracy; sensitivity vs. bandwidth) are application-dependent and largely unquantified — and lists the open challenges: motion-dependent appearance breaking data association, noise modeling, end-to-end event-based perception-to-control systems, and adapting deep learning to events. Written by the leading groups in the area (Gallego, Delbruck, Scaramuzza, Davison, Leutenegger, Daniilidis, and others), it is the default first citation of nearly every event-vision paper since.
 
 ## Why it matters for SLAM
 
-If you read one thing before touching event-based SLAM, read this survey: nearly every system in this level (EVO, ESVO, Ultimate-SLAM, EKLT, EDS, DEVO) is easiest to understand in the vocabulary and taxonomy it established. It also honestly maps the open problems — absolute-intensity loss, noise, loop closure, learning on events — that still define the research frontier. Pair it with the community-maintained Awesome-Event-based-Vision repository for datasets, simulators, and code.
+If you read one thing before touching event-based SLAM, read this survey: nearly every system in this level (EVO, ESVO, Ultimate-SLAM, EKLT, EDS, DEVO) is easiest to understand in the vocabulary and taxonomy it established, and its event-generation equations are the physical model those systems' front-ends are built on. It also maps the open problems — absolute-intensity loss, noise, data association under motion-dependent appearance, learning on events — that still define the research frontier. Pair it with the community-maintained Awesome-Event-based-Vision repository for datasets (Event Camera Dataset, MVSEC, DSEC), simulators (ESIM, v2e), and code.
 
 ## Related
 
@@ -35,5 +36,3 @@ If you read one thing before touching event-based SLAM, read this survey: nearly
 - [EVO](evo.md)
 - [ESVO](esvo.md)
 - [Ultimate-SLAM](ultimate-slam.md)
-
-[Back to Level 10](../README.md#level-10-event-camera-slam)

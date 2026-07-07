@@ -51,5 +51,3 @@ Deployed VIO is proof that the material in this level is not academic: MSCKF-sty
 - [OKVIS](okvis.md) — keyframe sliding-window VIO from an era of early AR/MAV deployment work.
 - [maplab](maplab.md) — multi-session mapping and relocalization, the research analogue of persistent anchors.
 - [Observability](observability.md) — the theory behind graceful handling of degenerate user motion.
-
-[Back to Level 6](../README.md#level-6-vio--vins)

@@ -50,5 +50,3 @@ Nearly every stereo SLAM front-end — ORB-SLAM2's per-keypoint stereo matching,
 - [Disparity vs Depth](disparity-vs-depth.md)
 - [Camera calibration](../level-01-beginner/camera-calibration.md)
 - [Multi-sensor calibration](../level-02-getting-familiar/multi-sensor-calibration.md)
-
-[Back to Level 7](../README.md#level-7-stereo-slam)

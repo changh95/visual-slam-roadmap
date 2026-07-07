@@ -73,5 +73,3 @@ Every SLAM system is, at bottom, estimating a trajectory of $SE(3)$ elements. Ch
 - [Epipolar geometry](epipolar-geometry.md)
 - [Lie groups](../level-02-getting-familiar/lie-groups.md)
 - [Quaternion kinematics for error-state KF](../level-06-vio-vins/quaternion-kinematics-for-error-state-kf.md)
-
-[Back to Level 1](../README.md#level-1-beginner)

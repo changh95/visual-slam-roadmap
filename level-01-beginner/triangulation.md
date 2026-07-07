@@ -59,5 +59,3 @@ Triangulation is how a SLAM map grows: after epipolar geometry (or PnP) provides
 - [2D-2D correspondence](../level-02-getting-familiar/2d-2d-correspondence.md)
 - [Landmark](../level-02-getting-familiar/landmark.md)
 - [Disparity vs Depth](../level-07-stereo-slam/disparity-vs-depth.md)
-
-[Back to Level 1](../README.md#level-1-beginner)

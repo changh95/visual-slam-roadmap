@@ -74,5 +74,3 @@ The difference between a paper prototype and a deployable SLAM system is usually
 - [Mobile](mobile.md)
 - [PTAM](../level-03-monocular-slam/ptam.md)
 - [ORB-SLAM3](../level-03-monocular-slam/orb-slam3.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

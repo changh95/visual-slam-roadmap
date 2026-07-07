@@ -2,31 +2,41 @@
 
 > Endres 2013 · [Paper](https://felixendres.github.io/rgbdslam_v2/)
 
-**One-line summary** — A complete graph-based RGB-D SLAM system using visual feature matching with depth back-projection and g2o pose-graph optimization, accompanied by the influential TUM RGB-D benchmark and evaluation tools.
+**One-line summary** — A complete graph-based RGB-D SLAM system ("3-D Mapping With an RGB-D Camera", T-RO 2014) using visual features back-projected to 3D, a beam-based transformation validation model, g2o pose-graph optimization, and OctoMap output — evaluated exhaustively on the TUM RGB-D benchmark.
 
 ## Problem
 
-Early RGB-D SLAM approaches lacked a standardized, modular pipeline and reproducible benchmarks: papers evaluated on private sequences with incompatible metrics, making methods impossible to compare. The community needed two things at once — a robust, open baseline system that combines visual features with depth measurements in a principled graph-based back-end, and a rigorous evaluation framework with ground-truth trajectories and agreed-upon error metrics.
+Early RGB-D SLAM approaches lacked a standardized, modular pipeline and reproducible evaluation. Beyond that, feature-based RANSAC and ICP both lack reliable *failure detection*: a low inlier count may just mean low overlap, while repetitive man-made structure (identical chairs, wallpapers) produces confidently wrong transformations. The community needed a robust open baseline that combines color features with dense depth in a principled graph back-end, plus a rigorous benchmark-driven characterization of what actually matters for accuracy.
 
-## Key ideas
+## Method & architecture
 
-- **Tracking from color + depth**: visual features (SIFT/SURF/ORB) are extracted from the color image and back-projected to 3D points using the aligned depth image, yielding 3D-3D correspondences between frames — sidestepping the scale ambiguity and triangulation machinery of monocular SLAM.
-- **RANSAC relative pose**: the transformation between frames is estimated robustly from the 3D-3D correspondences:
-  $$\mathbf{T}_{ij}^* = \arg\min_{\mathbf{T}} \sum_{k \in \text{inliers}} \left\|\mathbf{p}_k^j - \mathbf{T}\,\mathbf{p}_k^i\right\|^2$$
-  which has the closed-form (SVD) solution familiar from ICP, wrapped in RANSAC for outlier rejection.
-- **Pose graph back-end**: keyframes become nodes and relative transforms become edges; g2o minimizes the sum of squared edge residuals on the manifold,
-  $$\mathbf{T}_1^*,\ldots,\mathbf{T}_n^* = \arg\min \sum_{(i,j)\in\mathcal{E}} \left\|\log\!\left(\mathbf{T}_{ij}^{-1}\,\mathbf{T}_i^{-1}\,\mathbf{T}_j\right)^\vee\right\|_{\boldsymbol{\Sigma}_{ij}}^2$$
-- **Loop closure with geometric verification**: candidate loop closures are found by matching features against earlier keyframes; RANSAC-based geometric verification filters false positives before edges are added to the graph.
-- **Mapping with OctoMap**: the optimized trajectory is used to build a probabilistic octree occupancy map — memory-efficient, explicitly modeling free vs. occupied space, and directly usable for robot navigation (unlike raw point clouds or TSDFs).
-- **Benchmark contribution**: the authors co-created the TUM RGB-D benchmark and its ATE (absolute trajectory error) / RPE (relative pose error) evaluation tools, which became the standard way to evaluate RGB-D SLAM and odometry.
+The system splits into the classic frontend / backend / map-representation triad.
 
-## Results & impact
+**Frontend: egomotion from features + depth.** Keypoints are extracted from the RGB image (SIFT via GPU, SURF, or ORB; descriptor $\mathbf{d} \in \mathbb{R}^{64}$ for SURF) and localized in 3D through the depth image. Matching uses Lowe's nearest/second-nearest ratio test (Hamming distance for ORB; Euclidean or the better-performing Hellinger distance for SIFT/SURF). The relative transformation between two frames is estimated by RANSAC: three 3D-3D correspondences initialize an estimate, inliers are counted by Mahalanobis distance, and the estimate is recursively refined with a decreasing inlier threshold via a closed-form least-squares solution.
 
-Published in IEEE Transactions on Robotics (2014), the system achieved centimeter-level ATE on the desk and room sequences of the TUM RGB-D benchmark, with ORB features providing the best speed-accuracy trade-off among the descriptors tested. Its deepest impact is methodological: the TUM RGB-D benchmark and the ATE/RPE tools were adopted universally — nearly every subsequent SLAM paper reports on them — and the feature-based front-end + pose-graph back-end pipeline it packaged became the standard baseline architecture for RGB-D SLAM, the same skeleton later perfected by ORB-SLAM2.
+**Environment measurement model (EMM).** To validate a candidate transformation independently of how it was estimated, depth points of one frame are projected into the other; each depth pixel implicitly defines a *beam* whose free space observed points must respect. Modeling both measurements of a common surface point with sensor-noise covariances $\Sigma_i, \Sigma_j$, the paper derives
+
+$$p(\mathbf{y}_i \mid \mathbf{y}_j) = \mathcal{N}(\mathbf{y}_i;\, \mathbf{y}_j,\, \Sigma_{ij}), \qquad \Sigma_{ij} = \Sigma_i + \Sigma_j$$
+
+Points within 3 sigma count as inliers; points projected far behind the associated beam are "occluded" and ignored; points landing in observed free space are outliers. A transformation is rejected unless the quality $q = I/(I+O)$ (inliers over inliers-plus-outliers) exceeds a threshold and inliers are at least 25% of observed points — a robust per-point hypothesis test instead of a brittle joint $\chi^2_{3N}$ test.
+
+**Loop-closure search.** Candidate frames for pairwise matching combine (i) $n$ immediate predecessors, (ii) $k$ frames sampled from the geodesic (graph) neighborhood of the previous frame via a limited-depth spanning tree — so found loop closures guide the search for more — and (iii) $l$ frames sampled from designated keyframes for large loops.
+
+**Backend: pose-graph optimization with g2o.** Validated transformations $z_{ij}$ with information matrices $\Omega_{ij}$ form edges of a pose graph over sensor poses $\mathbf{X}$, optimized by minimizing
+
+$$F(\mathbf{X}) = \sum_{\langle i,j\rangle \in \mathcal{C}} e(\mathbf{x}_i, \mathbf{x}_j, z_{ij})^{\top}\, \Omega_{ij}\, e(\mathbf{x}_i, \mathbf{x}_j, z_{ij})$$
+
+After optimization, edges whose Mahalanobis discrepancy is too large are pruned — a second robustness layer against bogus loop closures from repetitive structure.
+
+**Map: OctoMap.** The optimized trajectory projects the clouds into a probabilistic octree occupancy map that explicitly represents free and unknown space (2 cm resolution maps of the test sequences take only 4.2-25 MB) and is directly usable for navigation, unlike raw point clouds.
+
+## Results
+
+Evaluated on the TUM RGB-D benchmark (which the authors co-created) using ATE: $\mathrm{ATE}_{\mathrm{RMSE}} = \sqrt{\tfrac{1}{n}\sum_i \|\mathrm{trans}(\hat{\mathbf{x}}_i) - \mathrm{trans}(\mathbf{x}_i)\|^2}$. Headline numbers (Intel i7 3.4 GHz + GTX 570): ATE RMSE of **0.026 m on fr1/desk** (15.2 Hz), 0.087 m on fr1/room, 0.057 m on fr2/desk, 0.86 m on fr2/large_no_loop, and 1.65 m on a 229 m MIT Stata Center sequence — better than the respective best previously published results on all but fr2/large_no_loop. Feature study: GPU-SIFT is the most accurate (median RMSE 0.04 m over the fr1 sequences, ~600-700 features per frame sufficing), while ORB and Shi-Tomasi+SURF are fast options whose ~15 cm average error suits only benign scenarios; the Hellinger distance improved matching by up to 25.8% on some datasets at no runtime cost. On the challenging "Robot SLAM" Pioneer sequences, geodesic-neighborhood sampling cut average error by 26%, and the EMM (0.82 ms average evaluation) plus edge pruning drastically reduced error, with best results using both. The system is fully open source.
 
 ## Why it matters for SLAM
 
-RGBD-SLAM-V2 established the feature-based front-end + pose-graph back-end pipeline as the standard baseline for RGB-D SLAM, in contrast to the dense GPU fusion line started by KinectFusion. Its lasting influence is arguably even larger through the TUM RGB-D benchmark and evaluation metrics, which nearly every subsequent SLAM paper reports on. It remains a very readable reference implementation of a full classical SLAM system.
+RGBD-SLAM-V2 established the feature-based frontend + pose-graph backend pipeline as the standard baseline for RGB-D SLAM, in contrast to the dense GPU-fusion line started by KinectFusion, and its EMM introduced principled, estimator-independent failure detection using dense depth. Its influence is arguably even larger through the TUM RGB-D benchmark and the ATE/RPE evaluation tools, which nearly every subsequent SLAM paper reports on. It remains a very readable reference implementation of a full classical SLAM system.
 
 ## Related
 
@@ -35,5 +45,3 @@ RGBD-SLAM-V2 established the feature-based front-end + pose-graph back-end pipel
 - [DVO](dvo.md)
 - [ORB-SLAM2](../level-03-monocular-slam/orb-slam2.md)
 - [Metrics](../level-02-getting-familiar/metrics.md)
-
-[Back to Level 4](../README.md#level-4-rgb-d-visual-slam)

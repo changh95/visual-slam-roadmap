@@ -2,31 +2,39 @@
 
 > Leutenegger 2022 · [Paper](https://arxiv.org/abs/2202.09199)
 
-**One-line summary** — OKVIS2 upgrades the classic OKVIS sliding-window VIO into a real-time, scalable visual-inertial *SLAM* system by marginalizing common observations into pose-graph edges that can be fluidly turned back into landmarks upon loop closure.
+**One-line summary** — OKVIS2 upgrades the classic OKVIS sliding-window VIO into a real-time, scalable visual-inertial *SLAM* system by marginalizing common observations into pose-graph edges that can be fluidly turned back into landmarks and observations upon loop closure.
 
 ## Problem
 
-Sliding-window VIO systems (OKVIS, VINS-Mono) bound their computation by marginalizing old states, but classic marginalization is a one-way street: once a landmark's information is compressed into a dense Schur-complement prior, it can never be expanded back into explicit landmark constraints when a loop closure arrives. This creates a hard boundary between "odometry mode" (bounded window, drifting) and "SLAM mode" (global map with landmarks) — the system must either ignore the loop or reset its map. Robust, accurate state estimation for robotics and AR/VR particularly requires handling *long* and *repeated* loop closures, which is exactly the regime OKVIS2 targets.
+Sliding-window VIO systems bound computation by marginalizing or fixing old states, but classic marginalization is a one-way street: tight integration of loop closure and large-scale map management "constitutes an inherent challenge to schemes that employ marginalisation of old states and landmarks." ORB-SLAM3 instead simply *fixes* old states — simpler but "inherently not a conservative approximation, as it effectively ignores past estimation uncertainties." OKVIS2 targets robust, accurate estimation for robotics and AR/VR with particular attention to *long* and *repeated* loop closures, using one bounded factor graph that behaves like odometry and full SLAM at once.
 
-## Key ideas
+## Method & architecture
 
-- **Reactivatable landmarks / improved marginalization**: instead of irreversibly compressing old landmarks into a dense Schur-complement prior, marginalized observations become sparse *pose-graph edges* between the co-observing keyframes,
-  $$f_{\text{edge}}(\mathbf{T}_i, \mathbf{T}_j) = \left\|\mathbf{T}_j^{-1}\mathbf{T}_i \ominus \hat{\mathbf{T}}_{ij}\right\|^2_{\boldsymbol{\Omega}_{ij}},$$
-  where $\hat{\mathbf{T}}_{ij}$ is the relative pose at marginalization time and $\boldsymbol{\Omega}_{ij}$ encodes the information contributed by the marginalized landmark. At loop closure, the edge is replaced by the original reprojection factors and the landmark re-enters the optimization as an explicit 3D variable.
-- **One factor graph, two roles**: a bounded-size real-time factor graph mixes reprojection factors, IMU preintegration error terms, and pose-graph edges — so the system moves seamlessly between "odometry mode" and "full SLAM mode" without a map reset.
-- **Scalable pose graph**: the collection of edges left behind by marginalized landmarks grows at roughly constant cost per frame (bounded by the number of co-observed features), rather than the quadratic growth of naive global bundle adjustment — this is what makes the map long-trajectory-scalable.
-- **Loop closure with landmark reactivation**: place recognition proposes candidate loop frames; feature re-matching identifies which stored landmarks are visible from the current viewpoint; those landmarks are reactivated into the live window and jointly optimized with their original observations.
-- **Asynchronous large-loop optimization**: bigger loops are optimized asynchronously by re-using the same factor graph, keeping the real-time estimator bounded while still achieving global consistency after long and repeated loop closures.
-- **Multi-session capability**: because past maps are kept as a compact pose graph with recoverable landmarks, previously built maps can be re-entered and extended across sessions.
-- Retains OKVIS's tightly-coupled, keyframe-based, multi-camera + IMU design, now with on-manifold IMU preintegration factors inside a nonlinear least-squares (Ceres-style) optimizer.
+The system splits into a **frontend** (state initialization, BRISK keypoint matching, stereo triangulation, segmentation CNN, place recognition/relocalization) and a **realtime estimator** running synchronously per multi-frame, plus an **asynchronous full-graph loop optimization**. The estimator minimizes (Ceres, Cauchy-robustified observations):
 
-## Results & impact
+$$c(\mathbf{x}) = \frac{1}{2}\sum_{i}\sum_{k\in\mathcal{K}}\sum_{j\in\mathcal{J}(i,k)} \rho\left({\mathbf{e}_{\mathrm{r}}^{i,j,k}}^T \mathbf{W}_{\mathrm{r}}\, \mathbf{e}_{\mathrm{r}}^{i,j,k}\right) + \frac{1}{2}\sum_{k\in\mathcal{P}\cup\mathcal{K}\setminus f} {\mathbf{e}_{\mathrm{s}}^{k}}^T \mathbf{W}_{\mathrm{s}}^{k}\, \mathbf{e}_{\mathrm{s}}^{k} + \frac{1}{2}\sum_{r\in\mathcal{P}}\sum_{c\in\mathcal{C}(r)} {\mathbf{e}_{\mathrm{p}}^{r,c}}^T \mathbf{W}_{\mathrm{p}}^{r,c}\, \mathbf{e}_{\mathrm{p}}^{r,c},$$
 
-The paper's experiments show OKVIS2 "achieves and in part outperforms what state-of-the-art open-source systems achieve" on standard benchmarks. Evaluations cover EuRoC and TUM-VI style sequences, with accuracy competitive with ORB-SLAM3; on long sequences where loop closure is essential, the full SLAM mode reduces end-to-end drift dramatically compared to odometry-only OKVIS, and landmark reactivation improves consistency at loop closure compared to plain pose-graph correction. The system is engineered to run in real time on embedded-class processors and is open source, and its architecture became the base that OKVIS2-X extends with depth, LiDAR, and GNSS.
+over reprojection errors $\mathbf{e}_{\mathrm{r}}^{i,j,k} = \tilde{\mathbf{z}}^{i,j,k} - \mathbf{h}\big(\mathbf{T}_{SC_i}^{-1}\, \mathbf{T}_{S^k W}\, {}_{W}\mathbf{l}^{j}\big)$, preintegrated IMU errors $\mathbf{e}_{\mathrm{s}}^{k} = \hat{\mathbf{x}}^{n}(\mathbf{x}^{k}, \tilde{\mathbf{z}}_{\mathrm{s}}^{k,n}) \boxminus \mathbf{x}^{n} \in \mathbb{R}^{15}$, and relative pose (pose-graph) errors. $\mathcal{K}$ holds the $T$ most recent frames plus $M$ keyframes with live observations; $\mathcal{P}$ holds pose-graph frames reaching much further into the past.
+
+- **Posegraph creation (the key contribution)**: when $|\mathcal{K}|$ exceeds a bound $K$, the keyframe with least co-visibility is converted to a pose-graph node. Its joint observations with a connected frame are compressed into a relative pose factor
+  $$\mathbf{e}_{\mathrm{p}}^{r,c} = \mathbf{e}_{\mathrm{p},0}^{r,c} + \begin{bmatrix} {}_{S^r}\mathbf{r}_{S^c} - {}_{S^r}\tilde{\mathbf{r}}_{S^c} \\ \mathbf{q}_{S^rS^c} \boxminus \tilde{\mathbf{q}}_{S^rS^c} \end{bmatrix},$$
+  whose weight comes from actually marginalizing the co-observed landmarks with the Schur complement, $\mathbf{H}^{*} = \mathbf{H}_{\mathrm{p},\mathrm{p}} - \sum_j \mathbf{H}_{\mathrm{p},j}\mathbf{H}_{jj}^{+}\mathbf{H}_{\mathrm{p},j}^{T}$, giving $\mathbf{W}_{\mathrm{p}}^{r,c} = \mathbf{H}^{*}$ and $\mathbf{e}_{\mathrm{p},0}^{r,c} = -\mathbf{H}^{*+}\mathbf{b}^{*}$ — a principled alternative to the de-facto standard identity-weight pose-graph edges.
+- **Edge selection**: a Maximum Spanning Tree over co-observation counts decides which edges to create, keeping the graph sparse; the oldest keyframe is retained while it still shares observations with the present, preserving long-term directional accuracy.
+- **Loop closure with landmark revival**: a DBoW2 query plus 3D-2D RANSAC verification re-aligns the active window to the matched pose; pose-graph edges connecting it are "revived" back into landmarks and observations, landmarks are merged, the loop error is distributed by rotation averaging, and a background full-graph optimization (IMU factors included, states inside the loop variable) is later synchronized into the realtime graph.
+- **Bounded realtime problem**: only the $A = \max(A_{\min}, A_{\Delta T})$ most recent states stay variable; experiments use $T{=}3$, $K{=}5$, $L{=}5$ loop-closure frames, $A_{\min}{=}12$, $\Delta T{=}2$ s.
+- **Dynamic-content removal**: a light-weight Fast-SCNN segmentation CNN runs asynchronously on the CPU on keyframes only, removing observations into sky/cloud regions that the Cauchy robustifier alone does not reject.
+
+## Results
+
+Evaluated on EuRoC and TUM-VI (ATE after position + yaw alignment, causal vs. non-causal reported separately):
+
+- **EuRoC** average ATE: OKVIS2 non-causal **0.031 m** vs. ORB-SLAM3 0.035, causal 0.048, VIO-mode 0.071; original OKVIS 0.089, Kimera 0.119, VINS-Fusion 0.138.
+- **TUM-VI**: on-par with ORB-SLAM3 on short corridor/room sequences (room avg 0.01 m), clearly best on long ones — magistrale avg 0.28 m vs. ORB-SLAM3 0.81 m, outdoors avg 11.60 m vs. 17.87 m, slides avg 0.54 m vs. 0.45 m — and it achieves loop closures on sequences where ORB-SLAM3 reports none.
+- Per-frame timings (i7-11700K): detect & describe 7.1 ms, match & triangulate 26.6 ms, loop-closure attempts 17.7 ms, realtime graph optimization 33.2 ms, posegraph edge handling 14.0 ms; background loop optimizations take tens of ms up to ~1 s for very long loops.
 
 ## Why it matters for SLAM
 
-OKVIS (2015) defined the sliding-window optimization + marginalization architecture for VIO, but like all sliding-window estimators it could not undo marginalization when a loop was found. OKVIS2's pose-graph-edge representation is a principled middle ground between Schur-complement priors and full landmark retention, and it achieves or in part outperforms state-of-the-art open-source systems on standard benchmarks. It is the direct foundation for OKVIS2-X, which extends the same framework with depth, LiDAR, and GNSS.
+OKVIS (2015) defined the sliding-window optimization + marginalization architecture for VIO, but could not undo marginalization when a loop was found. OKVIS2's marginalization-derived pose-graph edges are a principled middle ground between Schur-complement priors and full landmark retention — the estimator moves fluidly between odometry and full SLAM without a map reset. It is the direct foundation of OKVIS2-X, which extends the same factor graph with depth, LiDAR, and GNSS.
 
 ## Related
 
@@ -34,7 +42,6 @@ OKVIS (2015) defined the sliding-window optimization + marginalization architect
 - [OKVIS2-X](okvis2-x.md)
 - [IMU preintegration](imu-preintegration.md)
 - [Marginalization](../level-02-getting-familiar/marginalization.md)
+- [Pose graph optimization](../level-02-getting-familiar/pose-graph-optimization.md)
 - [VINS-Mono](vins-mono.md)
 - [ORB-SLAM3](../level-03-monocular-slam/orb-slam3.md)
-
-[Back to Level 6](../README.md#level-6-vio--vins)

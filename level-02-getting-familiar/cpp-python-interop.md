@@ -55,5 +55,3 @@ The field is converging on hybrid systems: classical C++ back-ends combined with
 - [Python](python.md)
 - [Math libraries (Eigen, Ceres, GTSAM, g2o)](math-libraries.md)
 - [Edge deployment](edge-deployment.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

@@ -54,5 +54,3 @@ Image gradients computed by Sobel are the input to the Harris structure tensor a
 - [PL-SLAM](../level-03-monocular-slam/pl-slam.md)
 - [LSD-SLAM](../level-03-monocular-slam/lsd-slam.md)
 - [DSO](../level-03-monocular-slam/dso.md)
-
-[Back to Level 1](../README.md#level-1-beginner)

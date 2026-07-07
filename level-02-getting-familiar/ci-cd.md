@@ -62,5 +62,3 @@ SLAM systems couple many fragile pieces — sensor drivers, third-party solvers,
 - [Docker](docker.md)
 - [Bash/Linux](bash-linux.md)
 - [Metrics](metrics.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

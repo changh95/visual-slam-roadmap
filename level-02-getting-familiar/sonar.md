@@ -45,5 +45,3 @@ Underwater is one of the last domains where visual SLAM fundamentally cannot ope
 - [RADAR](radar.md)
 - [LiDAR](lidar.md)
 - [Exteroceptive sensor](exteroceptive-sensor.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

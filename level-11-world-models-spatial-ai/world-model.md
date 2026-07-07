@@ -53,5 +53,3 @@ World models and SLAM are converging answers to complementary questions — "whe
 - [NVIDIA Cosmos](nvidia-cosmos.md)
 - [WorldVLA](worldvla.md)
 - [Spatial AI](spatial-ai.md)
-
-[Back to Level 11](../README.md#level-11-world-models--spatial-ai)

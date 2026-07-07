@@ -2,29 +2,31 @@
 
 > Radford (OpenAI) 2021 · [Paper](https://arxiv.org/abs/2103.00020)
 
-**One-line summary** — CLIP trains an image encoder and a text encoder jointly on 400 million web image-text pairs with a contrastive objective, producing a shared embedding space that enables zero-shot visual recognition of essentially arbitrary concepts described in natural language.
+**One-line summary** — CLIP trains an image encoder and a text encoder jointly on 400 million web image-text pairs with a symmetric contrastive objective, producing a shared embedding space that enables zero-shot visual recognition of essentially arbitrary concepts described in natural language.
 
 ## Problem
 
-State-of-the-art computer vision systems were trained to predict a fixed set of predetermined object categories (canonically ImageNet's 1000 classes). This restricted form of supervision limits generality and usability: specifying *any other* visual concept requires collecting new labeled data and retraining. Learning directly from raw text about images is a promising alternative that taps a much broader source of supervision — the caption is already attached to the image, at internet scale, for free. The question CLIP answers is whether this weak, noisy signal can train visual representations that transfer to arbitrary downstream tasks.
+State-of-the-art vision systems were trained to predict a fixed set of predetermined object categories (canonically ImageNet's 1000 classes). This restricted supervision limits generality: specifying *any other* visual concept requires collecting new labeled data and retraining. Captions are already attached to images at internet scale for free — but predicting the exact words of a caption (VirTex-style) scales poorly: the authors' caption-prediction baseline learned ImageNet recognition 3× slower than a bag-of-words baseline, and swapping in a contrastive objective bought another 4× efficiency. CLIP asks whether this weak, noisy pairing signal, at sufficient scale, trains visual representations that transfer zero-shot to arbitrary tasks.
 
-## Key ideas
+## Method & architecture
 
-- **Natural language as supervision**: the pre-training task is simply predicting which caption goes with which image — a supervision signal available at internet scale without manual annotation. The dataset, 400 million (image, text) pairs collected from the internet, is what makes the simple objective work.
-- **Contrastive pre-training**: in each batch of $N$ image-text pairs, matched pairs are pulled together and mismatched pairs pushed apart in a shared embedding space via a symmetric InfoNCE-style loss over $L_2$-normalized embeddings $\mathbf{z}^I, \mathbf{z}^T$ with a learned temperature $\tau$:
+**Data.** WIT (WebImageText): 400M (image, text) pairs collected from the internet using 500,000 queries, class-balanced at up to 20,000 pairs per query.
 
-  $$\mathcal{L} = -\frac{1}{N}\sum_{i}\left[\log \frac{e^{\langle \mathbf{z}_i^I, \mathbf{z}_i^T\rangle/\tau}}{\sum_j e^{\langle \mathbf{z}_i^I, \mathbf{z}_j^T\rangle/\tau}} + \log \frac{e^{\langle \mathbf{z}_i^T, \mathbf{z}_i^I\rangle/\tau}}{\sum_j e^{\langle \mathbf{z}_j^I, \mathbf{z}_i^T\rangle/\tau}}\right]$$
+**Dual encoders.** An image encoder (5 ResNets: RN50 to RN50x64 with attention pooling; and 3 ViTs: B/32, B/16, L/14) and a text encoder (63M-parameter, 12-layer, 512-wide Transformer over lower-cased BPE, 49,152 vocab, max length 76; the [EOS] activation is the text feature) are trained from scratch. Each representation is *linearly* projected into the joint embedding space — no non-linear projection head.
 
-- **Zero-shot transfer**: at test time, class names are embedded as text prompts and an image is assigned to the nearest text embedding — $\hat{y} = \arg\max_c \langle f_I(I), f_T(\text{"a photo of a } c\text{"})\rangle$ — so natural language *references* learned visual concepts (or describes new ones) with no task-specific training data.
-- **Prompt engineering matters**: performance improves markedly with prompt templates and prompt ensembling — an early sign that interfacing with vision through language is itself a design surface.
-- **Open-vocabulary embeddings as a reusable asset**: beyond classification, the frozen CLIP encoders became a universal semantic feature extractor — the visual vocabulary underlying a generation of multimodal and robotics systems.
+**Contrastive objective.** Given a batch of $N$ pairs, CLIP predicts which of the $N \times N$ possible pairings actually occurred: maximize cosine similarity of the $N$ real pairs, minimize it for the $N^2 - N$ incorrect ones, via a symmetric cross-entropy over the similarity scores (the multi-class N-pair / InfoNCE loss). Following the paper's Figure 3 pseudocode, with $L_2$-normalized embeddings $x_i$ (image) and $y_j$ (text) and learned temperature $\tau$:
+$$\text{logits}_{ij} = \frac{\langle x_i, y_j \rangle}{\tau}, \qquad \mathcal{L} = \tfrac{1}{2}\big( \text{CE}_{\text{image} \to \text{text}} + \text{CE}_{\text{text} \to \text{image}} \big)$$
+where each CE is a softmax cross-entropy with the matched index as the label, taken along rows and columns respectively. $\tau$ is learned as a log-parameterized scalar (initialized to 0.07, logits clipped at 100). Batch size is 32,768; the largest ResNet took 18 days on 592 V100s and ViT-L/14 12 days on 256 V100s, plus one extra epoch at 336px (ViT-L/14@336px, the reported "CLIP").
 
-## Results & impact
+**Zero-shot transfer.** At test time the class names of a dataset are embedded (with prompt templates like "A photo of a {label}.") and an image is classified to the nearest text embedding — the text encoder acts as a hypernetwork generating the weights of a linear classifier. Prompt engineering and ensembling 80 prompts improve ImageNet accuracy by almost 5%.
 
-- Zero-shot CLIP matches the accuracy of the original supervised ResNet-50 on ImageNet *without using any of the 1.28 million training examples* it was trained on.
-- Benchmarked on over 30 existing computer-vision datasets — OCR, action recognition in videos, geo-localization, many kinds of fine-grained classification — CLIP transfers non-trivially to most tasks and is often competitive with fully supervised baselines, with notably better robustness to distribution shift than supervised models.
-- Code and pre-trained weights were released, and CLIP features became the standard visual backbone for open-vocabulary systems across 2D and 3D vision (LERF, OpenMask3D, ConceptFusion) and for VLM/VLA stacks (BLIP-2, LLaVA, OpenVLA).
-- The contrastive internet-scale paradigm it validated was adopted across multimodal AI; SigLIP is its direct technical successor, replacing the softmax contrastive loss with a pairwise sigmoid loss for better scalability.
+## Results
+
+- **Zero-shot ImageNet: 76.2%**, matching the original supervised ResNet-50 without using any of its 1.28M training examples (top-5: 95%, matching Inception-V4).
+- Across **27 datasets**, zero-shot CLIP beats a fully supervised logistic regression on ResNet-50 features on **16 of 27**; on STL10 it sets a state of the art at 99.3% with no training examples; on video action recognition it wins by +14.5% (Kinetics700) and +7.7% (UCF101).
+- **Linear probing**: CLIP features outperform the best ImageNet model (Noisy Student EfficientNet-L2) on **21 of 27** datasets, with the biggest gains on OCR, geo-localization, and activity recognition.
+- **Robustness**: on 7 natural distribution shifts (ImageNetV2, ImageNet-R, ObjectNet, ...), zero-shot CLIP shrinks the robustness gap by **up to 75%**; adapting to ImageNet raises ImageNet accuracy by 9.2% but erodes that effective robustness.
+- Zero-shot retrieval matches or beats all prior zero-shot results on Flickr30k and MSCOCO text retrieval.
 
 ## Why it matters for SLAM
 
@@ -38,5 +40,3 @@ CLIP is the enabling technology of open-vocabulary SLAM: by attaching CLIP featu
 - [LERF](../level-03-monocular-slam/lerf.md)
 - [ConceptFusion](../level-03-monocular-slam/conceptfusion.md)
 - [Foundation models](../level-05-deep-learning/foundation-models.md)
-
-[Back to Level 11](../README.md#level-11-world-models--spatial-ai)

@@ -66,5 +66,3 @@ Almost every paper in Level 5 is a point on the learned-vs-hand-crafted spectrum
 - [Differentiability](differentiability.md)
 - [NetVLAD](netvlad.md)
 - [Foundation models](foundation-models.md)
-
-[Back to Level 5](../README.md#level-5-applying-deep-learning)

@@ -56,5 +56,3 @@ LiDAR is the sensor of choice when metric accuracy and lighting robustness are n
 - [LOAM](../level-09-lidar-visual-lidar-slam/loam.md)
 - [LiDAR-Visual-Inertial (LVI)](../level-09-lidar-visual-lidar-slam/lidar-visual-inertial-lvi.md)
 - [FAST-LIO2](../level-09-lidar-visual-lidar-slam/fast-lio2.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

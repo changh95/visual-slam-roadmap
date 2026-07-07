@@ -2,30 +2,41 @@
 
 > Prisacariu 2017 · [Paper](https://arxiv.org/abs/1708.00783)
 
-**One-line summary** — A modular, cross-platform open-source RGB-D reconstruction framework combining voxel-hashed TSDF (or surfel) mapping, ICP/RGB tracking, random-fern relocalization, and loop closure.
+**One-line summary** — A modular, cross-device open-source RGB-D reconstruction framework combining voxel-hashed TSDF (or surfel) mapping, robust ICP/RGB tracking, random-fern relocalization, and submap-based globally consistent reconstruction.
 
 ## Problem
 
-Representing a reconstruction volumetrically as a TSDF gives most of the simplicity and efficiency that GPU implementations of KinectFusion-style systems enjoy — but the representation is memory-intensive and limits applicability to small-scale reconstructions. Several remedies had been explored (rolling volumes, voxel hashing, submaps), yet the community lacked a single fast, flexible pipeline in which components like camera tracking, scene representation, and data integration could be swapped and adapted. InfiniTAM was proposed as that unifying framework, and v3 is the technical report describing its third iteration.
+Representing a reconstruction volumetrically as a TSDF gives the simplicity and efficiency that GPU implementations of KinectFusion-style systems enjoy — but a dense uniform grid is memory-intensive and limits scale, and the research community lacked a single fast, flexible pipeline in which camera tracking, scene representation, and data integration could be swapped and adapted. InfiniTAM is that framework; the v3 technical report documents its third iteration, whose headline additions are a robust tracker with failure detection, a random-ferns relocalizer, globally consistent TSDF reconstruction via submaps, and a surfel backend.
 
-## Key ideas
+## Method & architecture
 
-- **Voxel hashing for unbounded scenes**: instead of a fixed grid, TSDF voxel blocks are stored in a hash table and allocated only near observed surfaces, giving bounded memory for arbitrarily large scenes:
-  $$h(\mathbf{b}) = \left(\mathbf{b}_x p_1 \oplus \mathbf{b}_y p_2 \oplus \mathbf{b}_z p_3\right) \bmod n$$
-  where $\mathbf{b}$ is the block index and $p_1, p_2, p_3$ are large primes.
-- **Pluggable map representations**: interchangeable backends — hashed-TSDF volumetric reconstruction, a surfel-based backend (an implementation of Keller et al.'s approach), and sparse point clouds — behind a common integration/ray-cast interface, so tracking code is representation-agnostic.
-- **Robust camera tracking**: a new robust tracking module (one of v3's headline features) aligns each depth image to a ray-cast prediction of the model with coarse-to-fine point-to-plane ICP, optionally combined with RGB alignment; low-level code improvements significantly improved tracking performance over earlier versions.
-- **Keyframe relocalization with random ferns**: an implementation of Glocker et al.'s fern-based relocalizer recovers the pose after tracking loss and proposes loop-closure candidates from frame appearance.
-- **Globally consistent TSDF reconstruction via rigid submaps**: the scene is divided into rigid submaps whose relative poses are optimized — a novel approach in v3 to bring loop-closure consistency to TSDF maps; pose corrections can trigger de-integration and re-integration of affected voxel blocks.
-- **Cross-platform engineering**: runs on CPU, CUDA, and OpenCL — including mobile devices — with clean modular C++ that made it a favorite research baseline and teaching codebase.
+**Engine architecture.** A chain-of-responsibility design: stateless processing engines (tracking, allocation, integration, raycast, swapping) pass state objects, each engine split into an Abstract, a Device-Specific (CPU/CUDA/Metal), and a Device-Agnostic layer of shared inline C code. Two pipelines exist: `ITMBasicEngine` (standard fusion) and `ITMMultiEngine` (globally consistent, with loop closure).
 
-## Results & impact
+**Voxel hashing.** Voxels (TSDF value, weight, optional RGB) are grouped into $8\times 8\times 8$ blocks stored in a contiguous voxel block array ($2^{18}$ entries); a hash table maps a block's corner coordinates $\mathbf{b}$ to its storage index via
 
-Evaluated on TUM RGB-D, ICL-NUIM, and large indoor sequences, InfiniTAM v3's tracking accuracy is on par with ElasticFusion, and voxel hashing enables apartment-scale reconstruction; CPU-only mode runs at 5-10 Hz while GPU mode exceeds 30 Hz, with demonstrations on ARM-based mobile devices. It became one of the most widely used open-source RGB-D reconstruction frameworks for research, and the voxel-hashing storage scheme it packaged (originating with Niessner et al. 2013) became the standard approach for scalable TSDF maps, adopted by BundleFusion and many later systems.
+$$h(\mathbf{b}) = \big( (b_x \cdot 73856093) \oplus (b_y \cdot 19349669) \oplus (b_z \cdot 83492791) \big) \bmod n$$
+
+with collisions handled by an unordered excess list. Allocation backprojects, for each depth pixel $d$, the segment from $d-\mu$ to $d+\mu$ and allocates the intersected blocks in three non-blocking stages; integration then updates each visible voxel with the running weighted TSDF average as in KinectFusion.
+
+**Tracking.** The classic `ITMDepthTracker` minimizes point-to-plane distances against a raycast of the model, $d = (\mathbf{R}\mathbf{p} + \mathbf{t} - \mathcal{V}(\bar{\mathbf{p}}))^{\top} \mathcal{N}(\bar{\mathbf{p}})$, over a resolution hierarchy; `ITMColorTracker` instead minimizes color differences $d = \| I(\pi(\mathbf{R}\,\mathcal{V}(i) + \mathbf{t})) - \mathcal{C}(i) \|_2$. New in v3, the default `ITMExtendedTracker` makes ICP robust: a Huber norm on per-pixel errors, depth-dependent down-weighting of far (noisier) measurements, outlier gating by distance threshold, and an optional frame-to-frame photometric term on intensities $I = 0.299R + 0.587G + 0.114B$ (Tukey loss, scaled by 0.3), all minimized with Levenberg-Marquardt coarse-to-fine. An SVM classifier on the ICP statistics (inlier percentage, Hessian determinant, residual) detects tracking failure and triggers relocalization.
+
+**Relocalization (random ferns).** Each RGB-D image is encoded as $m$ binary code blocks of $n$ feature tests; similarity between images is the block-wise Hamming distance $\mathrm{BlockHD}(b_C^I, b_C^J) = \frac{1}{m}\sum_{k=1}^{m} (b_{F_k}^I \equiv b_{F_k}^J)$. Code tables map codes to keyframe IDs, so the nearest stored keyframe (and its pose) is retrieved in constant time — used both for pose recovery and loop-closure detection.
+
+**Globally consistent reconstruction.** The scene is divided into rigid submaps (active ones tracked each frame, passive ones dormant; new submaps spawned as the camera leaves the current one). Inter-submap constraints accumulate from tracking and fern-detected loop closures, and a submap pose graph is optimized on a background thread. Rendering raycasts an implicit combined TSDF fused on the fly,
+
+$$\hat{F}(\mathbf{X}) = \sum_i F_w(\mathbf{P}_i \mathbf{X})\, F(\mathbf{P}_i \mathbf{X})$$
+
+where $\mathbf{P}_i$ is submap $i$'s pose and $F, F_w$ its TSDF and weight — the global map is a *view* over submaps, never explicitly built.
+
+**Surfel backend & swapping.** A beta implementation of Keller et al.'s point-based fusion updates a matched surfel by confidence-weighted averaging, $\bar{\mathbf{v}}_k \leftarrow (\bar{c}_k \bar{\mathbf{v}}_k + \alpha \mathbf{v}^g) / (\bar{c}_k + \alpha)$, up to 5M surfels. A swapping engine with fixed-size host/device transfer buffers pages voxel blocks out of GPU memory and re-fuses them on return, so maps can exceed GPU capacity.
+
+## Results
+
+The v3 paper is a technical report on the framework's implementation, not a benchmark study — it contains no quantitative evaluation tables; the underlying globally-consistent submap method is evaluated in its companion publication (Kähler et al., ECCV 2016). The report's own claims are engineering ones: the pipeline runs in real time on GPU (the less-optimized surfel backend is "still real-time" on a good GPU); an off-the-shelf graphics card holds roughly a single room at 4 mm voxel resolution in active memory even with hashing, which the swapping subsystem extends to larger scenes; and the whole stack runs across CPU, CUDA, and Metal device layers with numerous sensors (Kinect, PrimeSense, RealSense, Structure). See the companion papers for full tracking-accuracy evaluation. Its lasting impact is as one of the most widely used, hackable open-source RGB-D reconstruction codebases.
 
 ## Why it matters for SLAM
 
-InfiniTAM v3 packaged the post-KinectFusion state of the art — voxel hashing, frame-to-model tracking, relocalization, loop closure — into one hackable framework, and became one of the most widely used open-source RGB-D reconstruction codebases. If you want to understand how a production-quality dense SLAM pipeline is engineered (memory management, GPU kernels, swappable map backends), reading InfiniTAM's code is one of the best exercises at this level.
+InfiniTAM v3 packaged the post-KinectFusion state of the art — voxel hashing, robust frame-to-model tracking with failure detection, fern relocalization, submap-based loop closure — into one modular framework. If you want to understand how a production-quality dense SLAM pipeline is engineered (memory management, GPU kernels, swappable map backends, host-device paging), reading InfiniTAM's code is one of the best exercises at this level; it is also the reference implementation of the voxel-hashing storage scheme that scalable TSDF systems like BundleFusion build on.
 
 ## Related
 
@@ -33,5 +44,4 @@ InfiniTAM v3 packaged the post-KinectFusion state of the art — voxel hashing, 
 - [BundleFusion](bundlefusion.md)
 - [ElasticFusion](elasticfusion.md)
 - [Kintinuous](kintinuous.md)
-
-[Back to Level 4](../README.md#level-4-rgb-d-visual-slam)
+- [TSDF vs Surfel maps](tsdf-vs-surfel-maps.md)

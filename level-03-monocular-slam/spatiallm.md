@@ -2,33 +2,38 @@
 
 > Mao 2025 · [Paper](https://github.com/manycore-research/SpatialLM)
 
-**One-line summary** — Feeds 3D point clouds to a large language model that outputs structured indoor models as executable Python scripts, grounding LLM reasoning in 3D spatial structure.
+**One-line summary** — Fine-tunes an off-the-shelf LLM to consume 3D point clouds and emit structured indoor models — walls, doors, windows, and oriented object boxes — as Python-dataclass scripts, grounding LLM reasoning in 3D spatial structure.
 
 ## Problem
 
-Large language models excel at reasoning and code generation but have no grounding in 3D physical space, while 3D scene representations (point clouds, meshes) carry geometry but no reasoning capability. Point-feature maps (OpenScene, ConceptFusion) and scene graphs (ConceptGraphs) attach semantics to geometry, but their outputs are still not something an LLM can natively parse and manipulate. SpatialLM bridges the gap: an LLM consumes a point cloud and emits a structured, machine-readable model of the space.
+Structured indoor modeling — recovering the architectural layout (walls, doors, windows) plus 3D object bounding boxes from raw RGBD scans — has been the domain of task-specific networks (RoomFormer's polygon queries, V-DETR's detection heads) or bespoke autoregressive decoders with domain-specific tokens (SceneScript). Meanwhile LLMs excel at reasoning and code generation but have no grounding in 3D space. Two things blocked simply fine-tuning an LLM for the task: no large, high-quality dataset pairing point clouds with structured 3D annotations, and no empirical understanding of how to align point-cloud input with an LLM. SpatialLM (tech report: [arXiv 2506.07491](https://arxiv.org/abs/2506.07491), NeurIPS 2025) tackles both.
 
-## Key ideas
+## Method & architecture
 
-- **Point cloud to LLM**: 3D point clouds are tokenised into a sequence format the LLM can consume, encoding spatial coordinates and features as structured tokens — geometry becomes part of the language model's context rather than a separate modality bolted on.
-- **Structured indoor modeling as code**: the model outputs Python scripts defining room boundaries (walls, doors, windows) and object placements as oriented bounding boxes; the scripts are executable and reproduce a structured 3D scene model, so validity can be checked by simply running them.
-- **Code as the output representation**: emitting a program instead of raw coordinates leverages what LLMs are already best at (structured code generation) and yields an editable, diff-able, machine-readable scene description.
-- **Spatial reasoning in language space**: the LLM reasons about layout, connectivity between spaces, and functional zones, combining code-generation strengths with geometric input.
-- **Language-grounded interaction**: users can query the resulting spatial model in natural language and receive answers grounded in the reconstructed geometry.
+- **Standard "Encoder–MLP–LLM" pipeline** — no specialized decoder. A point-cloud encoder compresses the scene into a short sequence of visual tokens for the LLM:
 
-## Results & impact
+$$\mathbf{F} = \mathcal{E}(\mathbf{P}), \qquad \mathbf{P} \in \mathbb{R}^{N \times 6},\; \mathbf{F} \in \mathbb{R}^{K \times D},\; K \ll N,$$
 
-SpatialLM is distributed as an open model family with code on GitHub; its significance so far is architectural rather than benchmark-driven — it demonstrates a working pipeline from raw point cloud to executable structured scene description via an LLM. (This entry is kept deliberately lean: no paper abstract was available to verify quantitative claims.)
+  where each point carries XYZ + RGB. The chosen encoder is Sonata (an encoder-only, self-supervised Point Transformer V3 variant), a two-layer MLP projector, and Qwen2.5-0.5B as the base LLM (603.5M params total; released checkpoints also include a Llama-1B variant).
+- **Scene description as Python code.** The output is plain text: dataclass-style scripts (e.g. `class Wall: a_x, a_y, a_z, b_x, b_y, b_z, height`) for walls/doors/windows and oriented bounding boxes over 59 object categories. Code is human-editable, extensible to new classes, and exploits the LLM's built-in coding ability; unlike SceneScript's domain-specific tokens, no custom vocabulary is needed.
+- **SpatialLM dataset.** 12,328 synthetic scenes (54,778 rooms) parsed from professionally authored interior designs, rendered photo-realistically along simulated camera trajectories (images every 0.5 m); split 11,328/500/500 train/val/test. This dwarfs real annotated datasets (SceneCAD: 1,151 rooms with layout labels).
+- **Empirical alignment study.** Naive token reduction of per-point DINOv2 features (voxelization or farthest-point sampling) collapses to near-zero object F1 — too much spatial information is lost; learned encoders (sparse 3DCNN, Sonata) work, with Sonata best (layout F1 84.6 vs 79.4 for 3DCNN at IoU@0.25). Doubling encoder spatial resolution (K ≈ 510 tokens) helps (object F1 49.4 → 61.1 at IoU@0.5); 4× hurts. Single-stage training with encoder, MLP, and LLM all trainable beats every two- and three-stage freezing schedule.
+- **Evaluation metrics**: Hungarian-matched F1 at IoU thresholds 0.25/0.5 — 2D IoU of projected plane segments for layout, 3D IoU for object boxes (F1 rather than mAP because autoregressive models emit no confidence scores).
+
+## Results
+
+- **Layout estimation (Structured3D)**: SpatialLM pre-trained on its own dataset then fine-tuned on Structured3D reaches **F1 94.3 / 93.5** (IoU@0.25/0.5), beating the specialist RoomFormer (83.4/81.4) and SceneScript (90.4/89.2). Training on Structured3D alone gives only 32.6/18.1 — the large pre-training dataset is what makes LLM fine-tuning viable.
+- **3D object detection (ScanNet, 18 classes, F1)**: pre-train + ScanNet fine-tune scores **65.6 / 52.6** vs SceneScript 49.1/36.8 and the specialist V-DETR 65.1/56.8 — ahead at IoU@0.25, behind at 0.5, with most misses on the smallest objects (picture, sink). ScanNet-only training collapses (2.9/0.7).
+- **Zero-shot on video reconstructions**: on 107 indoor-tour videos reconstructed with MASt3R-SLAM — noisy, occluded, artifact-ridden point clouds — SpatialLM produces consistent layouts and full object boxes without fine-tuning, completing unseen regions (beds extended to the floor, plausible balcony/dining layouts) from context.
 
 ## Why it matters for SLAM
 
-SpatialLM illustrates where semantic mapping is heading: from label-annotated point clouds (OpenScene, ConceptFusion) and scene graphs (ConceptGraphs) toward representations an LLM can directly parse and manipulate. A SLAM system provides the point cloud; a model like SpatialLM turns it into a structured, queryable, machine-readable description of the space — useful for simulation, planning, digital-twin creation, and embodied AI.
+SpatialLM illustrates where semantic mapping is heading: from label-annotated point clouds (OpenScene, ConceptFusion) and scene graphs (ConceptGraphs) toward representations an LLM can directly parse and manipulate. A SLAM system provides the point cloud — the paper's own demo pipeline runs MASt3R-SLAM on monocular video — and SpatialLM turns it into a compact, editable, machine-readable description of the space, useful for scene editing, AR, robot navigation, digital twins, and embodied AI.
 
 ## Related
 
 - [OpenScene](openscene.md)
 - [ConceptFusion](conceptfusion.md)
 - [ConceptGraphs](../level-05-deep-learning/conceptgraphs.md)
+- [MASt3R-SLAM](mast3r-slam.md)
 - [Spatial AI](../level-11-world-models-spatial-ai/spatial-ai.md)
-
-[Back to Level 3](../README.md#level-3-monocular-visual-slam)

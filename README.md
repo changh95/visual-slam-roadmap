@@ -60,27 +60,27 @@ I made this roadmap to share my thoughts and experience on studying Visual-SLAM,
 
 ### Mathematics
 - **[Basic Probability & Statistics](level-01-beginner/basic-probability-and-statistics.md)**: Gaussian distribution, Bayes' theorem
-- **[Basic Linear Algebra](level-01-beginner/basic-linear-algebra.md)**: Vectors & Matrices, Determinant, Dot & Cross product, Rank, Inverse matrix, Transpose matrix, SVD, Eigenvalues/Eigenvectors
+- **[Basic Linear Algebra](level-01-beginner/basic-linear-algebra.md)**: Vectors & Matrices, Determinant, Dot & Cross product, Rank, Inverse matrix, Transpose matrix, [SVD](level-01-beginner/svd.md), Eigenvalues/Eigenvectors
 - **[Logarithm & Exponential](level-01-beginner/logarithm-and-exponential.md)**
 - **[Basic Calculus](level-01-beginner/basic-calculus.md)**: Differentiation, Taylor expansion
 
 ### Projective Geometry
 - **[Pinhole camera model](level-01-beginner/pinhole-camera-model.md)** → Image projection
-- **[Camera calibration](level-01-beginner/camera-calibration.md)**: Intrinsic/Extrinsic parameters, Lens distortion
+- **[Camera calibration](level-01-beginner/camera-calibration.md)**: Intrinsic/Extrinsic parameters, [Lens](level-02-getting-familiar/camera-device.md) distortion
 - **[Rigid body motion](level-01-beginner/rigid-body-motion.md)**: Euler/Quaternion/Rotation Matrix, Projective space & Vanishing point, Homogeneous transformation
 - **[Epipolar geometry](level-01-beginner/epipolar-geometry.md)** → Essential & Fundamental matrix
 - **[Triangulation](level-01-beginner/triangulation.md)**
 - **[Camera models beyond pinhole](level-01-beginner/camera-models-beyond-pinhole.md)**: Fisheye (Kannala-Brandt), double-sphere, omnidirectional; rolling-shutter awareness
 
 ### Camera Device
-- Lens, Sensor, Resolution/ISO/Aperture
+- [Lens](level-02-getting-familiar/camera-device.md), [Sensor](level-02-getting-familiar/camera-device.md), [Resolution/ISO/Aperture](level-02-getting-familiar/camera-device.md)
 
 ### Image Data
 - Color image, Resolution, Grayscale image
-- Thresholding, Gaussian blur
+- [Thresholding](level-01-beginner/thresholding.md), [Gaussian blur](level-01-beginner/gaussian-blur.md)
 - **[Corner detector](level-01-beginner/corner-detector.md)**: Harris corner
 - **[Edge detector](level-01-beginner/edge-detector.md)**: Sobel & Canny Edge
-- Stereo vision, RGB-D, Disparity, Depth
+- [Stereo vision](level-01-beginner/stereo-vision.md), [RGB-D](level-04-rgbd-slam/depth-from-sensor.md), [Disparity](level-07-stereo-slam/disparity-vs-depth.md), [Depth](level-07-stereo-slam/disparity-vs-depth.md)
 
 ---
 
@@ -108,36 +108,36 @@ I made this roadmap to share my thoughts and experience on studying Visual-SLAM,
 
 ### Image Processing
 - **[Keypoints](level-02-getting-familiar/keypoints.md)** → Detector/Descriptor
-  - SIFT, FAST, ORB, AKAZE
-  - Deep features: R2D2, SuperPoint
-- Image pyramid, oFAST, rBRIEF
+  - [SIFT](level-02-getting-familiar/sift.md), [FAST](level-02-getting-familiar/fast.md), [ORB](level-02-getting-familiar/orb.md), [AKAZE](level-02-getting-familiar/akaze.md)
+  - Deep features: [R2D2](level-05-deep-learning/r2d2.md), [SuperPoint](level-05-deep-learning/superpoint.md)
+- [Image pyramid](level-02-getting-familiar/image-pyramid.md), [oFAST](level-02-getting-familiar/orb.md), [rBRIEF](level-02-getting-familiar/orb.md)
 
 ### Local Feature Matching
-- Brute-Force, FLANN, Kd-Tree
-- LSH, Multi-probe LSH, HBST
-- SuperGlue
+- [Brute-Force](level-02-getting-familiar/brute-force-matching.md), [FLANN](level-02-getting-familiar/flann.md), [Kd-Tree](level-02-getting-familiar/kd-tree.md)
+- [LSH](level-02-getting-familiar/lsh.md), [Multi-probe LSH](level-02-getting-familiar/lsh.md), [HBST](level-02-getting-familiar/hbst.md)
+- [SuperGlue](level-05-deep-learning/superglue.md)
 
 ### Global Feature Matching
-- Bag of Visual Words, NetVLAD
-- Deep image retrieval, Hierarchical localization
+- [Bag of Visual Words](level-02-getting-familiar/bag-of-visual-words.md), [NetVLAD](level-05-deep-learning/netvlad.md)
+- [Deep image retrieval](level-02-getting-familiar/deep-image-retrieval.md), [Hierarchical localization](level-05-deep-learning/hloc.md)
 
 ### Feature Tracking
-- Optical flow, KLT Tracker
+- [Optical flow](level-02-getting-familiar/optical-flow.md), [KLT Tracker](level-02-getting-familiar/klt-tracker.md)
 
 ### Multiple View Geometry
-- **[2D-2D correspondence](level-02-getting-familiar/2d-2d-correspondence.md)**: Essential/Fundamental, Homography
-- **[2D-3D correspondence](level-02-getting-familiar/2d-3d-correspondence.md)**: P3P, PnP, SVD
-- **[3D-3D correspondence](level-02-getting-familiar/3d-3d-correspondence.md)**: ICP
+- **[2D-2D correspondence](level-02-getting-familiar/2d-2d-correspondence.md)**: [Essential/Fundamental](level-01-beginner/epipolar-geometry.md), [Homography](level-01-beginner/epipolar-geometry.md)
+- **[2D-3D correspondence](level-02-getting-familiar/2d-3d-correspondence.md)**: [P3P](level-02-getting-familiar/pnp.md), [PnP](level-02-getting-familiar/pnp.md), [SVD](level-01-beginner/svd.md)
+- **[3D-3D correspondence](level-02-getting-familiar/3d-3d-correspondence.md)**: [ICP](level-04-rgbd-slam/icp.md)
 
 ### Outlier Rejection
-- RANSAC, PROSAC, M-Estimator, MAXCON, Convex relaxation
+- [RANSAC](level-02-getting-familiar/ransac.md), [PROSAC](level-02-getting-familiar/prosac.md), [M-Estimator](level-02-getting-familiar/m-estimator.md), [MAXCON](level-02-getting-familiar/maxcon.md), [Convex relaxation](level-02-getting-familiar/convex-relaxation.md)
 - **[Robust pose-graph optimization](level-02-getting-familiar/robust-pose-graph-optimization.md)**: Switchable constraints, Dynamic covariance scaling (DCS), Pairwise consistency maximization (PCM)
 
 ### Least Squares Optimization
-- Reprojection error, Bundle adjustment
-- Non-linear optimization, Lie algebra
+- [Reprojection error](level-02-getting-familiar/reprojection-error.md), [Bundle adjustment](level-02-getting-familiar/bundle-adjustment.md)
+- [Non-linear optimization](level-02-getting-familiar/non-linear-optimization.md), [Lie algebra](level-02-getting-familiar/lie-groups.md)
 - **[Lie groups](level-02-getting-familiar/lie-groups.md)**: SO(3), SE(3)
-- Gauss-Newton, Levenberg-Marquardt
+- [Gauss-Newton](level-02-getting-familiar/gauss-newton.md), [Levenberg-Marquardt](level-02-getting-familiar/levenberg-marquardt.md)
 - **[Pose graph optimization](level-02-getting-familiar/pose-graph-optimization.md)**
 - **[Schur complement / Sparsity](level-02-getting-familiar/schur-complement-sparsity.md)**
 
@@ -148,7 +148,7 @@ I made this roadmap to share my thoughts and experience on studying Visual-SLAM,
 ### Observation Model
 - **[Exteroceptive sensor](level-02-getting-familiar/exteroceptive-sensor.md)**: Camera, LiDAR
 - **[Landmark](level-02-getting-familiar/landmark.md)** (Map)
-- Joint optimization, MLE & MAP
+- [Joint optimization](level-02-getting-familiar/map-inference-as-sparse-nonlinear-least-squares.md), [MLE & MAP](level-02-getting-familiar/mle-and-map.md)
 
 ### Factor Graph Optimization
 - **[Factor graph](level-02-getting-familiar/factor-graph.md)**: SLAM as a bipartite graph of variables (poses, landmarks) and factors (measurements)
@@ -158,13 +158,13 @@ I made this roadmap to share my thoughts and experience on studying Visual-SLAM,
 - Reference: [Dellaert & Kaess, *Factor Graphs for Robot Perception* (2017)](https://www.cs.cmu.edu/~kaess/pub/Dellaert17fnt.pdf); GTSAM tutorials
 
 ### Mapping
-- Point cloud, Occupancy grid mapping, TSDF, Surfel, Voxel map
+- [Point cloud](level-02-getting-familiar/point-cloud.md), [Occupancy grid mapping](level-02-getting-familiar/occupancy-grid-mapping.md), [TSDF](level-04-rgbd-slam/tsdf-vs-surfel-maps.md), [Surfel](level-04-rgbd-slam/tsdf-vs-surfel-maps.md), [Voxel map](level-02-getting-familiar/voxel-map.md)
 
 ### Sensors
-- **[Camera device](level-02-getting-familiar/camera-device.md)**: Wide/telecentric lens, Lens MTF, CCD/CMOS, Rolling/Global shutter, Exposure/ISO, Stereo vision, RGB-D, Structured light, Active IR/ToF
-- **[LiDAR](level-02-getting-familiar/lidar.md)** → Visual-LiDAR fusion
+- **[Camera device](level-02-getting-familiar/camera-device.md)**: Wide/telecentric lens, Lens MTF, CCD/CMOS, Rolling/Global shutter, Exposure/ISO, [Stereo vision](level-01-beginner/stereo-vision.md), [RGB-D](level-04-rgbd-slam/depth-from-sensor.md), [Structured light](level-04-rgbd-slam/depth-from-sensor.md), [Active IR/ToF](level-04-rgbd-slam/depth-from-sensor.md)
+- **[LiDAR](level-02-getting-familiar/lidar.md)** → [Visual-LiDAR fusion](level-09-lidar-visual-lidar-slam/lidar-visual-inertial-lvi.md)
 - **[IMU](level-02-getting-familiar/imu.md)** → VIO
-- **[RADAR](level-02-getting-familiar/radar.md)** → Sensor fusion, Extended Kalman filter
+- **[RADAR](level-02-getting-familiar/radar.md)** → [Sensor](level-02-getting-familiar/camera-device.md) fusion, [Extended Kalman filter](level-02-getting-familiar/extended-kalman-filter.md)
 - **[Sonar](level-02-getting-familiar/sonar.md)**
 - **[Multi-sensor calibration](level-02-getting-familiar/multi-sensor-calibration.md)**: Camera-IMU, Camera-LiDAR ([Kalibr](https://github.com/ethz-asl/kalibr))
 
@@ -173,9 +173,6 @@ I made this roadmap to share my thoughts and experience on studying Visual-SLAM,
 - **[Consistency](level-02-getting-familiar/consistency.md)**: NEES (Normalized Estimation Error Squared)
 - **Datasets**: [KITTI](https://www.cvlibs.net/datasets/kitti/), [TUM RGB-D](https://cvg.cit.tum.de/data/datasets/rgbd-dataset), [EuRoC](https://projects.asl.ethz.ch/datasets/euroc-mav/), [TartanAir](https://arxiv.org/abs/2003.14338), [TUM-VI](https://arxiv.org/abs/1804.06120), [4Seasons](https://arxiv.org/abs/2009.06364), [Hilti SLAM Challenge](https://hilti-challenge.com/), [Newer College](https://arxiv.org/abs/2003.05691), [Project Aria](https://www.projectaria.com/)
 - **Tools**: [evo](https://github.com/MichaelGrupp/evo) (trajectory evaluation)
-
-### Next Levels
-[Monocular SLAM](#level-3-monocular-visual-slam) · [RGB-D SLAM](#level-4-rgb-d-visual-slam) · [Deep Learning + SLAM](#level-5-applying-deep-learning) · [VIO / VINS](#level-6-vio--vins) · [Stereo SLAM](#level-7-stereo-slam) · [Collaborative SLAM](#level-8-collaborative--multi-robot-slam) · [LiDAR & Visual-LiDAR Fusion](#level-9-lidar--visual-lidar-fusion-slam) · [Event Camera SLAM](#level-10-event-camera-slam) · [World Models & Spatial AI](#level-11-world-models--spatial-ai)
 
 ---
 
@@ -326,7 +323,7 @@ I made this roadmap to share my thoughts and experience on studying Visual-SLAM,
 
 ### Key Concepts
 - **[Depth from sensor](level-04-rgbd-slam/depth-from-sensor.md)** — Structured light vs Active IR (ToF); metric scale for free, but range/material limitations
-- **[Frame-to-model tracking](level-04-rgbd-slam/frame-to-model-tracking.md)** — Aligning each frame against the accumulated model (ICP) instead of frame-to-frame
+- **[Frame-to-model tracking](level-04-rgbd-slam/frame-to-model-tracking.md)** — Aligning each frame against the accumulated model ([ICP](level-04-rgbd-slam/icp.md)) instead of frame-to-frame
 - **[TSDF vs Surfel maps](level-04-rgbd-slam/tsdf-vs-surfel-maps.md)** — Volumetric signed-distance fusion (KinectFusion) vs point-based surfel fusion (ElasticFusion)
 
 ### RGB-D Camera Devices
@@ -336,7 +333,7 @@ I made this roadmap to share my thoughts and experience on studying Visual-SLAM,
 - Legacy (discontinued): Microsoft Kinect v1/v2, Azure Kinect DK, Occipital Structure Core
 
 ### GPGPU Programming
-- CUDA, OpenGL GLSL
+- [CUDA, OpenGL GLSL](level-04-rgbd-slam/gpgpu-programming.md)
 
 ### Systems
 

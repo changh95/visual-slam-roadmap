@@ -6,23 +6,32 @@
 
 ## Problem
 
-Classical detectors such as Faster R-CNN and YOLO are not truly end-to-end: they depend on hand-designed components — anchor generation, non-maximum suppression (NMS), multi-stage proposal pipelines — that explicitly encode prior knowledge about the detection task and each need tuning. These components exist because the networks produce many redundant candidate boxes that must be deduplicated after the fact. DETR asks whether detection can instead be cast as a clean *set prediction* problem: an image goes in, and a set of (box, class) pairs comes out of one network trained with one loss, with duplicates suppressed by the training objective itself rather than by post-processing.
+Classical detectors such as Faster R-CNN and YOLO are not truly end-to-end: they depend on hand-designed components — anchor generation, non-maximum suppression (NMS), multi-stage proposal pipelines — that explicitly encode prior knowledge about the detection task and each need tuning. These exist because the networks produce many near-duplicate candidate boxes that must be deduplicated after the fact. DETR asks whether detection can be cast as a clean *set prediction* problem: an image in, a set of (box, class) pairs out of one network trained with one loss, with duplicates suppressed by the training objective itself rather than by post-processing.
 
-## Key ideas
+## Method & architecture
 
-- **Detection as set prediction**: instead of classifying dense anchor boxes, DETR predicts a fixed-size set of detections in parallel and trains with a set-based global loss — a fundamentally cleaner formulation than Faster R-CNN or YOLO.
-- **CNN + Transformer encoder**: a ResNet backbone extracts image features, then a Transformer encoder applies global self-attention over all spatial positions, letting every location reason about the whole image context.
-- **Object queries**: a fixed small set of $N$ learned query embeddings ($N = 100$ in the paper) attend to the encoder output via cross-attention in the decoder, each producing one detection candidate (box + class) — all in parallel, not autoregressively.
-- **Hungarian matching loss**: a unique one-to-one assignment between predictions and ground truth, $\hat{\sigma} = \arg\min_\sigma \sum_i \mathcal{L}_{\text{match}}(y_i, \hat{y}_{\sigma(i)})$, forces unique predictions — duplicate detections become costly during training, so no NMS post-processing is needed.
-- **Set prediction loss**: for matched pairs, the loss combines class cross-entropy with an $\ell_1$ + generalized IoU box regression term; unmatched queries must predict a special "no object" class.
-- **Anchor-free**: no anchor boxes, aspect-ratio priors, or scale heuristics to tune, and no specialized library required — the model is conceptually simple.
-- **Generalizes beyond boxes**: adding a mask head yields unified panoptic segmentation, where DETR significantly outperforms competitive baselines.
+Three components in sequence: a **CNN backbone** (ResNet-50/101) extracts a feature map, which is flattened and supplemented with fixed positional encodings; a **Transformer encoder** (6 layers, width 256, 8 heads in the base model) applies global self-attention over all spatial positions; a **Transformer decoder** transforms $N$ learned embeddings — *object queries* — via self-attention and encoder-decoder cross-attention, decoding all $N$ objects **in parallel** (not autoregressively); finally a shared **feed-forward network** maps each output embedding to normalized box coordinates $b \in [0,1]^4$ and a class label, including a special "no object" class $\varnothing$. $N$ is fixed and much larger than the typical object count. Auxiliary Hungarian losses after every decoder layer help training.
 
-## Results & impact
+**Bipartite matching.** Training first finds the lowest-cost one-to-one assignment between the $N$ predictions and the padded ground-truth set:
 
-- On COCO, DETR reaches 42.0 AP — accuracy and run-time performance on par with the well-established, highly optimized Faster R-CNN baseline — with a far simpler architecture.
-- Its main weakness at release was slow training convergence (500 epochs on COCO) and comparatively weaker small-object detection; follow-ups (Deformable DETR, DINO, RT-DETR) fixed both.
-- The bipartite-matching set loss became a standard tool for any set-to-set prediction task (keypoints, segments, tracked objects), and Transformer-based detectors now dominate the field.
+$$\hat{\sigma} = \arg\min_{\sigma \in \mathfrak{S}_N} \sum_{i}^{N} \mathcal{L}_{\text{match}}\big(y_i, \hat{y}_{\sigma(i)}\big),$$
+
+computed with the Hungarian algorithm, where for $y_i = (c_i, b_i)$ the matching cost is $-\mathbf{1}_{\{c_i \neq \varnothing\}}\, \hat{p}_{\sigma(i)}(c_i) + \mathbf{1}_{\{c_i \neq \varnothing\}}\, \mathcal{L}_{\text{box}}\big(b_i, \hat{b}_{\sigma(i)}\big)$.
+
+**Hungarian loss.** Given the optimal assignment, the loss is a negative log-likelihood for class prediction plus a box loss over matched pairs:
+
+$$\mathcal{L}_{\text{Hungarian}}(y, \hat{y}) = \sum_{i=1}^{N} \Big[ -\log \hat{p}_{\hat{\sigma}(i)}(c_i) + \mathbf{1}_{\{c_i \neq \varnothing\}}\, \mathcal{L}_{\text{box}}\big(b_i, \hat{b}_{\hat{\sigma}(i)}\big) \Big],$$
+
+with the log-probability of $\varnothing$ down-weighted by a factor 10 for class imbalance. Because boxes are predicted directly (not as deltas w.r.t. anchors), a pure $\ell_1$ loss would scale badly, so the box loss mixes $\ell_1$ with the scale-invariant generalized IoU: $\mathcal{L}_{\text{box}} = \lambda_{\text{iou}}\, \mathcal{L}_{\text{iou}}\big(b_i, \hat{b}_{\sigma(i)}\big) + \lambda_{\text{L1}}\, \lVert b_i - \hat{b}_{\sigma(i)} \rVert_1$. The one-to-one matching makes duplicate predictions costly during training — so no NMS is needed at inference.
+
+**Panoptic extension.** Adding a mask head on the decoder outputs, with a pixel-wise argmax over mask scores, yields unified panoptic segmentation of "things" and "stuff" with no overlap heuristics.
+
+## Results
+
+- On COCO val, DETR (ResNet-50, 41M params, 86 GFLOPS, 28 FPS) reaches **42.0 AP**, matching the heavily tuned Faster R-CNN-FPN+ baseline (42.0 AP, 42M params) — achieved by much better large-object detection ($\text{AP}_L$ 61.1 vs 53.4) while lagging on small objects ($\text{AP}_S$ 20.5 vs 26.6). DETR-DC5-R101 reaches 44.9 AP.
+- Training needed 500 epochs (lr drop at 400); the long schedule adds 1.5 AP over the short one. Ablations: removing the encoder costs 3.9 AP overall and 6.0 AP on large objects — global self-attention is doing real work.
+- Panoptic segmentation: DETR-R101 obtains **45.1 PQ** on COCO val vs 44.1 for a PanopticFPN++ baseline retrained with the same augmentation, dominating especially on stuff classes ($\text{PQ}^{\text{st}}$ 37.0 vs 33.6), and 46 PQ on COCO test.
+- Its main weaknesses at release — slow convergence and small-object AP — were fixed by follow-ups (Deformable DETR, DINO, RT-DETR), and the bipartite-matching set loss became a standard tool for any set-to-set prediction task.
 
 ## Why it matters for SLAM
 
@@ -34,5 +43,3 @@ DETR started the Transformer takeover of object detection, and its descendants (
 - [Grounding DINO](grounding-dino.md) — open-vocabulary, text-prompted DETR descendant
 - [YOLO](yolo.md) — the classical real-time detector family DETR contrasts with
 - [SAM](sam.md) — promptable segmentation often paired with DETR-style detectors
-
-[Back to Level 5](../README.md#level-5-applying-deep-learning)

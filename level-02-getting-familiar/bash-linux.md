@@ -69,5 +69,3 @@ The daily loop of a SLAM engineer — build with CMake, deploy to a robot over S
 - [Docker](docker.md)
 - [ROS/ROS2](ros-ros2.md)
 - [CI/CD](ci-cd.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

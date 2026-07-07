@@ -47,5 +47,3 @@ Map merging is where collaboration actually pays off: it converts $N$ partial, d
 - [Pose graph optimization](../level-02-getting-familiar/pose-graph-optimization.md)
 - [ORB-SLAM3](../level-03-monocular-slam/orb-slam3.md)
 - [3D-3D correspondence](../level-02-getting-familiar/3d-3d-correspondence.md)
-
-[Back to Level 8](../README.md#level-8-collaborative--multi-robot-slam)

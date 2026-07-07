@@ -78,5 +78,3 @@ Every optimization-based SLAM component — bundle adjustment, pose graph optimi
 - [Pose graph optimization](pose-graph-optimization.md)
 - [Quaternion kinematics for error-state KF](../level-06-vio-vins/quaternion-kinematics-for-error-state-kf.md)
 - [Lietorch](../level-05-deep-learning/lietorch.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

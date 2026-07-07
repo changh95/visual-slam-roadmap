@@ -41,5 +41,3 @@ VPR is what upgrades visual odometry into full SLAM: without recognising previou
 - [HF-Net](../level-05-deep-learning/hf-net.md)
 - [ORB-SLAM](orb-slam.md)
 - [VO vs SLAM](vo-vs-slam.md)
-
-[Back to Level 3](../README.md#level-3-monocular-visual-slam)

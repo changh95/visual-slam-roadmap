@@ -64,5 +64,3 @@ Modern SLAM research lives at the intersection of geometry and learning, and the
 - [C++/Python interop](cpp-python-interop.md)
 - [OpenCV](opencv.md)
 - [Bash/Linux](bash-linux.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

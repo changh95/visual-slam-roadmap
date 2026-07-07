@@ -2,27 +2,41 @@
 
 > Laidlow 2019 · [Paper](https://arxiv.org/abs/2207.12244)
 
-**One-line summary** — A dense monocular reconstruction system that probabilistically fuses semi-dense multi-view-stereo depth from a SLAM system with CNN-predicted depth and depth gradients, weighted by learned uncertainties.
+**One-line summary** — A dense monocular reconstruction system that probabilistically fuses semi-dense multi-view-stereo depth from a SLAM system with CNN-predicted log-depth and log-depth gradients, weighted by learned uncertainties.
 
 ## Problem
 
-Keypoint-based monocular SLAM maps are good for camera tracking but too sparse for many robotic tasks; depth cameras solve density but are "limited in range and to indoor spaces"; and dense reconstruction by minimising photometric error between frames is "typically poorly constrained and suffer[s] from scale ambiguity." DeepFusion targets this gap: a real-time, GPU-based system producing fully dense, metric-scale keyframe depth maps from a single moving camera, by treating CNN predictions as one more (uncertain) measurement source.
+Keypoint-based monocular SLAM maps are good for camera tracking but too sparse for many robotic tasks; depth cameras are "limited in range and to indoor spaces"; and dense reconstruction by minimising photometric error between frames is "typically poorly constrained and suffer[s] from scale ambiguity." DeepFusion targets this gap: a real-time GPU system producing fully dense, metric-scale keyframe depth maps from RGB images and the scale-ambiguous poses of a monocular SLAM system, by treating CNN predictions as one more (uncertain) measurement source.
 
-## Key ideas
+## Method & architecture
 
-- **Semi-dense geometry + dense priors**: a semi-dense multi-view stereo algorithm attached to a monocular SLAM pipeline yields accurate depth only at high-gradient pixels; a CNN predicts dense depth (with metric scale) for every pixel. Fusion produces dense maps that respect multi-view geometry where it is available.
-- **Depth gradients, not just depth**: in addition to absolute depth, the network predicts depth *gradients*, which constrain local surface shape and let sparse geometric measurements propagate across textureless regions instead of being trusted only pointwise.
-- **Probabilistic fusion with learned uncertainties**: the network outputs uncertainty estimates alongside its predictions, and fusion is an optimisation "in a probabilistic fashion, using learned uncertainties produced by the network" — each measurement is weighted by its confidence rather than either source being trusted blindly.
-- **Amortised network cost, continuous refinement**: "the network only needs to be run once per keyframe," yet the keyframe depth map is re-optimised "with each new frame so as to constantly make use of new geometric constraints" — cheap inference, continually improving geometry.
-- **Complementary failure modes**: photometric multi-view stereo fails in low-texture areas exactly where a learned single-view prior is most informative, mirroring CNN-SLAM's motivation but with a more explicitly probabilistic formulation.
+DeepFusion represents geometry as a series of keyframe depth maps. Each new frame gets a pose from ORB-SLAM2; a semi-dense multi-view stereo module then updates depth for high-texture pixels of the active keyframe by epipolar-line search minimising the SSD photometric error over five points, with per-pixel uncertainty $\sigma_i^2=(\mathbf{J}^T\mathbf{J})^{-1}$ from a finite-difference Jacobian. A new keyframe is created when the camera translates more than $\lambda_{trans}$ or the semi-dense estimation has fewer than $\lambda_{inliers}$ inliers.
 
-## Results & impact
+Once per keyframe, a U-Net-style CNN (shared encoder, four decoders, 256×192 resolution, trained on SceneNet RGB-D) predicts log-depth, log-depth gradients in x and y, and an uncertainty for each, using the maximum-likelihood loss
 
-From the abstract: based on its performance on synthetic and real-world datasets, DeepFusion "is capable of performing at least as well as other comparable systems" while producing real-time dense reconstructions on a GPU. Its influence is less about benchmark wins and more about the formulation: depth, depth gradients, and multi-view stereo all become noisy measurements with uncertainties in a single probabilistic estimation problem — a template that later learned-plus-geometric dense SLAM systems adopted.
+$$\mathcal{L}_{\mathrm{NN}}(\theta)=\sum_{i}\frac{(y_{i}-f_{\theta,i}(\mathbf{x}))^{2}}{\sigma_{\theta,i}(\mathbf{x})^{2}}+\log(\sigma_{\theta,i}(\mathbf{x})^{2}),$$
+
+where $f_{\theta,i}$ and $\sigma_{\theta,i}^2$ are the predicted mean and variance for pixel $i$. Log-depth is used because the difference of two log-depths is a depth ratio, which is scale-invariant; predictions are normalised by focal length in training and rescaled by the test camera's focal length.
+
+With every new frame, the keyframe's dense log-depth map $\mathbf{d}$ and a scale-correction factor $s$ are re-optimised by minimising
+
+$$c(\mathbf{d},s)=c_{\mathrm{semi}}(\mathbf{d},s)+c_{\mathrm{net}}(\mathbf{d})+c_{\mathrm{grad}}(\mathbf{d}),$$
+
+three uncertainty-weighted quadratic terms (each robustified with a Huber loss):
+
+- **Semi-dense (unary, scale-ambiguous):** $r_{\mathrm{semi},i}=\ln\mathbf{d}_{i}-\ln s-\ln\mathbf{d}_{\mathrm{semi},i}$, weighted by $\sigma_i^{2}$ from the stereo search.
+- **Network depth (unary, metric):** $r_{\mathrm{net},i}=\ln\mathbf{d}_{i}-\ln\mathbf{d}_{\mathrm{net},i}$, weighted by the predicted depth variance — a weak prior on absolute scale that makes $s$ observable.
+- **Network gradient (pairwise):** $r_{\mathrm{grad,x},i}=\ln\mathbf{d}_{i+1}-\ln\mathbf{d}_{i}-\mathbf{g}_{\mathrm{x},i}$ and $r_{\mathrm{grad,y},i}=\ln\mathbf{d}_{i+W}-\ln\mathbf{d}_{i}-\mathbf{g}_{\mathrm{y},i}$ ($W$ = image width), linking neighbouring pixels so sparse geometric measurements propagate across textureless regions and the map stays globally consistent.
+
+The system runs 10 Gauss-Newton iterations per frame (alternating depth and scale) as GPU kernels compiled by the Opt framework, so the expensive network pass is amortised once per keyframe while geometry is refined continuously.
+
+## Results
+
+Following CNN-SLAM's protocol — percentage of estimated depths within 10% of ground truth on ICL-NUIM (synthetic) and TUM RGB-D (real) — DeepFusion averages 22.466 vs CNN-SLAM's 22.464, LSD-SLAM (bootstrapped) 3.032, REMODE 7.649, Laina et al. 18.452, and ORB-SLAM 0.029. It is best on four of six ICL-NUIM sequences (e.g. office1: 37.420 vs CNN-SLAM 29.150), while CNN-SLAM wins two of three TUM sequences — attributed to training data: DeepFusion's SceneNet (synthetic) vs CNN-SLAM's Kinect-captured NYUv2. Ablations show the full formulation beats least-squares scale alignment on seven of nine sequences, and pairwise gradient constraints help on seven of nine. Timing (i7-5820K + GTX 980): semi-dense update 16 ms, optimisation 33 ms, network 45 ms mean — real-time with per-keyframe inference.
 
 ## Why it matters for SLAM
 
-DeepFusion sits in the lineage of systems that make monocular dense reconstruction practical by combining classical multi-view geometry with learned single-image cues (CNN-SLAM, DVSO, D3VO). Its emphasis on uncertainty-aware fusion — treating network outputs as noisy measurements with confidences rather than ground truth — became a recurring design principle in later learned-plus-geometric SLAM systems.
+DeepFusion sits in the lineage of systems that make monocular dense reconstruction practical by combining classical multi-view geometry with learned single-image cues (CNN-SLAM, DVSO, D3VO). Its emphasis on uncertainty-aware fusion — treating network depth *and* depth-gradient outputs as noisy measurements with learned confidences inside one probabilistic optimisation, rather than as ground truth — became a recurring design principle in later learned-plus-geometric dense SLAM systems.
 
 ## Related
 
@@ -31,5 +45,3 @@ DeepFusion sits in the lineage of systems that make monocular dense reconstructi
 - [DVSO](dvso.md)
 - [D3VO](d3vo.md)
 - [CodeSLAM](../level-05-deep-learning/codeslam.md)
-
-[Back to Level 3](../README.md#level-3-monocular-visual-slam)

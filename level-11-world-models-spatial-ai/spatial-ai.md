@@ -55,5 +55,3 @@ Spatial AI is the "why" behind most of the modern roadmap: it explains the field
 - [World model](world-model.md)
 - [VLM vs VLA](vlm-vs-vla.md)
 - [CLIP](clip.md)
-
-[Back to Level 11](../README.md#level-11-world-models--spatial-ai)

@@ -2,26 +2,33 @@
 
 > Zhai (Google) 2023 · [Paper](https://arxiv.org/abs/2303.15343)
 
-**One-line summary** — SigLIP replaces CLIP's softmax contrastive loss with a simple pairwise sigmoid loss, decoupling training from batch-level normalization so language-image pretraining scales to huge batches, works better at small batches, and trains efficiently on modest hardware.
+**One-line summary** — SigLIP replaces CLIP's softmax contrastive loss with a simple pairwise sigmoid loss that needs no global view of the batch, so language-image pretraining scales to huge batches, works better at small batches, and reaches 84.5% zero-shot ImageNet on just four TPUv4 chips.
 
 ## Problem
 
-Standard contrastive language-image pretraining (CLIP) uses a softmax cross-entropy loss whose normalization requires a *global view* of all pairwise similarities in the batch. This couples loss quality to batch size in both directions: large batches demand expensive all-to-all communication across accelerators, while small batches starve the softmax of negatives and degrade quality — putting CLIP-grade pretraining out of reach for labs without datacenter-scale clusters. SigLIP asks whether the global normalization is necessary at all.
+Standard contrastive language-image pretraining (CLIP/ALIGN) normalizes similarity scores with a batch-level softmax, applied twice (across images, then across texts). This requires a global view of all pairwise similarities: expensive all-gathers, materialization of a $|\mathcal{B}| \times |\mathcal{B}|$ similarity matrix, and an extra stabilization pass (max-subtraction) over the batch — coupling loss quality to batch size and putting CLIP-grade pretraining out of reach without datacenter-scale clusters. SigLIP asks whether the global normalization is necessary at all.
 
-## Key ideas
+## Method & architecture
 
-- **Pairwise sigmoid loss**: every image-text pair $(i,j)$ in a batch of $N$ is treated as an independent binary classification — matched ($y_{ij}=1$ when $i=j$) or not:
-  $$\mathcal{L} = -\frac{1}{N}\sum_{i=1}^{N}\sum_{j=1}^{N}\Big[y_{ij}\log\sigma\big(\tfrac{z_{ij}}{\tau}+b\big) + (1-y_{ij})\log\big(1-\sigma\big(\tfrac{z_{ij}}{\tau}+b\big)\big)\Big]$$
-  where $z_{ij}$ is the embedding similarity, $\tau$ a learned temperature, and $b$ a learned bias. The loss operates solely on image-text pairs and needs no normalization over the rest of the batch.
-- **No global view needed**: because each pair is scored independently, no all-to-all similarity matrix normalization is required — removing a major distributed-training bottleneck and *disentangling batch size from the loss*.
-- **Bias initialization**: with $N^2 - N$ negatives against $N$ positives, an untamed sigmoid loss is initially dominated by negative gradients; initializing $b$ to a suitably negative value encodes the prior that a random pair is almost surely unmatched, stabilizing early training.
-- **Batch-size science**: the disentanglement lets the authors study examples-vs-pairs trade-offs and the negative-to-positive ratio directly. Pushing batch size to the extreme — up to one million — they find benefits quickly diminish, with a more reasonable batch size of 32k being sufficient.
-- **Efficiency headline**: combined with Locked-image Tuning, a SigLiT model reaches 84.5% ImageNet zero-shot accuracy trained in two days on only four TPUv4 chips.
-- **Drop-in objective**: architectures are unchanged from CLIP (ViT image encoder + Transformer text encoder); SigLIP is purely a better training objective, and the models were publicly released.
+**Softmax baseline (what is being replaced).** With normalized embeddings $x_i = f(I_i)/\|f(I_i)\|_2$, $y_i = g(T_i)/\|g(T_i)\|_2$ and learned temperature $t$, CLIP minimizes
+$$-\frac{1}{2|\mathcal{B}|} \sum_{i=1}^{|\mathcal{B}|} \left( \log \frac{e^{t\, x_i \cdot y_i}}{\sum_{j} e^{t\, x_i \cdot y_j}} + \log \frac{e^{t\, x_i \cdot y_i}}{\sum_{j} e^{t\, x_j \cdot y_i}} \right).$$
 
-## Results & impact
+**Sigmoid loss.** SigLIP treats every image-text pair independently as binary classification — matched or not — over all $|\mathcal{B}|^2$ combinations:
+$$\mathcal{L} = -\frac{1}{|\mathcal{B}|} \sum_{i=1}^{|\mathcal{B}|} \sum_{j=1}^{|\mathcal{B}|} \log \frac{1}{1 + e^{z_{ij}\,(-t\, x_i \cdot y_j + b)}}$$
+where the label $z_{ij} = 1$ if $(I_i, T_j)$ are paired and $-1$ otherwise, $t = \exp(t')$ is a learned temperature, and $b$ is a learned bias. No normalization over the rest of the batch is needed.
 
-SigLIP simultaneously allows further scaling up of batch size *and* performs better than softmax contrastive training at smaller batch sizes — the 84.5% ImageNet zero-shot SigLiT result on four TPUv4 chips made high-quality language-image pretraining accessible far outside big-lab infrastructure. SigLIP subsequently became the default CLIP replacement across the multimodal stack, serving as the vision encoder (often fused with DINOv2) in OpenVLA and many post-2024 VLMs.
+**Bias initialization.** With $|\mathcal{B}|^2 - |\mathcal{B}|$ negatives against $|\mathcal{B}|$ positives, the untamed loss is initially dominated by negatives, causing massive corrective steps. Initializing $t' = \log 10$ and $b = -10$ starts training near the prior that a random pair is unmatched.
+
+**Chunked distributed implementation.** With data parallelism over $D$ devices and per-device batch $b = |\mathcal{B}|/D$, the loss is computed blockwise: each device scores its local $b \times b$ block, then text representations are permuted across devices so negatives rotate through, summing per-device losses. No all-gather, and only a $b \times b$ matrix is ever materialized — the sigmoid loss is symmetric and needs just a single pass.
+
+**Two recipes.** *SigLIP* trains both towers (ViT image encoder + Transformer text encoder, unchanged from CLIP) on WebLI; *SigLiT* follows Locked-image Tuning, training only the text tower against a frozen pretrained image encoder. The disentanglement of batch size from the loss also enables studying examples-vs-pairs trade-offs and training at extreme batch sizes.
+
+## Results
+
+- **SigLiT** with a frozen public B/8 checkpoint, trained on the LiT dataset with **four TPUv4 chips for one day**, reaches **79.7%** zero-shot ImageNet; with a g/14 checkpoint, **84.5%** in two days.
+- **SigLIP** B/16 on WebLI reaches **71.0%** zero-shot ImageNet with 16 TPUv4 chips in three days; 72.1% at batch 32k in 2 days and 73.4% in 5 days on 32 chips.
+- Sweeping batch size from 512 to **one million**: the sigmoid loss outperforms softmax **by a large margin below 16k batch**; the gap closes as batch grows, and performance saturates for both — a batch size of **32k is sufficient**, a conclusion that also holds for multilingual mSigLIP trained on over 100 languages (evaluated on XM3600 retrieval).
+- The sigmoid loss is more memory-efficient than softmax, which is what unlocks the million-batch experiments and small-chip training; models were publicly released in `big_vision`.
 
 ## Why it matters for SLAM
 
@@ -33,5 +40,3 @@ SigLIP became the default CLIP replacement in the multimodal stack: it is the vi
 - [LLaVA](llava.md)
 - [OpenVLA](openvla.md)
 - [BLIP-2](blip-2.md)
-
-[Back to Level 11](../README.md#level-11-world-models--spatial-ai)

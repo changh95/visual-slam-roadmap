@@ -2,32 +2,38 @@
 
 > Zhi 2019 · [Paper](https://arxiv.org/abs/1903.06482)
 
-**One-line summary** — Extends CodeSLAM by encoding depth *and* semantic segmentation in a single learned latent code, so geometric and semantic evidence constrain each other during SLAM optimization.
+**One-line summary** — Extends CodeSLAM by encoding depth *and* semantic segmentation as compact image-conditioned latent codes, so semantic label fusion becomes multi-view code optimization and geometry, poses and semantics are estimated in one unified optimisation.
 
 ## Problem
 
-Incremental semantic mapping systems must store and update both geometry and semantics, but while geometry estimation had well-developed probabilistic formulations, state-of-the-art systems stored *independent* per-element label estimates (per depth pixel, surfel, or voxel). This discards spatial correlation: fused label maps come out incoherent and noisy, flickering across viewpoints, and semantic evidence cannot inform geometry (or vice versa).
+Incremental semantic mapping systems must store and update both geometry and semantics, but while geometric estimation had well-developed probabilistic formulations, state-of-the-art systems stored *independent* label estimates per surface element (depth pixel, surfel, or voxel). Spatial correlation is discarded, so fused label maps come out incoherent and noisy, and semantic evidence cannot inform motion or geometry estimation. Object-graph approaches (SLAM++-style) have the desired token-like character but only cover discrete known objects. SceneCode asks whether semantics can live in a learned compact code — like CodeSLAM's depth codes — making labels an optimizable, spatially coherent map variable.
 
-Meanwhile CodeSLAM had shown depth maps can be compressed into small optimizable codes. SceneCode asks whether semantics can live in the same code, so labels become an optimizable, spatially coherent map variable — exploiting the fact that depth discontinuities and semantic boundaries are strongly correlated.
+## Method & architecture
 
-## Key ideas
+**Multitask CVAE.** A U-shaped network with a shared ResNet-50 encoder and two RefineNet decoders processes the colour image; two VGG-like variational encoders compress depth and one-hot semantic labels into two low-dimensional codes ($\boldsymbol{c}_d$, $\boldsymbol{c}_s$). Each decoder is deliberately **linear in the code**, conditioned nonlinearly on the image:
 
-- **Shared latent code for two modalities**: A variational auto-encoder conditioned on the colour image encodes both depth $D$ and semantics $S$ into one compact code $\mathbf{z}$, decoded as $p_\theta(D, S \mid \mathbf{z}, I) = p_\theta(D \mid \mathbf{z}, I)\, p_\theta(S \mid \mathbf{z}, I)$. The shared bottleneck forces the representation to capture the strong correlation between depth discontinuities and semantic boundaries.
-- **Compact and optimisable by design**: Like CodeSLAM's depth codes, the low-dimensional code makes dense semantics tractable inside a real-time optimizer — a handful of code variables per keyframe instead of per-pixel label distributions.
-- **Semantic label fusion by code optimization**: Instead of fusing per-pixel label histograms, labels from a set of overlapping keyframes are fused by *jointly optimizing the low-dimensional codes* associated with those keyframes — producing consistent fused label maps that preserve spatial correlation.
-- **Cross-modal constraints**: Photometric/geometric observations that update the code also improve the decoded semantics, and semantic observations sharpen depth at object boundaries — each modality supervises the other at optimization time, not just training time.
-- **Joint probabilistic optimization**: Camera poses $\xi$ and per-keyframe codes $\mathbf{z}$ are optimized together over a combined loss, e.g. $\mathcal{L} = \mathcal{L}_{\text{photo}}(\xi, \mathbf{z}) + \lambda_s \mathcal{L}_{\text{semantic}}(\mathbf{z}) + \lambda_p \|\mathbf{z}\|^2$, so motion, geometry, and semantics are estimated in one unified, flexible formulation while the map stays on the learned scene manifold.
-- **Keyframe-based monocular system**: The approach slots into a monocular keyframe SLAM pipeline where a similar code is already used for geometry (the CodeSLAM design), making semantics a first-class state variable rather than a post-processing layer.
+$$D\left(\boldsymbol{c}_{d},I\right)=D_{0}\left(I\right)+J_{d}\left(I\right)\boldsymbol{c}_{d}, \qquad S\left(\boldsymbol{c}_{s},I\right)=S_{0}\left(I\right)+J_{s}\left(I\right)\boldsymbol{c}_{s}$$
 
-## Results & impact
+where $D_0(I), S_0(I)$ are the zero-code (most likely single-view) predictions and $J_{d/s}$ the learned linear influence — linearity lets the code Jacobians be pre-computed once per keyframe. Training combines an $L_1$ proximity loss with predicted per-pixel uncertainty $b_i$, $\sum_{i=1}^{N}\big[\tfrac{|\widetilde{p}_{i}-p_{i}|}{b_{i}}+\log(b_{i})\big]$ (proximity $p=a/(a+d)$, $a=2$ m), multi-class cross-entropy for semantics, KL-annealed variational losses, and adaptive task weighting.
 
-- Demonstrated monocular dense semantic reconstruction where fused label maps are consistent in 3D rather than flickering per frame — spatial correlation preserved through the code.
-- Depth accuracy improves at object boundaries relative to depth-only codes, and semantic quality improves when geometric constraints are active — evidence of genuine cross-modal reinforcement.
-- First joint geometric-semantic latent representation for SLAM; conceptual precursor to semantic neural-field systems (e.g., Semantic-NeRF-style models) where one implicit representation likewise decodes both geometry and semantics.
+**Fusion via multi-view code optimization.** With relative pose $\boldsymbol{T}_{BA}$, dense correspondence $w\left(\boldsymbol{u}_{A},\boldsymbol{c}_{d}^{A},\boldsymbol{T}_{BA}\right)=\pi\left(\boldsymbol{T}_{BA}\,\pi^{-1}\left(\boldsymbol{u}_{A},D_{A}\left[\boldsymbol{u}_{A}\right]\right)\right)$ links overlapping views. Three residuals are minimized: photometric $r_{i}=I_{A}\left[\boldsymbol{u}_{A}\right]-I_{B}\left[w\left(\boldsymbol{u}_{A},\boldsymbol{c}_{d}^{A},\boldsymbol{T}_{BA}\right)\right]$, geometric $r_z$ (depth-consistency of warped points), and the new **semantic consistency residual**
+
+$$r_{s}=DS\left(S_{A}\left[\mathbf{u}_{A}\right],S_{B}\left[w\left(\mathbf{u_{A}},\boldsymbol{c}_{d}^{A},\boldsymbol{T}_{BA}\right)\right]\right)$$
+
+where $DS$ is the Euclidean distance between softmax probabilities — corresponding pixels should have similar categorical distributions regardless of viewpoint. Because $r_s$ is differentiable w.r.t. semantic codes *and* pose *and* depth, semantics can influence motion and structure (walls align with walls, chairs with chairs). A zero-code prior regularizes the weakly anchored semantic term.
+
+**SLAM system.** A keyframe-based monocular pipeline: each keyframe stores $I$, $\boldsymbol{c}_d$, $\boldsymbol{c}_s$; tracking uses photometric residuals only; mapping runs damped Gauss–Newton over an N-frame problem, first optimizing geometry+poses, then semantics, then all jointly.
+
+## Results
+
+- **Datasets**: NYUv2 (795/654 train/test, 13 classes), Stanford 2D-3D-Semantic (66,792/3,704), synthetic SceneNet RGB-D (110,000/3,000 subset); images at 256×192. Reconstruction saturates beyond code size 32, which is used throughout; zero-code predictions are comparable to a discriminative RefineNet on semantics and better on depth.
+- **Label fusion (2,000 SceneNet RGB-D images, perfect data association)**: code-based fusion beats element-wise fusion, most clearly in mIoU — single view 41.71; with 2 views: ours 43.84 vs. multiplication 42.33 and averaging 42.22; 3 views 44.23; 4 views 44.26. Total pixel accuracy rises 75.17 → 75.73 (2 views).
+- **Zero-code prior ablation**: without the prior, 2-view fusion drops to 39.60 mIoU — *below* single-view — showing the learned prior is essential.
+- **System demos**: two-view dense semantic SfM on NYUv2, SceneNet RGB-D and Stanford; the geometry prior makes initialisation robust and even handles pure rotational motion.
 
 ## Why it matters for SLAM
 
-SceneCode was the first joint geometric-semantic latent representation for SLAM, demonstrating that semantics can be an optimizable map variable rather than a post-hoc painting of labels onto geometry. It sits in the Imperial College latent-map lineage (CodeSLAM → SceneCode → DeepFactors/NodeSLAM) and conceptually prefigures semantic neural-field SLAM, where a single implicit representation likewise decodes both geometry and semantics.
+SceneCode was the first joint geometric–semantic latent representation for SLAM, demonstrating that semantics can be an optimizable map variable rather than a post-hoc painting of labels onto geometry — fused labels stay smooth and spatially coherent because pixels are no longer treated as independent. It sits in the Imperial College latent-map lineage (CodeSLAM → SceneCode → DeepFactors/NodeSLAM) and conceptually prefigures semantic neural-field SLAM, where a single implicit representation likewise decodes both geometry and semantics.
 
 ## Related
 
@@ -36,5 +42,3 @@ SceneCode was the first joint geometric-semantic latent representation for SLAM,
 - [NodeSLAM](nodeslam.md) — object-level latent codes
 - [CodeMapping](codemapping.md) — codes for dense mapping alongside sparse SLAM
 - [SemanticFusion](../level-04-rgbd-slam/semanticfusion.md) — earlier per-surfel semantic fusion
-
-[Back to Level 5](../README.md#level-5-applying-deep-learning)

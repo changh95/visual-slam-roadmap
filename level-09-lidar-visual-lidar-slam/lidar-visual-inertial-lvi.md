@@ -57,5 +57,3 @@ Triple fusion is the current best practice for robust outdoor and large-scale SL
 - [Tightly-coupled LiDAR-camera](tightly-coupled-lidar-camera.md) — how the modalities are jointly optimized
 - [IMU preintegration](../level-06-vio-vins/imu-preintegration.md) — how IMU data enters the optimization
 - [Degradation handling](degradation-handling.md) — what enforces the robustness contract
-
-[Back to Level 9](../README.md#level-9-lidar--visual-lidar-fusion-slam)

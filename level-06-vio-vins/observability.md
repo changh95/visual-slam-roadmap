@@ -60,5 +60,3 @@ Observability analysis explains behaviors that otherwise look like bugs: yaw dri
 - [Scale ambiguity](../level-03-monocular-slam/scale-ambiguity.md) — the purely monocular case (7 unobservable DoF).
 - [Consistency](../level-02-getting-familiar/consistency.md) — the estimator property observability analysis protects.
 - [Metrics](../level-02-getting-familiar/metrics.md) — where the 4-DoF alignment convention shows up in evaluation.
-
-[Back to Level 6](../README.md#level-6-vio--vins)

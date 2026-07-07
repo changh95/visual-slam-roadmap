@@ -56,5 +56,3 @@ Differentiability is the bridge between the two halves of Level 5: it lets learn
 - [GradSLAM](gradslam.md)
 - [DISK](disk.md)
 - [DROID-SLAM](../level-03-monocular-slam/droid-slam.md)
-
-[Back to Level 5](../README.md#level-5-applying-deep-learning)

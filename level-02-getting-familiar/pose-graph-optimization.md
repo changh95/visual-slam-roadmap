@@ -54,5 +54,3 @@ PGO is the workhorse of loop closure — the step that turns a drifting odometry
 - [Robust pose-graph optimization](robust-pose-graph-optimization.md)
 - [Lie groups](lie-groups.md)
 - [MAP inference as sparse nonlinear least squares](map-inference-as-sparse-nonlinear-least-squares.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

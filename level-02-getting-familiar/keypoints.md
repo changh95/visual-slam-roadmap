@@ -58,5 +58,3 @@ Feature-based (indirect) SLAM — the dominant paradigm from PTAM through ORB-SL
 - [SuperPoint](../level-05-deep-learning/superpoint.md)
 - [SuperGlue](../level-05-deep-learning/superglue.md)
 - [Learned vs hand-crafted features](../level-05-deep-learning/learned-vs-hand-crafted.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

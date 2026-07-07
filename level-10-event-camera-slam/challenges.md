@@ -47,5 +47,3 @@ Choosing an event camera is a systems decision, not just a sensor swap: the enti
 - [DEVO](devo.md)
 - [Ultimate-SLAM](ultimate-slam.md)
 - [Event-based Vision Survey](event-based-vision-survey.md)
-
-[Back to Level 10](../README.md#level-10-event-camera-slam)

@@ -52,5 +52,3 @@ The covisibility graph is the data structure that lets feature-based SLAM scale:
 - [ORB-SLAM3](orb-slam3.md)
 - [Visual Place Recognition (VPR)](visual-place-recognition-vpr.md)
 - [Pose graph optimization](../level-02-getting-familiar/pose-graph-optimization.md)
-
-[Back to Level 3](../README.md#level-3-monocular-visual-slam)

@@ -2,29 +2,39 @@
 
 > Edstedt 2024 · [Paper](https://arxiv.org/abs/2308.08479)
 
-**One-line summary** — DeDoDe ("Detect, Don't Describe — Describe, Don't Detect") decouples keypoint detection from description, training the detector directly for 3D consistency from SfM tracks and the descriptor separately for matching.
+**One-line summary** — DeDoDe ("Detect, Don't Describe — Describe, Don't Detect") decouples keypoint detection from description, training the detector directly for 3D consistency from large-scale SfM tracks and the descriptor separately for mutual-nearest-neighbour matchability.
 
 ## Problem
 
-The core difficulty in learned keypoint detection is the learning objective: what makes a pixel a "good" keypoint? Previous learning-based methods (SuperPoint, R2D2, DISK) jointly learn descriptors with keypoints and treat detection as binary classification on descriptor mutual nearest neighbours — a proxy task that is "not guaranteed to produce 3D-consistent keypoints" and that ties the keypoints to one specific descriptor, complicating downstream usage. This coupling is also a chicken-and-egg problem: good detection presupposes knowing what is matchable, and good description presupposes knowing what will be detected.
+The core difficulty in learned keypoint detection is the learning objective: what makes a pixel a "good" keypoint? Previous learning-based methods (SuperPoint, DISK, SiLK) jointly learn descriptors with keypoints and treat detection as binary classification on descriptor mutual nearest neighbours — a proxy task that is "not guaranteed to produce 3D-consistent keypoints" and that ties the keypoints to one specific descriptor, complicating downstream usage. DeDoDe instead learns keypoints directly from 3D consistency, and gains compatibility (keypoints usable with arbitrary matchers) and modularity as side effects.
 
-## Key ideas
+## Method & architecture
 
-- **Detect for 3D consistency, directly.** The detector is trained to fire on points that appear in **tracks from large-scale SfM reconstructions** — points empirically proven to correspond to the same 3D point across many views — rather than on texture-salient or descriptor-matchable points.
-- **Semi-supervised expansion.** SfM tracks are overly sparse for a useful detector, so a semi-supervised two-view detection objective expands the supervision to the desired number of detections per image (up to a target budget of $K$ points).
-- **Describe independently.** The descriptor is a *separate* network trained to maximize the mutual-nearest-neighbour matching objective over the detected keypoints — pure discriminativeness, with no detection duties mixed into its loss.
-- **Decoupled inference.** Because detection and description are independent, either component can be swapped or upgraded on its own; the pair plugs into matchers (e.g., LightGlue) and localization stacks (hloc) as a drop-in replacement for joint detector-descriptors.
-- **Principled division of labour.** Each sub-task finally gets its own optimal objective — geometric stability for the detector, matchability for the descriptor — removing the proxy feedback loop that limited joint methods.
+**Detector objective.** A network $f_\theta(x|I)$ outputs a log-density over the image, trained to maximize the likelihood of "good" keypoints:
 
-## Results & impact
+$$\max_{\theta}\sum_{j=1}^{|\mathcal{D}|}\sum_{i=1}^{K^{j}} f_{\theta}(x_i^j|I^j)-\log Z_{\theta}(I^j), \qquad Z_{\theta}(I^j)=\sum_{x^j\in I^j}\exp(f_{\theta}(x^j|I^j)).$$
 
-- The abstract reports "significant gains on multiple geometry benchmarks" over prior joint detector-descriptors such as SuperPoint and DISK — a payoff of 3D-consistent keypoints that stay stable across viewpoint change.
-- A refined follow-up (DeDoDe v2) further improved the detector training; the decoupled design has influenced how the community structures learned feature front-ends.
-- Published at 3DV 2024 with code released; widely used in image-matching pipelines alongside the same group's RoMa dense matcher.
+The "ground truth" is SIFT detections that survived MegaDepth SfM reconstruction as 3D tracks. Since each image sees only a fraction of its tracks, pairs $(I^{\mathcal{A}}, I^{\mathcal{B}})$ are sampled and the union of covisible detections (via MVS depth) is used.
+
+**Smooth two-view prior.** Dirac deltas at track detections are blurred with a Gaussian ($\sigma=0.5$ px) plus a small uniform constant, warped across views with depth, and multiplied: $p^{\mathcal{A}}_{\rm kp}\propto\tilde{p}_{\rm kp}^{\mathcal{A}}\cdot\tilde{p}_{\rm kp}^{\mathcal{B}\to\mathcal{A}}$ — peaking on tracks detected in *both* images.
+
+**Semi-supervised posterior + top-k target.** Because the base detector has insufficient recall, the prior is conditioned on the network's own predictions, $p\propto p_{f_\theta}\cdot p_{\rm kp}$, letting DeDoDe discover keypoints SIFT missed. The target is binarized at the top $k=\text{batchsize}\cdot 1024$ detections (avoiding degenerate solutions), giving $\mathcal{L}_{\rm detection}={\rm CE}(p_{f_\theta}, p_{\text{top-}k})$, plus a coverage regularizer $\mathcal{L}_{\rm coverage}={\rm CE}(\mathcal{N}(0,\sigma^2)*p_{f_\theta},\,\mathcal{N}(0,\sigma^2)*p_{\rm MVS})$ with $\sigma=12.5$ px so detections avoid unmatchable regions (e.g. sky). Inference simply takes the top-$K$ points, with no non-max suppression.
+
+**Descriptor, trained separately.** A second network $\mathbf{g}_\theta$ (no shared weights) maximizes the symmetric log-likelihood $\ell_{g_\theta}=\log p_{g_\theta}(x^{\mathcal{A}}|x^{\mathcal{B}})+\log p_{g_\theta}(x^{\mathcal{B}}|x^{\mathcal{A}})$, where $p_{g_\theta}$ is a softmax over inner products of 256-dim normalized descriptions (temperature $1/20$) — evaluated *at trained DeDoDe keypoints* ($K=5000$ per image), so the intractable normalizer of joint methods disappears.
+
+**Architecture.** Both nets use an ImageNet-pretrained VGG-19 encoder (strides 1–8, channels 64–512) with DKM-style depthwise-convolution refiner decoders that residually refine a dense logit/description grid across scales. **DeDoDe-G** adds frozen DINOv2 features at stride 14 with an extra decoder stage (dim 768). Detector: 100k steps, batch 8, 512×512, ~30 h on one A100; descriptor ~24 h; SotA evaluation at 784×784.
+
+## Results
+
+- **MegaDepth-1500 relative pose (MNN matching)**: DeDoDe-B 49.4 / 65.5 / 77.7 AUC@5°/10°/20° and DeDoDe-G 52.8 / 69.7 / 82.0 — vs DISK 35.0, SiLK 39.9, ALIKED 41.9, SuperPoint 31.7 at AUC@5° (gains of +17.8 over DISK, +12.9 over SiLK, +10.9 over ALIKED); DeDoDe-G matches LoFTR (52.8) with plain nearest-neighbour matching.
+- **IMC2022 (hidden test set, 30k keypoints)**: DeDoDe-B 72.9, DeDoDe-G 75.8 mAA@10 — vs DISK 64.8, SiLK 68.5 (+7.4), competitive with SuperPoint+SuperGlue (72.4).
+- **Detector repeatability (MegaDepth, 10k kpts, 0.1% threshold)**: DeDoDe 40.1 vs DISK* 32.6, ALIKED* 26.4, SiLK 21.2.
+- **Component swaps**: SIFT/DeDoDe-B (41.1 AUC@5°) and DISK/DeDoDe-B (41.5) both beat the original SIFT (36.5) and DISK (35.0) pipelines — but trail full DeDoDe by ~8 points, showing detector and descriptor each contribute.
+- **Ablation**: removing the coverage loss drops repeatability@0.1% from 37.1 to 29.7; supervising directly on the prior (no posterior/top-k) drops it to 34.8.
 
 ## Why it matters for SLAM
 
-Keypoint quality bounds everything downstream in feature-based SLAM: triangulation, BA, relocalization. DeDoDe's insight — supervise detection with 3D consistency rather than descriptor-matching proxies — gives keypoints that survive wide baselines and viewpoint change, which is exactly what long-term SLAM and mapping need. It also exemplifies the modern trend of decomposing the learned front-end into independently optimized, composable pieces.
+Keypoint quality bounds everything downstream in feature-based SLAM: triangulation, BA, relocalization. DeDoDe's insight — supervise detection with 3D consistency rather than descriptor-matching proxies — gives keypoints that survive wide baselines and viewpoint change, which is exactly what long-term SLAM and mapping need. It also exemplifies the modern trend of decomposing the learned front-end into independently optimized, composable pieces that plug into matchers (e.g., LightGlue) and localization stacks.
 
 ## Related
 
@@ -32,6 +42,5 @@ Keypoint quality bounds everything downstream in feature-based SLAM: triangulati
 - [DISK](disk.md)
 - [R2D2](r2d2.md)
 - [LightGlue](lightglue.md)
-- [RoMa](roma.md)
-
-[Back to Level 5](../README.md#level-5-applying-deep-learning)
+- [RoMa](roma.md) — same group; frozen DINOv2 features used in DeDoDe-G
+- [Foundation models](foundation-models.md)

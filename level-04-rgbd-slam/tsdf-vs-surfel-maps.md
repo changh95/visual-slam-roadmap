@@ -56,5 +56,3 @@ The map representation dictates almost everything downstream in a dense SLAM sys
 - [BundleFusion](bundlefusion.md) — TSDF kept consistent via de-/re-integration
 - [BAD SLAM](bad-slam.md) — direct bundle adjustment over a surfel map
 - [Frame-to-model tracking](frame-to-model-tracking.md) — how these maps are used for tracking
-
-[Back to Level 4](../README.md#level-4-rgb-d-visual-slam)

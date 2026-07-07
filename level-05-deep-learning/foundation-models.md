@@ -53,5 +53,3 @@ Foundation models are reshaping what a SLAM front-end is: instead of training ta
 - [RoMa](roma.md)
 - [MASt3R-SLAM](../level-03-monocular-slam/mast3r-slam.md)
 - [ConceptGraphs](conceptgraphs.md)
-
-[Back to Level 5](../README.md#level-5-applying-deep-learning)

@@ -71,5 +71,3 @@ ATE and RPE are the shared currency of the field: every SLAM paper's results tab
 - [VO vs SLAM](../level-03-monocular-slam/vo-vs-slam.md)
 - [Scale ambiguity](../level-03-monocular-slam/scale-ambiguity.md)
 - [RGBD-SLAM-V2 (TUM RGB-D benchmark)](../level-04-rgbd-slam/rgbd-slam-v2.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

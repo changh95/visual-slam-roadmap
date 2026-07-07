@@ -57,5 +57,3 @@ This distinction organises the entire field: nearly every system you will study 
 - [Pose graph optimization](../level-02-getting-familiar/pose-graph-optimization.md)
 - [LDSO](ldso.md)
 - [ORB-SLAM](orb-slam.md)
-
-[Back to Level 3](../README.md#level-3-monocular-visual-slam)

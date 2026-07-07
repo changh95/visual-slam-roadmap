@@ -48,5 +48,3 @@ Landmarks need not be points. Systems have used lines and planes (richer geometr
 - [2D-3D correspondence](2d-3d-correspondence.md)
 - [Factor graph](factor-graph.md)
 - [Odometry](odometry.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

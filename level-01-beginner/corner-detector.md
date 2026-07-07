@@ -71,5 +71,3 @@ Corners are the raw material of feature-based SLAM front-ends: they become the k
 - [Basic Linear Algebra](basic-linear-algebra.md)
 - [Keypoints](../level-02-getting-familiar/keypoints.md)
 - [SuperPoint](../level-05-deep-learning/superpoint.md)
-
-[Back to Level 1](../README.md#level-1-beginner)

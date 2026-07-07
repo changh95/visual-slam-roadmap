@@ -6,26 +6,36 @@
 
 ## Problem
 
-Event cameras' low-latency, asynchronous output is a great fit for state estimation in challenging situations, but although event-based visual odometry had been studied extensively, most of it was monocular — stereo event vision had seen little research. The existing design space had a hole: ESVO offered stereo event odometry without an IMU (limiting robustness to aggressive motion), while Ultimate-SLAM fused events, frames, and IMU but only monocularly (no direct metric depth). A stereo event VIO would combine stereo's instantaneous metric depth, the IMU's dynamic robustness, and events' HDR/no-blur properties in one system.
+Event cameras' low-latency, asynchronous output (and 140 dB dynamic range vs ~60 dB for standard cameras) is a great fit for state estimation in challenging situations, but most event-based VO was monocular — stereo event vision had seen little research. The design space had a hole: ESVO offered stereo event odometry without an IMU, while Ultimate-SLAM fused events, frames, and IMU but only monocularly. Moreover, image-style instantaneous matching cannot be applied directly to two asynchronous event streams — temporal deviations, noise, and differing contrast sensitivities cause false stereo correspondences.
 
-## Key ideas
+## Method & architecture
 
-- **Filling the gap in the design space**: ESVIO combines all the pieces — stereo metric depth, inertial robustness, and events' HDR/no-blur properties — in one tightly-coupled pipeline that leverages the complementary advantages of event streams, standard images, and inertial measurements.
-- **Temporal tracking + instantaneous matching**: the event front-end tracks features *temporally* between consecutive stereo event streams (for motion) and matches events *instantaneously* across the left-right pair (for depth), sidestepping the fact that the two event streams are asynchronous and never fire at the same instants.
-- **IMU-aided motion compensation**: each event is warped to a reference moment using IMU information and the ESVIO back-end's estimates, $\mathbf{x}_k^{\text{ref}} = \pi\!\left(\mathbf{T}(t_{\text{ref}}, t_k)\, \pi^{-1}(\mathbf{x}_k, d_k)\right)$, sharpening the accumulated scene edges. Better event representations improve the state estimate, which in turn improves the compensation — a closed loop between front-end and back-end.
-- **Two variants**: ESIO (purely event-inertial) and ESVIO (event with image-aided), which isolates how much the standard images contribute on top of events and IMU.
-- **Aimed at deployment**: the pipeline is designed as a real-time, accurate system for robust state estimation under challenging environments, not just a benchmark exercise.
+The pipeline has two variants: **ESIO** (purely event-inertial) and **ESVIO** (event + image-aided). Three front-end/back-end stages interact in a closed loop:
 
-## Results & impact
+1. **IMU-aided motion compensation.** Each event $e_k = \{l_k, t_k, p_k\}$ is warped to a reference time $t_{ref}$ assuming uniform motion over the short interval $\Delta t$, using the gyroscope for rotation and the back-end's velocity estimate for translation:
 
-- Both ESIO (events-only) and ESVIO (image-aided) show superior performance compared with image-based and event-based baseline methods on public and self-collected datasets.
-- The system flew onboard quadrotors in low-light environments, and a real-world large-scale experiment demonstrated long-term effectiveness — field evidence that is still rare in the event-camera literature.
-- Published in RA-L (2023) with open-source code from the HKU MaRS Lab, it became a common baseline for subsequent event-based VIO research.
-- It completed the stereo-event lineage started by ESVO, showing the full stereo events + frames + IMU combination is practical on real aerial platforms.
+$$ {}^{ref}\mathbf{R}_k = \exp\big((\tilde{\boldsymbol{\omega}}_k - \mathbf{b}_g - \mathbf{n}_g)\Delta t\big), \qquad {}^{ref}\mathbf{L}_k = {}^{ref}\mathbf{R}_k \mathbf{L}_k + \mathbf{v}_{ref}\Delta t, $$
+
+where $\mathbf{L}_k$ is the homogeneous pixel location and $\mathbf{v}_{ref}$ the back-end velocity. Better state estimates sharpen the compensated event edges, which in turn improve the next estimate.
+
+2. **Spatial and temporal data association.** Compensated events populate polarity-separated surfaces of active events (SAE), converted to time surfaces (TS). Event corners are extracted with a modified Arc* detector (100–200 features maintained, spread by a minimum-distance mask on the TS). Features are tracked *temporally* between consecutive left event streams and matched *instantaneously* across stereo-rectified left/right time surfaces, both with forward-inverse LK optical flow; depth is recovered by triangulation with RANSAC outlier rejection.
+
+3. **Graph-based back-end.** A sliding window optimizes the full state $\boldsymbol{\chi} = [\mathbf{x}_{b_0}, \dots, \mathbf{x}_{b_n}, \mathbf{x}^b_e, \mathbf{x}^b_c, \boldsymbol{\Lambda}_{es}, \boldsymbol{\Lambda}_{et}, \boldsymbol{\Lambda}_c]$ — IMU states (position, quaternion, velocity, biases), camera-IMU extrinsics, and inverse depths of event/image features — by minimizing
+
+$$ \min_{\boldsymbol{\chi}} \Big( \sum_{k} \|\mathbf{r}_b\|^2_{\Omega_b} + \sum_{(l,k)} \|\mathbf{r}_{es}\|^2_{\Omega_{es}} + \sum_{(l,k)} \|\mathbf{r}_{et}\|^2_{\Omega_{et}} + \sum_{(l,k)} \|\mathbf{r}_c\|^2_{\Omega_c} \Big), $$
+
+combining IMU preintegration residuals $\mathbf{r}_b$, **spatial** event residuals $\mathbf{r}_{es}$ (reprojection of a feature from right to left event camera through inverse depth $\lambda_{es}$ and extrinsic $\mathbf{T}^{le}_{re}$), **temporal** event residuals $\mathbf{r}_{et}$ (reprojection between the $i$-th and $k$-th left event streams through body poses $\mathbf{T}^w_{b_i}, \mathbf{T}^{b_k}_w$), and standard-camera residuals $\mathbf{r}_c$.
+
+## Results
+
+- **Self-collected HKU dataset** (two DAVIS346, 6 cm baseline, stereo events 60 Hz, frames 30 Hz, IMU 1000 Hz, VICON ground truth; aggressive motion and HDR): ESVIO achieves average MPE 0.14% / MRE 0.033°/m vs ORB-SLAM3 stereo VIO 0.16% / 0.12°/m, VINS-Fusion 0.76% / 0.38°/m, USLAM mono EIO 5.06% / 1.05°/m, and PL-EVIO 0.26% / 0.41°/m. ESIO reaches 0.89% and motion-compensated ESIO+ 0.66%. ORB-SLAM3 and VINS-Fusion fail on hku_agg_walk (motion blur); ORB-SLAM3 fails on hku_dark_normal; EVO and ESVO failed on all sequences.
+- **Public datasets**: first reported results on VECtor (e.g., robot-fast 0.20% where VINS-Fusion, EVO, ESVO fail) and strong MVSEC indoor-flying results (e.g., 0.94% / 0.47% MPE on flying 1/3 vs 1.35% / 0.64% for PL-EVIO); low-texture units-dolly/scooter remain hard for all vision-only methods.
+- **Real-time**: on an i7-1260P NUC, front-end 10.44 ms and back-end 19.30 ms at 346×260 (35.69 / 35.59 ms at 640×480).
+- **Onboard quadrotor flights**: closed-loop flight with ESVIO as the only pose feedback; on a 56.0 m HDR flight, ATE RMSE 0.17 m with average relative translation error around 0.1 m; large-scale outdoor and driving sequences demonstrate long-term operation.
 
 ## Why it matters for SLAM
 
-ESVIO completes the sensor-fusion lineage of event SLAM: it shows the full stereo + events + frames + IMU combination is practical on real aerial platforms, in exactly the dark and fast conditions the sensor was designed for. It is a natural study target after ESVO and Ultimate-SLAM, and its open-source release makes it a common baseline for subsequent event VIO work.
+ESVIO completes the sensor-fusion lineage of event SLAM: it shows the full stereo + events + frames + IMU combination is practical on real aerial platforms, in exactly the dark and fast conditions the sensor was designed for. It is a natural study target after ESVO and Ultimate-SLAM, and its open-source release (HKU ArcLab) makes it a common baseline for subsequent event VIO work.
 
 ## Related
 
@@ -34,5 +44,3 @@ ESVIO completes the sensor-fusion lineage of event SLAM: it shows the full stere
 - [EKLT](eklt.md)
 - [IMU preintegration](../level-06-vio-vins/imu-preintegration.md)
 - [VINS-Fusion](../level-06-vio-vins/vins-fusion.md)
-
-[Back to Level 10](../README.md#level-10-event-camera-slam)

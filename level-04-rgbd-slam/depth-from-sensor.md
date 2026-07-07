@@ -59,5 +59,3 @@ Every design decision in RGB-D SLAM flows from the sensor: per-pixel metric dept
 - [Scale ambiguity](../level-03-monocular-slam/scale-ambiguity.md) — the monocular problem that depth sensors remove
 - [Frame-to-model tracking](frame-to-model-tracking.md) — what dense SLAM does with the depth stream
 - [ICP](icp.md) — the alignment algorithm fed by these measurements
-
-[Back to Level 4](../README.md#level-4-rgb-d-visual-slam)

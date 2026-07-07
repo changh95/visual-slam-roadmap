@@ -47,5 +47,3 @@ Direct LiDAR-camera alignment is the design behind the currently strongest open-
 - [R3LIVE](r3live.md) — frame-to-map photometric error for map texturing
 - [R3LIVE++](r3livepp.md) — photometric calibration that makes direct alignment physically consistent
 - [DSO](../level-03-monocular-slam/dso.md) — the direct/photometric tradition in visual SLAM
-
-[Back to Level 9](../README.md#level-9-lidar--visual-lidar-fusion-slam)

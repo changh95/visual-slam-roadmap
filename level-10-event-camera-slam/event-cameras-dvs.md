@@ -66,5 +66,3 @@ Event cameras address exactly the conditions where frame-based visual SLAM break
 - [Event-based Vision Survey](event-based-vision-survey.md)
 - [EVO](evo.md)
 - [Camera device](../level-02-getting-familiar/camera-device.md)
-
-[Back to Level 10](../README.md#level-10-event-camera-slam)

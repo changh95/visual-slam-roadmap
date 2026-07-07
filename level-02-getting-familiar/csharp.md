@@ -41,5 +41,3 @@ AR is one of the largest commercial applications of visual SLAM, and C#/Unity is
 - [C++](cpp.md)
 - [Simulation](simulation.md)
 - [Deployed VIO (ARKit / ARCore / etc.)](../level-06-vio-vins/deployed-vio.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

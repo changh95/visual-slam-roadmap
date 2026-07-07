@@ -47,5 +47,3 @@ PnP is the tracking backbone of feature-based SLAM: ORB-SLAM tracks every frame 
 - [Landmark](landmark.md)
 - [Visual Place Recognition (VPR)](../level-03-monocular-slam/visual-place-recognition-vpr.md)
 - [ORB-SLAM](../level-03-monocular-slam/orb-slam.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

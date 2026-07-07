@@ -6,30 +6,40 @@
 
 ## Problem
 
-Classical feature matching is a pipeline of hand-designed heuristics: nearest-neighbor search in descriptor space, ratio test, mutual check, then RANSAC to clean up. Each descriptor is compared independently — no reasoning about the other keypoints, the scene's geometry, or which points are simply *not visible* in the other image. Under strong viewpoint change, repetitive structure, or partial overlap, this collapses.
+Classical feature matching is a pipeline of hand-designed heuristics: nearest-neighbor search in descriptor space, ratio test, mutual check, then RANSAC to clean up. Each descriptor is compared independently — no reasoning about the other keypoints, the scene's geometry, or which points are simply *not visible* in the other image. Under strong viewpoint change, repetitive structure, or partial overlap, this collapses. SuperGlue reframes matching itself as a learnable optimization problem: jointly find correspondences *and* reject non-matchable points, exploiting two physical constraints — a keypoint has at most one correspondence, and some keypoints are unmatched due to occlusion or detector failure.
 
-SuperGlue reframes matching itself as a learning problem: jointly find correspondences *and* reject non-matchable points, using context from all keypoints in both images.
+## Method & architecture
 
-## Key ideas
+Given images $A, B$ with $M$ and $N$ local features (position $\mathbf{p}_i := (x, y, c)_i$ with detection confidence $c$, and descriptor $\mathbf{d}_i \in \mathbb{R}^D$, e.g. SuperPoint or SIFT), SuperGlue predicts a partial soft assignment $\mathbf{P} \in [0,1]^{M \times N}$ with $\mathbf{P}\mathbf{1}_N \leq \mathbf{1}_M$ and $\mathbf{P}^\top \mathbf{1}_M \leq \mathbf{1}_N$. Two blocks:
 
-- **Matching as joint inference, not independent lookup**: SuperGlue reasons about *all* keypoints in both images simultaneously, learning priors over geometric transformations and regularities of the 3D world through end-to-end training on real image pairs.
-- **Keypoint encoder**: Each keypoint's 2D position and detection score are embedded by a small MLP and added to its visual descriptor, so the network reasons jointly about appearance *and* spatial layout from the first layer.
-- **Attentional GNN**: The embeddings are refined by alternating self-attention (context within an image — "which other points constrain me?") and cross-attention (candidate correspondences across images — "which points could I be?") layers, a flexible context-aggregation mechanism that lets the network reason about the underlying 3D scene.
-- **Optimal transport assignment**: The refined descriptors produce a score matrix $\mathbf{S} \in \mathbb{R}^{(M+1)\times(N+1)}$; differentiable Sinkhorn iterations solve the resulting optimal transport problem, enforcing soft one-to-one (partial) assignment structure rather than greedy per-point decisions.
-- **Dustbin mechanism**: The extra row/column absorbs keypoints with no valid match — occlusions and partial overlap are handled *inside* the model rather than by post-hoc score thresholds.
-- **End-to-end supervision**: Trained with negative log-likelihood on ground-truth matches (and dustbin assignments) derived from pose + depth, so the network directly optimizes correspondence quality.
-- **Real-time on GPU**: Matching runs in real time on a modern GPU, making it drop-in for online SfM and SLAM front-ends.
+**1. Attentional Graph Neural Network.** A keypoint encoder embeds position into the descriptor so appearance and layout are reasoned about jointly:
 
-## Results & impact
+$$ {}^{(0)}\mathbf{x}_i = \mathbf{d}_i + \mathrm{MLP}_{\mathrm{enc}}(\mathbf{p}_i) $$
 
-- Outperformed other learned approaches and achieved state-of-the-art pose estimation in challenging real-world indoor and outdoor environments (ScanNet and MegaDepth evaluations), with large margins over NN + ratio-test matching.
-- SuperPoint + SuperGlue became the dominant recipe for visual localization — the core of the hloc pipeline and long-term localization benchmarks.
-- CVPR 2020 (oral); its attention-over-keypoints design directly inspired LightGlue (efficiency) and the detector-free LoFTR lineage.
-- Made relocalization and loop closure workable across day/night and severe viewpoint change where descriptor-distance matching fails.
+All keypoints of both images form one complete *multiplex* graph with self edges (within an image) and cross edges (across images). A residual message-passing update runs for $L$ layers, alternating self and cross edges:
+
+$$ {}^{(\ell+1)}\mathbf{x}_i^A = {}^{(\ell)}\mathbf{x}_i^A + \mathrm{MLP}\big(\big[{}^{(\ell)}\mathbf{x}_i^A \,\Vert\, \mathbf{m}_{\mathcal{E}\rightarrow i}\big]\big) $$
+
+The message is attentional aggregation, $\mathbf{m}_{\mathcal{E}\rightarrow i} = \sum_{j} \alpha_{ij} \mathbf{v}_j$ with weights $\alpha_{ij} = \mathrm{Softmax}_j(\mathbf{q}_i^\top \mathbf{k}_j)$ over the edge set — self-attention lets a keypoint attend to salient points in its own image, cross-attention to candidate matches in the other image. Final matching descriptors are linear projections $\mathbf{f}_i^A = \mathbf{W}\,{}^{(L)}\mathbf{x}_i^A + \mathbf{b}$.
+
+**2. Optimal matching layer.** Pairwise scores are inner products $\mathbf{S}_{i,j} = \langle \mathbf{f}_i^A, \mathbf{f}_j^B \rangle$. The score matrix is augmented with a dustbin row and column filled with a single learnable scalar $z$, so occluded/undetected points are explicitly assigned. The entropy-regularized optimal transport problem is solved with $T$ differentiable Sinkhorn iterations (iterative row/column normalization of $\exp(\bar{\mathbf{S}})$), yielding $\bar{\mathbf{P}}$; dropping the dustbins recovers $\mathbf{P}$.
+
+**Supervision.** Negative log-likelihood over ground-truth matches $\mathcal{M}$ (from poses + depth or homographies) and unmatched sets $\mathcal{I}, \mathcal{J}$:
+
+$$ \mathrm{Loss} = -\sum_{(i,j)\in\mathcal{M}} \log \bar{\mathbf{P}}_{i,j} - \sum_{i\in\mathcal{I}} \log \bar{\mathbf{P}}_{i,N+1} - \sum_{j\in\mathcal{J}} \log \bar{\mathbf{P}}_{M+1,j} $$
+
+**Details:** $D = 256$, $L = 9$ layers of 4-head attention, $T = 100$ Sinkhorn iterations, 12M parameters; a forward pass averages 69 ms (15 FPS) per indoor pair on a GTX 1080 GPU. Match confidence threshold 0.2 at test time.
+
+## Results
+
+- **Homography estimation** (synthetic homographies over the Oxford/Paris 1M distractor images): 98.3% recall and 90.7% precision; AUC 65.85 with plain DLT vs 53.67 with RANSAC — correspondences so clean that a non-robust least-squares solver beats RANSAC. NN matching gets 0.00 DLT AUC; OANet 52.29.
+- **Indoor pose (ScanNet, 1500 wide-baseline test pairs):** SuperPoint+SuperGlue pose AUC@5°/10°/20° = 16.16/33.81/51.84 vs 11.76/26.90/43.85 for SuperPoint+OANet and 9.43/21.53/36.40 for NN+mutual; precision 84.4%. With SIFT: 6.71/15.70/28.67, up to 10× more correct matches than ratio-test matching.
+- **Outdoor pose (PhotoTourism):** SuperPoint+SuperGlue AUC@5°/10°/20° = 34.18/50.32/64.16 vs 21.03/34.08/46.88 for OANet; precision 84.9%. SIFT+SuperGlue 23.68/36.44/49.44 vs 15.19/24.72/35.30 for ratio test.
+- **Ablation:** the GNN explains most of the gains; backpropagating into SuperPoint descriptors lifts AUC@20° from 51.84 to 53.38, showing the path toward end-to-end learning.
 
 ## Why it matters for SLAM
 
-SuperGlue changed the front-end recipe for hard association problems: SuperPoint + SuperGlue became the dominant baseline for visual localization, wide-baseline loop closure, and mapping via the hloc pipeline. For SLAM specifically, it made relocalization work across day/night and strong viewpoint changes where descriptor-distance matching collapses. Its cost — full attention over all keypoints every frame — motivated LightGlue, the efficient successor now standard in real-time settings.
+SuperGlue changed the front-end recipe for hard association problems: SuperPoint + SuperGlue became the dominant baseline for visual localization, wide-baseline loop closure, and mapping via the hloc pipeline. For SLAM specifically, it made relocalization work across day/night and strong viewpoint changes where descriptor-distance matching collapses. The paper itself frames this learnable middle-end as "a major milestone towards end-to-end deep SLAM". Its cost — full attention over all keypoints every frame — motivated LightGlue, the efficient successor now standard in real-time settings.
 
 ## Related
 
@@ -38,5 +48,3 @@ SuperGlue changed the front-end recipe for hard association problems: SuperPoint
 - [LoFTR](loftr.md) — detector-free dense alternative
 - [HF-Net](hf-net.md) — the hierarchical localization pipeline built around it
 - [hloc](hloc.md) — the localization toolbox where it is the standard matcher
-
-[Back to Level 5](../README.md#level-5-applying-deep-learning)

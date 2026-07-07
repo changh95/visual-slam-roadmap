@@ -64,5 +64,3 @@ This distinction is the first question to ask about any VIO paper, and the same 
 - [IMU preintegration](imu-preintegration.md) — the tool that makes tightly-coupled optimization tractable.
 - [Tightly-coupled LiDAR-camera](../level-09-lidar-visual-lidar-slam/tightly-coupled-lidar-camera.md) — the same concept applied to LiDAR fusion.
 - [Multi-sensor calibration](../level-02-getting-familiar/multi-sensor-calibration.md) — the prerequisite tight coupling depends on.
-
-[Back to Level 6](../README.md#level-6-vio--vins)

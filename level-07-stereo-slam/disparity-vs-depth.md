@@ -68,5 +68,3 @@ The $d = fB/Z$ geometry decides whether stereo actually helps: it tells you whic
 - [Triangulation](../level-01-beginner/triangulation.md)
 - [Epipolar geometry](../level-01-beginner/epipolar-geometry.md)
 - [ORB-SLAM2](../level-03-monocular-slam/orb-slam2.md)
-
-[Back to Level 7](../README.md#level-7-stereo-slam)

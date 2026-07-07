@@ -50,5 +50,3 @@ The tight-vs-loose distinction, familiar from VIO, is the single most important 
 - [LiDAR-Visual-Inertial (LVI)](lidar-visual-inertial-lvi.md) — the broader triple-fusion picture
 - [Factor graph](../level-02-getting-familiar/factor-graph.md) — the machinery behind joint optimization
 - [Degradation handling](degradation-handling.md) — the safeguards tight coupling requires
-
-[Back to Level 9](../README.md#level-9-lidar--visual-lidar-fusion-slam)

@@ -62,5 +62,3 @@ Preintegration is the single idea that made optimization-based VIO real-time: it
 - [Lie groups](../level-02-getting-familiar/lie-groups.md) — the math behind the on-manifold formulation.
 - [Factor graph](../level-02-getting-familiar/factor-graph.md) — where the preintegrated IMU factor lives.
 - [VINS-Mono](vins-mono.md) — a complete system built around preintegrated IMU factors.
-
-[Back to Level 6](../README.md#level-6-vio--vins)

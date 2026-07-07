@@ -1,42 +1,37 @@
 # Kimera-VIO
+
 > Rosinol 2020 · [Paper](https://arxiv.org/abs/1910.02490)
 
-**One-line summary** — The fast stereo-inertial odometry front-end of the Kimera library, pairing on-manifold IMU preintegration with GTSAM structureless "smart" vision factors and iSAM2 smoothing — the state-estimation core of a real-time metric-semantic SLAM pipeline.
+**One-line summary** — The fast stereo-inertial odometry module of the Kimera library: on-manifold IMU preintegration plus GTSAM structureless vision factors solved by iSAM2 fixed-lag smoothing — the state-estimation core of a real-time, CPU-only metric-semantic SLAM pipeline.
 
 ## Problem
-Robots operating around people need more than a trajectory: they need a metrically accurate *and semantically labeled* model of the scene. Existing open libraries (ORB-SLAM, VINS-Mono, OKVIS, ROVIO) stopped at poses and sparse points, and running dense reconstruction plus semantics alongside SLAM was considered impractical on modest hardware.
 
-Kimera set out to "go beyond existing visual and visual-inertial SLAM libraries ... by enabling mesh reconstruction and semantic labeling in 3D" (abstract) — in real time, on a CPU — with a VIO front-end fast and accurate enough to anchor the whole stack.
+Robots operating around people need more than a trajectory: they need a metrically accurate *and semantically labeled* model of the scene. Existing open libraries (ORB-SLAM, VINS-Mono, OKVIS, ROVIO) stop at poses and sparse points, while real-time metric-semantic systems (SLAM++, SemanticFusion, Voxblox++) rely on RGB-D sensing and mostly GPUs. Kimera goes "beyond existing visual and visual-inertial SLAM libraries ... by enabling mesh reconstruction and semantic labeling in 3D" — with visual-inertial sensing, on a CPU, in real time — anchored by a VIO front-end fast and accurate enough to carry the whole stack.
 
-## Key ideas
-- **Lightweight stereo-inertial front-end.** FAST corners tracked with KLT optical flow, stereo matching for depth, RANSAC-based outlier rejection, and Forster-style on-manifold IMU preintegration between keyframes — deliberately simple components chosen for CPU real-time operation.
-- **Structureless "smart" vision factors.** Instead of keeping 3D landmarks in the state, Kimera-VIO uses GTSAM's SmartProjectionFactor: for a feature seen in frames $\{i_1,\dots,i_N\}$, the factor encodes
+## Method & architecture
 
-  $$\min_{\{\mathbf{T}_{WC_k}\}} \sum_{k=1}^{N} \left\| \mathbf{z}_k - \pi\!\big(\mathbf{T}_{WC_k}^{-1}\,{}^W\hat{\mathbf{p}}_f\big) \right\|^2_{\mathbf{R}^{-1}}$$
+Kimera takes stereo frames and high-rate IMU data and is parallelized across four threads hosting four modules:
 
-  where the landmark ${}^W\hat{\mathbf{p}}_f$ is triangulated from the current pose estimates and marginalized in closed form inside the solve — a multi-view constraint over poses only, the smoothing-world analogue of MSCKF's null-space trick, avoiding state growth.
-- **iSAM2 incremental smoothing.** The Bayes-tree-based incremental solver re-linearizes only the part of the factor graph touched by new measurements, giving near-constant-time updates without a hand-built sliding window.
-- **Four modular components** (per the abstract):
-  1. the VIO module for fast, accurate state estimation;
-  2. a robust pose graph optimizer (Kimera-RPGO) that rejects outlier loop closures via graduated non-convexity;
-  3. a lightweight 3D mesher for fast mesh reconstruction;
-  4. a dense metric-semantic reconstruction module that back-projects 2D semantic labels (from a deep network) onto the 3D mesh.
-- **Run alone or together.** The modules "can be run in isolation or in combination, hence Kimera can easily fall back to a state-of-the-art VIO or a full SLAM system" — the modularity is itself a design contribution, letting researchers benchmark or replace any single stage.
+- **Kimera-VIO** implements the keyframe-based maximum-a-posteriori visual-inertial estimator of Forster et al. as a fixed-lag (or optionally full) smoother. The *front-end* performs on-manifold IMU preintegration between keyframes and, on the vision side, detects Shi-Tomasi corners, tracks them with the Lucas-Kanade tracker, finds left-right stereo matches, and runs geometric verification — 5-point RANSAC (mono) and 3-point RANSAC (stereo), with optional 2-point/1-point variants using the IMU rotation. Detection, stereo matching, and verification run only at keyframes; intermediate frames are tracked. The *back-end* adds preintegrated IMU factors and the **structureless vision model** to a GTSAM factor graph solved with iSAM2: at each iteration, observed features are triangulated by DLT from current pose estimates and the 3D points are analytically eliminated from the VIO state, after removing degenerate points (behind camera, low parallax) and outliers (large reprojection error). States beyond the smoothing horizon are marginalized out; the front-end publishes state estimates at IMU rate.
+- **Kimera-RPGO** detects loop closures with DBoW2 bag-of-words plus mono/stereo geometric verification, then applies a robust PGO with *incremental Pairwise Consistent Measurement set maximization (PCM)*: each loop must be consistent with the odometry along its cycle (Chi-squared test) and pairwise consistent with previous loops, tracked in an adjacency matrix $\boldsymbol{A}\in\mathbb{R}^{L\times L}$ grown incrementally; a fast maximum-clique search selects the largest consistent set before Gauss–Newton optimization.
+- **Kimera-Mesher** builds a per-frame 3D mesh in under 5 ms by 2D Delaunay triangulation over tracked features back-projected with back-end depth, and a multi-frame mesh over the VIO horizon; detected planar surfaces feed regularity factors back into the VIO — a tight coupling of mesh regularization and state estimation.
+- **Kimera-Semantics** runs dense stereo (semi-global matching) per keyframe, fuses the point cloud into a Voxblox TSDF via bundled raycasting while Bayesian-updating per-voxel semantic label probabilities from 2D segmentations, and extracts the global metric-semantic mesh with marching cubes.
 
-## Results & impact
-Kimera "runs in real-time on a CPU and produces a 3D metric-semantic mesh from semantically labeled images" (abstract), with the VIO module delivering state estimation competitive with the established open-source pipelines it is designed to complement.
+The modules "can be run in isolation or in combination, hence Kimera can easily fall back to a state-of-the-art VIO or a full SLAM system."
 
-Its bigger impact is as a substrate: 3D Dynamic Scene Graphs, Hydra, and Kimera-Multi all build on this front-end, the GTSAM smart-factor + iSAM2 recipe became a standard alternative to Ceres-style sliding windows, and Kimera-RPGO's GNC-based robust pose graph optimization is used as a standalone library.
+## Results
+
+On EuRoC (RMSE ATE, SE(3) alignment), Kimera achieves top performance per category: in fixed-lag smoothing, Kimera-VIO reaches 0.05–0.35 m (e.g., MH_1 0.11, V1_3 0.07) vs OKVIS 0.09–0.47, MSCKF 0.10–1.13, ROVIO 0.10–0.52, VINS-Mono 0.08–0.32; with full smoothing 0.04 m on MH_1 where SVO-GTSAM fails three V sequences; with loop closures, Kimera-RPGO gets 0.19 m on V2_3 where VINS-LC reports 1.39 m. Robustness: without PCM, PGO error explodes to 1.74 m as the DBoW2 threshold $\alpha$ loosens, while Kimera-RPGO stays at ~0.05 m for every $\alpha$ — no parameter tuning needed. Geometry: the global semantic mesh is accurate to 0.35–0.48 m against EuRoC ground-truth clouds; the fast multi-frame mesh is up to 24% noisier but two orders of magnitude faster. In a photo-realistic simulator, Kimera-Semantics reaches 80.03% mIoU with ground-truth depth and Kimera-VIO poses (ATE 0.04 m), dropping to 57.23% with dense stereo. Timing (CPU): IMU preintegration ~40 µs (>200 Hz state output), tracking 4.5 ms/frame, keyframe processing 45 ms, back-end <40 ms, RPGO ~55 ms, semantics ~0.1 s per keyframe.
 
 ## Why it matters for SLAM
-Kimera showed that a clean, modular open-source stack can go from raw stereo+IMU to a semantically labeled 3D mesh in real time — making it both a practical VIO baseline and the substrate for a whole research lineage: 3D Dynamic Scene Graphs, Hydra, and Kimera-Multi all build on this front-end. Its GTSAM smart-factor + iSAM2 recipe is now a standard alternative to Ceres-style sliding-window optimization, and its robust pose graph module (GNC-based) is used as a standalone library.
+
+Kimera showed that a clean, modular open-source stack can go from raw stereo+IMU to a semantically labeled 3D mesh in real time on a CPU — making it both a practical VIO baseline and the substrate for a whole research lineage: 3D Dynamic Scene Graphs, Hydra, and Kimera-Multi all build on this front-end. Its GTSAM smart-factor + iSAM2 recipe is now a standard alternative to Ceres-style sliding-window optimization, and Kimera-RPGO's robust pose graph optimization is used as a standalone library.
 
 ## Related
+
 - [IMU Preintegration on Manifold](imu-preintegration-on-manifold.md) — the IMU factor Kimera-VIO uses.
 - [Kimera / 3D Dynamic Scene Graph](../level-05-deep-learning/kimera-3d-dynamic-scene-graph.md) — the scene-understanding layer built on this VIO.
 - [Kimera-Multi](../level-08-collaborative-slam/kimera-multi.md) — the multi-robot extension.
 - [Incremental smoothing](../level-02-getting-familiar/incremental-smoothing.md) — the iSAM2 machinery underneath.
-- [GNC](../level-05-deep-learning/gnc.md) — the robust optimization used in Kimera-RPGO.
+- [GNC](../level-05-deep-learning/gnc.md) — robust optimization later adopted in Kimera-RPGO.
 - [MSCKF](msckf.md) — the filtering ancestor of the structureless measurement idea.
-
-[Back to Level 6](../README.md#level-6-vio--vins)

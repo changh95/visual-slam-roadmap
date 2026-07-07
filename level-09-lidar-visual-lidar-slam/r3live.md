@@ -6,27 +6,37 @@
 
 ## Problem
 
-LiDAR SLAM produces accurate 3D geometry but colorless maps of limited use for inspection, visualization, and downstream 3D applications; camera-based SLAM provides appearance but weaker geometric accuracy and scale. R3LIVE aims to get both at once — robust, accurate state estimation *and* a dense RGB-colored map — by giving each sensor the job it is best at and coupling them tightly through one shared map.
+LiDAR-based SLAM fails when there are not enough geometric features — especially with small-FoV solid-state LiDARs — and its maps are colorless, limiting their use for surveying, simulators, and other 3D applications. R3LIVE aims for robust, accurate state estimation *and* a dense RGB-colored map by giving each sensor the job it is best at, coupled through one shared map and one filter.
 
-## Key ideas
+## Method & architecture
 
-- **LIO + VIO with a clean division of labor**: the LIO subsystem (based on FAST-LIO) takes the LiDAR and inertial measurements and reconstructs the geometric structure of the global map — the positions of its 3D points — while the VIO subsystem uses the visual-inertial data to render the map's texture, i.e., the color of those points.
-- **Direct frame-to-map photometric fusion**: instead of extracting and matching visual features, the VIO fuses the visual data by minimizing the photometric error between the current image and the colors stored on visible map points,
+Two subsystems share a 29-dimensional state $\mathbf{x} \in \mathbb{R}^{29}$ containing IMU pose $({^G}\mathbf{R}_I, {^G}\mathbf{p}_I)$, velocity, gyro/accel biases, gravity ${^G}\mathbf{g}$, camera-IMU extrinsics $({^I}\mathbf{R}_C, {^I}\mathbf{p}_C)$, camera-IMU time offset ${^I}t_C$, and camera intrinsics $\boldsymbol{\phi} = [f_x, f_y, c_x, c_y]^T$ — all estimated online in an error-state iterated Kalman filter (ESIKF).
 
-  $$\mathcal{L}_{\text{photo}} = \sum_i \Big( I\big(\pi(\mathbf{T}^{-1}\mathbf{P}_i)\big) - C_i \Big)^2,$$
+- **Map**: fixed-size voxels (e.g. $0.1$ m cubes, marked *activated* if points were appended recently) containing points $\mathbf{P} = [{^G}\mathbf{p}^T, \mathbf{c}^T]^T$ — 3D position plus RGB color, each with covariances $\boldsymbol{\Sigma}_{\mathbf{p}}, \boldsymbol{\Sigma}_{\mathbf{c}}$.
+- **LIO subsystem** (based on FAST-LIO): IMU backward propagation de-skews each scan, the ESIKF minimizes point-to-plane residuals, and converged scans are appended to the global map — building the geometry that also supplies depth to the VIO.
+- **VIO subsystem**, a two-step direct pipeline with no feature extraction:
+  1. *Frame-to-frame update*: LK optical flow tracks projections of map points; the PnP reprojection residual $\mathbf{r} = \boldsymbol{\rho}_{s_k} - \boldsymbol{\pi}({^C}\mathbf{p}_s, \check{\mathbf{x}}_k)$ (with an online temporal-offset correction term inside $\boldsymbol{\pi}$) drives an ESIKF update.
+  2. *Frame-to-map update*: the photometric residual $\mathbf{o}(\check{\mathbf{x}}_k, {^G}\mathbf{p}_s, \mathbf{c}_s) = \mathbf{c}_s - \boldsymbol{\gamma}_s$ compares each tracked point's stored map color $\mathbf{c}_s$ with its color $\boldsymbol{\gamma}_s$ interpolated from the current image — the map color is invariant to camera rotation/translation, unlike patch pyramids.
+- Both updates solve the same MAP problem, combining the IMU-propagated prior with the stacked residuals:
 
-  where $\mathbf{P}_i$ is a 3D map point and $C_i$ its stored color — tightly coupling the camera to the LiDAR-built map.
-- **Continuous color refinement**: each new image updates the colors of the map points it observes, blending new observations into the stored color, so the texture stays consistent as lighting and viewpoints change.
-- **A mapping device, not just an odometry**: the output is a dense, precise, RGB-colored 3D map directly useful for surveying and mapping, and the release includes offline utilities for reconstructing and texturing meshes to bridge toward simulators, video games, and other 3D applications.
-- **Careful engineering lineage**: developed from the authors' earlier R2LIVE with a redesigned architecture and implementation.
+$$\min_{\delta\check{\mathbf{x}}_k} \Big( \big\|\check{\mathbf{x}}_k \boxminus \hat{\mathbf{x}}_k + \boldsymbol{\mathcal{H}}\delta\check{\mathbf{x}}_k\big\|^2_{\boldsymbol{\Sigma}_{\delta\hat{\mathbf{x}}_k}} + \sum_{s=1}^{m} \big\|\mathbf{o}(\check{\mathbf{x}}_k, {^G}\mathbf{p}_s, \mathbf{c}_s) + \mathbf{H}^o_s \delta\check{\mathbf{x}}_k\big\|^2_{\boldsymbol{\Sigma}_{\boldsymbol{\beta}_s}} \Big)$$
 
-## Results & impact
+  iterated to convergence with Kalman gain $\mathbf{K} = (\mathbf{H}^T\mathbf{R}^{-1}\mathbf{H} + \mathbf{P}^{-1})^{-1}\mathbf{H}^T\mathbf{R}^{-1}$ (equivalent to Gauss-Newton).
+- **Texture rendering**: after each converged pose, points in activated voxels that fall in the image get their colors fused by a Bayesian update — the stored color's covariance grows with a random-walk term $\boldsymbol{\sigma}_s^2 \cdot \Delta t_{\mathbf{c}_s}$ (modeling illumination change) before blending with the new observation.
+- **Tracked-point maintenance**: points with large reprojection or photometric error are dropped; new map points are added where no tracked point exists within a 50-pixel radius.
 
-Experiments show the system achieves more robustness and higher accuracy in state estimation than contemporary counterparts, while reconstructing dense, precise, RGB-colored 3D maps in real time. R3LIVE is fully open source — code, software utilities, and even the mechanical design of the sensor device — which helped make it a popular starting point for colorized LiDAR mapping and a reference design for the "geometry from LiDAR, texture from camera" pattern.
+## Results
+
+Handheld device: Livox AVIA LiDAR (FoV 70.4°×77.2°), FLIR Blackfly global-shutter camera, DJI Manifold-2c (Intel i7-8550U, 8 GB RAM).
+
+- **LiDAR-degenerate + texture-less test**: passing a narrow "T"-shape passage while facing white walls (single-plane LiDAR constraint, near-zero texture), R3LIVE survives and drifts only 4.57 cm in translation and 1.62° in rotation end-to-end (ArUco ground truth).
+- **Large-scale campus mapping** (HKUST, four trajectories of 1317/1524/1372/1191 m): translation drift 0.093/0.154/0.164/0.102 m and rotation drift 2.140/0.285/2.342/3.925°, with trajectories closing the loop without any loop-closure module.
+- **RTK-GPS benchmark** (seaport, two sequences): R3LIVE-HiRes achieves the best relative errors, e.g. 0.21°/0.17% (RRE/RTE) at 300 m sub-sequences on sequence (a) versus 0.43°/2.40% for LVI-SAM and 0.59°/2.31% for VINS-Mono; it also edges out R2LIVE and FAST-LIO2.
+- **Runtime**: VIO costs 7.01 ms per frame on PC at 320×256 / 0.10 m map resolution — comfortably real time even on the onboard computer.
 
 ## Why it matters for SLAM
 
-R3LIVE established the "geometry from LiDAR, texture from camera" pattern for LVI systems and demonstrated that direct photometric alignment against a LiDAR map is a practical, real-time alternative to feature-based visual fusion. It is the bridge between state estimation and colorized 3D reconstruction — digital twins, inspection, AR — and the direct ancestor of R3LIVE++ (radiance mapping) and a close sibling of FAST-LIVO within the HKU MARS lineage.
+R3LIVE established the "geometry from LiDAR, texture from camera" pattern for LVI systems and showed that direct photometric alignment against a colored LiDAR map is a practical, real-time alternative to feature-based visual fusion. It bridges state estimation and colorized 3D reconstruction — digital twins, inspection, AR — and its full open-source release (code, mesh-texturing utilities, even the device's mechanical design) made it the reference design that R3LIVE++ and FAST-LIVO build upon.
 
 ## Related
 
@@ -35,5 +45,4 @@ R3LIVE established the "geometry from LiDAR, texture from camera" pattern for LV
 - [FAST-LIVO](fast-livo.md) — sibling system where vision also feeds pose estimation via patches
 - [LiDAR-Visual-Inertial (LVI)](lidar-visual-inertial-lvi.md) — the fusion category
 - [Direct LiDAR-camera alignment](direct-lidar-camera-alignment.md) — the photometric fusion principle
-
-[Back to Level 9](../README.md#level-9-lidar--visual-lidar-fusion-slam)
+- [Quaternion kinematics for error-state KF](../level-06-vio-vins/quaternion-kinematics-for-error-state-kf.md) — the error-state machinery behind its ESIKF

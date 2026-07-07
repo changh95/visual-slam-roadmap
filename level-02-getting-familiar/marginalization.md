@@ -61,5 +61,3 @@ Marginalization is the workhorse that makes real-time, bounded-memory visual-ine
 - [Incremental smoothing (iSAM/iSAM2)](incremental-smoothing.md)
 - [OKVIS](../level-06-vio-vins/okvis.md)
 - [DM-VIO](../level-06-vio-vins/dm-vio.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

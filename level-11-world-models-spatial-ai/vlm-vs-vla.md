@@ -54,5 +54,3 @@ VLMs are already reshaping SLAM: CLIP-style embeddings attached to 3D maps yield
 - [OpenVLA](openvla.md)
 - [NaVILA](navila.md)
 - [Spatial AI](spatial-ai.md)
-
-[Back to Level 11](../README.md#level-11-world-models--spatial-ai)

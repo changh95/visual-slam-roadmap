@@ -2,36 +2,40 @@
 
 > Schöps 2019 · [Paper](https://openaccess.thecvf.com/content_CVPR_2019/html/Schops_BAD_SLAM_Bundle_Adjusted_Direct_RGB-D_SLAM_CVPR_2019_paper.html)
 
-**One-line summary** — A direct bundle-adjustment RGB-D SLAM that jointly optimizes camera poses and a dense surfel map in real time on the GPU, released together with the high-precision ETH3D SLAM benchmark.
+**One-line summary** — A direct bundle-adjustment RGB-D SLAM that jointly optimizes keyframe poses and a dense surfel map in real time on the GPU, released together with the high-precision ETH3D SLAM benchmark.
 
 ## Problem
 
-Most RGB-D SLAM systems decouple tracking (frame-to-model alignment) from mapping (TSDF or surfel fusion) and optimize each separately — the map is built assuming poses are right, and poses are estimated assuming the map is right. True bundle adjustment, jointly optimizing all camera poses and 3D structure, yields higher accuracy but was considered impractical for dense representations. A second problem was evaluation: existing RGB-D benchmarks had limited ground-truth accuracy, making it hard to even measure the difference between high-precision systems.
+Bundle adjustment — joint optimization of all camera and structure parameters — is the gold standard back-end for SLAM, but for dense RGB-D data the number of variables was considered too large: prior systems approximated it with pose-graph optimization, map deformation (Kintinuous, ElasticFusion), fragment alignment, or sparse-feature BA (BundleFusion, ORB-SLAM2). A second problem was evaluation: direct RGB-D systems are highly sensitive to rolling shutter, unsynchronized RGB/depth streams, and depth-calibration errors, and existing benchmarks recorded with consumer cameras conflate these hardware artifacts with algorithmic accuracy.
 
-## Key ideas
+## Method & architecture
 
-- **True BA for dense SLAM**: surfel positions and camera poses are treated as joint optimization variables — direct bundle adjustment over dense geometry, rather than the usual alternate-and-hope tracking/fusion loop.
-- **Direct photometric + geometric residuals**: the cost sums, over each keyframe $k$ and each visible surfel $j$, a photometric term comparing the image intensity at the surfel's projection against the surfel's stored color, and a geometric term comparing the measured depth against the surfel's projected depth:
-  $$E = \sum_{k}\sum_{j \in \mathcal{V}_k} \Big[ w_I\big(I_k(\pi(\mathbf{T}_k \mathbf{s}_j)) - c_j\big)^2 + w_D\big(D_k(\pi(\mathbf{T}_k \mathbf{s}_j)) - [\mathbf{T}_k \mathbf{s}_j]_z\big)^2 \Big]$$
-  No sparse features are extracted anywhere in the pipeline.
-- **GPU-accelerated solver**: the Gauss-Newton system is assembled and solved on the GPU with preconditioned conjugate gradient (PCG), making joint optimization over thousands of surfels and tens of keyframes feasible in real time.
-- **Alternating optimization**: the system alternates between optimizing camera poses with surfels fixed and surfel attributes with poses fixed, converging within a few iterations per frame — a practical decomposition of the huge joint problem.
-- **ETH3D SLAM benchmark**: the paper introduced a benchmark with far more accurate ground truth than prior RGB-D datasets, precise enough to reveal accuracy differences that older benchmarks could not resolve.
+The front-end tracks each frame against the last keyframe with standard direct photometric+geometric alignment in $SE(3)$ (every 10th frame becomes a keyframe) and detects loops with binary-feature bag-of-words followed by direct alignment and a pose-graph initialization. The back-end — the paper's contribution — runs true direct BA over all keyframes $K$ and surfels $S$. A surfel $s$ is an oriented disc with center $\mathbf{p}_s$, normal $\mathbf{n}_s$, radius $r_s$, and a scalar descriptor $d_s$; there are no sparse features anywhere in the map. The cost projects each surfel into every keyframe $k$ where it has a correspondence:
 
-## Results & impact
+$$C(K,S)=\sum_{k\in K}\sum_{s\in S_k}\Big[\rho_{\text{Tukey}}\big(\sigma_D^{-1}\,r_{\text{geom}}(s,k)\big)+w_{\text{photo}}\,\rho_{\text{Huber}}\big(\sigma_p^{-1}\,r_{\text{photo}}(s,k)\big)\Big]$$
 
-BAD SLAM achieved the lowest trajectory error on its new ETH3D benchmark, outperforming ElasticFusion, BundleFusion, and ORB-SLAM2, while running in real time on a high-end GPU. Beyond the system itself, the ETH3D SLAM benchmark became a standard evaluation suite for RGB-D SLAM — and its high-precision ground truth exposed how many established systems were less robust than older benchmarks suggested.
+with $w_{\text{photo}}=10^{-2}$ (depth is trusted more) and robust-loss parameter 10. The geometric term is a point-to-plane residual along the surfel normal,
+
+$$r_{\text{geom}}(s,k)=\big(\mathbf{T}_{kG}\,\mathbf{n}_s\big)^{T}\Big(\pi_{D,k}^{-1}\big(\hat{\pi}_{D,k}(\mathbf{T}_{kG}\,\mathbf{p}_s)\big)-\mathbf{T}_{kG}\,\mathbf{p}_s\Big)$$
+
+where $\mathbf{T}_{kG}$ maps global to keyframe coordinates, $\hat{\pi}_{D,k}$ projects to the nearest depth pixel and $\pi_{D,k}^{-1}$ back-projects its measured depth. It is normalized by a stereo depth-noise model $\sigma_{d_m}=\delta\,d_m^2\,(bf)^{-1}$ ($b$ baseline, $f$ focal length, $\delta=0.1$ px matching error). The photometric term compares a geometrically consistent intensity-gradient magnitude — sampled at the surfel center and two points $\mathbf{s}_1,\mathbf{s}_2$ on the disc boundary — against the stored descriptor:
+
+$$r_{\text{photo}}(s,k)=\left\lVert\begin{pmatrix}I(\pi_{I,k}(\mathbf{s}_1))-I(\pi_{I,k}(\mathbf{p}_s))\\ I(\pi_{I,k}(\mathbf{s}_2))-I(\pi_{I,k}(\mathbf{p}_s))\end{pmatrix}\right\rVert_2-\,d_s$$
+
+Optimization alternates instead of solving one huge system: per iteration, (1) update surfel normals by averaging corresponding measurement normals; (2) jointly optimize each surfel's position and descriptor by Gauss-Newton — positions move only along the normal ($\mathbf{p}_s+t\,\mathbf{n}_s$), so each surfel is an independent 2×2 solve, which also avoids ill-conditioned drift in textureless regions; (3) merge similar surfels; (4) optimize all keyframe poses with $\mathfrak{se}(3)$ local updates $\mathbf{T}_{kG}\exp(\hat{\epsilon})$; (5) optionally optimize intrinsics plus a per-pixel depth-deformation image (solved cheaply via Schur complement). Discrete surfel creation (one per uncovered 4×4 pixel cell), outlier deletion, and radius updates are interleaved. Everything is implemented in CUDA; alternating BA proved slightly better and faster than a PCG solver on the full Gauss-Newton system.
+
+## Results
+
+On TUM RGB-D (ATE RMSE), BAD SLAM reaches 1.7 / 1.1 / 1.7 cm on fr1-desk / fr2-xyz / fr3-office — second average rank (2.7) tied with BundleFusion, behind ORB-SLAM2 (rank 1.0); disabling its intrinsics/depth-deformation optimization degrades this to 3.6 / 1.2 / 2.5 cm, showing how much consumer-camera miscalibration matters. On synthetic re-renderings of TUM scenes, BAD SLAM wins outright (average ATE 0.15 cm clean vs 0.47 for ORB-SLAM2 and 0.34 for BundleFusion), and adding rolling shutter and asynchronous RGB-D degrades every method several-fold — motivating the new benchmark. The ETH3D SLAM benchmark (61 training + 35 test sequences, synchronized global-shutter active-stereo cameras, motion-capture ground truth, online leaderboard with withheld test GT) reverses the TUM ranking: BAD SLAM significantly outperforms ORB-SLAM2, BundleFusion, DVO SLAM, and ElasticFusion on both training and test sets, while the "hard" sequences (textureless scenes, fast motion, dynamics) defeat all evaluated methods. The system runs in real time on an i7-6700K + GTX 1080 (~370 ms of BA budget per keyframe at ~27 Hz input, one keyframe per 10 frames; the Fig. 1 scene holds ~335,000 surfels).
 
 ## Why it matters for SLAM
 
-BAD SLAM demonstrated that the accuracy argument for bundle adjustment — long settled for sparse SLAM by Strasdat's "Why filter?" analysis — extends to fully dense RGB-D SLAM: joint pose-and-structure optimization removes the systematic biases of decoupled tracking-then-fusion pipelines. Its ETH3D benchmark became a standard evaluation suite for RGB-D SLAM. Reach for the ideas here when tracking-versus-mapping inconsistency, not sensor noise, is your accuracy bottleneck.
+BAD SLAM demonstrated that the accuracy argument for bundle adjustment — long settled for sparse SLAM by Strasdat's "Why filter?" analysis — extends to fully dense RGB-D SLAM: joint pose-and-structure optimization removes the systematic biases of decoupled tracking-then-fusion pipelines. Just as lasting is its evaluation lesson: results on poorly calibrated, rolling-shutter benchmarks can invert the true ranking of methods, and its ETH3D benchmark became a standard evaluation suite for RGB-D SLAM. Reach for the ideas here when tracking-versus-mapping inconsistency, not sensor noise, is your accuracy bottleneck.
 
 ## Related
 
-- [ElasticFusion](elasticfusion.md) — surfel mapping with decoupled frame-to-model tracking
+- [ElasticFusion](elasticfusion.md) — surfel mapping with decoupled frame-to-model tracking and map deformation
 - [BundleFusion](bundlefusion.md) — global consistency via sparse-feature BA and TSDF re-integration
 - [DVO](dvo.md) — robust direct RGB-D alignment, a precursor of dense direct methods
 - [TSDF vs Surfel maps](tsdf-vs-surfel-maps.md) — the representation choice behind the system
 - [DSO](../level-03-monocular-slam/dso.md) — the sparse direct BA counterpart in monocular SLAM
-
-[Back to Level 4](../README.md#level-4-rgb-d-visual-slam)

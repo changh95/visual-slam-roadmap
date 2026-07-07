@@ -46,5 +46,3 @@ Robots plan, control, and avoid obstacles in meters, so metric scale is non-nego
 - [Observability](../level-06-vio-vins/observability.md)
 - [Stereo DSO](stereo-dso.md)
 - [VI-DSO](../level-06-vio-vins/vi-dso.md)
-
-[Back to Level 7](../README.md#level-7-stereo-slam)

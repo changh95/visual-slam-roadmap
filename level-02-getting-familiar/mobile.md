@@ -36,5 +36,3 @@ Mobile AR is where visual-inertial SLAM met mass deployment, and phone constrain
 - [C++](cpp.md)
 - [Edge deployment](edge-deployment.md)
 - [Deployed VIO (ARKit / ARCore / etc.)](../level-06-vio-vins/deployed-vio.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

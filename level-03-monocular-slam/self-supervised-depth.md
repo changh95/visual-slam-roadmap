@@ -58,5 +58,3 @@ Self-supervised depth turns a single camera into an approximate depth sensor usi
 - [CNN-SLAM](cnn-slam.md)
 - [DVSO](dvso.md)
 - [D3VO](d3vo.md)
-
-[Back to Level 3](../README.md#level-3-monocular-visual-slam)

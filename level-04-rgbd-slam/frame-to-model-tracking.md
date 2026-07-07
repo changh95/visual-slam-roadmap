@@ -48,5 +48,3 @@ Frame-to-model tracking is the defining trick of dense RGB-D SLAM: it is why Kin
 - [ElasticFusion](elasticfusion.md) — surfel-based frame-to-model tracking
 - [TSDF vs Surfel maps](tsdf-vs-surfel-maps.md) — the two model representations you track against
 - [DVO](dvo.md) — robust direct RGB-D alignment
-
-[Back to Level 4](../README.md#level-4-rgb-d-visual-slam)

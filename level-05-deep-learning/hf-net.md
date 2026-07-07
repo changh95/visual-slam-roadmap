@@ -2,26 +2,35 @@
 
 > Sarlin 2019 · [Paper](https://arxiv.org/abs/1812.03506)
 
-**One-line summary** — Coarse-to-fine hierarchical localization: global retrieval narrows the search to candidate database images, local feature matching then yields a precise 6-DoF pose — with HF-Net computing both feature types in a single CNN forward pass.
+**One-line summary** — Coarse-to-fine hierarchical localization: global retrieval narrows the search to candidate places, local feature matching then yields a precise 6-DoF pose — with HF-Net computing both feature types in a single CNN forward pass.
 
 ## Problem
 
-Robust and accurate visual localization is fundamental for autonomous driving, mobile robotics, and augmented reality, but it remains challenging at large scale and under significant appearance change (day-night, seasons). State-of-the-art methods at the time not only struggled in those conditions but were also too resource-intensive for real-time applications: matching a query against every database image is unaffordable, yet global retrieval alone gives only coarse, meter-level place hypotheses rather than a 6-DoF pose.
+Robust and accurate visual localization is fundamental for autonomous driving, mobile robotics, and AR, but remains hard at large scale and under strong appearance change (day-night, seasons). Direct 2D-3D matching methods (Active Search, CSL) are accurate but become ambiguous and slow as models grow and appearance changes; image-retrieval methods are robust but only give a pose up to the database discretization. Hand-crafted features (SIFT) limit robustness, learned dense features are intractable on mobile — and computing a retrieval network plus a local-feature network separately is redundant, since both start from the same low-level image cues.
 
-## Key ideas
+## Method & architecture
 
-- **Coarse-to-fine paradigm**: first perform global retrieval to obtain location hypotheses, and only later match local features within those candidate places — accuracy of local matching at the cost of retrieval, not exhaustive search.
-- **Coarse step — global retrieval**: a NetVLAD global descriptor retrieves the top-$k$ candidate database images for the query.
-- **Fine step — local matching + PnP**: SuperPoint local features are matched against the candidates, and the resulting 2D-3D correspondences (via an SfM model) feed PnP + RANSAC for the final 6-DoF pose.
-- **HF-Net — one network, both feature types**: a single monolithic CNN simultaneously predicts local features and global descriptors; it is trained by multi-task distillation from NetVLAD and SuperPoint teachers, so the whole front-end costs one forward pass.
-- **Runtime by design**: the hierarchical structure itself yields significant runtime savings — most of the database is never touched by expensive local matching — making the system suitable for real-time operation on robots and mobile devices.
-- **Learned descriptors carry the robustness**: the localization robustness across large appearance variations comes from the learned global and local features, not from any appearance-specific engineering.
+**Hierarchical localization pipeline** (following Sarlin 2018, upgraded with learned features):
+1. *Prior retrieval*: match the query's global descriptor against database images; the k-nearest neighbors are candidate locations.
+2. *Covisibility clustering*: group prior frames into *places* — connected components of the covisibility graph linking database images to the SfM model's 3D points.
+3. *Local matching*: per place, match query 2D keypoints to the place's 3D points and estimate a 6-DoF pose with PnP + RANSAC, stopping at the first valid pose. A modified ratio test only rejects a match if the two nearest neighbors belong to *different* 3D points, keeping matches in highly covisible areas.
 
-## Results & impact
+The strongest variant, **NV+SP**, uses NetVLAD for retrieval and SuperPoint for local features; SfM models are re-triangulated with SuperPoint keypoints via COLMAP under ground-truth reference poses.
 
-- Set a new state of the art on two challenging large-scale localization benchmarks with severe appearance change — Aachen Day-Night and RobotCar Seasons — while running in real time.
-- The companion `hloc` toolbox became the standard pipeline for the Long-Term Visual Localization benchmarks, with SuperPoint + SuperGlue via hloc the dominant baseline for indoor and outdoor localization.
-- The coarse-to-fine recipe became the universal template for relocalization: retrieve with a global descriptor, verify and refine with local matches.
+**HF-Net.** To make this run on mobile, a single MobileNetV2 encoder (depth multiplier 0.75) feeds three heads: keypoint scores and dense local descriptors (SuperPoint's parameter-free decoding, branching at layer 7 where spatial resolution is still high) and a NetVLAD global-descriptor head at layer 18 — local features are lower-level than image-wide ones, so the split points differ.
+
+**Multi-task distillation.** Ground-truth local correspondences and globally diverse imagery don't coexist in any dataset, so HF-Net is instead trained to copy three teachers — NetVLAD ($t_1$, global), SuperPoint ($t_2$ descriptors, $t_3$ keypoints) — with self-balancing loss weights $w_{1,2,3}$ (Kendall et al.):
+
+$$L=e^{-w_{1}}\|\mathbf{d}^{g}_{s}-\mathbf{d}^{g}_{t_{1}}\|_{2}^{2}+e^{-w_{2}}\|\mathbf{d}^{l}_{s}-\mathbf{d}^{l}_{t_{2}}\|_{2}^{2}+2e^{-w_{3}}\,\mathrm{CrossEntropy}(\mathbf{p}_{s},\mathbf{p}_{t_{3}})+\sum_{i}w_{i}$$
+
+where $\mathbf{d}^{g},\mathbf{d}^{l}$ are global/local descriptors and $\mathbf{p}$ keypoint scores. Training uses 185k Google Landmarks day-time images plus 37k night/dawn Berkeley Deep Drive images (night data proved critical for night retrieval), with photometric augmentation but teacher targets predicted on clean images.
+
+## Results
+
+- **Benchmarks** (recall within distance/orientation thresholds): on **Aachen Day-Night**, NV+SP localizes 40.8 / 56.1 / 74.5% of night queries at (0.5m,2°)/(1m,5°)/(5m,10°) vs 30.6/43.9/58.2 for NV+SIFT and 19.4/30.6/43.9 for Active Search. On **CMU Seasons** urban, NV+SP reaches 91.7/94.6/97.7 vs 75.0/82.1/87.8 for the semantic SMC baseline. On **RobotCar Seasons** night, 6.6/17.1/32.2 vs 0.5/1.1/3.4 for AS. HF-Net tracks its NV+SP upper bound within 2.6% average recall (its distilled global descriptor is the limiting factor on blurry RobotCar night queries).
+- **Distillation can beat the teacher**: swapping HF-Net's local features into the NV+SP pipeline (NV+HF-Net) slightly outperforms SuperPoint itself on Aachen (e.g., 81.2 vs 79.7 at 0.25m day).
+- **Leaner maps**: the SuperPoint/HF-Net Aachen model has 685k 3D points vs 1,899k for SIFT and 2,576 vs 10,230 keypoints per image, with a higher fraction of keypoints matched (33.8% vs 18.8%) — sparser models that localize better.
+- **Runtime** (GTX 1080): full localization in 45 ms on Aachen day vs 148 ms for NV+SP, 375 ms for Active Search and 1356 ms for NV+SIFT — HF-Net inference is 7x faster than running NetVLAD+SuperPoint separately, and the whole system runs at over 20 FPS, ~10x faster than AS.
 
 ## Why it matters for SLAM
 
@@ -34,5 +43,3 @@ The coarse-to-fine paradigm HF-Net established is now the universal design for r
 - [SuperPoint](superpoint.md) — the local features used for fine matching
 - [SuperGlue](superglue.md) — the learned matcher that later upgraded the fine stage
 - [Visual Place Recognition (VPR)](../level-03-monocular-slam/visual-place-recognition-vpr.md) — the coarse retrieval problem in general
-
-[Back to Level 5](../README.md#level-5-applying-deep-learning)

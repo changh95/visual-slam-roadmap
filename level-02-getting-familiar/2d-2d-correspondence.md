@@ -57,5 +57,3 @@ Degenerate configurations matter: a planar scene or pure rotation makes $F$/$E$ 
 - [Triangulation](../level-01-beginner/triangulation.md)
 - [Keypoints](keypoints.md)
 - [Scale ambiguity](../level-03-monocular-slam/scale-ambiguity.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

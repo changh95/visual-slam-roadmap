@@ -46,5 +46,3 @@ RADAR is the all-weather sensor: when perception must keep working in rain, fog,
 - [Sonar](sonar.md)
 - [Exteroceptive sensor](exteroceptive-sensor.md)
 - [Multi-sensor calibration](multi-sensor-calibration.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

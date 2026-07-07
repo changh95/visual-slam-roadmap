@@ -54,5 +54,3 @@ Almost every deployed SLAM system is proprioceptive + exteroceptive fusion: VIO 
 - [IMU](imu.md)
 - [Odometry](odometry.md)
 - [IMU noise model](../level-06-vio-vins/imu-noise-model.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

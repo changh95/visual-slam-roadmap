@@ -53,5 +53,3 @@ Real-time SLAM exists because of structure-exploiting linear algebra: without th
 - [Pose graph optimization](pose-graph-optimization.md)
 - [Marginalization](marginalization.md)
 - [Math libraries](math-libraries.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

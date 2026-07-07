@@ -75,5 +75,3 @@ The back-end of every system you will study is written against one of these libr
 - [MAP inference as sparse nonlinear least squares](map-inference-as-sparse-nonlinear-least-squares.md)
 - [Incremental smoothing (iSAM/iSAM2)](incremental-smoothing.md)
 - [Schur complement / Sparsity](schur-complement-sparsity.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

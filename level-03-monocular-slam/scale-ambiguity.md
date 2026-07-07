@@ -50,5 +50,3 @@ Scale ambiguity dictates system design: it is *the* reason phones and headsets a
 - [Metric3D](../level-05-deep-learning/metric3d.md)
 - [MASt3R](mast3r.md)
 - [CubeSLAM](cubeslam.md)
-
-[Back to Level 3](../README.md#level-3-monocular-visual-slam)

@@ -56,5 +56,3 @@ Your choice of exteroceptive sensor dictates the entire SLAM architecture — fe
 - [LiDAR](lidar.md)
 - [IMU](imu.md)
 - [Multi-sensor calibration](multi-sensor-calibration.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

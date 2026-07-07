@@ -58,5 +58,3 @@ The gap between "the paper runs at 30 FPS" and "it runs on my robot" is exactly 
 - [SuperPoint](../level-05-deep-learning/superpoint.md)
 - [XFeat](../level-05-deep-learning/xfeat.md)
 - [LightGlue](../level-05-deep-learning/lightglue.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

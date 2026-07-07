@@ -46,5 +46,3 @@ Incremental smoothing is what makes the "smoothing beats filtering" insight prac
 - [Marginalization](marginalization.md)
 - [Kimera-VIO](../level-06-vio-vins/kimera-vio.md)
 - [LIO-SAM](../level-09-lidar-visual-lidar-slam/lio-sam.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

@@ -68,5 +68,3 @@ Real-time SLAM lives close to the hardware, and the boundary between your algori
 - [C++/Python interop](cpp-python-interop.md)
 - [Edge deployment](edge-deployment.md)
 - [Camera device](camera-device.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

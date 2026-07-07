@@ -47,5 +47,3 @@ The classic failure modes of visual SLAM — motion blur during aggressive motio
 - [Ultimate-SLAM](ultimate-slam.md)
 - [EDS](eds.md)
 - [Event-based Vision Survey](event-based-vision-survey.md)
-
-[Back to Level 10](../README.md#level-10-event-camera-slam)

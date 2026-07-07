@@ -60,5 +60,3 @@ SLAM systems assume that undistorted, calibrated observations feed their geometr
 - [Epipolar geometry](epipolar-geometry.md)
 - [Multi-sensor calibration](../level-02-getting-familiar/multi-sensor-calibration.md)
 - [Camera device](../level-02-getting-familiar/camera-device.md)
-
-[Back to Level 1](../README.md#level-1-beginner)

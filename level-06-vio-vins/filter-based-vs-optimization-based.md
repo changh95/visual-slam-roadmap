@@ -60,5 +60,3 @@ This is the VIO version of the classic "why filter?" question studied for visual
 - [Basalt](basalt.md) — nonlinear factor recovery to fix marginalization-prior linearization error.
 - [Marginalization](../level-02-getting-familiar/marginalization.md) — the mechanism connecting both worlds.
 - [Consistency](../level-02-getting-familiar/consistency.md) — the estimator property at stake in this choice.
-
-[Back to Level 6](../README.md#level-6-vio--vins)

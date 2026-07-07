@@ -6,29 +6,35 @@
 
 ## Problem
 
-NeRF synthesises photorealistic novel views, but it has a hard prerequisite: accurate camera poses for every training image, typically pre-computed with COLMAP. When poses are noisy or unknown, NeRF training fails — the scene representation and the registration problem are coupled, and each needs the other to converge. Worse, the failure is structural: NeRF's high-frequency positional encoding creates a highly non-convex photometric loss landscape riddled with local minima for the pose variables, so simply making poses learnable and back-propagating does not work. BARF ("Bundle-Adjusting Neural Radiance Fields") tackles this joint problem of learning a neural 3D representation while registering the camera frames.
+NeRF synthesises photorealistic novel views, but it has a hard prerequisite: accurate camera poses for every training image, typically pre-computed with an SfM package. When poses are noisy or unknown, naive pose optimisation with NeRF "is sensitive to initialization" and "may lead to suboptimal solutions of the 3D scene representation". Reconstruction and registration form a chicken-and-egg problem: recovering 3D structure requires known poses, while localizing requires reliable correspondences from the reconstruction. BARF tackles training NeRF from imperfect (or even unknown) camera poses — the joint problem of learning neural 3D representations and registering camera frames — as a form of photometric bundle adjustment with view synthesis as the proxy objective.
 
-## Key ideas
+## Method & architecture
 
-- **Joint pose + NeRF optimisation**: camera poses $T_i \in SE(3)$, parameterised in the Lie algebra $\mathfrak{se}(3)$ for unconstrained gradient-based updates, are treated as learnable parameters optimised alongside the NeRF MLP weights $\theta$ by minimising the photometric rendering loss
+BARF first analyses 2D image alignment: registering images by gradient descent on $\min_{\mathbf{p}}\sum_{\mathbf{x}}\|\mathcal{I}_1(\mathcal{W}(\mathbf{x};\mathbf{p}))-\mathcal{I}_2(\mathbf{x})\|_2^2$ works only if the "steepest descent image" (the Jacobian chaining image gradients through the warp) gives *coherent* per-pixel updates — which is why classical Lucas-Kanade alignment blurs images coarse-to-fine to widen the basin of attraction. The same structure appears in 3D with NeRF. A pixel's colour is volume-rendered through the MLP $f$:
 
-  $$\min_{\theta,\, \{T_i\}} \sum_i \sum_{\mathbf{r}} \left\| \hat{C}_\theta(\mathbf{r};\, T_i) - C_i(\mathbf{r}) \right\|^2$$
+$$\hat{\mathcal{I}}(\mathbf{u})=\int_{z_{\text{near}}}^{z_{\text{far}}}T(\mathbf{u},z)\,\sigma(z\bar{\mathbf{u}})\,\mathbf{c}(z\bar{\mathbf{u}})\,\mathrm{d}z\;,\qquad T(\mathbf{u},z)=\exp\Big(-\int_{z_{\text{near}}}^{z}\sigma(z'\bar{\mathbf{u}})\,\mathrm{d}z'\Big)$$
 
-  — bundle adjustment where the "map" is a neural field and the "reprojection error" is a rendering residual.
-- **Theoretical link to classical image alignment**: BARF establishes the connection to Lucas-Kanade-style registration. In classical alignment, smoothing the image widens the basin of attraction (Gaussian-pyramid coarse-to-fine); BARF shows the same principle applies to synthesis-based registration against a neural field.
-- **Positional encoding is the obstacle**: naively applying NeRF's positional encoding $\gamma_l(\mathbf{x}) = [\sin(2^l \pi \mathbf{x}), \cos(2^l \pi \mathbf{x})]$ has a *negative* impact on registration — the $2^l$ frequency scaling amplifies gradient oscillations, so the pose gradients from high-frequency components are incoherent and the optimisation falls into local minima.
-- **Coarse-to-fine frequency schedule**: BARF progressively activates the encoding's frequency bands during training with a smooth windowing function
+and BARF jointly optimises the $M$ camera poses $\mathbf{p}_i\in\mathbb{R}^6$ (parameterised in the Lie algebra $\mathfrak{se}(3)$) and NeRF weights $\boldsymbol{\Theta}$ over the synthesis-based objective
 
-  $$w_l(\alpha) = \tfrac{1}{2}\bigl(1 - \cos(\pi \cdot \mathrm{clamp}(\alpha - l,\, 0,\, 1))\bigr)$$
+$$\min_{\mathbf{p}_1,\dots,\mathbf{p}_M,\boldsymbol{\Theta}}\;\sum_{i=1}^{M}\sum_{\mathbf{u}}\big\|\hat{\mathcal{I}}(\mathbf{u};\mathbf{p}_i,\boldsymbol{\Theta})-\mathcal{I}_i(\mathbf{u})\big\|_2^2\;.$$
 
-  where $\alpha$ ramps up over training: early on only low frequencies are active (smooth landscape, wide convergence basin, poses move freely); as poses converge, higher bands switch on and the scene sharpens to full detail.
-- **Not a full SLAM system**: BARF is batch co-optimisation of poses and scene — not real-time, not incremental, and it still needs roughly known intrinsics — but it is exactly the tracking machinery a NeRF-based SLAM system needs.
+The obstacle is positional encoding. NeRF lifts inputs with $\gamma_k(\mathbf{x})=\big[\cos(2^k\pi\mathbf{x}),\sin(2^k\pi\mathbf{x})\big]$, whose Jacobian
 
-## Results & impact
+$$\frac{\partial\gamma_k(\mathbf{x})}{\partial\mathbf{x}}=2^k\pi\cdot\big[-\sin(2^k\pi\mathbf{x}),\cos(2^k\pi\mathbf{x})\big]$$
 
-On synthetic scenes and real-world data (LLFF forward-facing scenes), BARF effectively optimises the neural scene representation while resolving large camera pose misalignment at the same time, reaching view-synthesis quality close to a NeRF trained with ground-truth poses — whereas naive joint optimisation with full positional encoding gets stuck. The paper explicitly frames the consequence: view synthesis and localization from video sequences with unknown poses, "opening up new avenues for visual localization systems (e.g. SLAM)" and dense 3D mapping.
+amplifies gradients by $2^k\pi$ while flipping direction at the same frequency, so pose gradients from sampled 3D points "are incoherent … and can easily cancel out each other". BARF's fix is a dynamic low-pass filter: weight the $k$-th band as $\gamma_k(\mathbf{x};\alpha)=w_k(\alpha)\cdot\big[\cos(2^k\pi\mathbf{x}),\sin(2^k\pi\mathbf{x})\big]$ with
 
-The impact was immediate and broad: tracking-by-rendering in iMAP, NICE-SLAM and their successors rests on the demonstration that poses can be estimated *through* the scene representation, and the coarse-to-fine frequency schedule became a standard ingredient across pose-free neural-field methods (and reappears as scheduled hash-grid smoothing in later systems).
+$$w_k(\alpha)=\begin{cases}0 & \text{if } \alpha<k\\[2pt] \dfrac{1-\cos((\alpha-k)\pi)}{2} & \text{if } 0\leq\alpha-k<1\\[2pt] 1 & \text{if } \alpha-k\geq 1\end{cases}$$
+
+where $\alpha\in[0,L]$ ramps with optimisation progress: from raw 3D input ($\alpha=0$, smooth landscape, poses move freely) to full encoding ($\alpha=L$, scene sharpens to full detail). In the NeRF experiments $\alpha$ is ramped linearly from iteration 20K to 100K of 200K, with $L=10$ frequency bands, Adam on both poses and network. BARF is batch co-optimisation — not real-time or incremental, and intrinsics are assumed known — but it is exactly the tracking machinery a NeRF-based SLAM system needs.
+
+## Results
+
+- **2D planar alignment** (homography warps in $\mathfrak{sl}(3)$): BARF reaches warp error 0.0096 and patch PSNR 35.30, versus 0.2949 / 23.41 for full positional encoding and 0.0641 / 24.72 without encoding.
+- **Synthetic NeRF scenes** (8 scenes, poses perturbed by $\delta\mathbf{p}\sim\mathcal{N}(\mathbf{0},0.15\mathbf{I})$ ≈ 14.9° rotation, 0.26 translation): BARF achieves near-perfect registration — e.g. Chair 0.096° rotation / 0.428 translation error with PSNR 31.16 vs 31.91 for a reference NeRF trained on ground-truth poses; naive full encoding lands at 7.19° and PSNR 19.02.
+- **LLFF real-world forward-facing scenes, all poses initialised to identity**: mean rotation error 0.573° and translation error 0.331 vs 84.509° / 31.598 for naive positional encoding; mean PSNR 23.97 vs 11.03 (naive) and 22.56 for reference NeRF trained on SfM poses.
+
+The conclusion flags the consequence explicitly: BARF "opens up exciting avenues for rethinking visual localization for SfM/SLAM systems and self-supervised dense 3D reconstruction frameworks using view synthesis as a proxy objective."
 
 ## Why it matters for SLAM
 
@@ -41,5 +47,3 @@ NeRF originally *consumed* camera poses (from COLMAP); BARF showed poses can be 
 - [NICE-SLAM](nice-slam.md)
 - [NeRF-SLAM](nerf-slam.md)
 - [GO-SLAM](go-slam.md)
-
-[Back to Level 3](../README.md#level-3-monocular-visual-slam)

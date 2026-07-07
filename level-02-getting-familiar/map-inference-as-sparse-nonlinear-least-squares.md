@@ -71,5 +71,3 @@ This formulation is the reason the field moved from filtering to optimization ("
 - [Schur complement / Sparsity](schur-complement-sparsity.md)
 - [Incremental smoothing (iSAM/iSAM2)](incremental-smoothing.md)
 - [Visual-SLAM: Why filter?](../level-03-monocular-slam/visual-slam-why-filter.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

@@ -54,5 +54,3 @@ The architecture choice drives everything else in a collaborative SLAM design â€
 - [Communication constraints](communication-constraints.md)
 - [Map merging](map-merging.md)
 - [DOOR-SLAM](door-slam.md)
-
-[Back to Level 8](../README.md#level-8-collaborative--multi-robot-slam)

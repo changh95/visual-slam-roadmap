@@ -43,5 +43,3 @@ Simulation shortens the develop-test loop from hours of hardware fiddling to sec
 - [Docker](docker.md)
 - [Metrics](metrics.md)
 - [CI/CD](ci-cd.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

@@ -2,29 +2,46 @@
 
 > Teed 2020 · [Paper](https://arxiv.org/abs/2003.12039)
 
-**One-line summary** — Builds a 4D all-pairs correlation volume and iteratively refines optical flow with a ConvGRU that looks up correlations around the current estimate — ECCV 2020 Best Paper and the defining architecture of modern optical flow.
+**One-line summary** — Builds a 4D all-pairs correlation volume and iteratively refines a single high-resolution optical flow field with a weight-tied ConvGRU that looks up correlations around the current estimate — ECCV 2020 Best Paper and the defining architecture of modern optical flow.
 
 ## Problem
 
-The dominant deep flow architecture (PWC-Net) inherited the classical coarse-to-fine pyramid: estimate flow at low resolution, then warp and refine. That design has structural blind spots — the cost volume at each level only covers a small search window, small fast-moving objects disappear at coarse resolutions, and mistakes made early in the pyramid are difficult to undo at finer levels.
+The dominant deep flow architectures (PWC-Net and kin) inherited the classical coarse-to-fine pyramid: estimate flow at low resolution, then warp and refine. That design has structural blind spots — the cost volume at each level covers only a small search window, small fast-moving objects disappear at coarse resolutions, mistakes made early in the pyramid are difficult to undo, and multi-stage cascades often need over 1M training iterations. Prior iterative-refinement schemes did not tie weights across iterations (or, like IRR, were limited by their large recurrent unit). RAFT asks: what if the network precomputes matching costs between *all* pixel pairs, and a lightweight learned optimizer refines one high-resolution flow field by querying that volume as needed?
 
-RAFT asked: what if the network precomputes matching costs between *all* pixel pairs, and a learned iterative optimizer refines a single high-resolution flow field by querying that volume as needed — the deep-learning analogue of a classical variational solver iterating on a data term?
+## Method & architecture
 
-## Key ideas
+Three stages, all differentiable and trained end-to-end:
 
-- **All-pairs correlation**: Per-pixel features $\mathbf{g}(\mathbf{x})$ are extracted at 1/8 resolution, and correlation $C(\mathbf{x}_1, \mathbf{x}_2) = \langle \mathbf{g}(\mathbf{x}_1), \mathbf{g}(\mathbf{x}_2) \rangle$ is precomputed for *every* pixel pair, then average-pooled into a 4-level pyramid $\{C^1, C^2, C^4, C^8\}$. Unlike PWC-Net's windowed cost volume, no displacement is out of reach.
-- **Iterative ConvGRU update**: A recurrent update operator repeatedly looks up correlation values in a local grid around the current flow estimate and emits a residual update $\mathbf{f}^{k+1} = \mathbf{f}^k + \Delta\mathbf{f}$ — mimicking the iterations of a classical first-order optimizer, but with learned update rules. Weights are shared across iterations.
-- **Single resolution, many iterations**: Replaces the coarse-to-fine pyramid (where coarse errors are hard to undo) with iterative refinement of one high-resolution field; a separate context encoder feeds scene information into the update operator.
-- **Correlation pyramid ≠ image pyramid**: Pooling the *correlation volume* (not the image) preserves fine spatial resolution in the first image while still capturing large displacements — the lookup radius covers big motions at coarse correlation levels without sacrificing localization.
-- **Supervision over all iterations**: Exponentially weighted $\ell_1$ loss $\mathcal{L} = \sum_i \gamma^{N-i}\|\mathbf{f}^i - \mathbf{f}^{gt}\|_1$ trains every refinement step, so the trajectory of estimates converges quickly and extra inference iterations still help.
-- **Learned optimization as a pattern**: The recipe — build a matching-cost data structure, then unroll a learned recurrent optimizer over it — generalizes far beyond flow, which is exactly why it propagated into SLAM.
+1. **Feature extraction**: an encoder $g_\theta : \mathbb{R}^{H \times W \times 3} \mapsto \mathbb{R}^{H/8 \times W/8 \times D}$ ($D = 256$, 6 residual blocks) encodes both frames; a context network $h_\theta$ of identical architecture encodes $I_1$ only. Both run once per pair.
+2. **All-pairs correlation**: visual similarity is precomputed for every pixel pair as a single matrix multiplication,
 
-## Results & impact
+$$C_{ijkl} = \sum_h g_\theta(I_1)_{ijh} \cdot g_\theta(I_2)_{klh}, \qquad \mathbf{C} \in \mathbb{R}^{H \times W \times H \times W}$$
 
-- On KITTI, F1-all error of 5.10%, a 16% error reduction from the best published result (6.10%); on Sintel (final pass), 2.855 px end-point-error, a 30% reduction from the best published result (4.098 px).
-- Strong cross-dataset generalization and high efficiency in inference time, training speed, and parameter count — it did not buy accuracy with scale.
-- ECCV 2020 Best Paper; RAFT variants and descendants (RAFT-3D, SEA-RAFT, FlowFormer and other transformer hybrids) have dominated flow benchmarks since.
-- The all-pairs-correlation + ConvGRU update operator became the backbone of learned SLAM: DROID-SLAM and DPVO are RAFT-style update operators wrapped around differentiable bundle adjustment.
+   then the last two dimensions are average-pooled with kernels 1, 2, 4, 8 into a pyramid $\{\mathbf{C}^1, \mathbf{C}^2, \mathbf{C}^3, \mathbf{C}^4\}$. Pooling only the $I_2$ dimensions keeps the $I_1$ dimensions at full (1/8) resolution — large and small displacements are both captured without losing small fast-moving objects. A lookup operator $L_\mathbf{C}$ bilinearly samples each level on a local grid around the current correspondence $\mathbf{x}' = \mathbf{x} + \mathbf{f}(\mathbf{x})$,
+
+$$\mathcal{N}(\mathbf{x}')_r = \{ \mathbf{x}' + \mathbf{dx} \mid \mathbf{dx} \in \mathbb{Z}^2,\ \lVert \mathbf{dx} \rVert_1 \le r \}$$
+
+   indexed at $\mathcal{N}(\mathbf{x}'/2^k)_r$ per level $k$ — a constant radius spans larger context at coarser levels (radius 4 at $k=4$ covers 256 pixels at original resolution).
+3. **Iterative updates**: starting from $\mathbf{f}_0 = \mathbf{0}$, a recurrent update operator (only 2.7M parameters, weights tied across all iterations) consumes correlation lookups, flow features, and context features $x_t$, and emits residual updates $\mathbf{f}_{k+1} = \mathbf{f}_k + \Delta\mathbf{f}$ via a convolutional GRU:
+
+$$z_t = \sigma(\mathrm{Conv}_{3\times3}([h_{t-1}, x_t], W_z)), \qquad r_t = \sigma(\mathrm{Conv}_{3\times3}([h_{t-1}, x_t], W_r))$$
+
+$$\tilde{h}_t = \tanh(\mathrm{Conv}_{3\times3}([r_t \odot h_{t-1}, x_t], W_h)), \qquad h_t = (1 - z_t) \odot h_{t-1} + z_t \odot \tilde{h}_t$$
+
+   The operator mimics a first-order optimizer — but instead of a Taylor-linearized data term it *learns* to propose the descent direction; bounded activations encourage convergence to a fixed point, and it can run 100+ iterations without diverging. Flow is predicted at 1/8 resolution and upsampled by a learned convex combination over each pixel's 3x3 coarse neighborhood (weights via softmax).
+
+Supervision covers the whole sequence of estimates with exponentially increasing weights:
+
+$$\mathcal{L} = \sum_{i=1}^{N} \gamma^{N-i} \lVert \mathbf{f}_{gt} - \mathbf{f}_i \rVert_1, \qquad \gamma = 0.8$$
+
+Training follows FlyingChairs then FlyingThings, then benchmark fine-tuning; on video, warm-start initialization forward-projects the previous frame's flow.
+
+## Results
+
+- **Sintel (final pass, test)**: EPE 2.855 px, a 30% error reduction from the best published result (4.098 px); ranked 1st on both clean and final passes. **KITTI**: F1-all 5.10%, a 16% reduction from the best published result (6.10%), ranked 1st among all optical flow methods.
+- **Generalization**: trained only on synthetic C+T data, 5.04 px EPE on KITTI-15 (train) vs 8.36 for the best prior deep network (40% reduction); Sintel train clean EPE 1.43, 29% lower than FlowNet2.
+- **Efficiency**: 10 fps on 1088x436 video (GTX 1080Ti); trains with 10x fewer iterations than other architectures; the 1M-parameter RAFT-S outperforms PWC-Net and VCN, both over 6x larger. In ablations RAFT surpasses PWC-Net after 3 update iterations and FlowNet2 after 6; it scales to 1080p DAVIS video (550 ms for 12 iterations, of which all-pairs correlation is 95 ms).
+- Ablations confirm each choice: GRU beats plain convolutions, tied weights beat untied, all-pairs beats windowed correlation and warping-based refinement, learned upsampling beats bilinear.
 
 ## Why it matters for SLAM
 
@@ -38,5 +55,3 @@ RAFT's "correlation volume + iterative recurrent refinement" recipe became the w
 - [FlowFormer](flowformer.md) — Transformer-based successor for cost-volume reasoning
 - [DROID-SLAM](../level-03-monocular-slam/droid-slam.md) — RAFT machinery turned into a full SLAM system
 - [DPVO](../level-03-monocular-slam/dpvo.md) — sparse patch-based odometry from the same lineage
-
-[Back to Level 5](../README.md#level-5-applying-deep-learning)

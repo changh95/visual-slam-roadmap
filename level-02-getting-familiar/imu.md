@@ -59,5 +59,3 @@ Virtually every deployed visual tracking system — phone AR, drones, headsets, 
 - [IMU preintegration](../level-06-vio-vins/imu-preintegration.md)
 - [Introduction to Inertial Navigation](../level-06-vio-vins/introduction-to-inertial-navigation.md)
 - [Multi-sensor calibration](multi-sensor-calibration.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

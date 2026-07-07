@@ -59,5 +59,3 @@ Nearly every robot you will deploy on speaks ROS: sensor data arrives as ROS top
 - [Simulation](simulation.md)
 - [C++](cpp.md)
 - [Python](python.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

@@ -6,27 +6,35 @@
 
 ## Problem
 
-KinectFusion's fixed volume restricts scene size, and Kintinuous's rolling volume extends the range but still accumulates drift that must be corrected. Pose-graph approaches correct the camera trajectory, but keeping a *dense* map consistent with an optimized trajectory requires complex bookkeeping — every measurement must be re-associated with its corrected pose. ElasticFusion asks: what if we drop the pose graph entirely and treat the dense surfel map itself as an elastic surface that can be deformed into global consistency?
+Dense SLAM systems struggled with motion that is both extended and loopy — a person "painting" a room with a handheld depth camera. KinectFusion's fixed volume restricts scene size; Whelan's earlier Kintinuous scales to corridors via pose-graph deformation but performs poorly on locally loopy trajectories and cannot re-use revisited map areas; DVO-SLAM optimizes keyframe poses but builds no explicit continuous surface. ElasticFusion inverts the priority: instead of optimizing a camera trajectory (pose graph) and rebuilding the map, optimize the *map* itself — apply surface loop closures early and often so the system always stays near the mode of the map distribution.
 
-## Key ideas
+## Method & architecture
 
-- **Fused surfel-based model**: the map is a set of surfels $\mathcal{M} = \{(\mathbf{p}_i, \mathbf{n}_i, r_i, \mathbf{c}_i, w_i, t_i)\}$ — position, normal, radius, color, confidence weight, timestamp — split into *active* (recently observed) and *inactive* parts by time-windowing on $t_i$.
-- **Frame-to-model tracking (photometric + geometric)**: each frame is tracked against a prediction rendered from the active surfel map (not against the previous frame), jointly minimizing a point-to-plane ICP cost and a photometric RGB cost:
-  $$E = \sum_{i} \left[ w_{\mathrm{icp}} \left(\mathbf{n}_i^\top(\mathbf{T}\mathbf{v}_i - \mathbf{u}_i)\right)^2 + w_{\mathrm{rgb}} \left(I(\pi(\mathbf{T}\mathbf{v}_i)) - \hat{I}(\mathbf{u}_i)\right)^2 \right]$$
-- **Surfel fusion**: new depth measurements are merged into existing surfels when close enough (updating position, normal, color, and confidence), otherwise new surfels are created; surfels not seen recently become inactive and wait to be reconciled.
-- **Local loop closure**: when the camera revisits a region, the active model overlaps an inactive sub-model; a model-to-model surface alignment produces a local deformation that stitches the two back together, catching small drift continuously rather than only at big loop events.
-- **Global loop closure with randomized ferns**: fern-encoded frame appearance detects globally revisited places; the resulting constraint is propagated through the entire map by a non-rigid space deformation over a sparse embedded deformation graph with energy of the form
-  $$E_{\mathrm{def}} = \sum_k \left( \mathbf{R}_k^\top \mathbf{R}_k - \mathbf{I} \right)^2 + \sum_{k,\,j\in\mathcal{N}(k)} \|\mathbf{R}_k(\mathbf{g}_j - \mathbf{g}_k) + \mathbf{g}_k + \mathbf{t}_k - \mathbf{g}_j - \mathbf{t}_j\|^2,$$
-  where $\mathbf{g}_k, \mathbf{R}_k, \mathbf{t}_k$ are deformation-node position, rotation, and translation — no pose graph, no trajectory bookkeeping.
-- **Map-centric pipeline**: the full loop is `RGB-D input → surfel prediction (rendering) → frame-to-model ICP+RGB tracking → surfel fusion → local loop check → fern loop check → elastic deformation`. Joint optimization of map consistency through deformation replaces the usual "optimize poses, then rebuild map" cycle of pose-graph systems.
+Per-frame loop: RGB-D input → splatted surfel prediction → frame-to-model ICP+RGB tracking → surfel fusion → local (model-to-model) loop check → global (fern) loop check → non-rigid deformation. CUDA does tracking reductions and map management; OpenGL does view prediction.
 
-## Results & impact
+- **Fused surfel map**: an unordered list $\mathcal{M}$ of surfels with position $\mathbf{p}\in\mathbb{R}^3$, normal $\mathbf{n}$, colour $\mathbf{c}$, weight $w$, radius $r$, initialisation timestamp $t_0$ and last-updated timestamp $t$. A time window $\delta_t$ splits $\mathcal{M}$ into **active** surfels $\Theta$ (recently observed; used for tracking and fusion) and **inactive** surfels $\Psi$ (not used until a loop reactivates them).
+- **Joint frame-to-model tracking**: each frame is registered against a splatted rendering of the active model — depth *and* full colour. The geometric term is point-to-plane ICP between the live depth map and the predicted depth,
 
-Published at RSS 2015, ElasticFusion achieved state-of-the-art trajectory accuracy on the TUM RGB-D and ICL-NUIM benchmarks at the time, with visually superior reconstruction quality to KinectFusion and Kintinuous, running at roughly 30 Hz on an NVIDIA Titan X GPU. It established surfel-based dense SLAM with frame-to-model tracking as a primary paradigm alongside TSDF fusion, and pioneered non-rigid map deformation as a loop-closure mechanism. SemanticFusion (2016) extended it directly by attaching CNN semantic label distributions to its surfels, and its active/inactive model split and fern-based relocalization recur throughout later dense systems.
+$$E_{\mathrm{icp}} = \sum_{k} \Big( \big(\mathbf{v}^k - \exp(\hat{\boldsymbol{\xi}})\,\mathbf{T}\,\mathbf{v}_t^k\big)\cdot\mathbf{n}^k \Big)^2 ,$$
+
+  and the photometric term $E_{\mathrm{rgb}}$ penalizes intensity differences between the live colour image and the predicted active-model colour. The joint cost $E_{\mathrm{track}} = E_{\mathrm{icp}} + w_{\mathrm{rgb}} E_{\mathrm{rgb}}$ with $w_{\mathrm{rgb}} = 0.1$ is minimized by Gauss-Newton over a three-level coarse-to-fine pyramid (GPU tree reduction builds the 6×6 system, CPU Cholesky solves it).
+- **Deformation graph, sampled and connected in time**: each frame a fresh graph $\mathcal{G}$ of nodes (position $\mathcal{G}^n_{\mathbf{g}}$, transform $\mathcal{G}^n_{\mathbf{R}}, \mathcal{G}^n_{\mathbf{t}}$, timestamp) is sampled from the surfels; connectivity follows initialisation-time order (k = 4 neighbours), which prevents temporally uncorrelated passes over the same surface from influencing each other. A surfel is deformed by its influencing nodes:
+
+$$\hat{\mathcal{M}}^s_{\mathbf{p}} = \sum_{n\in I} w^n \big[ \mathcal{G}^n_{\mathbf{R}} (\mathcal{M}^s_{\mathbf{p}} - \mathcal{G}^n_{\mathbf{g}}) + \mathcal{G}^n_{\mathbf{g}} + \mathcal{G}^n_{\mathbf{t}} \big], \qquad w^n = \big(1 - \lVert \mathcal{M}^s_{\mathbf{p}} - \mathcal{G}^n_{\mathbf{g}} \rVert_2 / d_{\max} \big)^2 .$$
+
+- **Deformation optimisation**: given surface correspondences $\mathcal{Q}$ (source point, destination point, timestamps), the graph parameters minimize $E_{\mathrm{def}} = w_{\mathrm{rot}} E_{\mathrm{rot}} + w_{\mathrm{reg}} E_{\mathrm{reg}} + w_{\mathrm{con}} E_{\mathrm{con}} + w_{\mathrm{con}} E_{\mathrm{pin}}$ with $w_{\mathrm{rot}}{=}1, w_{\mathrm{reg}}{=}10, w_{\mathrm{con}}{=}100$: a rigidity term $E_{\mathrm{rot}} = \sum_l \lVert \mathcal{G}^{l\top}_{\mathbf{R}}\mathcal{G}^{l}_{\mathbf{R}} - \mathbf{I} \rVert_F^2$, an embedded-deformation smoothness term $E_{\mathrm{reg}}$ over graph edges, a constraint term $E_{\mathrm{con}} = \sum_p \lVert \phi(\mathcal{Q}^p_{\mathbf{s}}) - \mathcal{Q}^p_{\mathbf{d}} \rVert_2^2$, and a pin term that anchors the inactive area so the active model deforms *into* the inactive coordinate frame. Solved with Gauss-Newton and sparse Cholesky on the CPU, then applied to all surfels on the GPU.
+- **Local loop closure**: every frame (when no global loop fired), predicted renderings of the active and inactive model from the current pose are registered with the same ICP+RGB method; the registration is accepted only if the residual is small, inliers sufficient, and the eigenvalues of the Hessian-derived covariance stay below a threshold. Accepted constraints deform the map and reactivate the matched inactive surfels — many small loops are closed continuously.
+- **Global loop closure**: a randomized fern encoding database (on 80×60 downsampled *predicted* views rather than raw frames) detects revisits after arbitrary drift; matched views are registered, checked (including on $E_{\mathrm{con}}$ after optimisation), and applied as a whole-map deformation — no pose graph, no trajectory bookkeeping.
+
+## Results
+
+- **Trajectory (TUM RGB-D, ATE RMSE)**: fr1/desk 0.020 m, fr2/xyz 0.011 m, fr3/office 0.017 m, fr3/nst 0.016 m — on par with or better than DVO SLAM (0.021/0.018/0.035/0.018), RGB-D SLAM (0.023/0.008/0.032/0.017), MRSMap (0.043/0.020/0.042/2.018) and Kintinuous (0.037/0.029/0.030/0.031).
+- **Surface reconstruction (ICL-NUIM synthetic living room)**: mean distance to ground-truth model of 0.007 / 0.007 / 0.008 / 0.028 m on kt0-kt3 — superior to all compared systems (e.g. Kintinuous 0.011/0.008/0.009/0.150 m); trajectory ATE 0.009/0.009/0.014/0.106 m. Ablation on kt3: local loops only 0.099 m surface error, global loops only 0.103 m — both needed.
+- **Scale and speed**: comprehensive room scans of over 4.5 million surfels captured in real time; the Hotel sequence runs 7725 frames to 4.1M surfels with 328 graph nodes, 11 local and 1 global loop closures. Average frame time 31 ms, peaking at 45 ms (worst-case ≈22 Hz) on an Intel Core i7-4930K with an NVIDIA GTX 780 Ti.
 
 ## Why it matters for SLAM
 
-ElasticFusion made "the map is the state" a viable design: instead of correcting a camera trajectory and re-integrating measurements, it corrects the dense surface itself. It became the standard surfel-based dense SLAM backbone — SemanticFusion adds CNN semantics directly on its surfels — and its active/inactive model and fern relocalization ideas recur throughout later dense systems. Use it (or study it) whenever you want high-quality dense room-scale reconstruction with online loop closure.
+ElasticFusion made "the map is the state" a viable design: instead of correcting a camera trajectory and re-integrating measurements, it corrects the dense surface itself, staying close to the mode of the map distribution through frequent small deformations. It became the standard surfel-based dense SLAM backbone — SemanticFusion adds CNN semantics directly on its surfels — and its active/inactive model split, model-to-model local loops, and fern relocalisation recur throughout later dense systems. Study it for high-quality room-scale dense reconstruction with online loop closure.
 
 ## Related
 
@@ -36,5 +44,3 @@ ElasticFusion made "the map is the state" a viable design: instead of correcting
 - [TSDF vs Surfel maps](tsdf-vs-surfel-maps.md)
 - [Frame-to-model tracking](frame-to-model-tracking.md)
 - [BundleFusion](bundlefusion.md)
-
-[Back to Level 4](../README.md#level-4-rgb-d-visual-slam)

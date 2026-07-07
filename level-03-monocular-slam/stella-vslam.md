@@ -2,22 +2,29 @@
 
 > Community 2021 · [Paper](https://github.com/stella-cv/stella_vslam)
 
-**One-line summary** — The community-maintained successor to OpenVSLAM, rebooted after licence concerns, continuing a modular, library-style visual SLAM framework under permissive licensing.
+**One-line summary** — The community-maintained successor to OpenVSLAM, rebooted after licence concerns, continuing a modular, library-style visual SLAM framework with first-class perspective, fisheye, and equirectangular camera support.
 
 ## Problem
 
-OpenVSLAM was widely adopted, but portions of its code were suspected to derive from the GPLv3-licensed ORB-SLAM2 without carrying that licence, and the original repository was taken down. That left users of a popular, deployment-oriented SLAM library without a maintained upstream. The stella-cv community continued the project as Stella-VSLAM, addressing the licensing problem so the framework could keep being used and embedded, including in commercial contexts where GPL obligations are a real constraint.
+OpenVSLAM (Sumikura et al., ACMMM 2019) was widely adopted for its unique multi-camera-model support, but portions of its code were suspected to derive from the GPLv3-licensed ORB-SLAM2 without carrying that licence, and the original repository was withdrawn from GitHub in 2020. That left users of a popular, deployment-oriented SLAM library without a maintained upstream — particularly painful for drone applications using fisheye lenses and indoor scanning with 360-degree cameras, where no other actively maintained system filled the gap. The stella-cv community continued the project as Stella-VSLAM, addressing the licensing problem so the framework could keep being embedded, including in commercial contexts where GPL obligations are a real constraint.
 
-## Key ideas
+## Method & architecture
 
-- **Licence reboot**: the project's core purpose — continue OpenVSLAM's codebase and community under permissive licensing, with the problematic provenance addressed by reworking the affected components.
-- **OpenVSLAM feature parity**: retains the modular architecture and support for perspective, fisheye, equirectangular (360-degree), and stereo cameras — still one of the few maintained systems with first-class equirectangular support.
-- **Library-first philosophy**: like its predecessor, it is designed as a callable library with clean APIs rather than a monolithic application, including map save/load and a localization mode for map-reuse deployments.
-- **Community maintenance**: ongoing bug fixes, performance improvements, relocalization and map-management improvements, and platform support contributed by the open-source community keep it usable as the original ORB-SLAM-family research code ages.
+Stella-VSLAM is not a paper-backed research system but an engineering continuation of OpenVSLAM's design, which itself follows the ORB-SLAM2 three-thread architecture (tracking, local mapping, loop closing) rebuilt as a callable library:
 
-## Results & impact
+- **Unified camera model abstraction** — a generic camera interface supports perspective (pinhole + radial-tangential distortion), fisheye (Kannala-Brandt equidistant projection), and equirectangular (360-degree) projection. All downstream modules — feature extraction, map-point triangulation, bundle adjustment — operate through this interface without modification.
+- **ORB features with model-aware handling** — ORB keypoints drive tracking, mapping, and relocalization; for equirectangular input the image is handled so that feature matching and epipolar geometry remain valid on the sphere.
+- **Stereo depth integration** — in stereo configuration, each left-image keypoint gets depth from an epipolar block-matched right-image correspondence, following ORB-SLAM2:
 
-Stella-VSLAM tracks OpenVSLAM's accuracy — comparable to ORB-SLAM2 on the standard public benchmarks — while being actively maintained and permissively licensed. In practice it has become the default recommendation when someone needs an embeddable, 360-degree-capable, legally clean feature-based SLAM library, and it is one of the clearest examples in the field of open-source governance directly shaping which SLAM systems get deployed.
+$$Z = \frac{f \cdot b}{u_L - u_R}$$
+
+  where $f$ is the focal length, $b$ the stereo baseline, and $u_L - u_R$ the disparity.
+- **DBoW2 place recognition and loop closure** — the same bag-of-words pipeline as ORB-SLAM2, with loop constraints verified via $\mathrm{Sim}(3)$ optimization in monocular mode or $\mathrm{SE}(3)$ in metric (stereo/RGB-D) modes.
+- **Deployment tooling** — map save/load and a localization-only mode for map-reuse deployments, plus ROS1/ROS2 wrappers (launch files, TF2 integration), an improved build system, and ongoing community bug fixes and relocalization/map-management improvements.
+
+## Results
+
+There is no standalone evaluation paper; results are inherited and reproduced from OpenVSLAM. Per the roadmap book's coverage: Stella-VSLAM reproduces OpenVSLAM's published results on the EuRoC, KITTI, and TUM RGB-D benchmarks; on EuRoC with fisheye input it achieves ATE competitive with ORB-SLAM3's fisheye mode; and its equirectangular mode successfully maps indoor environments with a Ricoh Theta 360-degree camera where standard perspective SLAM fails. Community benchmarking reports confirm numerical parity with OpenVSLAM. In practice it has become the default recommendation for an embeddable, 360-degree-capable, legally clean feature-based SLAM library.
 
 ## Why it matters for SLAM
 
@@ -29,5 +36,4 @@ Stella-VSLAM is a practical, actively maintained entry point for feature-based v
 - [ORB-SLAM2](orb-slam2.md)
 - [ORB-SLAM3](orb-slam3.md)
 - [Camera models beyond pinhole](../level-01-beginner/camera-models-beyond-pinhole.md)
-
-[Back to Level 3](../README.md#level-3-monocular-visual-slam)
+- [Disparity vs Depth](../level-07-stereo-slam/disparity-vs-depth.md)

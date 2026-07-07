@@ -79,5 +79,3 @@ Factor graphs unified what used to be separate problem formulations — filterin
 - [Marginalization](marginalization.md)
 - [Math libraries (Eigen, Ceres, GTSAM, g2o)](math-libraries.md)
 - [Robust pose-graph optimization](robust-pose-graph-optimization.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

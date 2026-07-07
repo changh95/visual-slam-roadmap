@@ -51,5 +51,3 @@ Every sensor-fusion SLAM formulation — VIO, LiDAR-visual-inertial odometry, RA
 - [IMU](imu.md)
 - [LiDAR](lidar.md)
 - [VINS-Mono](../level-06-vio-vins/vins-mono.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

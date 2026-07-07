@@ -54,5 +54,3 @@ Feeding fisheye images into a pinhole+distortion model, or ignoring rolling shut
 - [Camera device](../level-02-getting-familiar/camera-device.md)
 - [Basalt](../level-06-vio-vins/basalt.md)
 - [Multi-sensor calibration](../level-02-getting-familiar/multi-sensor-calibration.md)
-
-[Back to Level 1](../README.md#level-1-beginner)

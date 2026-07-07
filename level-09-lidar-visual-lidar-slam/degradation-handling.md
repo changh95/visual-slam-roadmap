@@ -53,5 +53,3 @@ Fusion systems are sold on the promise that "the sensors cover each other's weak
 - [Tightly-coupled LiDAR-camera](tightly-coupled-lidar-camera.md) — why bad measurements are dangerous in joint optimization
 - [Observability](../level-06-vio-vins/observability.md) — the theory behind unconstrained state directions
 - [FAST-LIVO2](fast-livo2.md) — robustness machinery (raycast, exposure estimation) against visual degradation
-
-[Back to Level 9](../README.md#level-9-lidar--visual-lidar-fusion-slam)

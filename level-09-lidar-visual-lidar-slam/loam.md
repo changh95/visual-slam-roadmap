@@ -6,31 +6,40 @@
 
 ## Problem
 
-LiDAR SLAM faces two competing requirements: real-time operation demands fast processing, but accuracy demands registering each sweep against a large, consistent global map. Naive scan-to-map matching is too slow for real time, while pure frame-to-frame odometry drifts quickly. LOAM (RSS 2014) resolves the tension by decoupling the problem into two cooperating processes running at different frequencies — a design that let a spinning LiDAR on a moving vehicle be tracked accurately with the compute of a standard laptop.
+LiDAR SLAM faces two competing requirements: real-time operation demands fast processing, but accuracy demands registering each sweep against a large, consistent global map — while also undoing the motion distortion a moving scanner imprints on every sweep. Naive scan-to-map matching is too slow for real time; pure frame-to-frame odometry drifts. LOAM (RSS 2014) resolves the tension by dividing the problem between two cooperating algorithms running in parallel at different frequencies: coarse, fast odometry and fine, slow mapping.
 
-## Key ideas
+## Method & architecture
 
-- **Edge + planar features from curvature**: points on each scan ring are classified by a local curvature score computed from their neighbors on the same ring,
+**Feature extraction.** Points in each scan are scored by a local-surface smoothness term over their set $S$ of same-scan neighbors,
 
-  $$c = \frac{1}{|S| \cdot \|\mathbf{p}_i\|} \Big\| \sum_{j \in S,\, j \neq i} (\mathbf{p}_j - \mathbf{p}_i) \Big\|,$$
+$$c = \frac{1}{|S| \cdot \big\| X^{L}_{(k,i)} \big\|} \, \Big\| \sum_{j \in S,\, j \neq i} \big( X^{L}_{(k,i)} - X^{L}_{(k,j)} \big) \Big\|,$$
 
-  with the highest-curvature points kept as *edge* features and the lowest-curvature points as *planar* features — drastically reducing the data used for registration.
-- **Two algorithms at two frequencies**: a fast odometry process (around 10 Hz) registers consecutive sweeps for low-latency motion estimates, while a slower mapping process (around 1 Hz) registers the sweep against the accumulated feature map with a more exhaustive search, correcting the odometry's drift.
-- **Point-to-line / point-to-plane residuals**: the pose $\mathbf{T}$ is estimated by minimizing geometric distances rather than point-to-point ICP,
+where $X^{L}_{(k,i)}$ is point $i$ of sweep $k$ in the LiDAR frame $L$. Maximum-$c$ points become *edge points*, minimum-$c$ points *planar points*; each scan is split into four subregions providing at most 2 edge and 4 planar points, and points on beam-parallel surfaces or occlusion boundaries are excluded as unreliable.
 
-  $$\min_{\mathbf{T}} \sum_{\text{edges}} d_e(\mathbf{T})^2 + \sum_{\text{planes}} d_p(\mathbf{T})^2,$$
+**LiDAR odometry (~10 Hz).** The previous sweep's cloud, reprojected to the sweep boundary, is stored in a KD-tree. Each new edge point is matched to the line through its two nearest edge points $j, l$ (from different scans), and each planar point to the plane through three points $j, l, m$. The residuals are the point-to-line and point-to-plane distances
 
-  where $d_e$ is the distance of an edge point to the line through two matched map edge points, and $d_p$ is the distance of a planar point to the plane through three matched map points.
-- **Motion de-skewing**: because a spinning LiDAR moves during a sweep (~100 ms), each point is timestamped and corrected by interpolating the pose across the sweep duration — a preprocessing step that became standard in all subsequent LiDAR pipelines.
-- **No loop closure by design**: LOAM is an odometry-and-mapping system; global consistency mechanisms were left to its descendants.
+$$d_{\mathcal{E}} = \frac{\big| (\tilde{X}^{L}_{(k+1,i)} - \bar{X}^{L}_{(k,j)}) \times (\tilde{X}^{L}_{(k+1,i)} - \bar{X}^{L}_{(k,l)}) \big|}{\big| \bar{X}^{L}_{(k,j)} - \bar{X}^{L}_{(k,l)} \big|}, \qquad d_{\mathcal{H}} = \frac{\big| (\tilde{X}^{L}_{(k+1,i)} - \bar{X}^{L}_{(k,j)}) \cdot \big( (\bar{X}^{L}_{(k,j)} - \bar{X}^{L}_{(k,l)}) \times (\bar{X}^{L}_{(k,j)} - \bar{X}^{L}_{(k,m)}) \big) \big|}{\big| (\bar{X}^{L}_{(k,j)} - \bar{X}^{L}_{(k,l)}) \times (\bar{X}^{L}_{(k,j)} - \bar{X}^{L}_{(k,m)}) \big|}.$$
 
-## Results & impact
+Motion within a sweep is modeled with constant angular/linear velocity, so the pose of each point at its own timestamp $t_i$ is linearly interpolated from the sweep transform $T^{L}_{k+1} = [t_x, t_y, t_z, \theta_x, \theta_y, \theta_z]^{\top}$:
 
-On the KITTI odometry benchmark, LOAM achieved relative translation error below 1% and ranked first at publication — and it held a top position for years while running in real time on a standard laptop with a Velodyne HDL-64E. Its vocabulary and structure propagated everywhere: LeGO-LOAM and LIO-SAM inherit the edge/planar feature extraction and odometry/mapping split directly, and countless "X-LOAM" variants adapted the recipe to new platforms and sensors.
+$$T^{L}_{(k+1,i)} = \frac{t_i - t_{k+1}}{t - t_{k+1}} \, T^{L}_{k+1},$$
+
+which simultaneously de-skews the cloud. Stacking a residual row per feature into $f(T^{L}_{k+1}) = d$, the pose is solved by robust Levenberg–Marquardt with bisquare weights (large-residual features are down-weighted, beyond a threshold zeroed):
+
+$$T^{L}_{k+1} \leftarrow T^{L}_{k+1} - \big( J^{\top} J + \lambda \, \mathrm{diag}(J^{\top} J) \big)^{-1} J^{\top} d.$$
+
+**LiDAR mapping (1 Hz).** Once per sweep, the undistorted cloud is registered to the accumulated map using 10x more feature points. The map is stored in 10 m cubes; correspondences come from the eigen-decomposition of the covariance matrix of each feature's map neighborhood (one dominant eigenvalue = edge line, two = planar patch, with the associated eigenvectors giving the direction), the same distance residuals are minimized, and the map is downsampled with a 5 cm voxel grid. The final pose output fuses the mapping pose $T^{W}_{k}$ with the odometry motion $T^{L}_{k+1}$ at the odometry's 10 Hz rate. There is no loop closure by design.
+
+## Results
+
+- **KITTI odometry benchmark** (39.2 km over urban/country/highway, Velodyne HDL-64E at 10 Hz): average position error of **0.88%** of distance traveled (100–800 m segments, 3D), **ranked #1 among all methods irrespective of sensing modality** at publication, ahead of state-of-the-art stereo visual odometry.
+- **Own hardware** (custom 2-axis unit: Hokuyo UTM-30LX, 180° FoV, 0.25° resolution, 40 lines/sec): closed-loop drift of 0.9%/1.1% over 58/46 m in an indoor corridor and 2.3%/2.8% over 52/67 m in an orchard — roughly 1% relative accuracy indoors and 2.5% outdoors at 0.5 m/s.
+- **Compute:** runs in real time on a 2.5 GHz quad-core laptop, odometry and mapping consuming one core each.
+- **IMU assistance** (Xsens MTi-10): using IMU orientation/acceleration only to pre-undistort the cloud (not in the optimization) gives the highest accuracy under aggressive hand-carried motion — the IMU cancels nonlinear motion while LOAM handles the linear part.
 
 ## Why it matters for SLAM
 
-LOAM is to LiDAR SLAM what PTAM is to visual SLAM: the architectural template. LeGO-LOAM and LIO-SAM inherit its feature extraction and odometry/mapping split directly; FAST-LIO2 defines itself in opposition to it by dropping feature extraction entirely. If you read one classical LiDAR paper, read this one — the vocabulary of "edge features," "planar features," and "scan-to-map refinement" that pervades the field starts here.
+LOAM is to LiDAR SLAM what PTAM is to visual SLAM: the architectural template. LeGO-LOAM and LIO-SAM inherit its curvature-based edge/planar feature extraction and odometry/mapping split directly; FAST-LIO2 defines itself in opposition to it by dropping feature extraction entirely. Motion de-skewing became a required preprocessing step for every subsequent spinning-LiDAR pipeline, and LOAM held a top KITTI rank for years while remaining the standard baseline. If you read one classical LiDAR paper, read this one — the vocabulary of "edge features," "planar features," and "scan-to-map refinement" that pervades the field starts here.
 
 ## Related
 
@@ -39,5 +48,3 @@ LOAM is to LiDAR SLAM what PTAM is to visual SLAM: the architectural template. L
 - [SuMa](suma.md) — contemporary alternative built on surfels and range images
 - [LiDAR](../level-02-getting-familiar/lidar.md) — sensor background
 - [ICP](../level-04-rgbd-slam/icp.md) — the classical registration algorithm LOAM's residuals refine
-
-[Back to Level 9](../README.md#level-9-lidar--visual-lidar-fusion-slam)

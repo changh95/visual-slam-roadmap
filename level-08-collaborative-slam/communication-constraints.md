@@ -43,5 +43,3 @@ Algorithms that look identical on a benchmark differ by orders of magnitude in b
 - [CCM-SLAM](ccm-slam.md)
 - [NetVLAD](../level-05-deep-learning/netvlad.md)
 - [Inter-robot loop closure](inter-robot-loop-closure.md)
-
-[Back to Level 8](../README.md#level-8-collaborative--multi-robot-slam)

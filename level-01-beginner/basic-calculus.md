@@ -76,5 +76,3 @@ In bundle adjustment, the reprojection error $\mathbf{e}(\mathbf{x} + \Delta\mat
 - [MAP inference as sparse nonlinear least squares](../level-02-getting-familiar/map-inference-as-sparse-nonlinear-least-squares.md)
 - [Lie groups](../level-02-getting-familiar/lie-groups.md)
 - [Pose graph optimization](../level-02-getting-familiar/pose-graph-optimization.md)
-
-[Back to Level 1](../README.md#level-1-beginner)

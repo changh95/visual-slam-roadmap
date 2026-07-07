@@ -59,5 +59,3 @@ Sensor choice bounds achievable accuracy: baseline sets stereo depth precision, 
 - [Depth from sensor](../level-04-rgbd-slam/depth-from-sensor.md)
 - [Event cameras (DVS)](../level-10-event-camera-slam/event-cameras-dvs.md)
 - [Disparity vs Depth](../level-07-stereo-slam/disparity-vs-depth.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

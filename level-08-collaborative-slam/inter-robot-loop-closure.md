@@ -43,5 +43,3 @@ Inter-robot loop closures are the currency that buys a *shared* map — the whol
 - [NetVLAD](../level-05-deep-learning/netvlad.md)
 - [Robust pose-graph optimization](../level-02-getting-familiar/robust-pose-graph-optimization.md)
 - [Kimera-Multi](kimera-multi.md)
-
-[Back to Level 8](../README.md#level-8-collaborative--multi-robot-slam)

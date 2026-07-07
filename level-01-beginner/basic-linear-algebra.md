@@ -86,5 +86,3 @@ Every stage of a SLAM pipeline is linear algebra in disguise: projecting points 
 - [Math libraries](../level-02-getting-familiar/math-libraries.md)
 - [Schur complement / Sparsity](../level-02-getting-familiar/schur-complement-sparsity.md)
 - [3D-3D correspondence](../level-02-getting-familiar/3d-3d-correspondence.md)
-
-[Back to Level 1](../README.md#level-1-beginner)

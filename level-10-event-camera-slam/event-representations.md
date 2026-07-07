@@ -65,5 +65,3 @@ Every event-based SLAM system implicitly answers "what do we do with the raw str
 - [ESVO](esvo.md)
 - [ESVIO](esvio.md)
 - [DEVO](devo.md)
-
-[Back to Level 10](../README.md#level-10-event-camera-slam)

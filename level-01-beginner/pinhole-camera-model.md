@@ -79,5 +79,3 @@ The projection function $\pi(\cdot)$ defined by this model is at the heart of ev
 - [Triangulation](triangulation.md)
 - [Rigid body motion](rigid-body-motion.md)
 - [Camera device](../level-02-getting-familiar/camera-device.md)
-
-[Back to Level 1](../README.md#level-1-beginner)

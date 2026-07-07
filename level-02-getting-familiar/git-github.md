@@ -56,5 +56,3 @@ You cannot participate in modern SLAM without Git: obtaining systems, tracking t
 - [Docker](docker.md)
 - [C++](cpp.md)
 - [Bash/Linux](bash-linux.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

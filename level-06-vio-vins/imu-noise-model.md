@@ -69,5 +69,3 @@ The noise model is the contract between your hardware and your estimator: it set
 - [IMU preintegration](imu-preintegration.md) — where these noise terms propagate into factor covariances.
 - [OpenVINS](openvins.md) — a system whose documentation makes the noise-parameter workflow explicit.
 - [Multi-sensor calibration](../level-02-getting-familiar/multi-sensor-calibration.md) — the offline calibration that removes scale/misalignment terms.
-
-[Back to Level 6](../README.md#level-6-vio--vins)

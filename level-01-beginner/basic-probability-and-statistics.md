@@ -61,5 +61,3 @@ The two dominant families of SLAM back-ends — filtering (EKF, particle filters
 - [Visual-SLAM why filter?](../level-03-monocular-slam/visual-slam-why-filter.md)
 - [Consistency](../level-02-getting-familiar/consistency.md)
 - [Marginalization](../level-02-getting-familiar/marginalization.md)
-
-[Back to Level 1](../README.md#level-1-beginner)

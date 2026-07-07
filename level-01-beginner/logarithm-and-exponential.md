@@ -57,5 +57,3 @@ Logarithms and exponentials let us "linearize" rotations and poses, making them 
 - [Basic Probability & Statistics](basic-probability-and-statistics.md)
 - [Lie groups](../level-02-getting-familiar/lie-groups.md)
 - [Pose graph optimization](../level-02-getting-familiar/pose-graph-optimization.md)
-
-[Back to Level 1](../README.md#level-1-beginner)

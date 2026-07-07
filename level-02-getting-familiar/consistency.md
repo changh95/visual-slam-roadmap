@@ -75,5 +75,3 @@ Trajectory metrics like ATE/RPE only measure the mean error, so two systems with
 - [Observability](../level-06-vio-vins/observability.md)
 - [MSCKF](../level-06-vio-vins/msckf.md)
 - [OpenVINS](../level-06-vio-vins/openvins.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

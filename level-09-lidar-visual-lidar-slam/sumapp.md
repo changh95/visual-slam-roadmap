@@ -2,37 +2,40 @@
 
 > Chen (Bonn) 2019 · [Paper](https://www.ipb.uni-bonn.de/pdfs/chen2019iros.pdf)
 
-**One-line summary** — SuMa++ extends SuMa with deep semantic segmentation from RangeNet++, filtering dynamic objects out of ICP registration and building semantically labeled surfel maps that are markedly more robust in dynamic urban traffic.
+**One-line summary** — SuMa++ extends SuMa with point-wise semantics from RangeNet++, filtering moving objects out of the surfel map via semantic consistency checks and weighting ICP residuals by semantic agreement, which markedly improves robustness in dynamic traffic — without blindly deleting parked cars.
 
 ## Problem
 
-SuMa — like most LiDAR SLAM systems — assumes a static world: every scan point contributes equally to ICP registration. In urban driving a significant fraction of the scene is dynamic (cars, cyclists, pedestrians), and including those points corrupts registration, pulling the estimated pose toward the motion of the most numerous moving objects rather than the static background. Purely geometric dynamic-point rejection (outlier detection after registration, temporal motion segmentation) fails exactly when it is needed most: when dynamic objects are numerous (heavy traffic) or move slowly enough to be indistinguishable from static structure. Knowing *what* each point is — semantics — offers a more direct solution.
+SuMa — like most LiDAR SLAM systems — assumes a static world: every scan point contributes equally to ICP registration. In driving scenes, especially highways with few distinct static structures, wrong correspondences on consistently moving outliers (like cars in a traffic jam) lock the frame-to-model ICP onto the traffic and corrupt both pose and map. The naive fix — deleting all points of movable classes — backfires: parked cars are often the most distinctive static features available, and removing them makes the surfel map sparser and registration worse. The system needs to distinguish *actually moving* objects from *potentially movable but static* ones.
 
-## Key ideas
+## Method & architecture
 
-- **Semantics on the range image**: each LiDAR sweep is projected to a range image (as in SuMa) and passed through RangeNet++, an encoder-decoder CNN trained on SemanticKITTI, producing per-point labels such as road, building, vegetation (static) and car, person, bicycle (movable).
-- **Dynamic object filtering**: points belonging to dynamic classes are removed from registration, and residual dynamics are caught by checking semantic consistency between the new scan and the already-built semantic map — so movable objects contaminate neither the pose estimate nor the map:
+The SuMa pipeline is extended at three points: a semantic segmentation front-end, a dynamics filter in the map update, and semantic weights in the ICP.
 
-  $$\mathcal{P}_{\text{ICP}} = \{\,p_k \mid \text{label}(p_k) \notin \mathcal{C}_{\text{dynamic}}\,\}$$
+- **Semantic segmentation on the range image**: RangeNet++ — an FCN based on the SqueezeSeg architecture with a DarkNet53 backbone, trained on SemanticKITTI — predicts a label for every point of the spherical projection, producing a raw semantic mask $\mathcal{S}_{\text{raw}}$. Each surfel additionally stores the inferred label $y$ and its probability.
+- **Flood-fill label refinement**: back-projection of the blob-like CNN output introduces label artifacts, reduced in two steps: an *erosion* removes pixels whose neighborhood (kernel size $d$) contains conflicting labels, then a *depth-based fill-in* re-assigns eroded boundary pixels from neighbors whose vertex-map distances are consistent (within threshold $\theta$), yielding the refined mask $\mathcal{S}_D$.
+- **Filtering dynamics by semantic consistency**: during the map update, the labels of the new observation $\mathcal{S}_D$ are checked against the rendered semantic world model $\mathcal{S}_M$. Inconsistent surfels — presumed moving — receive a penalty in the recursive stability update:
 
-- **Semantic ICP weighting**: within the remaining points, ICP residuals are weighted by semantic consistency — a correspondence whose scan label agrees with the map surfel's label gets weight $w_k^{\text{sem}} > 1$, softly down-weighting misclassified or boundary points instead of hard-rejecting them:
+  $$l_s^{(t)} = l_s^{(t-1)} + \mathrm{odds}\left(p_{\text{stable}}\, e^{-\alpha^2/\sigma_\alpha^2}\, e^{-d^2/\sigma_d^2}\right) - \mathrm{odds}(p_{\text{prior}}) - \mathrm{odds}(p_{\text{penalty}}),$$
 
-  $$\mathbf{T}^* = \arg\min_{\mathbf{T}} \sum_k w_k^{\text{sem}} \left(\mathbf{n}_k^\top(\mathbf{T}\mathbf{p}_k - \hat{\mathbf{p}}_k)\right)^2$$
+  so after several observations moving objects drop below the stability threshold and are removed, while static movables (parked cars) survive as valuable registration features.
+- **Semantic ICP**: the frame-to-model point-to-plane objective becomes $E = \sum_{u \in \mathcal{V}_D} w_u\, r_u^2$ with $r_u = \mathbf{n}_u^{\top}\left(\mathbf{T}^{(k)}_{C_{t-1}C_t} \mathbf{u} - \mathbf{v}_u\right)$, solved by Gauss–Newton with weights
 
-- **Semantic surfel map**: each surfel carries a semantic label distribution alongside its geometry, fused over multiple observations with a Bayesian update, yielding a globally consistent labeled map usable by downstream navigation and planning.
-- **Semantics-aware loop closure**: loop candidates are additionally filtered by semantic consistency — two frames are only considered a plausible loop if their semantic label histograms are sufficiently similar.
-- **Geometry and semantics help each other**: the range-image pipeline makes real-time segmentation feasible, and cleaner segmentation in turn makes registration more accurate — an early demonstration of the geometry–semantics feedback loop in SLAM.
+  $$w_u^{(k)} = \rho_{\text{Huber}}\left(r_u^{(k)}\right) C_{\text{semantic}}\left(\mathcal{S}_D(u), \mathcal{S}_M(u)\right) \mathrm{I}\{l_s^{(k)} \geq l_{\text{stable}}\},$$
 
-## Results & impact
+  where $C_{\text{semantic}} = P(y_u|u)$ if scan and map labels agree and $1 - P(y_u|u)$ otherwise — the network's own confidence softly down-weights semantically inconsistent correspondences.
+- **Initialization caveat**: dynamics in the *first* scan cannot be detected by consistency (there is no map yet), so all movable classes are removed during the initialization period only.
 
-- On KITTI odometry sequences 00–10, SuMa++ reduces mean relative translation error from $1.01\%$ (SuMa) to $0.83\%$, with the largest gains on traffic-heavy sequences (seq. 01: $2.17\% \to 1.49\%$; seq. 07: $0.57\% \to 0.43\%$).
-- RangeNet++ segmentation runs at 11.4 Hz on a Titan XP GPU, adding only modest overhead to the SuMa pipeline; the resulting semantic map reaches 52.8% mIoU on SemanticKITTI — competitive with offline methods.
-- It was one of the first LiDAR SLAM systems to use a deep segmentation network to filter dynamics from registration — a recipe that became standard practice in urban autonomous-driving SLAM.
-- The semantic surfel map directly supports downstream tasks (planning on drivable surfaces, object-aware navigation) without extra processing.
+## Results
+
+- KITTI road/raw sequences 30–41 (country + highway; not in the odometry benchmark, so no segmentation training overlap), relative rotational (deg/100 m) / translational (%) errors: SuMa 1.35/6.13 → SuMa++ 1.04/1.46 on average. Highway seq. 35: 5.11/26.8 → 2.90/1.11; seq. 40: 1.09/18.0 → 0.75/1.95; seq. 41: 1.24/15.6 → 1.14/1.67.
+- KITTI odometry training set: SuMa 0.36/0.83 → SuMa++ 0.29/0.70 on average (IMLS-SLAM −/0.55, LOAM −/0.84). The naive baseline "SuMa nomovable" diverges in urban sequences (average 23.3/9.24; e.g. seq. 00: 22.0/58.0) — removing parked cars destroys good features.
+- KITTI test set (server-side): 0.0032 deg/m and 1.06% translational error vs 1.39% for original SuMa.
+- Runtime on a Xeon W-2123 + Quadro P4000: RangeNet++ takes 75 ms per scan on average, surfel mapping 48 ms, with at most 190 ms when integrating loop closures.
 
 ## Why it matters for SLAM
 
-SuMa++ was one of the first LiDAR SLAM systems to use a deep segmentation network to handle dynamic environments, a problem that pure geometry struggles with when traffic is dense or slow-moving. The recipe — segment on the range image, exclude dynamic classes, weight residuals by semantic agreement — became standard practice in urban autonomous-driving SLAM, and mirrors what DynaSLAM did for visual SLAM. It also cemented the range image as the standard intermediate representation for learned LiDAR processing.
+SuMa++ was one of the first LiDAR SLAM systems to use a deep segmentation network to handle dynamic environments, a problem pure geometry struggles with when traffic is dense or slow-moving. Its key empirical lesson — filter what actually *moves* via map–scan semantic consistency, rather than deleting whole movable classes — became standard practice in urban autonomous-driving SLAM, and mirrors what DynaSLAM did for visual SLAM. It also cemented the range image as the standard intermediate representation for learned LiDAR processing, and produced semantically labeled surfel maps usable by downstream navigation.
 
 ## Related
 
@@ -41,5 +44,3 @@ SuMa++ was one of the first LiDAR SLAM systems to use a deep segmentation networ
 - [DynaSLAM](../level-03-monocular-slam/dynaslam.md)
 - [SemanticFusion](../level-04-rgbd-slam/semanticfusion.md)
 - [FAST-LIO2](fast-lio2.md)
-
-[Back to Level 9](../README.md#level-9-lidar--visual-lidar-fusion-slam)

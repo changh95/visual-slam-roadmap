@@ -66,5 +66,3 @@ Every level above this one assumes you can read, build, and modify a mid-sized C
 - [C++/Python interop](cpp-python-interop.md)
 - [Concurrency](concurrency.md)
 - [Git/GitHub](git-github.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

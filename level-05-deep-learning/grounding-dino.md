@@ -6,26 +6,34 @@
 
 ## Problem
 
-Standard detectors (YOLO, DETR) are closed-set: they detect only the fixed categories they were trained on (e.g., 80 COCO classes). Robots operating in the open world constantly encounter objects outside any training vocabulary, and language is the natural open-vocabulary interface — a robot should detect "the red mug on the table" without "red mug" ever being a training class. The key to open-set detection is introducing language into a closed-set detector so it generalizes to open-set concepts; the question is *where and how tightly* to fuse the two modalities.
+Standard detectors (YOLO, DETR) are closed-set: they detect only the fixed categories they were trained on (e.g., 80 COCO classes). The key to open-set detection is introducing language so a closed-set detector generalizes to unseen concepts — learning language-aware region embeddings classified in a semantic space rather than over a fixed label set. Prior open-set detectors fused the modalities only partially: GLIP fuses only in the neck (phase A), OV-DETR only injects language at the decoder inputs (phase B). The paper's thesis is that fusion should happen in *all three* phases of a detector — neck, query initialization, and head — and that tighter fusion yields better open-set generalization.
 
-## Key ideas
+## Method & architecture
 
-- **Tight fusion across the whole detector**: the paper conceptually divides a closed-set detector into three phases — backbone, neck, head — and injects language into all of them rather than only at the classification output, via a feature enhancer, language-guided query selection, and a cross-modality decoder.
-- **Dual encoders**: a Swin Transformer encodes the image into multi-scale visual features while a BERT text encoder produces token-level language features from the prompt.
-- **Bidirectional cross-modality feature enhancer**: vision tokens attend to language tokens and vice versa ($\mathbf{v}' = \text{CrossAttn}(\mathbf{v}, \mathbf{l}) + \mathbf{v}$, $\mathbf{l}' = \text{CrossAttn}(\mathbf{l}, \mathbf{v}) + \mathbf{l}$), grounding image regions in words and contextualizing words by image content.
-- **Language-guided query selection**: DETR-style object queries are initialized from the visual features most similar to the text tokens, focusing the decoder on relevant regions from the start; each query outputs a box plus a text-region alignment score.
-- **Referring expressions, not just categories**: beyond novel category names, the paper evaluates on referring expression comprehension — detecting objects specified with attributes ("the leftmost chair") — a much stronger test of open-set understanding.
-- **Grounded SAM**: feeding Grounding DINO's text-prompted boxes into SAM yields high-quality instance masks for any described object — the de facto open-vocabulary segmentation pipeline.
+A dual-encoder single-decoder architecture built on DINO (the DETR variant): image backbone (Swin-T/Swin-L) extracts multi-scale visual features, text backbone (BERT-base) extracts token features from the prompt (all category names concatenated, or a referring expression). Three fusion modules follow:
 
-## Results & impact
+- **Feature enhancer** (neck, 6 layers): each layer applies deformable self-attention on image features and vanilla self-attention on text features, then image-to-text and text-to-image cross-attention — grounding regions in words and contextualizing words by image content.
+- **Language-guided query selection**: with enhanced image features $\mathbf{X}_I \in \mathbb{R}^{N_I \times d}$ and text features $\mathbf{X}_T \in \mathbb{R}^{N_T \times d}$ ($d=256$, $N_I > 10{,}000$, $N_T \le 256$), the $N_q = 900$ decoder queries are initialized from the image tokens most similar to any text token:
 
-- Achieves 52.5 AP on COCO detection *zero-shot* — without any COCO training data — and sets a record 26.1 mean AP on the ODinW zero-shot benchmark; strong results across COCO, LVIS, ODinW, and RefCOCO/+/g.
-- Became the standard open-vocabulary detector: the Grounded SAM combination is the perception front-end of ConceptGraphs, Clio, and most open-vocabulary 3D scene graph work.
-- Eliminated the retrain-per-environment cycle for robotic detection — new object categories are a prompt, not a dataset.
+$$\mathbf{I}_{N_q} = \texttt{Top}_{N_q}\big(\texttt{Max}^{(-1)}(\mathbf{X}_I \mathbf{X}_T^{\intercal})\big)$$
+
+  where $\texttt{Max}^{(-1)}$ takes the max over the text dimension. Following DINO's mixed query selection, selected features initialize the positional part (dynamic anchor boxes) while content queries stay learnable.
+- **Cross-modality decoder** (head, 6 layers): each layer runs query self-attention, image cross-attention, *text cross-attention* (the addition over DINO), and an FFN, so queries keep probing both modalities during box refinement.
+
+**Sub-sentence text representation**: concatenating category names lets unrelated categories attend to each other in BERT; attention masks block cross-category attention while keeping per-word features — finer than sentence-level, cleaner than word-level.
+
+**Training**: L1 + GIoU losses for boxes and, following GLIP, a contrastive loss between predicted objects and language tokens for classification (each query outputs a box and dot-product similarities to text tokens); Hungarian matching costs 2.0/5.0/2.0 (cls/L1/GIoU), loss weights 1.0/5.0/2.0. Trained on detection + grounding (+ caption) data. For REC, the highest-scoring box is returned.
+
+## Results
+
+- **Zero-shot COCO** (no COCO training images): Grounding DINO-L reaches **52.5 AP on COCO minival**; fine-tuned on COCO it reaches 62.6 AP minival (63.0 test-dev). With Swin-T, it beats GLIP-T by +1.8 AP and DINO by +0.5 AP under the same setting; adding grounding data gives >1 AP (48.1 vs 46.7).
+- **ODinW zero-shot** (35 diverse real-world detection datasets): a record **26.1 mean AP**.
+- **LVIS zero-shot**: outperforms GLIP under comparable data, better on common objects but weaker on rare categories; scales better with data than GLIP (+1.8 AP from Cap4M captions vs GLIP's +1.1) though behind DetCLIPv2 trained on larger-scale data.
+- **RefCOCO/+/g** referring expression comprehension: evaluated across all three splits — attribute-qualified phrases ("the leftmost chair"), a stronger open-set test than category names.
 
 ## Why it matters for SLAM
 
-Grounding DINO is what makes language-driven semantic SLAM practical: maps can be populated with objects named by natural language, without retraining a detector for each new environment. The Grounded SAM combination is the perception front-end of open-vocabulary 3D scene graph systems like ConceptGraphs and task-driven mapping like Clio, and it lets robots execute language instructions ("go to the whiteboard") directly against the SLAM map.
+Grounding DINO is what makes language-driven semantic SLAM practical: maps can be populated with objects named by natural language, without retraining a detector for each new environment. Feeding its text-prompted boxes to SAM (**Grounded SAM**) yields instance masks for any described object — the perception front-end of open-vocabulary 3D scene graph systems like ConceptGraphs and task-driven mapping like Clio — and it lets robots execute language instructions ("go to the whiteboard") directly against the SLAM map.
 
 ## Related
 
@@ -35,5 +43,3 @@ Grounding DINO is what makes language-driven semantic SLAM practical: maps can b
 - [Open-YOLO 3D](open-yolo-3d.md) — open-vocabulary 3D instance segmentation using 2D open-set detectors
 - [CLIP](../level-11-world-models-spatial-ai/clip.md) — the vision-language alignment idea underpinning open-vocabulary perception
 - [Clio](clio.md) — task-driven open-vocabulary mapping consuming this detector's outputs
-
-[Back to Level 5](../README.md#level-5-applying-deep-learning)

@@ -37,5 +37,3 @@ The range image is the bridge between LiDAR processing and the mature toolbox of
 - [LiDAR](../level-02-getting-familiar/lidar.md) — sensor fundamentals
 - [ICP](../level-04-rgbd-slam/icp.md) — the registration algorithm that projective lookup accelerates
 - [LOAM](loam.md) — the contrasting branch that works on the raw point list
-
-[Back to Level 9](../README.md#level-9-lidar--visual-lidar-fusion-slam)

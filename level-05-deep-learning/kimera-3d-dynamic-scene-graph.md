@@ -2,40 +2,48 @@
 
 > Rosinol 2020 · [Paper](https://arxiv.org/abs/2002.06289)
 
-**One-line summary** — Complete open-source metric-semantic SLAM library (visual-inertial odometry + robust pose-graph optimization + CPU meshing + semantic label fusion) whose companion 3D Dynamic Scene Graph work organizes the resulting map into a hierarchical, layered world model.
+**One-line summary** — Introduces the 3D Dynamic Scene Graph (DSG) — a layered, actionable world model spanning mesh, objects, agents, places, rooms, and building — and SPIN, the first fully automatic Spatial PerceptIon eNgine that builds one from stereo + IMU data using the open-source Kimera metric-semantic SLAM library.
 
 ## Problem
 
-Geometric SLAM produces metric maps — point clouds, surfels, meshes — that are flat and unstructured: they cannot answer questions like "how many chairs are in the kitchen?" or "which room is adjacent to the corridor?". Semantic SLAM systems add class labels but still lack hierarchical structure, and no open-source library provided a complete pipeline from raw stereo + IMU data to a dense semantic 3D map running in real time on a laptop CPU. The 3D Dynamic Scene Graph paper additionally asks how to represent *dynamic* entities — humans and robots moving through the scene — inside one actionable spatial representation that supports planning and decision-making.
+Geometric SLAM produces metric maps — point clouds, meshes, volumetric models — that are flat and unstructured, while metric-semantic mapping adds labels but stays non-hierarchical: neither can ground a command like "search for survivors on the second floor of the tall building" or feed both motion planning (fine meshes) and task planning (abstract concepts) from one representation. Early hierarchical maps were 2D, static, and pre-deep-learning; the pioneering 3D scene graphs of Armeni et al. and Kim et al. were built semi-automatically or offline, captured no actionable information such as traversability, and ignored dynamic entities. The paper asks how to represent moving agents — humans in particular — inside one hierarchical spatial representation, built automatically from visual-inertial data.
 
-## Key ideas
+## Method & architecture
 
-- **Kimera-VIO**: Stereo/monocular visual-inertial odometry front-end with IMU preintegration and FAST + KLT feature tracking, using iSAM2 fixed-lag smoothing with structureless smart factors over a sliding keyframe window.
-- **Kimera-RPGO**: Robust pose-graph optimizer that rejects outlier loop closures via Graduated Non-Convexity (GNC) instead of RANSAC-style gating:
+**The DSG** is a layered directed graph where nodes are spatially grounded semantic concepts and edges are pairwise spatio-temporal relations ("agent A is in room B at time $t$"). Five layers for a single-story indoor scene:
 
-  $$\min_{\mathbf{T}_{1:N}} \sum_{(i,j)\in\mathcal{E}} \rho_\mu\!\left(\left\|\log\!\left(\mathbf{T}_i^{-1}\mathbf{T}_j\,\tilde{\mathbf{T}}_{ij}^{-1}\right)^{\!\vee}\right\|^2_{\mathbf{\Omega}_{ij}}\right)$$
+1. **Metric-semantic mesh** — vertices with position, normal, RGB, and panoptic label; faces define topology.
+2. **Objects and agents** — objects carry pose, bounding box, and class; agents (humans, robots) carry a time-stamped 3D pose graph, a mesh model, and a class.
+3. **Places and structures** — places sample free space, edges encode straight-line traversability (a topological map for planning); structures are walls/floor/ceiling.
+4. **Rooms** — connected by adjacency (door) edges, each linked to the places it contains.
+5. **Building** — a root node connected to all rooms. The hierarchy is compositional (e.g., a "Level" layer can be inserted for multi-story buildings).
 
-  where the surrogate $\rho_\mu$ is annealed toward an $\ell_0$-like cost, automatically down-weighting false loop closures.
-- **Kimera-Mesher**: Lightweight CPU-based mesher with a local-to-global strategy — a per-keyframe local mesh is stitched into a global 3D mesh as the camera moves. No GPU required.
-- **Kimera-Semantics**: Projects 2D CNN semantic segmentation onto the 3D mesh via volumetric label integration, accumulating a label probability distribution across views; **Kimera-PGMO** jointly deforms the mesh with the pose graph after loop closures.
-- **3D Dynamic Scene Graph (Kimera-DSG)**: A hierarchical graph with layers for the metric-semantic mesh, objects (3D bounding boxes with class labels), places (free-space nodes with navigability edges), rooms, and buildings — plus dynamic agents (humans, robots) tracked as time-varying nodes with spatio-temporal relations.
-- **Spatial PerceptIon eNgine (SPIN)**: The first fully automatic engine to build a DSG from visual-inertial data, integrating object and human detection and pose estimation, and robustly inferring object, robot, and human nodes in crowded scenes — the first work to reconcile visual-inertial SLAM with dense human mesh tracking.
+**SPIN pipeline** (input: stereo + IMU; mesh and agents built incrementally in real time, higher layers at end of run):
 
-## Results & impact
+- **Layer 1 via Kimera**: Kimera-VIO (IMU preintegration + fixed-lag smoothing), Kimera-RPGO (robust pose-graph optimization), Kimera-Mesher, and Kimera-Semantics, which fuses 2D panoptic segmentation into a Voxblox-based volumetric model with Bayesian label updates and extracts a semantic mesh plus an ESDF.
+- **Crowd-robust VIO (DVIO)**: the Lucas-Kanade tracker is replaced by IMU-aware optical flow, and 5-point RANSAC by 2-point RANSAC that uses the IMU rotation to prune outlier feature tracks.
+- **Human nodes**: a Graph-CNN regresses SMPL mesh vertices (6890 vertices, 23 joints) per detection; full pose is recovered with PnP. Each human is tracked by a pose graph with zero-velocity motion factors and per-detection prior factors; a detection $d_{t}$ is associated to track $h^{(i)}_{1:t-1}$ only if every joint moves less than 3 m per second (detections at image borders or under 30 pixels are rejected). **Dynamic masking** feeds human pixels back to Kimera-Semantics as free-space-only rays so walkers leave no "contrails" in the mesh.
+- **Object nodes**: the class-labeled mesh is split into instances by Euclidean clustering (threshold twice the 0.1 m voxel size) giving centroid + bounding box; if a CAD model exists, 3D Harris keypoints (0.15 m radius) are matched and registered with TEASER++ to recover a full object pose.
+- **Places and rooms**: a topological graph is sampled from the ESDF; rooms come from a 2D ESDF section cut 0.3 m below the detected ceiling and truncated above 0.2 m so door openings disconnect — places are labeled by the component they fall in, remaining ones by majority voting over graph neighbors.
 
-The full Kimera pipeline — visual-inertial odometry, robust pose-graph optimization, meshing, and semantic label fusion — runs in real time on a laptop CPU without a GPU. The 3D Dynamic Scene Graph engine was demonstrated in a photo-realistic Unity-based simulator, where its robustness and expressiveness were assessed. Kimera became the default open-source research platform for metric-semantic SLAM, and the DSG concept directly seeded Hydra and the whole hierarchical scene-graph line.
+## Results
+
+Evaluated in a photo-realistic 65m x 65m Unity office (the released uHumans datasets: uH_01/02/03 with 12, 24, 60 humans) plus EuRoC:
+
+- **VIO in crowds** (ATE, cm): on uH_03, 5-point RANSAC 160 → 2-point 111 → DVIO 88; on static EuRoC the approach stays on par with the state of the art (e.g., MH_01: 9.3 → 8.1).
+- **Dynamic masking**: mesh RMSE with ground-truth poses on uH_03 drops from 0.192 m to 0.061 m; the gain persists with VIO poses.
+- **Human tracking**: mean torso localization error improves from 1.20 m (single-image detections, uH_03) to 0.63 m with the pose-graph tracker; unknown-shape objects localize within 1.31–1.70 m, CAD-fitted (TEASER++) objects within 0.20–0.38 m.
+- **Room parsing**: place-to-room classification reaches 99.89% precision / 99.84% recall on uH_01, with errors confined to doorways.
 
 ## Why it matters for SLAM
 
-Kimera was the first widely used open-source pipeline going from raw stereo + IMU data all the way to a dense semantic 3D map in real time on a laptop CPU, so it became the default research platform for metric-semantic SLAM. The 3D Dynamic Scene Graph introduced the vocabulary and data structure for hierarchical spatial reasoning that Hydra later made real-time, and Kimera's modules (VIO, GNC-based robust PGO) are reused as standalone components across the field, including in multi-robot systems.
+This is the paper that reconciled visual-inertial SLAM with dense human mesh tracking and generalized SLAM into a "spatial perception engine" — SLAM becomes one module inside a system that also infers relations, dynamics, and abstractions. The DSG's bounding-volume hierarchy gives fast collision checking, its place graph gives hierarchical planning, and its layered pruning gives principled map compression for long-term autonomy. Kimera became the default open-source research platform for metric-semantic SLAM, and the DSG data structure directly seeded Hydra and the entire hierarchical scene-graph line.
 
 ## Related
 
 - [Kimera-VIO](../level-06-vio-vins/kimera-vio.md) — the visual-inertial front-end in detail
-- [Hydra](hydra.md) — real-time scene-graph successor
+- [Hydra](hydra.md) — makes DSG construction real-time and incremental
 - [Kimera-Multi](../level-08-collaborative-slam/kimera-multi.md) — multi-robot extension
-- [GNC](gnc.md) — the robust optimization behind Kimera-RPGO
+- [GNC](gnc.md) — robust estimation from the same lab, used in later scene-graph optimizers
 - [SemanticFusion](../level-04-rgbd-slam/semanticfusion.md) — earlier semantic label fusion in dense SLAM
-- [Pose graph optimization](../level-02-getting-familiar/pose-graph-optimization.md) — the back-end problem Kimera-RPGO robustifies
-
-[Back to Level 5](../README.md#level-5-applying-deep-learning)
+- [Pose graph optimization](../level-02-getting-familiar/pose-graph-optimization.md) — the back-end machinery behind robot and human trajectory estimation

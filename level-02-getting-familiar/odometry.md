@@ -57,5 +57,3 @@ Odometry is the backbone of every SLAM system: it provides the high-rate, locall
 - [Visual Odometry](../level-03-monocular-slam/visual-odometry.md)
 - [VO vs SLAM](../level-03-monocular-slam/vo-vs-slam.md)
 - [Pose graph optimization](pose-graph-optimization.md)
-
-[Back to Level 2](../README.md#level-2-getting-familiar-with-slam)

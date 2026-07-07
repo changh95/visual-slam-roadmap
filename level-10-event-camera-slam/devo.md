@@ -2,27 +2,34 @@
 
 > Klenk 2024 · [Paper](https://arxiv.org/abs/2312.09800)
 
-**One-line summary** — DEVO (Deep Event Visual Odometry) adapts the DPVO-style learned sparse patch odometry architecture to monocular event streams, trained on large-scale *simulated* event data, and generalizes to real event benchmarks where it substantially outperforms classical event VO.
+**One-line summary** — DEVO (Deep Event Visual Odometry) adapts the DPVO-style learned sparse patch odometry architecture to monocular event streams, trained purely on *simulated* events, and generalizes to real event benchmarks where it cuts pose tracking error by up to 97% versus prior event-only methods.
 
 ## Problem
 
-Event cameras promise camera tracking during high-speed motion and in adverse lighting, yet existing event-based *monocular* VO showed limited performance on recent benchmarks. To compensate, many systems added extra sensors — IMUs, stereo event cameras, or frame-based cameras — but those additions raise cost and complicate system requirements, and relying on a frame camera reintroduces exactly the motion-blur and HDR vulnerabilities events were meant to avoid. DEVO asks how far a *single event camera* can go when paired with a modern learned VO architecture.
+Event cameras promise camera tracking during high-speed motion and in adverse lighting, yet existing event-based *monocular* VO showed limited performance on recent benchmarks. To compensate, many systems added extra sensors — IMUs, stereo event cameras, or frame-based cameras — but those raise cost, complicate system requirements (space, power, calibration), and relying on a frame camera reintroduces exactly the motion-blur and HDR vulnerabilities events were meant to avoid. DEVO asks: what is the limit of general, real-world monocular event-only VO with no additional sensors?
 
-## Key ideas
+## Method & architecture
 
-- **Learned VO transferred to events**: deep frame-based VO (DROID-SLAM, DPVO) showed that recurrent, correlation-based architectures with differentiable bundle adjustment beat classical pipelines. DEVO asks whether the same data-driven recipe works when the input is events rather than images — and shows it does.
-- **DPVO-style sparse patches**: instead of dense flow, the system sparsely tracks a set of selected event patches over time, iteratively refining patch trajectories with a recurrent update operator and optimizing poses and depths jointly — keeping the efficiency benefits of the patch-based design.
-- **Deep patch selection tailored to events**: a key component is a novel learned selection mechanism that picks informative event patches. This matters because event data is sparse and motion-dependent — random or gradient-based patch sampling (fine for images) wastes capacity on empty or noisy regions of the event stream.
-- **Event voxel grids as network input**: raw events are converted into voxel-grid tensors, so standard CNN feature extractors apply without architectural surgery.
-- **Trained purely in simulation**: real event training data with ground truth is scarce, so DEVO is trained on large amounts of simulated events rendered from existing frame datasets — and still transfers to real sensors, demonstrating that sim-to-real transfer is viable for event-based learning.
-- **Monocular, events-only**: unlike fusion systems (Ultimate-SLAM, ESVIO), DEVO uses a single event camera with no frames and no IMU, making its robustness results a statement about what events alone can support when paired with learning.
+**Event representation.** Events $(x_k, y_k, t_k, p_k)$ are binned into voxel grids $\mathbf{E}_t \in \mathbb{R}^{H\times W\times 5}$ (bilinear interpolation of event counts over 5 time bins, normalized to zero mean / unit variance), each paired during training with a ground-truth pose $\mathbf{T}_t \in \mathbb{SE}(3)$ and inverse depth map $\mathbf{d}_t$.
 
-## Results & impact
+**DPVO-style backbone.** DEVO reuses DPVO's dynamic patch graph and recurrent update operator: sparse event patches on $\mathbf{E}_t$ are connected to neighboring voxel grids; the update operator iteratively predicts optical-flow revisions $\Delta\hat{\mathbf{f}}$ and confidence weights $\omega$, and a differentiable bundle adjustment (DBA) layer updates camera poses and patch depths over a sliding window of keyframes.
 
-- DEVO is the first monocular event-only system with strong performance across a large number of real-world benchmarks — the paper evaluates on seven of them.
-- It decreases pose tracking error by up to 97% compared to prior event-only methods, and often surpasses or comes close to methods that use *additional* stereo or inertial sensors.
-- The results shift the community's expectation of what a single event camera can achieve, weakening the argument that event VO must lean on auxiliary sensors to be competitive.
-- Code is open source (github.com/tum-vision/DEVO), making it the natural learned baseline for subsequent event odometry work.
+**Deep event patch selection (the key novelty).** Events cover the image plane sparsely, so random or gradient-based patch sampling wastes capacity on empty or noisy regions. A small CNN (three 3×3 conv+ReLU layers with 8/16/32 channels, then a 1-channel layer, 4×4 max-pooling, sigmoid) predicts a score map $\mathbf{S}_t \in [0,1]^{H/4 \times W/4}$ highlighting trackable coordinates. It is trained without score labels by the self-supervised loss
+
+$$\mathcal{L}_{\text{score}} = \frac{1}{|\mathcal{E}|} \sum_{(k,j)\in\mathcal{E}} s_k\, r_{kj}\, (1 - \alpha \ln \omega_{kj}) - \ln \mathbf{S}_{\mathbf{P}},$$
+
+which pushes scores $s_k$ down where flow residuals $r_{kj}$ are large or DBA weights $\omega_{kj}$ are small. The total loss is $\mathcal{L} = 0.05\,\mathcal{L}_{\text{score}} + 0.1\,\mathcal{L}_{\text{flow}} + 10\,\mathcal{L}_{\text{pose}}$. At inference, patches are drawn by **pooled multinomial sampling**: the score map is 4×4 average-pooled, coordinates are sampled from a multinomial over grid cells without replacement, then refined within each 4×4 window — more robust to score-map outliers than top-$P$ selection.
+
+**Simulation-only training.** Events are simulated with ESIM on all TartanAir sequences using the event generation model $\Delta L(\mathbf{u}_k, t_k) = p_k C$, with contrast thresholds randomized per sequence, $C \sim \mathcal{U}(0.16, 0.34)$, plus photometric voxel augmentations to shrink the sim-to-real gap. Training: 240k iterations on two A40 GPUs, sequence length $N=15$, $P=80$ patches (~2.5 days).
+
+## Results
+
+- Evaluated on **seven real-world benchmarks** (UZH-FPV, VECtor, HKU, EDS, TUM-VIE, RPG, MVSEC), median of 5 runs, with identical parameters everywhere (only the keyframe threshold varies per dataset); metrics ATE [cm], rotation RMSE, MPE [%/m]. Headline: up to 97% lower pose tracking error than prior event-only methods.
+- **UZH-FPV** (drone racing): best on 4 of 9 sequences even though all other successful methods use an IMU; DPVO and EVO fail on all sequences.
+- **VECtor**: EVO and ESVO fail on 88% and 76% of sequences respectively; DEVO beats even ESVIO (stereo events + stereo frames + IMU) on 70% of sequences.
+- **HKU**: best on 5 of 9 sequences; EVO and ESVO fail on all.
+- **TUM-VIE**: at least 44% lower ATE than all event-only methods; **RPG**: at least 63% lower ATE than event-only methods, average ATE 88% lower than USLAM and 28% lower than EDS.
+- Code, training, and event-data generation are open source (github.com/tum-vision/DEVO).
 
 ## Why it matters for SLAM
 
@@ -33,7 +40,6 @@ DEVO marks the moment the deep-VO revolution reached event cameras: classical ev
 - [DPVO](../level-03-monocular-slam/dpvo.md)
 - [DROID-SLAM](../level-03-monocular-slam/droid-slam.md)
 - [ESVO](esvo.md)
+- [EDS](eds.md)
 - [Event representations](event-representations.md)
 - [Challenges](challenges.md)
-
-[Back to Level 10](../README.md#level-10-event-camera-slam)

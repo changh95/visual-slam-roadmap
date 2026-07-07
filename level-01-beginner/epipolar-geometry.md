@@ -63,5 +63,3 @@ Epipolar geometry is how a monocular SLAM system bootstraps itself: from 2D-2D f
 - [Rigid body motion](rigid-body-motion.md)
 - [2D-2D correspondence](../level-02-getting-familiar/2d-2d-correspondence.md)
 - [Scale ambiguity](../level-03-monocular-slam/scale-ambiguity.md)
-
-[Back to Level 1](../README.md#level-1-beginner)
