@@ -44,6 +44,11 @@ A flat 2D grid is the classic representation for indoor mobile robots (ROS `nav_
 
 SLAM gives you a trajectory and a landmark/point map — but a sparse [point cloud](point-cloud.md) cannot answer "is this space safe to drive through?", because it says nothing about *free* space. Occupancy grids explicitly represent free, occupied, and unknown volumes, which is what collision checking, frontier-based exploration, and path planning need. In practice the SLAM system supplies poses, and an occupancy mapper turns the posed scans into the costmap the navigation stack runs on; the log-odds filter also provides natural robustness to dynamic objects and sensor noise that raw geometric maps lack.
 
+## Hands-on
+
+- [Octree, OctoMap, Bonxai hands-on](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part2_ch03_08)
+- [OctoMap on KITTI](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/octomap)
+
 ## Related
 
 - [Voxel map](voxel-map.md)

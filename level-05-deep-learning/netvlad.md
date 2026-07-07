@@ -30,6 +30,10 @@ Evaluation uses recall@N (correct if a top-N database image is within 25 m) on P
 
 Loop-closure detection and relocalization are place-recognition problems, and NetVLAD's descriptor was the de facto standard for them for years — it is the global retrieval stage of the hloc pipeline and countless SLAM systems. It also established the template for learned place recognition (CNN backbone + trainable aggregation + weak metric-learning supervision) that Patch-NetVLAD, CosPlace, MixVPR, and today's foundation-model VPR methods still follow.
 
+## Hands-on
+
+- [Deep global feature detection](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part2_ch01_10)
+
 ## Related
 
 - [Patch NetVLAD](patch-netvlad.md) — multi-scale patch-level successor with spatial re-ranking

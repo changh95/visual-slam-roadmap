@@ -31,6 +31,10 @@ $$\hat{T}^{bw}_{1:N},\hat{p}^{w}_{1:M} = \arg\min_{T^{bw}_{1:N},\,p^{w}_{1:M}} \
 
 PyCuVSLAM represents two industry trends at once: hardware-accelerated SLAM as a product-grade component, and Python-first APIs that lower the barrier for robotics and ML developers to integrate SLAM without writing C++. Its multi-camera formulation (frustum graph + rig-level PnP/BA) is also a clean template for the multi-sensor robots that increasingly dominate deployment, in contrast to single-camera research systems like ORB-SLAM3.
 
+## Hands-on
+
+- [Run cuVSLAM](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/cuvslam)
+
 ## Related
 
 - [ORB-SLAM3](orb-slam3.md)

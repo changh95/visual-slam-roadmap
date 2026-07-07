@@ -39,6 +39,10 @@ The published evaluation (IEEE-paywalled; full text was not available for this n
 
 This paper defined visual odometry as a distinct problem and proved that cameras can serve as primary navigation sensors, laying the groundwork for every monocular SLAM system that followed. Its pipeline — features, minimal solver + RANSAC, triangulation, pose composition — is still the skeleton of most geometric front-ends (PTAM even uses the same five-point algorithm for map initialisation). Understanding what it lacks (loop closure, global consistency) is the cleanest way to understand what SLAM adds on top of VO.
 
+## Hands-on
+
+- [MonoVO hands-on](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part2_ch02_05)
+
 ## Related
 
 - [VO vs SLAM](vo-vs-slam.md) — the conceptual distinction this paper motivates

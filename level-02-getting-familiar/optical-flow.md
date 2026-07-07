@@ -53,6 +53,10 @@ A standard reliability filter for tracking is the **forward-backward check**: tr
 
 Optical flow is the cheapest way to get frame-to-frame correspondences, and correspondences are the raw material of visual odometry. KLT-based tracking front-ends (e.g. in VINS-Mono and many VIO systems) track corners with pyramidal Lucas-Kanade instead of matching descriptors — faster, and with sub-pixel accuracy that descriptor matching lacks. The same brightness-constancy machinery, generalized from a 2D window shift to a full camera-pose warp, is the foundation of direct methods (LSD-SLAM, DSO). And dense learned flow now powers correspondence in systems like DROID-SLAM. Understanding the constraint equation, the aperture problem, and the structure-tensor conditioning tells you where any of these will fail: fast motion, low texture, and changing illumination.
 
+## Hands-on
+
+- [Feature tracking hands-on](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part2_ch01_07)
+
 ## Related
 
 - [KLT Tracker](klt-tracker.md)

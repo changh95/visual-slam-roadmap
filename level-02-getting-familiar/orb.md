@@ -44,6 +44,10 @@ OpenCV ships ORB as `cv::ORB::create()`, with the knobs that matter exposed dire
 
 ORB hits the sweet spot that made feature-based SLAM practical on CPUs and embedded hardware: detection, description, and matching of ~1000 features per frame comfortably within a 30 fps budget, with enough invariance (scale via pyramid, rotation via oFAST/rBRIEF) for wide-baseline matching. ORB-SLAM built its entire architecture on this one feature — the *same* ORB descriptors serve frame-to-frame tracking, local-map matching, relocalization, and loop-closure detection through a [bag of visual words](bag-of-visual-words.md) vocabulary — which is a large part of why the system is so coherent and robust. Even in the deep-learning era, ORB remains the default baseline that learned features (SuperPoint and friends) are measured against, and still the pragmatic choice when compute is scarce.
 
+## Hands-on
+
+- [Classical local feature detection](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part2_ch01_03)
+
 ## Related
 
 - [FAST](fast.md)

@@ -68,6 +68,14 @@ Performance intuition worth having: autodiff costs somewhat more per iteration t
 
 The back-end of every system you will study is written against one of these libraries, and their APIs shape how papers think: "add a factor," "define an edge," "attach a robust kernel." Being fluent means you can read any system's optimization code, prototype a new residual in an afternoon, and understand performance discussions (autodiff vs. analytic Jacobians, sparse solver choices, incremental vs. batch) that decide whether a method runs in real time.
 
+## Hands-on
+
+- [Eigen + Sophus hands-on](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part1_ch03_05)
+- [g2o hands-on](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part3_ch01_13)
+- [GTSAM hands-on](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part3_ch01_14)
+- [Ceres-solver hands-on](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part3_ch01_15)
+- [SymForce hands-on](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part3_ch01_16)
+
 ## Related
 
 - [C++](cpp.md)

@@ -71,6 +71,11 @@ The code *is* the graph: every `add` is a factor node, every integer key a varia
 
 Factor graphs unified what used to be separate problem formulations — filtering, pose-graph optimization, bundle adjustment, sensor fusion — into one picture: define variables, attach factors, solve. Every modern back-end you will meet (ORB-SLAM's BA, VINS-Mono's sliding window, Kimera's iSAM2 smoother, LIO-SAM's LiDAR-inertial graph) is a factor graph with a particular choice of variables, factors, and solving schedule. Learning to *draw the factor graph* of a system is the fastest way to understand any SLAM paper's back-end.
 
+## Hands-on
+
+- [g2o hands-on](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part3_ch01_13)
+- [GTSAM hands-on](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part3_ch01_14)
+
 ## Related
 
 - [MAP inference as sparse nonlinear least squares](map-inference-as-sparse-nonlinear-least-squares.md)

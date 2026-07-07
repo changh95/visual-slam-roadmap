@@ -36,6 +36,10 @@ Before and alongside CUDA, GPGPU was done through the graphics pipeline using **
 - The GPU/CPU split is an architectural decision: dense tracking and mapping on the GPU, sparse optimization (pose graph, BA) on the CPU is the standard division of labor.
 - Voxel hashing, TSDF integration, and raycasting are only real-time because of GPU parallelism — algorithm design and GPGPU implementation are inseparable in this domain.
 
+## Hands-on
+
+- [CUDA acceleration hands-on](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part5_ch03_08)
+
 ## Related
 
 - [KinectFusion](kinectfusion.md)

@@ -787,7 +787,8 @@ I made this roadmap to share my thoughts and experience on studying Visual-SLAM,
 
 | Resource | Link |
 |----------|------|
-| **changh95/slam_lecture_codes** | [GitHub](https://github.com/changh95/slam_lecture_codes) — Hands-on SLAM lecture code collection |
+| **SLAM Zero-to-Hero code exercises** | [GitHub](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero) — Docker-based hands-on exercises for this roadmap's topics (feature detection, epipolar geometry, RANSAC, ICP, g2o/GTSAM/Ceres) and systems (ORB-SLAM2, Basalt, Kimera, FAST-LIO2, MASt3R-SLAM, ...); individual exercises are linked from the matching study notes |
+| **changh95/slam_lecture_codes** | [GitHub](https://github.com/changh95/slam_lecture_codes) — Full SLAM lecture code collection |
 
 ---
 

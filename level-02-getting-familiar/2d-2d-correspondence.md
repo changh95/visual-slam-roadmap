@@ -49,6 +49,10 @@ Degenerate configurations matter: a planar scene or pure rotation makes $F$/$E$ 
 
 2D-2D correspondence is the entry point of monocular SLAM: it bootstraps the first relative pose (up to scale) before any map exists, after which triangulation creates landmarks and the pipeline switches to 2D-3D (PnP) tracking. The same solvers also verify loop-closure candidates geometrically and underpin structure-from-motion pipelines such as COLMAP.
 
+## Hands-on
+
+- [Epipolar geometry hands-on](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part2_ch02_02)
+
 ## Related
 
 - [Epipolar geometry](../level-01-beginner/epipolar-geometry.md)

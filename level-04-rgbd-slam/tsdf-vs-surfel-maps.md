@@ -49,6 +49,11 @@ Later neural representations (neural fields, 3D Gaussians) are best understood a
 
 The map representation dictates almost everything downstream in a dense SLAM system: how tracking predictions are generated, how memory scales with scene size, and — most critically — how the system can correct the map when loop closure reveals accumulated drift. "TSDF with re-integration or surfels with deformation" is the fundamental design fork of RGB-D SLAM, and recognizing it lets you place any dense system on the map quickly.
 
+## Hands-on
+
+- [Run Voxblox (TSDF mapping)](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/voxblox)
+- [Run nvblox (GPU TSDF)](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/nvblox)
+
 ## Related
 
 - [KinectFusion](kinectfusion.md) — the canonical TSDF fusion system

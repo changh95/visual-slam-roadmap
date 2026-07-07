@@ -49,6 +49,10 @@ py::class_<SlamSystem>(m, "SlamSystem")
 
 The field is converging on hybrid systems: classical C++ back-ends combined with learned front-ends (feature detectors, depth networks, matchers) that live in Python/PyTorch. Being able to bind a C++ optimizer into Python — or call a learned matcher from C++ via exported models — is what makes those combinations practical. It also transforms your own C++ code: once wrapped, it becomes scriptable, unit-testable from pytest, and easy to evaluate against datasets with Python tooling.
 
+## Hands-on
+
+- [PyBind hands-on](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part1_ch02_08)
+
 ## Related
 
 - [C++](cpp.md)

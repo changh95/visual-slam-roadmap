@@ -71,6 +71,10 @@ The same pattern is baked into every SLAM library: g2o's `SE3` vertices, Ceres' 
 
 Every optimization-based SLAM component — bundle adjustment, pose graph optimization, IMU preintegration, direct image alignment — differentiates residuals with respect to poses, and Lie group machinery is *how* that is done correctly. Residuals between poses are themselves expressed via $\log$ (as in pose graph costs $\|\log(T_{ij}^{-1} T_i^{-1} T_j)\|^2$). If you cannot read $\exp$/$\log$/perturbation notation fluently, back-end papers are unreadable; once you can, they all look pleasantly alike.
 
+## Hands-on
+
+- [Eigen + Sophus hands-on](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part1_ch03_05)
+
 ## Related
 
 - [Rigid body motion](../level-01-beginner/rigid-body-motion.md)

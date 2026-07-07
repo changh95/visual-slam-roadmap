@@ -51,6 +51,10 @@ DELF/DELG couple both stages in one network (attention-selected deep local featu
 
 Loop closure detection and relocalization are retrieval problems: given the current frame, find previously mapped frames showing the same place. Classical BoW (DBoW2) works well when appearance is stable, but degrades badly under day-night, seasonal, or weather changes because it is built on hand-crafted local descriptors. Learned global descriptors are trained precisely to be invariant to such condition changes, and they produce a single compact vector per keyframe — cheap to store in a keyframe database and fast to search. Understanding the retrieve-then-verify structure also explains the architecture of modern relocalization stacks (HF-Net/hloc, Patch-NetVLAD) and of collaborative SLAM systems that must match places across robots.
 
+## Hands-on
+
+- [Deep global feature detection](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part2_ch01_10)
+
 ## Related
 
 - [Bag of Visual Words](bag-of-visual-words.md)

@@ -39,6 +39,10 @@ A dense grid over volume $V$ at resolution $r$ costs $O\left((V/r)^3\right)$ mem
 - TSDF voxel grids underpin dense RGB-D SLAM (KinectFusion and descendants) and provide the smooth surface models used for frame-to-model tracking via raycasting.
 - OctoMap-style occupancy maps are the standard output representation when a SLAM system feeds a navigation stack (e.g., in ROS).
 
+## Hands-on
+
+- [Octree, OctoMap, Bonxai hands-on](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part2_ch03_08)
+
 ## Related
 
 - [Occupancy grid mapping](occupancy-grid-mapping.md)

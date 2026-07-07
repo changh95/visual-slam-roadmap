@@ -39,6 +39,10 @@ Run on an i9-12900K + RTX 4090 at ~15 FPS (frames subsampled by 2 to simulate re
 
 MASt3R-SLAM is plug-and-play: point it at video from an arbitrary camera — even one whose zoom or distortion varies — and get dense, globally consistent geometry with no depth sensor, no calibration procedure, no per-scene training. That redefined the baseline for what monocular dense SLAM should be expected to do, and its architecture (learned two-view prior + classical Sim(3) graph optimisation) is the template most foundation-model SLAM systems now follow.
 
+## Hands-on
+
+- [Run MASt3R-SLAM](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/mast3r_slam)
+
 ## Related
 
 - [MASt3R](mast3r.md)

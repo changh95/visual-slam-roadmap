@@ -50,6 +50,10 @@ Which one you need is an engineering decision. If only short-horizon ego-motion 
 
 This distinction organises the entire field: nearly every system you will study is either a VO/odometry method, or a SLAM system built by wrapping map management, place recognition, and global optimisation around a VO core. Knowing which claims a paper makes (local accuracy vs global consistency) tells you which benchmarks matter — RPE for VO, ATE with loop closures for SLAM — and what its failure modes will be.
 
+## Hands-on
+
+- [MonoVO hands-on](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part2_ch02_05)
+
 ## Related
 
 - [Visual Odometry](visual-odometry.md)

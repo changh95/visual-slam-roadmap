@@ -42,6 +42,10 @@ On a desktop with an RTX 4090 (multi-process implementation, live at 3 fps monoc
 
 MonoGS is the canonical *monocular* entry point to Gaussian-splatting SLAM: it showed that a rendering-quality map and camera tracking can share one differentiable representation at interactive rates. Its analytic-Jacobian, direct-alignment formulation connects splatting SLAM back to the direct methods (DTAM, LSD-SLAM, DSO) — the same photometric principle applied to a far richer map — and its covisibility keyframing echoes DSO's window management. It comes from the same Imperial College lab as MonoSLAM and iMAP, each of which redefined the map representation of its era.
 
+## Hands-on
+
+- [Run Gaussian Splatting SLAM](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/gaussian_splatting_slam)
+
 ## Related
 
 - [SplaTAM](splatam.md)

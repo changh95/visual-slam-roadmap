@@ -43,6 +43,10 @@ SIFT is highly accurate but slow — on the order of a second per high-resolutio
 - SIFT's pipeline (scale-space detection, orientation assignment, gradient-histogram descriptor, ratio-test matching) is the conceptual blueprint for every feature system used in SLAM; ORB is best understood as a real-time approximation of it.
 - Offline mapping and structure-from-motion (e.g., COLMAP) still default to SIFT for maximum matching quality; visual place recognition historically built bag-of-visual-words vocabularies from SIFT descriptors.
 
+## Hands-on
+
+- [Classical local feature detection](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part2_ch01_03)
+
 ## Related
 
 - [Gaussian blur](../level-01-beginner/gaussian-blur.md)

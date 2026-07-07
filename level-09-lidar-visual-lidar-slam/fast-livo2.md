@@ -38,6 +38,10 @@ $$\mathbf{0} = \tau_k\,\mathbf{I}_k(\mathbf{u}_i + \Delta\mathbf{u}) - \tau_r\,\
 
 FAST-LIVO2 is widely regarded as the strongest open-source direct LVI odometry — the culmination of the HKU MARS line (FAST-LIO2 → FAST-LIVO → FAST-LIVO2). Its sequential-update trick is a generally useful pattern for fusing sensors whose measurements differ wildly in dimension and structure, and its demonstrated UAV deployments show direct triple fusion is production-ready at edge-compute budgets. If you are choosing a modern LVI system for a robot today, this is the default candidate to beat.
 
+## Hands-on
+
+- [Run FAST-LIVO2](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/fast_livo2)
+
 ## Related
 
 - [FAST-LIVO](fast-livo.md) — the predecessor whose fusion it makes rigorous

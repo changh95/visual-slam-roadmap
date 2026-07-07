@@ -46,6 +46,10 @@ Points are allowed to slide along the surface, penalized only perpendicular to i
 
 ICP is the tracking engine of dense RGB-D SLAM (KinectFusion aligns each depth frame to the model with point-to-plane ICP) and of most LiDAR odometry systems, and the SVD alignment step reappears in loop closing whenever two submaps must be merged. Together with 2D-2D (no depth) and 2D-3D (one-sided depth), it completes the correspondence toolbox: which one you use is determined simply by where 3D information is available.
 
+## Hands-on
+
+- [ICP hands-on](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part2_ch03_06)
+
 ## Related
 
 - [2D-2D correspondence](2d-2d-correspondence.md)

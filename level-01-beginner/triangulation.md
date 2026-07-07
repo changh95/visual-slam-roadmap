@@ -51,6 +51,10 @@ Because depth is inversely proportional to disparity, a fixed matching error of 
 
 Triangulation is how a SLAM map grows: after epipolar geometry (or PnP) provides camera poses, every new feature match becomes a candidate 3D landmark via triangulation. It is also half of the classic monocular bootstrapping recipe — recover relative pose from the essential matrix, then triangulate the initial map — and the quality checks around it (parallax, reprojection error, positive depth) are what separate robust systems from fragile ones.
 
+## Hands-on
+
+- [Triangulation hands-on](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part2_ch02_07)
+
 ## Related
 
 - [Epipolar geometry](epipolar-geometry.md)

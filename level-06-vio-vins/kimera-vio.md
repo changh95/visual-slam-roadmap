@@ -27,6 +27,10 @@ On EuRoC (RMSE ATE, SE(3) alignment), Kimera achieves top performance per catego
 
 Kimera showed that a clean, modular open-source stack can go from raw stereo+IMU to a semantically labeled 3D mesh in real time on a CPU — making it both a practical VIO baseline and the substrate for a whole research lineage: 3D Dynamic Scene Graphs, Hydra, and Kimera-Multi all build on this front-end. Its GTSAM smart-factor + iSAM2 recipe is now a standard alternative to Ceres-style sliding-window optimization, and Kimera-RPGO's robust pose graph optimization is used as a standalone library.
 
+## Hands-on
+
+- [Run Kimera](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/kimera)
+
 ## Related
 
 - [IMU Preintegration on Manifold](imu-preintegration-on-manifold.md) — the IMU factor Kimera-VIO uses.

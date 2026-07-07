@@ -38,6 +38,11 @@ The original TPAMI 1992 paper demonstrated registration of geometric primitives 
 
 ICP is the foundation of 3D-3D registration: nearly every RGB-D dense SLAM system (KinectFusion, ElasticFusion, InfiniTAM) tracks the camera by running some ICP variant between the incoming depth frame and the map. It is equally central to LiDAR SLAM, where scan matching is essentially ICP with engineering refinements. Understanding ICP — its cost function, its closed-form solution, and its failure modes — is a prerequisite for understanding frame-to-model tracking in all of Level 4.
 
+## Hands-on
+
+- [ICP hands-on](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part2_ch03_06)
+- [Advanced ICP hands-on](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part2_ch03_07)
+
 ## Related
 
 - [3D-3D correspondence](../level-02-getting-familiar/3d-3d-correspondence.md)

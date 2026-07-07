@@ -59,6 +59,13 @@ Real-time SLAM systems use parallelism aggressively, at several granularities:
 
 Every level above this one assumes you can read, build, and modify a mid-sized C++ codebase. Reproducing a paper usually means cloning a C++ repository, fixing its CMake build against your local Eigen/OpenCV versions, and profiling where the time goes. C++ fluency is also what lets you move from *using* SLAM systems to *changing* them — swapping a feature detector, adding a sensor, or optimizing a bottleneck with threading or SIMD.
 
+## Hands-on
+
+- [Basic C++ programming](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part1_ch02_02)
+- [Building C++ libraries](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part1_ch02_03)
+- [C++ CPU profiler](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part1_ch02_04)
+- [C++ memory profiler](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part1_ch02_05)
+
 ## Related
 
 - [Math libraries (Eigen, Ceres, GTSAM, g2o)](math-libraries.md)

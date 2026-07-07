@@ -50,6 +50,11 @@ In a SLAM pipeline, keypoints are the raw material for everything downstream: 2D
 
 Feature-based (indirect) SLAM — the dominant paradigm from PTAM through ORB-SLAM3 — stands entirely on keypoints: the quality, speed, and distribution of detected features bound the accuracy and robustness of the whole system. Understanding detector/descriptor trade-offs (accuracy vs. Hz, binary vs. float descriptors, hand-crafted vs. learned) is essential both for reading papers and for the very practical task of choosing a front-end for your compute budget.
 
+## Hands-on
+
+- [Classical local feature detection](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part2_ch01_03)
+- [Deep local feature detection](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part2_ch01_04)
+
 ## Related
 
 - [Corner detector](../level-01-beginner/corner-detector.md)

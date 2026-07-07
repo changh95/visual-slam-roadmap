@@ -56,6 +56,11 @@ Homographies are used in ORB-SLAM for map initialization: competing Homography a
 
 Epipolar geometry is how a monocular SLAM system bootstraps itself: from 2D-2D feature matches alone it recovers the relative camera pose and triangulates the first map points. It also provides the epipolar line as a 1D search constraint for stereo matching and guided feature matching, and the epipolar constraint is the standard geometric verification inside RANSAC for rejecting false matches.
 
+## Hands-on
+
+- [Epipolar geometry hands-on](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part2_ch02_02)
+- [Homography hands-on](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part2_ch02_04)
+
 ## Related
 
 - [Pinhole camera model](pinhole-camera-model.md)

@@ -67,6 +67,11 @@ trackAgainst(local_points);  // heavy work happens outside the lock
 
 The difference between a paper prototype and a deployable SLAM system is usually engineering throughput, not algorithmic novelty: the same math runs 10x faster with SIMD descriptors, OpenMP front-ends, and a properly decoupled thread architecture. On embedded platforms with tight power budgets, exploiting Neon and the GPU is often the only way to reach real-time at all.
 
+## Hands-on
+
+- [SIMD acceleration hands-on](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part5_ch03_06)
+- [CUDA acceleration hands-on](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part5_ch03_08)
+
 ## Related
 
 - [C++](cpp.md)

@@ -48,6 +48,10 @@ Imagine a robot driving a large square, with odometry accumulating a bit of head
 
 PGO is the workhorse of loop closure — the step that turns a drifting odometry trajectory into a globally consistent map. It is the simplest instance of graph-based SLAM, so it is also the best place to first understand nonlinear least squares on manifolds, sparsity, and information matrices before tackling full bundle adjustment and factor graphs.
 
+## Hands-on
+
+- [Kimera-RPGO hands-on](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part3_ch01_17)
+
 ## Related
 
 - [Factor graph](factor-graph.md)

@@ -34,6 +34,10 @@ On EuRoC (RMS ATE, V2_03 excluded for >400 missing frames): the VIO layer is bes
 
 Basalt gave a principled answer to a question every VIO-plus-mapping system faces: how to carry odometry information into global optimization without freezing linearization points or keeping raw measurements. Framing "what to keep from odometry" as a distribution-approximation problem (which nonlinear factors best match the accumulated information) made the idea transferable — it influenced later systems including OKVIS2's pose-graph-edge treatment of marginalized landmarks — and its high-quality open-source implementation is a common high-accuracy baseline on EuRoC and TUM-VI.
 
+## Hands-on
+
+- [Run Basalt-VIO](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/basalt)
+
 ## Related
 
 - [OKVIS](okvis.md) — the sliding-window architecture whose marginalization weakness Basalt targets.

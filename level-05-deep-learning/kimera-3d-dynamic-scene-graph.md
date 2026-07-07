@@ -39,6 +39,10 @@ Evaluated in a photo-realistic 65m x 65m Unity office (the released uHumans data
 
 This is the paper that reconciled visual-inertial SLAM with dense human mesh tracking and generalized SLAM into a "spatial perception engine" — SLAM becomes one module inside a system that also infers relations, dynamics, and abstractions. The DSG's bounding-volume hierarchy gives fast collision checking, its place graph gives hierarchical planning, and its layered pruning gives principled map compression for long-term autonomy. Kimera became the default open-source research platform for metric-semantic SLAM, and the DSG data structure directly seeded Hydra and the entire hierarchical scene-graph line.
 
+## Hands-on
+
+- [Run Kimera](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/kimera)
+
 ## Related
 
 - [Kimera-VIO](../level-06-vio-vins/kimera-vio.md) — the visual-inertial front-end in detail

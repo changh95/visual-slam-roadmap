@@ -43,6 +43,10 @@ i.e., the largest total contrast of the supporting arc, and non-maximum suppress
 
 Feature detection runs on every frame inside the tracking loop, so its cost directly bounds the achievable frame rate on embedded hardware. FAST made a full detect-describe-match pipeline real-time on CPUs — PTAM used FAST for tracking, SVO seeds its depth filters at FAST corners, VIO front-ends (VINS-Mono, MSCKF implementations) detect FAST corners and track them with KLT, and ORB (oFAST + rBRIEF) turned it into the complete feature of the ORB-SLAM family. Knowing the segment test also explains FAST's failure modes you will observe in practice: responses on edges under noise, clustering on high-contrast texture, and sensitivity to motion blur (the circle contrast collapses when gradients smear).
 
+## Hands-on
+
+- [Classical local feature detection](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part2_ch01_03)
+
 ## Related
 
 - [Keypoints](keypoints.md)

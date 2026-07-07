@@ -37,6 +37,10 @@ In practice AKAZE occupies a middle ground: notably more repeatable and accurate
 
 Feature quality bounds everything downstream — tracking stability, map accuracy, loop-closure recall. AKAZE demonstrates that the *scale space itself* is a design choice: preserving edges during smoothing yields better-localized keypoints near object boundaries, exactly where SLAM features often live. For pipelines suffering from motion blur or weak texture where ORB degrades, AKAZE is one of the standard "stronger classical feature" upgrades to try before reaching for learned features.
 
+## Hands-on
+
+- [Classical local feature detection](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part2_ch01_03)
+
 ## Related
 
 - [SIFT](sift.md)

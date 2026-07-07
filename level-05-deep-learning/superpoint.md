@@ -44,6 +44,10 @@ with $\lambda_d=250$ balancing sparse positives against abundant negatives and $
 
 SuperPoint became *the* learned local feature of the deep-SLAM era: robust to illumination and viewpoint changes where ORB fails, yet fast enough for real-time front-ends. It is the standard backbone under SuperGlue/LightGlue and the hloc localization ecosystem, and has been dropped into ORB-SLAM-style systems (e.g., DXSLAM uses learned features in a classical pipeline). Homographic Adaptation itself became a widely reused self-supervision recipe for geometric learning.
 
+## Hands-on
+
+- [Deep local feature detection](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part2_ch01_04)
+
 ## Related
 
 - [SuperGlue](superglue.md) — the GNN matcher built on SuperPoint features

@@ -32,6 +32,10 @@ On KITTI3D (7481 frames, single image + LiDAR, same DeepSDF prior and initializa
 
 DSP-SLAM was the first SLAM system to integrate learned implicit shape priors for online object reconstruction, updating the SLAM++ vision — maps made of objects, not raw geometry — for the deep learning era: instead of a database of scanned CAD models, a latent shape space covers a whole category. Its second-order optimization through a neural SDF showed that deep shape fitting can live inside a real-time loop, and it is a key stepping stone between classical object-level SLAM (SLAM++, Fusion++, NodeSLAM) and later neural-field object mapping (vMAP) — a good template whenever you need semantically meaningful, complete object models rather than surfel soup.
 
+## Hands-on
+
+- [Run DSP-SLAM](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/dsp_slam)
+
 ## Related
 
 - [SLAM++](slampp.md) — the original object-oriented SLAM with a CAD model database

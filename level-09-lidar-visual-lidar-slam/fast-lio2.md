@@ -37,6 +37,10 @@ Raw points are accumulated into scans (10–100 ms), registered to a large local
 
 FAST-LIO2 flipped the field's default from "extract features, then register" to "register everything, fast." Its ikd-Tree became a widely reused open-source component, and its iEKF-on-manifold formulation is the reference design for filter-based LiDAR-inertial odometry. It is also the foundation of the HKU MARS ecosystem — R3LIVE and FAST-LIVO/FAST-LIVO2 build their visual fusion on this LIO core — and it is the pragmatic first choice today for pure LiDAR-inertial odometry, especially on cheap solid-state sensors.
 
+## Hands-on
+
+- [Run FAST-LIO2](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/fast_lio2)
+
 ## Related
 
 - [LOAM](loam.md) — the feature-based paradigm it displaced

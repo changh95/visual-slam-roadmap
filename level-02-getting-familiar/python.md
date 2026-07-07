@@ -58,6 +58,10 @@ Python's slowness is almost entirely a *loops* problem. The rules of thumb:
 
 Modern SLAM research lives at the intersection of geometry and learning, and the learning half speaks Python. Even for classical systems, the evaluation, visualisation, and dataset tooling ecosystem is Python-based; being fluent in it makes you dramatically faster at running experiments and understanding what your C++ system is actually doing.
 
+## Hands-on
+
+- [Basic Python programming](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part1_ch02_07)
+
 ## Related
 
 - [C++](cpp.md)

@@ -37,6 +37,10 @@ where $\alpha=e^{-\gamma^{2}/2\sigma^{2}}$ weights by normalized radial distance
 
 ConceptFusion pioneered open-set multimodal 3D mapping and established the now-standard paradigm: 2D foundation-model features + classical multi-view fusion, no 3D training at all. It is a key bridge between classical SLAM and Spatial AI — the same map that localizes the robot answers "where is something I can use to open this bottle?". Its memory cost (a full embedding per point) is precisely the problem later systems attack: LERF/LEGS with implicit feature fields, OpenGS-SLAM with discrete labels, ConceptGraphs with object-level nodes.
 
+## Hands-on
+
+- [Run ConceptFusion](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/concept_fusion)
+
 ## Related
 
 - [LERF](lerf.md)

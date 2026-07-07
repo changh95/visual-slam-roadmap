@@ -44,6 +44,10 @@ This is why dense SLAM systems typically use point clouds as the **input/interme
 - Dense mapping pipelines convert depth frames to point clouds, then integrate them into TSDF or occupancy structures.
 - Map quality checks (density, coverage, degenerate coplanar geometry) are performed on the cloud; a coplanar cloud is a degenerate configuration for initialization.
 
+## Hands-on
+
+- [Point cloud preprocessing](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part2_ch03_04)
+
 ## Related
 
 - [Voxel map](voxel-map.md)

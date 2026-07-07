@@ -47,6 +47,10 @@ Real 2D–3D match sets contain outliers (wrong descriptor matches, moved object
 - **Metric scale**: because the 3D points fix the scale, PnP-based tracking does not suffer the scale ambiguity of pure 2D–2D motion estimation.
 - A practical VO pipeline is: detect ORB, match, reject outliers with RANSAC, estimate pose with EPnP/P3P, refine with Gauss–Newton/LM.
 
+## Hands-on
+
+- [Perspective-n-points hands-on](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part2_ch02_09)
+
 ## Related
 
 - [2D-3D correspondence](2d-3d-correspondence.md)

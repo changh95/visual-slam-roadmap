@@ -45,6 +45,11 @@ over the spline, the extrinsics $T_{\text{cam,imu}}$, the gravity direction, IMU
 
 Every sensor-fusion SLAM formulation — VIO, LiDAR-visual-inertial odometry, RADAR fusion — assumes measurements can be expressed in a common frame at a common time. Errors in extrinsics or time offset show up as systematic, unmodelled residuals that the optimizer tries to absorb into poses and biases, producing drift and inconsistency that no amount of tuning fixes. Getting calibration right (and knowing how to verify it) is usually the first step of any real-world SLAM deployment.
 
+## Hands-on
+
+- [Sensor calibration](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part1_ch04_07)
+- [Kalibr hands-on](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part1_ch04_08)
+
 ## Related
 
 - [Camera calibration](../level-01-beginner/camera-calibration.md)

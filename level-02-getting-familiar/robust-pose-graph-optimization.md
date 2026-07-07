@@ -36,6 +36,10 @@ A complementary *hard* check on the front-end side is **chi-square gating**: bef
 
 One false loop closure can destroy a map that took an hour to build, so robustness at the back-end is not optional in deployed systems. This topic is also the entry point to multi-robot SLAM, where robots must decide whether to trust constraints produced by other robots — the setting PCM was designed for.
 
+## Hands-on
+
+- [Kimera-RPGO hands-on](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part3_ch01_17)
+
 ## Related
 
 - [Pose graph optimization](pose-graph-optimization.md)

@@ -42,6 +42,10 @@ Iterations are stopped by practical criteria: the cost decrease per iteration fa
 
 The back-end of every modern SLAM system — bundle adjustment, pose graph optimization, VIO sliding windows, direct photometric alignment — is an instance of sparse non-linear least squares solved with Gauss-Newton/LM iterations on a manifold. The probabilistic view ([MLE & MAP](mle-and-map.md)) says *what* to minimize; non-linear optimization is *how*. Fluency here pays off everywhere: reading a paper's "we minimize the following energy" section, diagnosing divergence (bad initialization? wrong parameterization? outliers?), and using Ceres/g2o/GTSAM effectively all rest on this material.
 
+## Hands-on
+
+- [Ceres-solver hands-on](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part3_ch01_15)
+
 ## Related
 
 - [Gauss-Newton](gauss-newton.md)

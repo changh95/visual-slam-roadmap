@@ -46,6 +46,10 @@ Shi & Tomasi's criterion selects features where $\min(\lambda_1, \lambda_2) > \t
 
 KLT is the cheap, high-precision alternative to descriptor matching for *frame-to-frame* correspondence: no descriptor computation, no NN search, sub-pixel accuracy, and computation proportional to the number of tracked points — ideal for the tracking thread of a real-time system on embedded hardware. This is why optical-flow front-ends dominate VIO (VINS-Mono tracks KLT corners and never computes descriptors during normal operation) and why semi-direct methods like SVO are built on the same patch-alignment mathematics. Its limits define front-end design, too: KLT degrades under large baselines, illumination change (brightness constancy breaks), and motion blur, and provides no means to re-find a lost feature — which is exactly what descriptor-based matching and place recognition are for. The KLT normal equations are also the simplest instance of the Gauss-Newton pattern that reappears at every scale of SLAM, up to full photometric bundle adjustment.
 
+## Hands-on
+
+- [Feature tracking hands-on](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part2_ch01_07)
+
 ## Related
 
 - [Optical flow](optical-flow.md)

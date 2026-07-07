@@ -46,6 +46,10 @@ Per frame: (1) deskew and voxel-downsample the scan into a registration cloud $\
 
 Neural implicit SLAM (iMAP, NICE-SLAM) began as a slow, room-scale RGB-D affair; PIN-SLAM is the demonstration that implicit maps scale to outdoor LiDAR SLAM with global consistency — the first system to make the neural map itself loop-closure-aware through elastic deformation. It marks the credible entry of learned map representations into the LiDAR domain that FAST-LIO2 and LOAM dominated with classical structures, and it points toward maps that are simultaneously compact, dense-reconstructable, and globally consistent.
 
+## Hands-on
+
+- [Run PIN-SLAM](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/pin_slam)
+
 ## Related
 
 - [FAST-LIO2](fast-lio2.md) — classical direct registration baseline it competes with

@@ -50,6 +50,10 @@ The iteration count grows **exponentially in the sample size** — this is exact
 - Descriptor matching alone routinely produces 20–50% wrong matches; without RANSAC the least-squares estimates would be arbitrarily corrupted (least squares has zero breakdown tolerance to outliers).
 - Loop-closure candidates from place recognition are **geometrically verified** with RANSAC before being added to the pose graph — a single false loop constraint can destroy the whole map.
 
+## Hands-on
+
+- [RANSAC hands-on](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part2_ch02_12)
+
 ## Related
 
 - [PROSAC](prosac.md)

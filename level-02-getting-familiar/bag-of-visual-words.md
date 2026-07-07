@@ -41,6 +41,10 @@ BoVW throws away geometry, so two images with similar texture statistics can sco
 
 Odometry drifts; loop closure is what makes SLAM more than dead reckoning, and BoVW is the classical way to *find* loops in constant time regardless of map size. It also powers relocalization after tracking loss and multi-session map alignment. Even as learned global descriptors (NetVLAD and successors) replace the retrieval stage in newer systems, the BoVW architecture — quantize, weight, invert, verify — remains the reference design, and DBoW2-style vocabularies still run in many deployed systems because they are fast, compact, and CPU-only.
 
+## Hands-on
+
+- [Global feature detection](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part2_ch01_09)
+
 ## Related
 
 - [ORB](orb.md)

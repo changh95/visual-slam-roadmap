@@ -39,6 +39,10 @@ where $\pi$ is the camera projection and $\rho$ a robust kernel (e.g., Huber) th
 
 PnP is the tracking backbone of feature-based SLAM: ORB-SLAM tracks every frame by matching against local map points and solving PnP, and relocalization after tracking loss is PnP against place-recognition candidates. It is also how visual localization services (query image vs. pre-built map) compute a camera pose. Alongside 2D-2D (initialization) and 3D-3D (point cloud alignment), it completes the trio of correspondence problems every SLAM engineer must know.
 
+## Hands-on
+
+- [Perspective-n-points hands-on](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part2_ch02_09)
+
 ## Related
 
 - [2D-2D correspondence](2d-2d-correspondence.md)

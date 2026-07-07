@@ -53,6 +53,10 @@ Day-to-day commands worth memorising: `ros2 bag record -a` / `ros2 bag play <bag
 
 Nearly every robot you will deploy on speaks ROS: sensor data arrives as ROS topics, extrinsics live in TF, and downstream consumers (navigation, planning) expect `nav_msgs/Odometry` and a `map` frame. Being able to wrap a SLAM system into a ROS 2 node, replay bags, and debug with RViz is a baseline skill for both research and industry robotics work.
 
+## Hands-on
+
+- [ROS fundamentals](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part1_ch02_09)
+
 ## Related
 
 - [Docker](docker.md)

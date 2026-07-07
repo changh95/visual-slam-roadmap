@@ -37,6 +37,10 @@ The SuMa pipeline is extended at three points: a semantic segmentation front-end
 
 SuMa++ was one of the first LiDAR SLAM systems to use a deep segmentation network to handle dynamic environments, a problem pure geometry struggles with when traffic is dense or slow-moving. Its key empirical lesson — filter what actually *moves* via map–scan semantic consistency, rather than deleting whole movable classes — became standard practice in urban autonomous-driving SLAM, and mirrors what DynaSLAM did for visual SLAM. It also cemented the range image as the standard intermediate representation for learned LiDAR processing, and produced semantically labeled surfel maps usable by downstream navigation.
 
+## Hands-on
+
+- [Run SuMa++](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/suma_pp)
+
 ## Related
 
 - [SuMa](suma.md)
