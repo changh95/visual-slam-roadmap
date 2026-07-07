@@ -45,6 +45,16 @@
 - [RANSAC](level-02-getting-familiar/ransac.md), [PROSAC](level-02-getting-familiar/prosac.md), [M-Estimator](level-02-getting-familiar/m-estimator.md), [MAXCON](level-02-getting-familiar/maxcon.md), [볼록 완화](level-02-getting-familiar/convex-relaxation.md)
 - **[강건 포즈 그래프 최적화](level-02-getting-familiar/robust-pose-graph-optimization.md)**: 전환 가능한 제약 조건, 동적 공분산 스케일링(DCS), 쌍별 일관성 최대화(PCM)
 
+
+### 인증 가능한 최적 알고리즘
+
+| 시스템 | 저자/연도 | 핵심 개념 |
+|--------|-------------|--------------|
+| [**SE-Sync**](level-02-getting-familiar/se-sync.md) | [Rosen 2019](https://arxiv.org/abs/1611.00128) | SDP + 리만 최적화를 통한 인증 가능한 포즈 그래프 최적화 (arXiv 2016, IJRR 2019) |
+| [**TEASER++**](level-02-getting-familiar/teaserpp.md) | [Yang 2020](https://arxiv.org/abs/2001.07715) | 포인트 클라우드 정합, 90%+ 이상치에 강건, TLS + Max Clique (T-RO/RSS 2020) |
+| [**GNC**](level-02-getting-familiar/gnc.md) | [Yang 2020](https://arxiv.org/abs/1909.08605) | Graduated Non-Convexity, 볼록 → 강건 비용으로의 연속화(continuation) |
+| [**QUASAR**](level-02-getting-familiar/quasar.md) | [Yang 2019](https://arxiv.org/abs/1905.12536) | 인증 가능한 최적 회전 탐색(이상치가 있는 Wahba 문제), 쿼터니언 QCQP + SDP 완화 |
+
 ### 최소제곱 최적화
 - [재투영 오차](level-02-getting-familiar/reprojection-error.md), [번들 조정](level-02-getting-familiar/bundle-adjustment.md)
 - [비선형 최적화](level-02-getting-familiar/non-linear-optimization.md), [리 대수](level-02-getting-familiar/lie-groups.md)
@@ -68,6 +78,16 @@
 - **[증분 스무딩](level-02-getting-familiar/incremental-smoothing.md)**: iSAM / iSAM2
 - **[주변화](level-02-getting-familiar/marginalization.md)**와 고정 래그 스무딩
 - 참고 자료: [Dellaert & Kaess, *Factor Graphs for Robot Perception* (2017)](https://www.cs.cmu.edu/~kaess/pub/Dellaert17fnt.pdf); GTSAM 튜토리얼
+
+
+### 가우시안 신뢰 전파
+
+| 시스템 | 저자/연도 | 핵심 개념 |
+|--------|-------------|--------------|
+| [**FutureMapping 1**](level-02-getting-familiar/futuremapping-1.md) | [Davison 2018](https://arxiv.org/abs/1803.11288) | 공간 AI의 연산 구조, SLAM을 위한 GBP |
+| [**FutureMapping 2**](level-02-getting-familiar/futuremapping-2.md) | [Davison 2019](https://arxiv.org/abs/1910.14139) | 핵심 공간 AI 프리미티브로서의 GBP, GBP에 대한 시각적 입문 |
+| [**BA on Graph Processor**](level-02-getting-familiar/ba-on-graph-processor.md) | [Ortiz 2020](https://arxiv.org/abs/2003.03134) | Graphcore IPU에서의 번들 조정, 타일 기반 병렬성 |
+| [**DANCeRS**](level-02-getting-familiar/dancers.md) | [Patwardhan 2025](https://arxiv.org/abs/2508.18153) | 로봇 군집에서의 GBP 기반 분산 합의 |
 
 ### 맵 표현
 - [포인트 클라우드](level-02-getting-familiar/point-cloud.md), [점유 격자 매핑](level-02-getting-familiar/occupancy-grid-mapping.md), [TSDF](level-04-rgbd-slam/tsdf-vs-surfel-maps.md), [서펠](level-04-rgbd-slam/tsdf-vs-surfel-maps.md), [복셀 맵](level-02-getting-familiar/voxel-map.md)

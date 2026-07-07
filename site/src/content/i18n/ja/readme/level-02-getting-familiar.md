@@ -45,6 +45,16 @@
 - [RANSAC](level-02-getting-familiar/ransac.md)、[PROSAC](level-02-getting-familiar/prosac.md)、[M-Estimator](level-02-getting-familiar/m-estimator.md)、[MAXCON](level-02-getting-familiar/maxcon.md)、[凸緩和](level-02-getting-familiar/convex-relaxation.md)
 - **[ロバストなポーズグラフ最適化](level-02-getting-familiar/robust-pose-graph-optimization.md)**: 切替可能制約(Switchable constraints)、動的共分散スケーリング(DCS)、ペアワイズ整合性最大化(PCM)
 
+
+### 証明可能な最適アルゴリズム
+
+| システム | 著者/年 | キーコンセプト |
+|--------|-------------|--------------|
+| [**SE-Sync**](level-02-getting-familiar/se-sync.md) | [Rosen 2019](https://arxiv.org/abs/1611.00128) | SDP+リーマン最適化による証明可能なポーズグラフ最適化(arXiv 2016、IJRR 2019) |
+| [**TEASER++**](level-02-getting-familiar/teaserpp.md) | [Yang 2020](https://arxiv.org/abs/2001.07715) | 点群レジストレーション、90%以上の外れ値にロバスト、TLS+最大クリーク(T-RO/RSS 2020) |
+| [**GNC**](level-02-getting-familiar/gnc.md) | [Yang 2020](https://arxiv.org/abs/1909.08605) | Graduated Non-Convexity、凸関数からロバストコストへの連続変形 |
+| [**QUASAR**](level-02-getting-familiar/quasar.md) | [Yang 2019](https://arxiv.org/abs/1905.12536) | 証明可能な最適回転探索(外れ値を含むWahba問題)、クォータニオンQCQP+SDP緩和 |
+
 ### 最小二乗最適化
 - [再投影誤差](level-02-getting-familiar/reprojection-error.md)、[バンドル調整](level-02-getting-familiar/bundle-adjustment.md)
 - [非線形最適化](level-02-getting-familiar/non-linear-optimization.md)、[リー代数](level-02-getting-familiar/lie-groups.md)
@@ -68,6 +78,16 @@
 - **[インクリメンタルスムージング](level-02-getting-familiar/incremental-smoothing.md)**: iSAM / iSAM2
 - **[マージナライゼーション(周辺化)](level-02-getting-familiar/marginalization.md)** と固定ラグスムージング
 - 参考文献: [Dellaert & Kaess, *Factor Graphs for Robot Perception* (2017)](https://www.cs.cmu.edu/~kaess/pub/Dellaert17fnt.pdf); GTSAMチュートリアル
+
+
+### ガウス信念伝播
+
+| システム | 著者/年 | キーコンセプト |
+|--------|-------------|--------------|
+| [**FutureMapping 1**](level-02-getting-familiar/futuremapping-1.md) | [Davison 2018](https://arxiv.org/abs/1803.11288) | Spatial AIの計算構造、SLAMのためのGBP |
+| [**FutureMapping 2**](level-02-getting-familiar/futuremapping-2.md) | [Davison 2019](https://arxiv.org/abs/1910.14139) | Spatial AIの中核プリミティブとしてのGBP、GBPへの視覚的な入門 |
+| [**BA on Graph Processor**](level-02-getting-familiar/ba-on-graph-processor.md) | [Ortiz 2020](https://arxiv.org/abs/2003.03134) | Graphcore IPU上でのバンドル調整、タイルベースの並列処理 |
+| [**DANCeRS**](level-02-getting-familiar/dancers.md) | [Patwardhan 2025](https://arxiv.org/abs/2508.18153) | GBPベースのロボット群における分散合意形成 |
 
 ### マッピング
 - [点群](level-02-getting-familiar/point-cloud.md)、[占有格子マッピング](level-02-getting-familiar/occupancy-grid-mapping.md)、[TSDF](level-04-rgbd-slam/tsdf-vs-surfel-maps.md)、[サーフェル](level-04-rgbd-slam/tsdf-vs-surfel-maps.md)、[ボクセルマップ](level-02-getting-familiar/voxel-map.md)

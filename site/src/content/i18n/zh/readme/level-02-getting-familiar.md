@@ -45,6 +45,16 @@
 - [RANSAC](level-02-getting-familiar/ransac.md)、[PROSAC](level-02-getting-familiar/prosac.md)、[M-估计器(M-Estimator)](level-02-getting-familiar/m-estimator.md)、[MAXCON](level-02-getting-familiar/maxcon.md)、[凸松弛](level-02-getting-familiar/convex-relaxation.md)
 - **[鲁棒位姿图优化](level-02-getting-familiar/robust-pose-graph-optimization.md)**: 可切换约束(Switchable constraints)、动态协方差缩放(DCS)、成对一致性最大化(PCM)
 
+
+### 可证明最优算法
+
+| 系统 | 作者/年份 | 关键概念 |
+|--------|-------------|--------------|
+| [**SE-Sync**](level-02-getting-familiar/se-sync.md) | [Rosen 2019](https://arxiv.org/abs/1611.00128) | 通过SDP+黎曼优化实现可证明的位姿图优化(arXiv 2016, IJRR 2019) |
+| [**TEASER++**](level-02-getting-familiar/teaserpp.md) | [Yang 2020](https://arxiv.org/abs/2001.07715) | 点云配准，对90%以上外点鲁棒，TLS+最大团(T-RO/RSS 2020) |
+| [**GNC**](level-02-getting-familiar/gnc.md) | [Yang 2020](https://arxiv.org/abs/1909.08605) | 渐进非凸化(Graduated Non-Convexity)，从凸优化连续过渡到鲁棒代价函数 |
+| [**QUASAR**](level-02-getting-familiar/quasar.md) | [Yang 2019](https://arxiv.org/abs/1905.12536) | 可证明最优的旋转搜索(含外点的Wahba问题)，四元数QCQP+SDP松弛 |
+
 ### 最小二乘优化
 - [重投影误差](level-02-getting-familiar/reprojection-error.md)、[光束法平差](level-02-getting-familiar/bundle-adjustment.md)
 - [非线性优化](level-02-getting-familiar/non-linear-optimization.md)、[李代数](level-02-getting-familiar/lie-groups.md)
@@ -68,6 +78,16 @@
 - **[增量式平滑](level-02-getting-familiar/incremental-smoothing.md)**: iSAM / iSAM2
 - **[边缘化](level-02-getting-familiar/marginalization.md)**与固定滞后平滑(fixed-lag smoothing)
 - 参考文献: [Dellaert & Kaess, *Factor Graphs for Robot Perception* (2017)](https://www.cs.cmu.edu/~kaess/pub/Dellaert17fnt.pdf); GTSAM教程
+
+
+### 高斯信念传播
+
+| 系统 | 作者/年份 | 关键概念 |
+|--------|-------------|--------------|
+| [**FutureMapping 1**](level-02-getting-familiar/futuremapping-1.md) | [Davison 2018](https://arxiv.org/abs/1803.11288) | Spatial AI的计算结构，用于SLAM的高斯信念传播(GBP) |
+| [**FutureMapping 2**](level-02-getting-familiar/futuremapping-2.md) | [Davison 2019](https://arxiv.org/abs/1910.14139) | 将GBP作为Spatial AI的核心基础，GBP的可视化介绍 |
+| [**BA on Graph Processor**](level-02-getting-familiar/ba-on-graph-processor.md) | [Ortiz 2020](https://arxiv.org/abs/2003.03134) | 在Graphcore IPU上进行光束法平差，基于分块(tile)的并行化 |
+| [**DANCeRS**](level-02-getting-familiar/dancers.md) | [Patwardhan 2025](https://arxiv.org/abs/2508.18153) | 基于GBP的机器人集群分布式共识 |
 
 ### 建图
 - [点云](level-02-getting-familiar/point-cloud.md)、[占据栅格建图](level-02-getting-familiar/occupancy-grid-mapping.md)、[TSDF](level-04-rgbd-slam/tsdf-vs-surfel-maps.md)、[面元(Surfel)](level-04-rgbd-slam/tsdf-vs-surfel-maps.md)、[体素地图](level-02-getting-familiar/voxel-map.md)

@@ -47,83 +47,14 @@
 | [**Stereo DSO**](level-07-stereo-slam/stereo-dso.md) | [Wang 2017](https://arxiv.org/abs/1708.07878) | → ステレオSLAMへ |
 | [VI-DSO](level-06-vio-vins/vi-dso.md) | [von Stumberg 2018](https://arxiv.org/abs/1804.05625) | → VIO/VINSへ |
 
-### 学習ベースSLAM
 
-| システム | 著者/年 | キーコンセプト |
-|--------|-------------|--------------|
-| [**DROID-SLAM**](level-05-deep-learning/droid-slam.md) | [Teed 2021](https://arxiv.org/abs/2108.10869) | 微分可能なBA、高密度オプティカルフロー、end-to-endで学習(→ Level 5にも掲載) |
-| [TartanVO](level-05-deep-learning/tartanvo.md) | [Wang 2021](https://arxiv.org/abs/2011.00359) | 汎化性の高いビジュアルオドメトリ |
-| [**DPVO**](level-05-deep-learning/dpvo.md) | [Teed 2023](https://arxiv.org/abs/2208.04726) | パッチベースの軽量DROID-SLAM、リアルタイムVO(→ Level 5にも掲載) |
-| [**DPV-SLAM**](level-05-deep-learning/dpv-slam.md) | [Lipson 2024](https://arxiv.org/abs/2408.01654) | DPVO+ループクロージング、完全なSLAM(ECCV 2024) |
-| [MAC-VO](level-05-deep-learning/mac-vo.md) | [Qiu 2024](https://arxiv.org/abs/2409.09479) | 学習ベースVO、メトリックスケールを考慮 |
-| [**VoT**](level-05-deep-learning/vot.md) | [Yugay 2025](https://arxiv.org/abs/2510.03348) | Transformerを用いたビジュアルオドメトリ(後にFVOへ改題) |
-
-### 基盤モデルSLAM
-
-| システム | 著者/年 | キーコンセプト |
-|--------|-------------|--------------|
-| [**DUSt3R**](level-05-deep-learning/dust3r.md) | [Wang 2024](https://arxiv.org/abs/2312.14132) | 画像ペアからのポイントマップ回帰、キャリブレーション不要 |
-| [**MASt3R**](level-05-deep-learning/mast3r.md) | [Leroy 2024](https://arxiv.org/abs/2406.09756) | DUSt3R+ローカル特徴マッチング |
-| [**MASt3R-SLAM**](level-05-deep-learning/mast3r-slam.md) | [Murai 2024](https://arxiv.org/abs/2412.12392) | MASt3Rの事前分布によるリアルタイム高密度SLAM |
-| [**VGGT**](level-05-deep-learning/vggt.md) | [Wang (Meta) 2025](https://arxiv.org/abs/2503.11651) | N視点からの姿勢・深度・ポイントマップ・トラックのフィードフォワード推論(**CVPR 2025最優秀論文**) |
-| [**VGGT-SLAM**](level-05-deep-learning/vggt-slam.md) | [Maggio 2025](https://arxiv.org/abs/2505.12549) | SL(4)多様体上で最適化された高密度RGB SLAM、VGGTフロントエンド |
-| [**VGGT-SLAM 2.0**](level-05-deep-learning/vggt-slam-2-0.md) | [Maggio 2026](https://arxiv.org/abs/2601.19887) | リアルタイム高密度フィードフォワードシーン再構成 |
-| [**VGGT-Geo**](level-05-deep-learning/vggt-geo.md) | [Qin 2026](https://www.mdpi.com/2220-9964/15/2/85) | 高密度屋内SLAMのためのVGGT事前分布の確率的幾何融合 |
-| [**IGGT**](level-05-deep-learning/iggt.md) | [Li 2025](https://arxiv.org/abs/2510.22706) | インスタンスに基づく幾何Transformer — 3次元再構成とインスタンスレベル理解の統合 |
-| [**AMB3R**](level-05-deep-learning/amb3r.md) | [Wang 2025](https://arxiv.org/abs/2511.20343) | バックエンドを備えた高精度フィードフォワードのメトリックスケール3次元再構成、SfM/SLAM対応 |
-| [**MASt3R-Fusion**](level-05-deep-learning/mast3r-fusion.md) | [Zhou 2025](https://arxiv.org/abs/2509.20757) | MASt3Rフィードフォワード視覚モデル+IMU+GNSS融合 |
-
-#### SfMツール
+### SfMツール
 
 | システム | 著者/年 | キーコンセプト |
 |--------|-------------|--------------|
 | [**COLMAP**](level-03-monocular-slam/colmap.md) | [Schönberger 2016](https://colmap.github.io/) | デファクトスタンダードとなる逐次SfM+MVSパイプライン(C++/CUDA、pycolmapバインディング) |
 | [**GLOMAP**](level-03-monocular-slam/glomap.md) | [Pan 2024](https://arxiv.org/abs/2407.20219) | グローバルSfMの再考 — COLMAP互換、大幅に高速なマッピング |
 | [**InstantSfM**](level-03-monocular-slam/instantsfm.md) | [Zhong 2025](https://arxiv.org/abs/2510.13310) | GPUネイティブな疎性を考慮したSfMパイプライン、COLMAPに対する大幅な高速化 |
-
-### ニューラル表現SLAM
-
-#### NeRFベース
-
-| システム | 著者/年 | キーコンセプト |
-|--------|-------------|--------------|
-| [**iMAP**](level-05-deep-learning/imap.md) | [Sucar 2021](https://arxiv.org/abs/2103.12352) | 初のNeRF-SLAM、単一のMLP、リアルタイムトラッキング/マッピング |
-| [**BARF**](level-05-deep-learning/barf.md) | [Lin 2021](https://arxiv.org/abs/2104.06405) | バンドル調整を行うNeRF、coarse-to-fineの位置エンコーディング、姿勢とNeRFの同時最適化(完全なSLAMではなく姿勢+NeRFの共同最適化) |
-| [**NICE-SLAM**](level-05-deep-learning/nice-slam.md) | [Zhu & Peng 2022](https://arxiv.org/abs/2112.12130) | 階層的特徴グリッド(coarse/mid/fine)、スケーラブル |
-| [**Co-SLAM**](level-05-deep-learning/co-slam.md) | [Wang 2023](https://arxiv.org/abs/2304.14377) | ハッシュグリッド(Instant-NGP)+座標エンコーディング、NICE-SLAMより5〜10倍高速 |
-| [**ESLAM**](level-05-deep-learning/eslam.md) | [Johari 2023](https://arxiv.org/abs/2211.11704) | トライプレーン表現、O(N²)対O(N³)のメモリ使用量 |
-| [**Point-SLAM**](level-05-deep-learning/point-slam.md) | [Sandström 2023](https://arxiv.org/abs/2304.04278) | ニューラル点群ベース |
-| [**NeRF-SLAM**](level-05-deep-learning/nerf-slam.md) | [Rosinol 2023](https://arxiv.org/abs/2210.13641) | NeRF+古典的SLAMパイプライン |
-| [**NICER-SLAM**](level-05-deep-learning/nicer-slam.md) | [Zhu 2024](https://arxiv.org/abs/2302.03594) | RGBのみのNeRF-SLAM(深度センサー不要)、モノキュラ深度の統合 |
-| [**vMAP**](level-05-deep-learning/vmap.md) | [Kong 2023](https://arxiv.org/abs/2302.01838) | 物体レベルのNeRF-SLAM、物体ごとのニューラルフィールド |
-| [**GO-SLAM**](level-05-deep-learning/go-slam.md) | [Zhang 2023](https://arxiv.org/abs/2309.02436) | グローバル最適化+NeRF-SLAM、ループクロージング+グローバルBA |
-
-#### 3DGSベース
-
-| システム | 著者/年 | キーコンセプト |
-|--------|-------------|--------------|
-| [**SplaTAM**](level-05-deep-learning/splatam.md) | [Keetha 2024](https://arxiv.org/abs/2312.02126) | 最初期の3DGS SLAMシステムの一つ(GS-SLAM、MonoGSと同時期)、RGB-D、シルエット誘導による高密度化 |
-| [**MonoGS**](level-05-deep-learning/monogs.md) | [Matsuki 2024](https://arxiv.org/abs/2312.06741) | 初のモノキュラ3DGS SLAM(CVPR 2024 highlight)、ラスタライズベースの直接トラッキング、解析的カメラヤコビアン |
-| [**GS-ICP SLAM**](level-05-deep-learning/gs-icp-slam.md) | [Ha 2024](https://arxiv.org/abs/2403.12550) | Gaussian-to-Gaussian ICP(マハラノビス距離)、幾何ベースのトラッキング |
-| [**Photo-SLAM**](level-05-deep-learning/photo-slam.md) | [Huang 2024](https://arxiv.org/abs/2311.16728) | 明示的な幾何+暗示的な見た目表現(MLPによる色)、アンチエイリアシング |
-| [**RTG-SLAM**](level-05-deep-learning/rtg-slam.md) | [Peng 2024](https://arxiv.org/abs/2404.19706) | リアルタイム重視、適応的なガウシアン数の制御、Jetson Orinで25FPS |
-| [**EGG-Fusion**](level-05-deep-learning/egg-fusion.md) | [Pan 2025](https://arxiv.org/abs/2512.01296) | 幾何を考慮したガウシアンサーフェルのオンザフライ融合、情報フィルタベース、リアルタイム |
-| [**Online 3DGS Modeling**](level-05-deep-learning/online-3dgs-modeling.md) | [Lee 2025](https://arxiv.org/abs/2508.14014) | 新規視点選択を伴うオンライン3Dガウシアンスプラッティングモデリング |
-| [**ActiveSplat**](level-05-deep-learning/activesplat.md) | [Li 2025](https://arxiv.org/abs/2410.21955) | 3DGSによるアクティブマッピング+ボロノイ図ベースのパス計画 |
-| [**OpenGS-SLAM**](level-05-deep-learning/opengs-slam.md) | [Yang 2025](https://arxiv.org/abs/2503.01646) | オープンセットな高密度セマンティック3DGS SLAM、物体レベルのシーン理解 |
-| [**LEGS**](level-05-deep-learning/legs.md) | [Yu 2024](https://arxiv.org/abs/2409.18108) | 言語を埋め込んだガウシアンスプラット、リアルタイムに言語で問い合わせ可能な3D表現 |
-
-### セマンティック/言語グラウンディングSLAM
-
-| システム | 著者/年 | キーコンセプト |
-|--------|-------------|--------------|
-| [**ConceptFusion**](level-05-deep-learning/conceptfusion.md) | [Jatavallabhula (MIT) 2023](https://arxiv.org/abs/2302.07241) | CLIP特徴を3次元地図に融合、オープンボキャブラリな言語クエリ |
-| [**LERF**](level-05-deep-learning/lerf.md) | [Kerr 2023](https://arxiv.org/abs/2303.09553) | 言語を埋め込んだRadiance Fields、DINOマルチスケール、NeRF+CLIP |
-| [**OpenScene**](level-05-deep-learning/openscene.md) | [Peng (ETH) 2023](https://arxiv.org/abs/2211.15654) | 言語特徴を3次元点群に逆投影 |
-| [**ConceptGraphs**](level-05-deep-learning/conceptgraphs.md) | [Gu 2023](https://arxiv.org/abs/2309.16650) | オープンボキャブラリな3Dシーングラフ、SAM+CLIP+LLMによる空間関係 |
-| [**SpatialLM**](level-05-deep-learning/spatiallm.md) | [Mao 2025](https://github.com/manycore-research/SpatialLM) | 点群→LLM、Pythonスクリプトとして構造化された屋内モデリング |
-
-> 関連項目: [**LEGS**](https://arxiv.org/abs/2409.18108)、[**OpenGS-SLAM**](https://arxiv.org/abs/2503.01646) (上記3DGSベースの節); [**Open-YOLO 3D**](https://arxiv.org/abs/2406.02548) (Level 5 物体検出)
 
 ### 動的環境SLAM
 
