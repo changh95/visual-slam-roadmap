@@ -43,6 +43,7 @@
 | [**Metric3D**](level-05-deep-learning/metric3d.md) | [Yin 2023](https://arxiv.org/abs/2307.10984) | 카메라 내부 파라미터 조건화 미터 깊이, Canonical Camera Space |
 | [**Depth Anything**](level-05-deep-learning/depth-anything.md) | [Yang 2024](https://arxiv.org/abs/2401.10891) | 6,200만 개 이미지, 단안 깊이를 위한 파운데이션 모델 |
 | [**Depth Anything V2**](level-05-deep-learning/depth-anything-v2.md) | [Yang 2024](https://arxiv.org/abs/2406.09414) | 합성 데이터로 개선, 더 나은 에지 보존 |
+| [**Depth Anything 3**](level-05-deep-learning/depth-anything-3.md) | [Lin 2025](https://arxiv.org/abs/2511.10647) | 임의 입력으로부터의 any-view 기하, depth-ray 예측 타깃, 단일 plain transformer(DINOv2), teacher-student 학습 |
 | [**Marigold**](level-05-deep-learning/marigold.md) | [Ke 2024](https://arxiv.org/abs/2312.02145) | 깊이 추정을 위한 Stable Diffusion, 미세한 디테일, 샘플링을 통한 불확실성 |
 | [**Align3R**](level-05-deep-learning/align3r.md) | [Lu 2025](https://arxiv.org/abs/2412.03079) | 비디오 시간적 일관성, DUSt3R 기반, CVPR 2025 하이라이트 |
 | [**Masked Depth Modeling (LingBot-Depth)**](level-05-deep-learning/masked-depth-modeling-lingbot-depth.md) | [Tan 2026](https://arxiv.org/abs/2601.17895) | 유리/거울/금속에서의 RGB-D 실패 해결 |
@@ -83,8 +84,10 @@
 | [**YOLO**](level-05-deep-learning/yolo.md) (v1→v11) | [Redmon 2016→2024](https://arxiv.org/abs/1506.02640) | 실시간 객체 검출, Ultralytics 생태계 |
 | [**DETR**](level-05-deep-learning/detr.md) | [Carion 2020](https://arxiv.org/abs/2005.12872) | Transformer 검출, 앵커 없는(anchor-free) 방식, NMS 없음 |
 | [**RT-DETR**](level-05-deep-learning/rt-detr.md) | [Zhao (Baidu) 2023](https://arxiv.org/abs/2304.08069) | 실시간 DETR, YOLO 수준의 속도 + Transformer 수준의 품질 |
+| [**RF-DETR**](level-05-deep-learning/rf-detr.md) | [Robinson 2025](https://arxiv.org/abs/2511.09554) | DETR에 대한 weight-sharing NAS, 정확도-지연시간 파레토 튜닝, COCO에서 60 AP를 넘은 최초의 실시간 검출기 |
 | [**SAM**](level-05-deep-learning/sam.md) | [Kirillov 2023](https://arxiv.org/abs/2304.02643) | Segment Anything, 프롬프트 기반, 파운데이션 모델 |
 | [**SAM 2**](level-05-deep-learning/sam-2.md) | [Meta 2024](https://arxiv.org/abs/2408.00714) | 비디오 분할, Memory Attention, 시간적 일관성 |
+| [**SAM 3**](level-05-deep-learning/sam-3.md) | [Carion 2025](https://arxiv.org/abs/2511.16719) | 프롬프트 가능한 개념 세그먼테이션(명사구 / exemplar 프롬프트), presence 헤드, 검출기 + 메모리 기반 비디오 트래커 |
 | [**Grounding DINO**](level-05-deep-learning/grounding-dino.md) | [Liu 2023](https://arxiv.org/abs/2303.05499) | 텍스트 프롬프트 기반 검출 → SAM 파이프라인 (Grounded SAM) |
 | [**Open-YOLO 3D**](level-05-deep-learning/open-yolo-3d.md) | [Boudjoghra 2024](https://arxiv.org/abs/2406.02548) | 2D 오픈 어휘 검출 → 3D 인스턴스 분할, 16배 빠름 |
 

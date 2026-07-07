@@ -363,6 +363,7 @@ I made this roadmap to share my thoughts and experience on studying Visual-SLAM,
 | [**Metric3D**](level-05-deep-learning/metric3d.md) | [Yin 2023](https://arxiv.org/abs/2307.10984) | Camera intrinsic-conditioned metric depth, Canonical Camera Space |
 | [**Depth Anything**](level-05-deep-learning/depth-anything.md) | [Yang 2024](https://arxiv.org/abs/2401.10891) | 62M images, foundation model for monocular depth |
 | [**Depth Anything V2**](level-05-deep-learning/depth-anything-v2.md) | [Yang 2024](https://arxiv.org/abs/2406.09414) | Improved with synthetic data, better edge preservation |
+| [**Depth Anything 3**](level-05-deep-learning/depth-anything-3.md) | [Lin 2025](https://arxiv.org/abs/2511.10647) | Any-view geometry from arbitrary inputs, depth-ray prediction target, single plain transformer (DINOv2), teacher-student training |
 | [**Marigold**](level-05-deep-learning/marigold.md) | [Ke 2024](https://arxiv.org/abs/2312.02145) | Stable Diffusion for depth, fine detail, uncertainty via sampling |
 | [**Align3R**](level-05-deep-learning/align3r.md) | [Lu 2025](https://arxiv.org/abs/2412.03079) | Video temporal consistency, DUSt3R-based, CVPR 2025 Highlight |
 | [**Masked Depth Modeling (LingBot-Depth)**](level-05-deep-learning/masked-depth-modeling-lingbot-depth.md) | [Tan 2026](https://arxiv.org/abs/2601.17895) | Fixes RGB-D failures on glass/mirrors/metal |
@@ -403,8 +404,10 @@ I made this roadmap to share my thoughts and experience on studying Visual-SLAM,
 | [**YOLO**](level-05-deep-learning/yolo.md) (v1→v11) | [Redmon 2016→2024](https://arxiv.org/abs/1506.02640) | Real-time object detection, Ultralytics ecosystem |
 | [**DETR**](level-05-deep-learning/detr.md) | [Carion 2020](https://arxiv.org/abs/2005.12872) | Transformer detection, anchor-free, no NMS |
 | [**RT-DETR**](level-05-deep-learning/rt-detr.md) | [Zhao (Baidu) 2023](https://arxiv.org/abs/2304.08069) | Real-time DETR, YOLO-speed + Transformer quality |
+| [**RF-DETR**](level-05-deep-learning/rf-detr.md) | [Robinson 2025](https://arxiv.org/abs/2511.09554) | Weight-sharing NAS over DETRs, accuracy-latency Pareto tuning, first real-time detector past 60 AP on COCO |
 | [**SAM**](level-05-deep-learning/sam.md) | [Kirillov 2023](https://arxiv.org/abs/2304.02643) | Segment Anything, prompt-based, Foundation Model |
 | [**SAM 2**](level-05-deep-learning/sam-2.md) | [Meta 2024](https://arxiv.org/abs/2408.00714) | Video segmentation, Memory Attention, temporal consistency |
+| [**SAM 3**](level-05-deep-learning/sam-3.md) | [Carion 2025](https://arxiv.org/abs/2511.16719) | Promptable concept segmentation (noun-phrase / exemplar prompts), presence head, detector + memory-based video tracker |
 | [**Grounding DINO**](level-05-deep-learning/grounding-dino.md) | [Liu 2023](https://arxiv.org/abs/2303.05499) | Text-prompted detection → SAM pipeline (Grounded SAM) |
 | [**Open-YOLO 3D**](level-05-deep-learning/open-yolo-3d.md) | [Boudjoghra 2024](https://arxiv.org/abs/2406.02548) | 2D open-vocab detection → 3D instance seg, 16× faster |
 

@@ -43,6 +43,7 @@
 | [**Metric3D**](level-05-deep-learning/metric3d.md) | [Yin 2023](https://arxiv.org/abs/2307.10984) | カメラ内部パラメータを条件としたメトリック深度、Canonical Camera Space |
 | [**Depth Anything**](level-05-deep-learning/depth-anything.md) | [Yang 2024](https://arxiv.org/abs/2401.10891) | 6200万枚の画像、モノキュラ深度のための基盤モデル |
 | [**Depth Anything V2**](level-05-deep-learning/depth-anything-v2.md) | [Yang 2024](https://arxiv.org/abs/2406.09414) | 合成データによる改善、エッジ保存性の向上 |
+| [**Depth Anything 3**](level-05-deep-learning/depth-anything-3.md) | [Lin 2025](https://arxiv.org/abs/2511.10647) | 任意の入力からの任意ビュー幾何、深度・レイ予測ターゲット、単一のプレーンなTransformer(DINOv2)、教師-生徒学習 |
 | [**Marigold**](level-05-deep-learning/marigold.md) | [Ke 2024](https://arxiv.org/abs/2312.02145) | 深度推定のためのStable Diffusion、細部の再現、サンプリングによる不確実性推定 |
 | [**Align3R**](level-05-deep-learning/align3r.md) | [Lu 2025](https://arxiv.org/abs/2412.03079) | 動画の時間的一貫性、DUSt3Rベース、CVPR 2025 Highlight |
 | [**Masked Depth Modeling (LingBot-Depth)**](level-05-deep-learning/masked-depth-modeling-lingbot-depth.md) | [Tan 2026](https://arxiv.org/abs/2601.17895) | ガラス・鏡・金属でのRGB-D失敗を修正 |
@@ -83,8 +84,10 @@
 | [**YOLO**](level-05-deep-learning/yolo.md) (v1→v11) | [Redmon 2016→2024](https://arxiv.org/abs/1506.02640) | リアルタイム物体検出、Ultralyticsエコシステム |
 | [**DETR**](level-05-deep-learning/detr.md) | [Carion 2020](https://arxiv.org/abs/2005.12872) | Transformerによる検出、アンカーフリー、NMS不要 |
 | [**RT-DETR**](level-05-deep-learning/rt-detr.md) | [Zhao (Baidu) 2023](https://arxiv.org/abs/2304.08069) | リアルタイムDETR、YOLOの速度+Transformerの精度 |
+| [**RF-DETR**](level-05-deep-learning/rf-detr.md) | [Robinson 2025](https://arxiv.org/abs/2511.09554) | DETRに対する重み共有NAS、精度-レイテンシのParetoチューニング、COCOで60 APを超えた初のリアルタイム検出器 |
 | [**SAM**](level-05-deep-learning/sam.md) | [Kirillov 2023](https://arxiv.org/abs/2304.02643) | Segment Anything、プロンプトベース、基盤モデル |
 | [**SAM 2**](level-05-deep-learning/sam-2.md) | [Meta 2024](https://arxiv.org/abs/2408.00714) | 動画セグメンテーション、Memory Attention、時間的一貫性 |
+| [**SAM 3**](level-05-deep-learning/sam-3.md) | [Carion 2025](https://arxiv.org/abs/2511.16719) | プロンプト可能な概念セグメンテーション(名詞句/エグザンプラプロンプト)、プレゼンスヘッド、検出器+メモリベースの動画トラッカー |
 | [**Grounding DINO**](level-05-deep-learning/grounding-dino.md) | [Liu 2023](https://arxiv.org/abs/2303.05499) | テキストプロンプトによる検出→SAMパイプライン(Grounded SAM) |
 | [**Open-YOLO 3D**](level-05-deep-learning/open-yolo-3d.md) | [Boudjoghra 2024](https://arxiv.org/abs/2406.02548) | 2Dオープンボキャブラリ検出→3Dインスタンスセグメンテーション、16倍高速 |
 

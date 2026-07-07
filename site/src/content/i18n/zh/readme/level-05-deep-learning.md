@@ -43,6 +43,7 @@
 | [**Metric3D**](level-05-deep-learning/metric3d.md) | [Yin 2023](https://arxiv.org/abs/2307.10984) | 基于相机内参条件的度量深度、规范相机空间(Canonical Camera Space) |
 | [**Depth Anything**](level-05-deep-learning/depth-anything.md) | [Yang 2024](https://arxiv.org/abs/2401.10891) | 6200万张图像、单目深度基础模型 |
 | [**Depth Anything V2**](level-05-deep-learning/depth-anything-v2.md) | [Yang 2024](https://arxiv.org/abs/2406.09414) | 使用合成数据改进，边缘保持效果更佳 |
+| [**Depth Anything 3**](level-05-deep-learning/depth-anything-3.md) | [Lin 2025](https://arxiv.org/abs/2511.10647) | 从任意输入恢复任意视角几何，深度-光线预测目标，单一普通Transformer(DINOv2)，师生训练 |
 | [**Marigold**](level-05-deep-learning/marigold.md) | [Ke 2024](https://arxiv.org/abs/2312.02145) | 用Stable Diffusion做深度估计，细节丰富，通过采样获得不确定性 |
 | [**Align3R**](level-05-deep-learning/align3r.md) | [Lu 2025](https://arxiv.org/abs/2412.03079) | 视频时序一致性，基于DUSt3R，CVPR 2025 Highlight |
 | [**Masked Depth Modeling (LingBot-Depth)**](level-05-deep-learning/masked-depth-modeling-lingbot-depth.md) | [Tan 2026](https://arxiv.org/abs/2601.17895) | 修复了RGB-D在玻璃/镜面/金属材质上的失效问题 |
@@ -83,8 +84,10 @@
 | [**YOLO**](level-05-deep-learning/yolo.md)(v1→v11) | [Redmon 2016→2024](https://arxiv.org/abs/1506.02640) | 实时物体检测，Ultralytics生态系统 |
 | [**DETR**](level-05-deep-learning/detr.md) | [Carion 2020](https://arxiv.org/abs/2005.12872) | Transformer检测，无锚框(anchor-free)，无需NMS |
 | [**RT-DETR**](level-05-deep-learning/rt-detr.md) | [Zhao (Baidu) 2023](https://arxiv.org/abs/2304.08069) | 实时DETR，兼具YOLO的速度与Transformer的质量 |
+| [**RF-DETR**](level-05-deep-learning/rf-detr.md) | [Robinson 2025](https://arxiv.org/abs/2511.09554) | 面向DETR的权重共享NAS，精度-延迟帕累托调优，首个在COCO上突破60 AP的实时检测器 |
 | [**SAM**](level-05-deep-learning/sam.md) | [Kirillov 2023](https://arxiv.org/abs/2304.02643) | Segment Anything，基于提示，基础模型 |
 | [**SAM 2**](level-05-deep-learning/sam-2.md) | [Meta 2024](https://arxiv.org/abs/2408.00714) | 视频分割，记忆注意力(Memory Attention)，时序一致性 |
+| [**SAM 3**](level-05-deep-learning/sam-3.md) | [Carion 2025](https://arxiv.org/abs/2511.16719) | 可提示概念分割(名词短语/样例提示)，存在性头，检测器+基于记忆的视频跟踪器 |
 | [**Grounding DINO**](level-05-deep-learning/grounding-dino.md) | [Liu 2023](https://arxiv.org/abs/2303.05499) | 文本提示检测→SAM流水线(Grounded SAM) |
 | [**Open-YOLO 3D**](level-05-deep-learning/open-yolo-3d.md) | [Boudjoghra 2024](https://arxiv.org/abs/2406.02548) | 2D开放词汇检测→3D实例分割，速度提升16倍 |
 
