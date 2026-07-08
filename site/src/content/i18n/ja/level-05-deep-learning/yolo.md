@@ -11,10 +11,12 @@ YOLO以前、物体検出は分類器を検出に転用していた：DPMは画�
 - **ネットワーク。** 24個の畳み込み層（$1\times1$削減＋$3\times3$畳み込み、GoogLeNetに着想を得たもの）に続く2つの全結合層；Fast YOLOは9個の畳み込み層を使う。最初の20個の畳み込み層は$224\times224$のImageNetで事前学習される（top-5で88%）；その後、検出は$448\times448$でleaky-ReLU活性化関数$\phi(x) = x$（$x > 0$の場合）、それ以外は$0.1x$を用いてファインチューニングされる。
 - **多項からなる二乗和誤差損失。** $\lambda_\text{coord} = 5$、$\lambda_\text{noobj} = 0.5$、そして$\mathbf{1}_{ij}^{\text{obj}}$は、物体を「担当する」予測器（現在最もIOUが高いもの）を選択する：
 
-$$\begin{aligned}
+$$
+\begin{aligned}
 & \lambda_{\text{coord}} \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbf{1}_{ij}^{\text{obj}} \left[ (x_i - \hat{x}_i)^2 + (y_i - \hat{y}_i)^2 \right] + \lambda_{\text{coord}} \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbf{1}_{ij}^{\text{obj}} \left[ \left(\sqrt{w_i} - \sqrt{\hat{w}_i}\right)^2 + \left(\sqrt{h_i} - \sqrt{\hat{h}_i}\right)^2 \right] \\
 & + \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbf{1}_{ij}^{\text{obj}} (C_i - \hat{C}_i)^2 + \lambda_{\text{noobj}} \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbf{1}_{ij}^{\text{noobj}} (C_i - \hat{C}_i)^2 + \sum_{i=0}^{S^2} \mathbf{1}_{i}^{\text{obj}} \sum_{c \in \text{classes}} \left(p_i(c) - \hat{p}_i(c)\right)^2
-\end{aligned}$$
+\end{aligned}
+$$
 
   $w, h$の平方根を取ることで小さいボックスの誤差がより大きく計上される；分類損失は物体を含むセルにのみ適用される。VOC 2007+2012上で約135エポック学習される（バッチ64、モーメンタム0.9、減衰0.0005、ドロップアウト0.5、スケール／平行移動／HSV拡張）。
 - **大域的コンテキスト。** ネットワークは（候補領域のクロップではなく）画像全体を見るため、文脈情報を符号化できる；NMSはR-CNN/DPMのような構造的必要性ではなく、任意のクリーンアップ処理である（+2〜3% mAP）。

@@ -16,11 +16,13 @@ $$SO(3) = \{R \in \mathbb{R}^{3\times3} \mid R^TR = I,\ \det(R) = +1\}$$
 
 从四元数转换为旋转矩阵：
 
-$$R = \begin{bmatrix}
+$$
+R = \begin{bmatrix}
 1 - 2(y^2+z^2) & 2(xy - wz) & 2(xz + wy) \\
 2(xy + wz) & 1 - 2(x^2+z^2) & 2(yz - wx) \\
 2(xz - wy) & 2(yz + wx) & 1 - 2(x^2+y^2)
-\end{bmatrix}$$
+\end{bmatrix}
+$$
 
 一个快速的 NumPy 检验，用于确认某矩阵是否为合法的旋转矩阵：
 
@@ -34,8 +36,10 @@ print(np.allclose(R.T @ R, np.eye(3)), np.isclose(np.linalg.det(R), 1.0))
 
 刚体运动将旋转 $R$ 和平移 $\mathbf{t}$ 组合成一个作用于齐次坐标的 $4\times4$ 矩阵：
 
-$$T = \begin{bmatrix} R & \mathbf{t} \\ \mathbf{0}^T & 1 \end{bmatrix} \in SE(3), \qquad
-T\begin{bmatrix}\mathbf{X}\\1\end{bmatrix} = \begin{bmatrix} R\mathbf{X} + \mathbf{t} \\ 1 \end{bmatrix}$$
+$$
+T = \begin{bmatrix} R & \mathbf{t} \\ \mathbf{0}^T & 1 \end{bmatrix} \in SE(3), \qquad
+T\begin{bmatrix}\mathbf{X}\\1\end{bmatrix} = \begin{bmatrix} R\mathbf{X} + \mathbf{t} \\ 1 \end{bmatrix}
+$$
 
 复合运算即为矩阵乘法，其中旋转和平移相互交织：
 

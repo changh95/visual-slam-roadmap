@@ -2,13 +2,17 @@
 
 Raw IMU measurements are corrupted in a structured way. The full error model (following Woodman's primer) includes bias, scale-factor error, cross-axis misalignment, and white noise per sensor:
 
-$$\tilde{\mathbf{a}} = \mathbf{a} + \mathbf{b}^a + \mathbf{S}^a\mathbf{a} + \mathbf{M}^a\mathbf{a} + \boldsymbol{\eta}^a, \qquad
-\tilde{\boldsymbol{\omega}} = \boldsymbol{\omega} + \mathbf{b}^g + \mathbf{S}^g\boldsymbol{\omega} + \mathbf{M}^g\boldsymbol{\omega} + \boldsymbol{\eta}^g$$
+$$
+\tilde{\mathbf{a}} = \mathbf{a} + \mathbf{b}^a + \mathbf{S}^a\mathbf{a} + \mathbf{M}^a\mathbf{a} + \boldsymbol{\eta}^a, \qquad
+\tilde{\boldsymbol{\omega}} = \boldsymbol{\omega} + \mathbf{b}^g + \mathbf{S}^g\boldsymbol{\omega} + \mathbf{M}^g\boldsymbol{\omega} + \boldsymbol{\eta}^g
+$$
 
 where $\mathbf{S}$ is (diagonal) scale-factor error and $\mathbf{M}$ is cross-axis sensitivity. VIO estimators assume $\mathbf{S}$ and $\mathbf{M}$ are handled by factory or offline calibration and keep only the two online terms — additive **white noise** and a slowly-varying **bias**:
 
-$$\tilde{\boldsymbol{\omega}} = \boldsymbol{\omega} + \mathbf{b}^g + \boldsymbol{\eta}^g \qquad
-\tilde{\mathbf{a}} = \mathbf{a} + \mathbf{b}^a + \boldsymbol{\eta}^a$$
+$$
+\tilde{\boldsymbol{\omega}} = \boldsymbol{\omega} + \mathbf{b}^g + \boldsymbol{\eta}^g \qquad
+\tilde{\mathbf{a}} = \mathbf{a} + \mathbf{b}^a + \boldsymbol{\eta}^a
+$$
 
 with $\boldsymbol{\eta}$ zero-mean white Gaussian noise and each bias modeled as a **random walk**: $\dot{\mathbf{b}} = \boldsymbol{\eta}^b$ with its own white driving noise.
 

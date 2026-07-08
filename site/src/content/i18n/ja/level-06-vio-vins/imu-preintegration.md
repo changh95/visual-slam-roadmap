@@ -14,8 +14,10 @@ $$\left(\Delta\mathbf{R}_{ij},\; \Delta\mathbf{v}_{ij},\; \Delta\mathbf{p}_{ij}\
 
 $$\Delta\mathbf{R}_{ij} = \prod_{t=i}^{j-1} \mathrm{Exp}\!\big((\tilde{\boldsymbol{\omega}}_t - \mathbf{b}^g_i)\,\delta t\big)$$
 
-$$\Delta\mathbf{v}_{ij} = \sum_{t=i}^{j-1} \Delta\mathbf{R}_{it}\,(\tilde{\mathbf{a}}_t - \mathbf{b}^a_i)\,\delta t, \qquad
-\Delta\mathbf{p}_{ij} = \sum_{t=i}^{j-1}\Big[\Delta\mathbf{v}_{it}\,\delta t + \tfrac{1}{2}\Delta\mathbf{R}_{it}\,(\tilde{\mathbf{a}}_t - \mathbf{b}^a_i)\,\delta t^2\Big]$$
+$$
+\Delta\mathbf{v}_{ij} = \sum_{t=i}^{j-1} \Delta\mathbf{R}_{it}\,(\tilde{\mathbf{a}}_t - \mathbf{b}^a_i)\,\delta t, \qquad
+\Delta\mathbf{p}_{ij} = \sum_{t=i}^{j-1}\Big[\Delta\mathbf{v}_{it}\,\delta t + \tfrac{1}{2}\Delta\mathbf{R}_{it}\,(\tilde{\mathbf{a}}_t - \mathbf{b}^a_i)\,\delta t^2\Big]
+$$
 
 ここで重力は**登場しない**ことに注意 — それは絶対姿勢が利用可能な、以下の残差においてのみ再導入される。疑似コードでは、この累積はキーフレーム区間ごとに一度実行される単純なループである:
 
@@ -32,8 +34,10 @@ for each IMU sample (ω̃, ã, δt) in [i, j):
 
 得られる因子は、(現在の姿勢・速度・バイアス推定値と重力からの)予測相対運動を、保存されたプレインテグレーション計測値と比較する。これは、再投影残差が予測画素と観測画素を比較する仕組みと完全に並行している:
 
-$$\mathbf{r}_{\Delta R} = \mathrm{Log}\big(\Delta\mathbf{R}_{ij}^\top\,\mathbf{R}_i^\top\mathbf{R}_j\big), \qquad
-\mathbf{r}_{\Delta v} = \mathbf{R}_i^\top\big(\mathbf{v}_j - \mathbf{v}_i - \mathbf{g}\,\Delta t_{ij}\big) - \Delta\mathbf{v}_{ij}$$
+$$
+\mathbf{r}_{\Delta R} = \mathrm{Log}\big(\Delta\mathbf{R}_{ij}^\top\,\mathbf{R}_i^\top\mathbf{R}_j\big), \qquad
+\mathbf{r}_{\Delta v} = \mathbf{R}_i^\top\big(\mathbf{v}_j - \mathbf{v}_i - \mathbf{g}\,\Delta t_{ij}\big) - \Delta\mathbf{v}_{ij}
+$$
 
 $$\mathbf{r}_{\Delta p} = \mathbf{R}_i^\top\big(\mathbf{p}_j - \mathbf{p}_i - \mathbf{v}_i\,\Delta t_{ij} - \tfrac{1}{2}\mathbf{g}\,\Delta t_{ij}^2\big) - \Delta\mathbf{p}_{ij}$$
 

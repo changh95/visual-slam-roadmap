@@ -11,8 +11,10 @@
 ## 方法与架构
 
 - **状态量。** 该滤波器估计当前的惯性状态、$c$ 个历史 IMU 位姿克隆(clone)、$m$ 个地标,以及每个相机的标定参数加一个时间偏移(公式 1–5):
-  $$\mathbf{x}_k = \begin{bmatrix} \mathbf{x}_I^\top & \mathbf{x}_C^\top & \mathbf{x}_M^\top & \mathbf{x}_W^\top & {}^Ct_I \end{bmatrix}^\top, \qquad
-  \mathbf{x}_I = \begin{bmatrix} {}^{I_k}_G\bar{q}^\top & {}^G\mathbf{p}_{I_k}^\top & {}^G\mathbf{v}_{I_k}^\top & \mathbf{b}_{\omega}^\top & \mathbf{b}_{a}^\top \end{bmatrix}^\top,$$
+$$
+\mathbf{x}_k = \begin{bmatrix} \mathbf{x}_I^\top & \mathbf{x}_C^\top & \mathbf{x}_M^\top & \mathbf{x}_W^\top & {}^Ct_I \end{bmatrix}^\top, \qquad
+\mathbf{x}_I = \begin{bmatrix} {}^{I_k}_G\bar{q}^\top & {}^G\mathbf{p}_{I_k}^\top & {}^G\mathbf{v}_{I_k}^\top & \mathbf{b}_{\omega}^\top & \mathbf{b}_{a}^\top \end{bmatrix}^\top,
+$$
   其中 $\mathbf{x}_C$ 堆叠了克隆位姿,$\mathbf{x}_M$ 是地标(全局三维、完全逆深度,或锚点表示),$\mathbf{x}_W$ 是每个相机的内参 $\zeta$ 以及 IMU-相机外参。惯性状态量位于 $\mathcal{M} = \mathbb{H} \times \mathbb{R}^{12}$(15 自由度)上,并采用四元数的 boxplus 运算 $\bar q \boxplus \delta\boldsymbol{\theta} \simeq \begin{bmatrix} \tfrac{1}{2}\delta\boldsymbol{\theta} \\ 1 \end{bmatrix} \otimes \bar q$。
 - **在流形上进行传播/更新。** IMU 运动学对均值和协方差进行传播,$\mathbf{P}_{k|k-1} = \boldsymbol{\Phi}_{k-1}\mathbf{P}_{k-1|k-1}\boldsymbol{\Phi}_{k-1}^\top + \mathbf{Q}_{k-1}$;克隆位姿、地标和标定状态是静态的,因此其雅可比块保持为单位矩阵(可利用稀疏性)。观测量 $\mathbf{z}_{m,k} = h(\mathbf{x}_k) + \mathbf{n}_{m,k}$ 相对于零均值误差状态进行线性化,并在流形上进行更新:
   $$\hat{\mathbf{x}}_{k|k} = \hat{\mathbf{x}}_{k|k-1} \boxplus \mathbf{K}_k\big(\mathbf{z}_{m,k} - h(\hat{\mathbf{x}}_{k|k-1})\big), \qquad \mathbf{K}_k = \mathbf{P}_{k|k-1}\mathbf{H}_k^\top\big(\mathbf{H}_k\mathbf{P}_{k|k-1}\mathbf{H}_k^\top + \mathbf{R}_{m,k}\big)^{-1}.$$

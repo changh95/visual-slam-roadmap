@@ -6,12 +6,14 @@ SLAM 的后端把大部分时间都花在最小化非线性代价函数上。微
 
 标量函数 $f: \mathbb{R}^n \to \mathbb{R}$ 具有梯度 $\nabla f = \left[\frac{\partial f}{\partial x_1}, \ldots, \frac{\partial f}{\partial x_n}\right]^T$。向量函数 $\mathbf{f}: \mathbb{R}^n \to \mathbb{R}^m$ 具有**雅可比矩阵**：
 
-$$J = \frac{\partial \mathbf{f}}{\partial \mathbf{x}} =
+$$
+J = \frac{\partial \mathbf{f}}{\partial \mathbf{x}} =
 \begin{bmatrix}
 \frac{\partial f_1}{\partial x_1} & \cdots & \frac{\partial f_1}{\partial x_n} \\
 \vdots & \ddots & \vdots \\
 \frac{\partial f_m}{\partial x_1} & \cdots & \frac{\partial f_m}{\partial x_n}
-\end{bmatrix} \in \mathbb{R}^{m \times n}$$
+\end{bmatrix} \in \mathbb{R}^{m \times n}
+$$
 
 雅可比矩阵是 SLAM 优化中的关键工具：给定一个残差 $\mathbf{e}(\mathbf{x})$（例如重投影误差），其雅可比矩阵 $J = \frac{\partial \mathbf{e}}{\partial \mathbf{x}}$ 告诉我们残差如何随状态的小扰动变化——这正是高斯-牛顿法和列文伯格-马夸尔特法所需要的信息。
 

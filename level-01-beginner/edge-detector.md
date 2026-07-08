@@ -16,8 +16,10 @@ The choice of $\sigma$ sets the scale of edges you detect: small $\sigma$ preser
 
 The Sobel operator computes image gradients via convolution with two $3 \times 3$ kernels:
 
-$$K_x = \begin{bmatrix} -1 & 0 & 1 \\ -2 & 0 & 2 \\ -1 & 0 & 1 \end{bmatrix}, \qquad
-K_y = \begin{bmatrix} -1 & -2 & -1 \\ 0 & 0 & 0 \\ 1 & 2 & 1 \end{bmatrix}$$
+$$
+K_x = \begin{bmatrix} -1 & 0 & 1 \\ -2 & 0 & 2 \\ -1 & 0 & 1 \end{bmatrix}, \qquad
+K_y = \begin{bmatrix} -1 & -2 & -1 \\ 0 & 0 & 0 \\ 1 & 2 & 1 \end{bmatrix}
+$$
 
 The gradient magnitude is $|\nabla I| = \sqrt{(K_x * I)^2 + (K_y * I)^2}$, and the gradient direction is $\mathrm{atan2}(K_y * I,\, K_x * I)$. Sobel combines differentiation (the $[-1, 0, 1]$ pattern) with smoothing perpendicular to it (the $[1, 2, 1]$ weights), making it more noise-tolerant than naive finite differences.
 

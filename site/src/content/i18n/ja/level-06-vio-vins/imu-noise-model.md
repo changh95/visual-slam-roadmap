@@ -2,13 +2,17 @@
 
 生のIMU計測値は構造化された形で誤差を含む。(Woodmanの入門解説に従う)完全な誤差モデルには、バイアス、スケールファクタ誤差、軸間ミスアライメント、センサーごとの白色雑音が含まれる:
 
-$$\tilde{\mathbf{a}} = \mathbf{a} + \mathbf{b}^a + \mathbf{S}^a\mathbf{a} + \mathbf{M}^a\mathbf{a} + \boldsymbol{\eta}^a, \qquad
-\tilde{\boldsymbol{\omega}} = \boldsymbol{\omega} + \mathbf{b}^g + \mathbf{S}^g\boldsymbol{\omega} + \mathbf{M}^g\boldsymbol{\omega} + \boldsymbol{\eta}^g$$
+$$
+\tilde{\mathbf{a}} = \mathbf{a} + \mathbf{b}^a + \mathbf{S}^a\mathbf{a} + \mathbf{M}^a\mathbf{a} + \boldsymbol{\eta}^a, \qquad
+\tilde{\boldsymbol{\omega}} = \boldsymbol{\omega} + \mathbf{b}^g + \mathbf{S}^g\boldsymbol{\omega} + \mathbf{M}^g\boldsymbol{\omega} + \boldsymbol{\eta}^g
+$$
 
 ここで $\mathbf{S}$ は(対角の)スケールファクタ誤差、$\mathbf{M}$ は軸間感度である。VIO推定器は $\mathbf{S}$ と $\mathbf{M}$ が工場またはオフラインのキャリブレーションで処理済みであると仮定し、オンラインの2項 — 加算的な**白色雑音**とゆっくり変化する**バイアス**のみを保持する:
 
-$$\tilde{\boldsymbol{\omega}} = \boldsymbol{\omega} + \mathbf{b}^g + \boldsymbol{\eta}^g \qquad
-\tilde{\mathbf{a}} = \mathbf{a} + \mathbf{b}^a + \boldsymbol{\eta}^a$$
+$$
+\tilde{\boldsymbol{\omega}} = \boldsymbol{\omega} + \mathbf{b}^g + \boldsymbol{\eta}^g \qquad
+\tilde{\mathbf{a}} = \mathbf{a} + \mathbf{b}^a + \boldsymbol{\eta}^a
+$$
 
 ここで $\boldsymbol{\eta}$ は平均ゼロの白色ガウス雑音であり、各バイアスは**ランダムウォーク**としてモデル化される: $\dot{\mathbf{b}} = \boldsymbol{\eta}^b$、これは独自の白色駆動雑音を持つ。
 

@@ -11,10 +11,12 @@
 - **网络结构。** 24个卷积层($1\times1$降维+$3\times3$卷积,受GoogLeNet启发)之后接2个全连接层;Fast YOLO使用9个卷积层。前20个卷积层在ImageNet上以$224\times224$分辨率预训练(88%的top-5准确率),随后在$448\times448$分辨率下针对检测任务微调,使用leaky-ReLU激活函数$\phi(x) = x$(当$x > 0$时),否则为$0.1x$。
 - **多部分平方和损失**,其中$\lambda_\text{coord} = 5$,$\lambda_\text{noobj} = 0.5$,$\mathbf{1}_{ij}^{\text{obj}}$用于选出"负责"某个目标的预测器(当前IOU最高者):
 
-$$\begin{aligned}
+$$
+\begin{aligned}
 & \lambda_{\text{coord}} \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbf{1}_{ij}^{\text{obj}} \left[ (x_i - \hat{x}_i)^2 + (y_i - \hat{y}_i)^2 \right] + \lambda_{\text{coord}} \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbf{1}_{ij}^{\text{obj}} \left[ \left(\sqrt{w_i} - \sqrt{\hat{w}_i}\right)^2 + \left(\sqrt{h_i} - \sqrt{\hat{h}_i}\right)^2 \right] \\
 & + \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbf{1}_{ij}^{\text{obj}} (C_i - \hat{C}_i)^2 + \lambda_{\text{noobj}} \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbf{1}_{ij}^{\text{noobj}} (C_i - \hat{C}_i)^2 + \sum_{i=0}^{S^2} \mathbf{1}_{i}^{\text{obj}} \sum_{c \in \text{classes}} \left(p_i(c) - \hat{p}_i(c)\right)^2
-\end{aligned}$$
+\end{aligned}
+$$
 
   对$w, h$取平方根,使得小边框的误差在损失中占更大权重;分类损失只在包含目标的格子中生效。在VOC 2007+2012上训练约135个epoch(批大小64,动量0.9,权重衰减0.0005,dropout 0.5,配合缩放/平移/HSV数据增强)。
 - **全局上下文。** 网络看到的是整张图像(而非候选框裁剪),因此能编码上下文信息;NMS只是可选的清理步骤(带来+2–3%的mAP提升),而不像在R-CNN/DPM中那样是结构上的必需品。

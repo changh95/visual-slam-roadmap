@@ -6,12 +6,14 @@ SLAM 백엔드는 대부분의 시간을 비선형 비용 함수를 최소화하
 
 스칼라 함수 $f: \mathbb{R}^n \to \mathbb{R}$은 그래디언트 $\nabla f = \left[\frac{\partial f}{\partial x_1}, \ldots, \frac{\partial f}{\partial x_n}\right]^T$를 가집니다. 벡터 함수 $\mathbf{f}: \mathbb{R}^n \to \mathbb{R}^m$은 **야코비안 행렬**을 가집니다:
 
-$$J = \frac{\partial \mathbf{f}}{\partial \mathbf{x}} =
+$$
+J = \frac{\partial \mathbf{f}}{\partial \mathbf{x}} =
 \begin{bmatrix}
 \frac{\partial f_1}{\partial x_1} & \cdots & \frac{\partial f_1}{\partial x_n} \\
 \vdots & \ddots & \vdots \\
 \frac{\partial f_m}{\partial x_1} & \cdots & \frac{\partial f_m}{\partial x_n}
-\end{bmatrix} \in \mathbb{R}^{m \times n}$$
+\end{bmatrix} \in \mathbb{R}^{m \times n}
+$$
 
 야코비안은 SLAM 최적화의 핵심 도구입니다: 잔차 $\mathbf{e}(\mathbf{x})$(예를 들어 재투영 오차)가 주어지면, 그 야코비안 $J = \frac{\partial \mathbf{e}}{\partial \mathbf{x}}$는 상태의 작은 섭동에 대해 잔차가 어떻게 변하는지 알려줍니다---Gauss-Newton과 Levenberg-Marquardt에 정확히 필요한 정보입니다.
 

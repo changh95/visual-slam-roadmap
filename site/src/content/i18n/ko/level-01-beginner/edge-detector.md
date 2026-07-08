@@ -16,8 +16,10 @@ $\sigma$의 선택은 검출하려는 에지의 스케일을 결정합니다: �
 
 Sobel 연산자는 두 개의 $3 \times 3$ 커널과의 컨볼루션으로 이미지 그래디언트를 계산합니다:
 
-$$K_x = \begin{bmatrix} -1 & 0 & 1 \\ -2 & 0 & 2 \\ -1 & 0 & 1 \end{bmatrix}, \qquad
-K_y = \begin{bmatrix} -1 & -2 & -1 \\ 0 & 0 & 0 \\ 1 & 2 & 1 \end{bmatrix}$$
+$$
+K_x = \begin{bmatrix} -1 & 0 & 1 \\ -2 & 0 & 2 \\ -1 & 0 & 1 \end{bmatrix}, \qquad
+K_y = \begin{bmatrix} -1 & -2 & -1 \\ 0 & 0 & 0 \\ 1 & 2 & 1 \end{bmatrix}
+$$
 
 그래디언트 크기는 $|\nabla I| = \sqrt{(K_x * I)^2 + (K_y * I)^2}$이고, 그래디언트 방향은 $\mathrm{atan2}(K_y * I,\, K_x * I)$입니다. Sobel은 미분($[-1, 0, 1]$ 패턴)과 그에 수직인 방향의 평활화($[1, 2, 1]$ 가중치)를 결합하여, 단순한 유한 차분보다 노이즈에 더 강건합니다.
 

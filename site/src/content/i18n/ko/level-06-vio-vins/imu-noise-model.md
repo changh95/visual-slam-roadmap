@@ -2,13 +2,17 @@
 
 원시 IMU 측정값은 구조화된 방식으로 오염된다. (Woodman의 입문서를 따르는) 전체 오차 모델은 센서별로 바이어스, 스케일 팩터 오차, 교차 축 오정렬, 백색 잡음을 포함한다:
 
-$$\tilde{\mathbf{a}} = \mathbf{a} + \mathbf{b}^a + \mathbf{S}^a\mathbf{a} + \mathbf{M}^a\mathbf{a} + \boldsymbol{\eta}^a, \qquad
-\tilde{\boldsymbol{\omega}} = \boldsymbol{\omega} + \mathbf{b}^g + \mathbf{S}^g\boldsymbol{\omega} + \mathbf{M}^g\boldsymbol{\omega} + \boldsymbol{\eta}^g$$
+$$
+\tilde{\mathbf{a}} = \mathbf{a} + \mathbf{b}^a + \mathbf{S}^a\mathbf{a} + \mathbf{M}^a\mathbf{a} + \boldsymbol{\eta}^a, \qquad
+\tilde{\boldsymbol{\omega}} = \boldsymbol{\omega} + \mathbf{b}^g + \mathbf{S}^g\boldsymbol{\omega} + \mathbf{M}^g\boldsymbol{\omega} + \boldsymbol{\eta}^g
+$$
 
 여기서 $\mathbf{S}$는 (대각) 스케일 팩터 오차이고 $\mathbf{M}$은 교차 축 감도이다. VIO 추정기는 $\mathbf{S}$와 $\mathbf{M}$이 공장 또는 오프라인 캘리브레이션으로 처리된다고 가정하고 온라인 항 두 가지만 유지한다 — 부가적인 **백색 잡음**과 천천히 변화하는 **바이어스**:
 
-$$\tilde{\boldsymbol{\omega}} = \boldsymbol{\omega} + \mathbf{b}^g + \boldsymbol{\eta}^g \qquad
-\tilde{\mathbf{a}} = \mathbf{a} + \mathbf{b}^a + \boldsymbol{\eta}^a$$
+$$
+\tilde{\boldsymbol{\omega}} = \boldsymbol{\omega} + \mathbf{b}^g + \boldsymbol{\eta}^g \qquad
+\tilde{\mathbf{a}} = \mathbf{a} + \mathbf{b}^a + \boldsymbol{\eta}^a
+$$
 
 $\boldsymbol{\eta}$는 평균이 0인 백색 가우시안 잡음이며, 각 바이어스는 자체의 백색 구동 잡음을 갖는 **랜덤 워크**로 모델링된다: $\dot{\mathbf{b}} = \boldsymbol{\eta}^b$.
 

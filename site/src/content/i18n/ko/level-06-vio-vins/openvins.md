@@ -11,8 +11,10 @@
 ## 방법 및 아키텍처
 
 - **상태.** 필터는 현재 관성 상태, $c$개의 과거 IMU 자세 클론, $m$개의 랜드마크, 카메라별 캘리브레이션과 시간 오프셋을 추정합니다 (식 1–5):
-  $$\mathbf{x}_k = \begin{bmatrix} \mathbf{x}_I^\top & \mathbf{x}_C^\top & \mathbf{x}_M^\top & \mathbf{x}_W^\top & {}^Ct_I \end{bmatrix}^\top, \qquad
-  \mathbf{x}_I = \begin{bmatrix} {}^{I_k}_G\bar{q}^\top & {}^G\mathbf{p}_{I_k}^\top & {}^G\mathbf{v}_{I_k}^\top & \mathbf{b}_{\omega}^\top & \mathbf{b}_{a}^\top \end{bmatrix}^\top,$$
+$$
+\mathbf{x}_k = \begin{bmatrix} \mathbf{x}_I^\top & \mathbf{x}_C^\top & \mathbf{x}_M^\top & \mathbf{x}_W^\top & {}^Ct_I \end{bmatrix}^\top, \qquad
+\mathbf{x}_I = \begin{bmatrix} {}^{I_k}_G\bar{q}^\top & {}^G\mathbf{p}_{I_k}^\top & {}^G\mathbf{v}_{I_k}^\top & \mathbf{b}_{\omega}^\top & \mathbf{b}_{a}^\top \end{bmatrix}^\top,
+$$
   여기서 $\mathbf{x}_C$는 클론 자세들을 쌓은 것이고, $\mathbf{x}_M$은 랜드마크(전역 3D, 완전 역깊이, 또는 앵커 기반 표현), $\mathbf{x}_W$는 각 카메라의 내부 파라미터 $\zeta$와 IMU-카메라 외부 파라미터입니다. 관성 상태는 $\mathcal{M} = \mathbb{H} \times \mathbb{R}^{12}$ (15 DoF) 위에 존재하며, 쿼터니언 boxplus는 $\bar q \boxplus \delta\boldsymbol{\theta} \simeq \begin{bmatrix} \tfrac{1}{2}\delta\boldsymbol{\theta} \\ 1 \end{bmatrix} \otimes \bar q$입니다.
 - **다양체 위에서의 전파 / 업데이트.** IMU 운동학이 평균과 공분산을 전파합니다: $\mathbf{P}_{k|k-1} = \boldsymbol{\Phi}_{k-1}\mathbf{P}_{k-1|k-1}\boldsymbol{\Phi}_{k-1}^\top + \mathbf{Q}_{k-1}$; 클론, 랜드마크, 캘리브레이션 상태는 정적이므로 이들의 야코비안 블록은 항등원으로 유지됩니다(희소성 활용). 측정값 $\mathbf{z}_{m,k} = h(\mathbf{x}_k) + \mathbf{n}_{m,k}$는 평균이 0인 오차 상태에 대해 선형화되어 다양체 위에서 업데이트됩니다:
   $$\hat{\mathbf{x}}_{k|k} = \hat{\mathbf{x}}_{k|k-1} \boxplus \mathbf{K}_k\big(\mathbf{z}_{m,k} - h(\hat{\mathbf{x}}_{k|k-1})\big), \qquad \mathbf{K}_k = \mathbf{P}_{k|k-1}\mathbf{H}_k^\top\big(\mathbf{H}_k\mathbf{P}_{k|k-1}\mathbf{H}_k^\top + \mathbf{R}_{m,k}\big)^{-1}.$$

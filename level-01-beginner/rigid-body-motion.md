@@ -16,11 +16,13 @@ Rotation matrices are the preferred representation for computation: matrix multi
 
 Conversion from quaternion to rotation matrix:
 
-$$R = \begin{bmatrix}
+$$
+R = \begin{bmatrix}
 1 - 2(y^2+z^2) & 2(xy - wz) & 2(xz + wy) \\
 2(xy + wz) & 1 - 2(x^2+z^2) & 2(yz - wx) \\
 2(xz - wy) & 2(yz + wx) & 1 - 2(x^2+y^2)
-\end{bmatrix}$$
+\end{bmatrix}
+$$
 
 A quick NumPy sanity check that a matrix is a valid rotation:
 
@@ -34,8 +36,10 @@ print(np.allclose(R.T @ R, np.eye(3)), np.isclose(np.linalg.det(R), 1.0))
 
 A rigid body motion combines rotation $R$ and translation $\mathbf{t}$ into one $4\times4$ matrix acting on homogeneous coordinates:
 
-$$T = \begin{bmatrix} R & \mathbf{t} \\ \mathbf{0}^T & 1 \end{bmatrix} \in SE(3), \qquad
-T\begin{bmatrix}\mathbf{X}\\1\end{bmatrix} = \begin{bmatrix} R\mathbf{X} + \mathbf{t} \\ 1 \end{bmatrix}$$
+$$
+T = \begin{bmatrix} R & \mathbf{t} \\ \mathbf{0}^T & 1 \end{bmatrix} \in SE(3), \qquad
+T\begin{bmatrix}\mathbf{X}\\1\end{bmatrix} = \begin{bmatrix} R\mathbf{X} + \mathbf{t} \\ 1 \end{bmatrix}
+$$
 
 Composition is matrix multiplication, with rotation and translation interleaving:
 

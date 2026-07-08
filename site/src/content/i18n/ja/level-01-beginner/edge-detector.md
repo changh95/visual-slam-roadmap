@@ -16,8 +16,10 @@ $\sigma$ の選択が検出するエッジのスケールを決める。小さ�
 
 Sobel演算子は、2つの $3 \times 3$ カーネルとの畳み込みによって画像勾配を計算する:
 
-$$K_x = \begin{bmatrix} -1 & 0 & 1 \\ -2 & 0 & 2 \\ -1 & 0 & 1 \end{bmatrix}, \qquad
-K_y = \begin{bmatrix} -1 & -2 & -1 \\ 0 & 0 & 0 \\ 1 & 2 & 1 \end{bmatrix}$$
+$$
+K_x = \begin{bmatrix} -1 & 0 & 1 \\ -2 & 0 & 2 \\ -1 & 0 & 1 \end{bmatrix}, \qquad
+K_y = \begin{bmatrix} -1 & -2 & -1 \\ 0 & 0 & 0 \\ 1 & 2 & 1 \end{bmatrix}
+$$
 
 勾配の大きさは $|\nabla I| = \sqrt{(K_x * I)^2 + (K_y * I)^2}$ であり、勾配の方向は $\mathrm{atan2}(K_y * I,\, K_x * I)$ である。Sobelは微分(パターン $[-1, 0, 1]$)とそれに垂直な方向のスムージング(重み $[1, 2, 1]$)を組み合わせており、これにより単純な差分よりも雑音への耐性が高くなる。
 

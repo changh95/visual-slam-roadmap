@@ -11,8 +11,10 @@ MSCKFは2007年以来影響力を持ってきたが、権威ある文書化さ�
 ## 手法とアーキテクチャ
 
 - **状態.** フィルタは現在の慣性状態、$c$個の過去のIMUポーズクローン、$m$個のランドマーク、各カメラのキャリブレーションと時間オフセットを推定する（式1–5）。
-  $$\mathbf{x}_k = \begin{bmatrix} \mathbf{x}_I^\top & \mathbf{x}_C^\top & \mathbf{x}_M^\top & \mathbf{x}_W^\top & {}^Ct_I \end{bmatrix}^\top, \qquad
-  \mathbf{x}_I = \begin{bmatrix} {}^{I_k}_G\bar{q}^\top & {}^G\mathbf{p}_{I_k}^\top & {}^G\mathbf{v}_{I_k}^\top & \mathbf{b}_{\omega}^\top & \mathbf{b}_{a}^\top \end{bmatrix}^\top,$$
+$$
+\mathbf{x}_k = \begin{bmatrix} \mathbf{x}_I^\top & \mathbf{x}_C^\top & \mathbf{x}_M^\top & \mathbf{x}_W^\top & {}^Ct_I \end{bmatrix}^\top, \qquad
+\mathbf{x}_I = \begin{bmatrix} {}^{I_k}_G\bar{q}^\top & {}^G\mathbf{p}_{I_k}^\top & {}^G\mathbf{v}_{I_k}^\top & \mathbf{b}_{\omega}^\top & \mathbf{b}_{a}^\top \end{bmatrix}^\top,
+$$
   ここで$\mathbf{x}_C$はクローンポーズを積み重ね、$\mathbf{x}_M$はランドマーク（グローバル3D、完全逆深度、またはアンカー表現）、$\mathbf{x}_W$は各カメラの内部パラメータ$\zeta$とIMU-カメラ外部パラメータである。慣性状態は$\mathcal{M} = \mathbb{H} \times \mathbb{R}^{12}$（15自由度）上に存在し、四元数のboxplusは$\bar q \boxplus \delta\boldsymbol{\theta} \simeq \begin{bmatrix} \tfrac{1}{2}\delta\boldsymbol{\theta} \\ 1 \end{bmatrix} \otimes \bar q$である。
 - **マニフォルド上での伝播・更新.** IMUのキネマティクスは平均と共分散を伝播する、$\mathbf{P}_{k|k-1} = \boldsymbol{\Phi}_{k-1}\mathbf{P}_{k-1|k-1}\boldsymbol{\Phi}_{k-1}^\top + \mathbf{Q}_{k-1}$；クローン、ランドマーク、キャリブレーション状態は静的であるため、そのヤコビアンブロックは単位行列のままとなる（この疎性が活用される）。観測$\mathbf{z}_{m,k} = h(\mathbf{x}_k) + \mathbf{n}_{m,k}$はゼロ平均の誤差状態に関して線形化され、マニフォルド上で更新される。
   $$\hat{\mathbf{x}}_{k|k} = \hat{\mathbf{x}}_{k|k-1} \boxplus \mathbf{K}_k\big(\mathbf{z}_{m,k} - h(\hat{\mathbf{x}}_{k|k-1})\big), \qquad \mathbf{K}_k = \mathbf{P}_{k|k-1}\mathbf{H}_k^\top\big(\mathbf{H}_k\mathbf{P}_{k|k-1}\mathbf{H}_k^\top + \mathbf{R}_{m,k}\big)^{-1}.$$

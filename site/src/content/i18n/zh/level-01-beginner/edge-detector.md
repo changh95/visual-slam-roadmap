@@ -16,8 +16,10 @@ $\sigma$ 的选择决定了你所检测边缘的尺度：小的 $\sigma$ 保留�
 
 Sobel 算子通过与两个 $3 \times 3$ 核的卷积来计算图像梯度：
 
-$$K_x = \begin{bmatrix} -1 & 0 & 1 \\ -2 & 0 & 2 \\ -1 & 0 & 1 \end{bmatrix}, \qquad
-K_y = \begin{bmatrix} -1 & -2 & -1 \\ 0 & 0 & 0 \\ 1 & 2 & 1 \end{bmatrix}$$
+$$
+K_x = \begin{bmatrix} -1 & 0 & 1 \\ -2 & 0 & 2 \\ -1 & 0 & 1 \end{bmatrix}, \qquad
+K_y = \begin{bmatrix} -1 & -2 & -1 \\ 0 & 0 & 0 \\ 1 & 2 & 1 \end{bmatrix}
+$$
 
 梯度大小为 $|\nabla I| = \sqrt{(K_x * I)^2 + (K_y * I)^2}$，梯度方向为 $\mathrm{atan2}(K_y * I,\, K_x * I)$。Sobel 算子把求导（$[-1, 0, 1]$ 模式）和与之垂直方向上的平滑（$[1, 2, 1]$ 权重）结合起来，因此比朴素的有限差分更能抵抗噪声。
 

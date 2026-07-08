@@ -6,12 +6,14 @@ SLAMのバックエンドは、その処理時間の大半を非線形コスト�
 
 スカラー関数 $f: \mathbb{R}^n \to \mathbb{R}$ は勾配 $\nabla f = \left[\frac{\partial f}{\partial x_1}, \ldots, \frac{\partial f}{\partial x_n}\right]^T$ を持つ。ベクトル関数 $\mathbf{f}: \mathbb{R}^n \to \mathbb{R}^m$ は**ヤコビ行列**を持つ:
 
-$$J = \frac{\partial \mathbf{f}}{\partial \mathbf{x}} =
+$$
+J = \frac{\partial \mathbf{f}}{\partial \mathbf{x}} =
 \begin{bmatrix}
 \frac{\partial f_1}{\partial x_1} & \cdots & \frac{\partial f_1}{\partial x_n} \\
 \vdots & \ddots & \vdots \\
 \frac{\partial f_m}{\partial x_1} & \cdots & \frac{\partial f_m}{\partial x_n}
-\end{bmatrix} \in \mathbb{R}^{m \times n}$$
+\end{bmatrix} \in \mathbb{R}^{m \times n}
+$$
 
 ヤコビ行列は、SLAMの最適化における中心的な道具である。残差 $\mathbf{e}(\mathbf{x})$(例えば再投影誤差)が与えられたとき、そのヤコビ行列 $J = \frac{\partial \mathbf{e}}{\partial \mathbf{x}}$ は、状態に対する微小な摂動によって残差がどのように変化するかを示す — これはガウス・ニュートン法やレーベンバーグ・マーカート法がまさに必要としている情報である。
 

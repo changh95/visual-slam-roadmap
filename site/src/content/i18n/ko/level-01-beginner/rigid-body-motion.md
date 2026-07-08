@@ -16,11 +16,13 @@ $$SO(3) = \{R \in \mathbb{R}^{3\times3} \mid R^TR = I,\ \det(R) = +1\}$$
 
 쿼터니언에서 회전 행렬로의 변환:
 
-$$R = \begin{bmatrix}
+$$
+R = \begin{bmatrix}
 1 - 2(y^2+z^2) & 2(xy - wz) & 2(xz + wy) \\
 2(xy + wz) & 1 - 2(x^2+z^2) & 2(yz - wx) \\
 2(xz - wy) & 2(yz + wx) & 1 - 2(x^2+y^2)
-\end{bmatrix}$$
+\end{bmatrix}
+$$
 
 행렬이 유효한 회전인지 빠르게 확인하는 NumPy 코드는 다음과 같습니다.
 
@@ -34,8 +36,10 @@ print(np.allclose(R.T @ R, np.eye(3)), np.isclose(np.linalg.det(R), 1.0))
 
 강체 운동은 회전 $R$과 이동 $\mathbf{t}$를 동차 좌표에 작용하는 하나의 $4\times4$ 행렬로 결합합니다.
 
-$$T = \begin{bmatrix} R & \mathbf{t} \\ \mathbf{0}^T & 1 \end{bmatrix} \in SE(3), \qquad
-T\begin{bmatrix}\mathbf{X}\\1\end{bmatrix} = \begin{bmatrix} R\mathbf{X} + \mathbf{t} \\ 1 \end{bmatrix}$$
+$$
+T = \begin{bmatrix} R & \mathbf{t} \\ \mathbf{0}^T & 1 \end{bmatrix} \in SE(3), \qquad
+T\begin{bmatrix}\mathbf{X}\\1\end{bmatrix} = \begin{bmatrix} R\mathbf{X} + \mathbf{t} \\ 1 \end{bmatrix}
+$$
 
 합성은 행렬 곱셈이며, 회전과 이동이 서로 얽힙니다.
 

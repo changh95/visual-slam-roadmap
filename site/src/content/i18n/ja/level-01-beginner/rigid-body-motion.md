@@ -16,11 +16,13 @@ $$SO(3) = \{R \in \mathbb{R}^{3\times3} \mid R^TR = I,\ \det(R) = +1\}$$
 
 四元数から回転行列への変換：
 
-$$R = \begin{bmatrix}
+$$
+R = \begin{bmatrix}
 1 - 2(y^2+z^2) & 2(xy - wz) & 2(xz + wy) \\
 2(xy + wz) & 1 - 2(x^2+z^2) & 2(yz - wx) \\
 2(xz - wy) & 2(yz + wx) & 1 - 2(x^2+y^2)
-\end{bmatrix}$$
+\end{bmatrix}
+$$
 
 行列が有効な回転であるかを簡単に確認するNumPyのコード：
 
@@ -34,8 +36,10 @@ print(np.allclose(R.T @ R, np.eye(3)), np.isclose(np.linalg.det(R), 1.0))
 
 剛体運動は、回転 $R$ と並進 $\mathbf{t}$ を、斉次座標に作用する1つの $4\times4$ 行列に結合する：
 
-$$T = \begin{bmatrix} R & \mathbf{t} \\ \mathbf{0}^T & 1 \end{bmatrix} \in SE(3), \qquad
-T\begin{bmatrix}\mathbf{X}\\1\end{bmatrix} = \begin{bmatrix} R\mathbf{X} + \mathbf{t} \\ 1 \end{bmatrix}$$
+$$
+T = \begin{bmatrix} R & \mathbf{t} \\ \mathbf{0}^T & 1 \end{bmatrix} \in SE(3), \qquad
+T\begin{bmatrix}\mathbf{X}\\1\end{bmatrix} = \begin{bmatrix} R\mathbf{X} + \mathbf{t} \\ 1 \end{bmatrix}
+$$
 
 合成は行列の積であり、回転と並進が入り交じる：
 

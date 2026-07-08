@@ -6,12 +6,14 @@ SLAM back-ends spend most of their time minimizing nonlinear cost functions. Two
 
 A scalar function $f: \mathbb{R}^n \to \mathbb{R}$ has a gradient $\nabla f = \left[\frac{\partial f}{\partial x_1}, \ldots, \frac{\partial f}{\partial x_n}\right]^T$. A vector function $\mathbf{f}: \mathbb{R}^n \to \mathbb{R}^m$ has a **Jacobian matrix**:
 
-$$J = \frac{\partial \mathbf{f}}{\partial \mathbf{x}} =
+$$
+J = \frac{\partial \mathbf{f}}{\partial \mathbf{x}} =
 \begin{bmatrix}
 \frac{\partial f_1}{\partial x_1} & \cdots & \frac{\partial f_1}{\partial x_n} \\
 \vdots & \ddots & \vdots \\
 \frac{\partial f_m}{\partial x_1} & \cdots & \frac{\partial f_m}{\partial x_n}
-\end{bmatrix} \in \mathbb{R}^{m \times n}$$
+\end{bmatrix} \in \mathbb{R}^{m \times n}
+$$
 
 The Jacobian is the key tool in SLAM optimization: given a residual $\mathbf{e}(\mathbf{x})$ (for example, a reprojection error), its Jacobian $J = \frac{\partial \mathbf{e}}{\partial \mathbf{x}}$ tells us how the residual changes with small perturbations to the state — exactly what Gauss-Newton and Levenberg-Marquardt need.
 

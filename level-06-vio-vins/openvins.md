@@ -11,8 +11,10 @@ Despite MSCKF's influence since 2007, no authoritative, documented open-source i
 ## Method & architecture
 
 - **State.** The filter estimates the current inertial state, $c$ historical IMU pose clones, $m$ landmarks, and per-camera calibration plus a time offset (Eqs. 1–5):
-  $$\mathbf{x}_k = \begin{bmatrix} \mathbf{x}_I^\top & \mathbf{x}_C^\top & \mathbf{x}_M^\top & \mathbf{x}_W^\top & {}^Ct_I \end{bmatrix}^\top, \qquad
-  \mathbf{x}_I = \begin{bmatrix} {}^{I_k}_G\bar{q}^\top & {}^G\mathbf{p}_{I_k}^\top & {}^G\mathbf{v}_{I_k}^\top & \mathbf{b}_{\omega}^\top & \mathbf{b}_{a}^\top \end{bmatrix}^\top,$$
+$$
+\mathbf{x}_k = \begin{bmatrix} \mathbf{x}_I^\top & \mathbf{x}_C^\top & \mathbf{x}_M^\top & \mathbf{x}_W^\top & {}^Ct_I \end{bmatrix}^\top, \qquad
+\mathbf{x}_I = \begin{bmatrix} {}^{I_k}_G\bar{q}^\top & {}^G\mathbf{p}_{I_k}^\top & {}^G\mathbf{v}_{I_k}^\top & \mathbf{b}_{\omega}^\top & \mathbf{b}_{a}^\top \end{bmatrix}^\top,
+$$
   where $\mathbf{x}_C$ stacks the clone poses, $\mathbf{x}_M$ the landmarks (global 3D, full inverse depth, or anchored representations), and $\mathbf{x}_W$ each camera's intrinsics $\zeta$ and IMU-camera extrinsics. The inertial state lives on $\mathcal{M} = \mathbb{H} \times \mathbb{R}^{12}$ (15 DoF) with a quaternion boxplus $\bar q \boxplus \delta\boldsymbol{\theta} \simeq \begin{bmatrix} \tfrac{1}{2}\delta\boldsymbol{\theta} \\ 1 \end{bmatrix} \otimes \bar q$.
 - **Propagate / update on the manifold.** IMU kinematics propagate mean and covariance, $\mathbf{P}_{k|k-1} = \boldsymbol{\Phi}_{k-1}\mathbf{P}_{k-1|k-1}\boldsymbol{\Phi}_{k-1}^\top + \mathbf{Q}_{k-1}$; clones, landmarks, and calibration states are static, so their Jacobian blocks stay identity (sparsity exploited). Measurements $\mathbf{z}_{m,k} = h(\mathbf{x}_k) + \mathbf{n}_{m,k}$ are linearized w.r.t. the zero-mean error state and updated on-manifold:
   $$\hat{\mathbf{x}}_{k|k} = \hat{\mathbf{x}}_{k|k-1} \boxplus \mathbf{K}_k\big(\mathbf{z}_{m,k} - h(\hat{\mathbf{x}}_{k|k-1})\big), \qquad \mathbf{K}_k = \mathbf{P}_{k|k-1}\mathbf{H}_k^\top\big(\mathbf{H}_k\mathbf{P}_{k|k-1}\mathbf{H}_k^\top + \mathbf{R}_{m,k}\big)^{-1}.$$

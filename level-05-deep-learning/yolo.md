@@ -11,10 +11,12 @@ Before YOLO, object detection repurposed classifiers to perform detection: DPM s
 - **Network.** 24 convolutional layers ($1\times1$ reduction + $3\times3$ conv, GoogLeNet-inspired) followed by 2 fully-connected layers; Fast YOLO uses 9 conv layers. The first 20 conv layers are pretrained on ImageNet at $224\times224$ (88% top-5), then detection is fine-tuned at $448\times448$ with leaky-ReLU activations $\phi(x) = x$ if $x > 0$, else $0.1x$.
 - **Multi-part sum-squared loss**, with $\lambda_\text{coord} = 5$, $\lambda_\text{noobj} = 0.5$ and $\mathbf{1}_{ij}^{\text{obj}}$ selecting the predictor "responsible" for an object (highest current IOU):
 
-$$\begin{aligned}
+$$
+\begin{aligned}
 & \lambda_{\text{coord}} \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbf{1}_{ij}^{\text{obj}} \left[ (x_i - \hat{x}_i)^2 + (y_i - \hat{y}_i)^2 \right] + \lambda_{\text{coord}} \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbf{1}_{ij}^{\text{obj}} \left[ \left(\sqrt{w_i} - \sqrt{\hat{w}_i}\right)^2 + \left(\sqrt{h_i} - \sqrt{\hat{h}_i}\right)^2 \right] \\
 & + \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbf{1}_{ij}^{\text{obj}} (C_i - \hat{C}_i)^2 + \lambda_{\text{noobj}} \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbf{1}_{ij}^{\text{noobj}} (C_i - \hat{C}_i)^2 + \sum_{i=0}^{S^2} \mathbf{1}_{i}^{\text{obj}} \sum_{c \in \text{classes}} \left(p_i(c) - \hat{p}_i(c)\right)^2
-\end{aligned}$$
+\end{aligned}
+$$
 
   Square roots of $w, h$ make small-box errors count more; classification loss applies only in cells containing objects. Trained ~135 epochs on VOC 2007+2012 (batch 64, momentum 0.9, decay 0.0005, dropout 0.5, scale/translation/HSV augmentation).
 - **Global context.** The network sees the whole image (not proposal crops), so it encodes contextual information; NMS is optional cleanup (+2–3% mAP), not a structural necessity as in R-CNN/DPM.

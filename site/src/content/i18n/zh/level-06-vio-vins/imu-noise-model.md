@@ -2,13 +2,17 @@
 
 原始IMU测量值以一种结构化的方式受到污染。完整的误差模型(遵循Woodman的入门教程)包括偏置、比例因子误差、交叉轴失准以及每个传感器的白噪声:
 
-$$\tilde{\mathbf{a}} = \mathbf{a} + \mathbf{b}^a + \mathbf{S}^a\mathbf{a} + \mathbf{M}^a\mathbf{a} + \boldsymbol{\eta}^a, \qquad
-\tilde{\boldsymbol{\omega}} = \boldsymbol{\omega} + \mathbf{b}^g + \mathbf{S}^g\boldsymbol{\omega} + \mathbf{M}^g\boldsymbol{\omega} + \boldsymbol{\eta}^g$$
+$$
+\tilde{\mathbf{a}} = \mathbf{a} + \mathbf{b}^a + \mathbf{S}^a\mathbf{a} + \mathbf{M}^a\mathbf{a} + \boldsymbol{\eta}^a, \qquad
+\tilde{\boldsymbol{\omega}} = \boldsymbol{\omega} + \mathbf{b}^g + \mathbf{S}^g\boldsymbol{\omega} + \mathbf{M}^g\boldsymbol{\omega} + \boldsymbol{\eta}^g
+$$
 
 其中 $\mathbf{S}$ 是(对角的)比例因子误差,$\mathbf{M}$ 是交叉轴敏感度。VIO估计器假设 $\mathbf{S}$ 和 $\mathbf{M}$ 已由出厂或离线标定处理,只保留两个在线项——加性**白噪声**和缓慢变化的**偏置**:
 
-$$\tilde{\boldsymbol{\omega}} = \boldsymbol{\omega} + \mathbf{b}^g + \boldsymbol{\eta}^g \qquad
-\tilde{\mathbf{a}} = \mathbf{a} + \mathbf{b}^a + \boldsymbol{\eta}^a$$
+$$
+\tilde{\boldsymbol{\omega}} = \boldsymbol{\omega} + \mathbf{b}^g + \boldsymbol{\eta}^g \qquad
+\tilde{\mathbf{a}} = \mathbf{a} + \mathbf{b}^a + \boldsymbol{\eta}^a
+$$
 
 其中 $\boldsymbol{\eta}$ 是零均值白高斯噪声,每个偏置都被建模为**随机游走**:$\dot{\mathbf{b}} = \boldsymbol{\eta}^b$,拥有自己的白色驱动噪声。
 

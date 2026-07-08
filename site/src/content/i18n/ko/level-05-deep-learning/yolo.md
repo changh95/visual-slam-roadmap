@@ -11,10 +11,12 @@ YOLO 이전에는 물체 검출이 분류기를 재활용하는 방식으로 이
 - **네트워크.** 24개의 컨볼루션 레이어($1\times1$ 축소 + $3\times3$ conv, GoogLeNet에서 영감을 받음) 뒤에 2개의 완전 연결 레이어가 이어집니다. Fast YOLO는 9개의 conv 레이어를 사용합니다. 처음 20개의 conv 레이어는 $224\times224$ 해상도로 ImageNet에서 사전 학습되며(top-5 88%), 그 후 검출은 leaky-ReLU 활성 함수 $\phi(x) = x$(단 $x > 0$일 때), 그렇지 않으면 $0.1x$를 사용하여 $448\times448$에서 미세 조정됩니다.
 - **다중 항목 제곱합 손실**, $\lambda_\text{coord} = 5$, $\lambda_\text{noobj} = 0.5$, 그리고 물체를 "담당"하는(현재 IOU가 가장 높은) 예측자를 선택하는 $\mathbf{1}_{ij}^{\text{obj}}$를 사용합니다:
 
-$$\begin{aligned}
+$$
+\begin{aligned}
 & \lambda_{\text{coord}} \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbf{1}_{ij}^{\text{obj}} \left[ (x_i - \hat{x}_i)^2 + (y_i - \hat{y}_i)^2 \right] + \lambda_{\text{coord}} \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbf{1}_{ij}^{\text{obj}} \left[ \left(\sqrt{w_i} - \sqrt{\hat{w}_i}\right)^2 + \left(\sqrt{h_i} - \sqrt{\hat{h}_i}\right)^2 \right] \\
 & + \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbf{1}_{ij}^{\text{obj}} (C_i - \hat{C}_i)^2 + \lambda_{\text{noobj}} \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbf{1}_{ij}^{\text{noobj}} (C_i - \hat{C}_i)^2 + \sum_{i=0}^{S^2} \mathbf{1}_{i}^{\text{obj}} \sum_{c \in \text{classes}} \left(p_i(c) - \hat{p}_i(c)\right)^2
-\end{aligned}$$
+\end{aligned}
+$$
 
   $w, h$의 제곱근을 취하면 작은 상자의 오차가 더 크게 반영됩니다. 분류 손실은 물체를 포함하는 셀에만 적용됩니다. VOC 2007+2012에서 약 135 epoch 학습(배치 64, 모멘텀 0.9, 감쇠 0.0005, 드롭아웃 0.5, 스케일/이동/HSV 증강).
 - **전역 컨텍스트.** 네트워크는 (제안 영역의 잘라낸 이미지가 아니라) 전체 이미지를 보므로 맥락 정보를 인코딩합니다. NMS는 R-CNN/DPM에서처럼 구조적으로 필수적인 것이 아니라 선택적인 정리 단계입니다(+2–3% mAP).
