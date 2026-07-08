@@ -7,6 +7,7 @@ import sitemap from '@astrojs/sitemap';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import remarkMdLinks from './src/lib/remark-md-links.mjs';
+import remarkDisplayDollars from './src/lib/remark-display-dollars.mjs';
 
 export default defineConfig({
   // canonical serving domain (github.io redirects here via the account-level custom domain)
@@ -23,7 +24,7 @@ export default defineConfig({
     }),
   ],
   markdown: {
-    remarkPlugins: [remarkMath, remarkMdLinks],
+    remarkPlugins: [remarkMath, remarkDisplayDollars, remarkMdLinks],
     rehypePlugins: [[rehypeKatex, { strict: false }]],
     shikiConfig: { theme: 'github-light' },
   },
