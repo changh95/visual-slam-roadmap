@@ -130,5 +130,15 @@ const ogImage = abs(`${base}og.png`);
         });
       });
     </script>
+    <!-- Ko-fi floating tip button -->
+    <script is:inline src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
+    <script is:inline>
+      kofiWidgetOverlay.draw('changh95', {
+        'type': 'floating-chat',
+        'floating-chat.donateButton.text': 'Tip Me',
+        'floating-chat.donateButton.background-color': '#00b9fe',
+        'floating-chat.donateButton.text-color': '#fff'
+      });
+    </script>
   </body>
 </html>
