@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>파운데이션 모델 — Visual-SLAM Roadmap</title><meta name="description" content="파운데이션 모델(foundation model)이란 대규모의 다양한 데이터에서 한 번 사전학습된 후, 고정된 특징 추출기로 그대로 쓰이거나 경미하게 미세조정되거나 프롬프팅되어 여러 다운스트림 작업에 재사용되는 대형 네트워크를 말한다. 이 용어가 SLAM 어휘에 들어온 것은, 이러한 모델들의 물결이 인식 백본으로 곧바로 유용하다는 것이 드러났기 때문이다: CLIP(이미지-텍스트 임베딩), SAM(프롬프트 가능한 세그멘테이션), DINOv2(자기지도 시각 특징), Depth Anything(단안 깊이), 그리고 DUSt3R 계열(…"><link rel="canonical" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-05-deep-learning/foundation-models/"><meta name="robots" content="index, follow, max-image-preview:large"><meta name="theme-color" content="#faf7f0"><link rel="icon" href="/visual-slam-roadmap/favicon.svg" type="image/svg+xml"><link rel="sitemap" href="/visual-slam-roadmap/sitemap-index.xml"><link rel="alternate" hreflang="en" href="https://www.cv-learn.com/visual-slam-roadmap/level-05-deep-learning/foundation-models/"><link rel="alternate" hreflang="ko" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-05-deep-learning/foundation-models/"><link rel="alternate" hreflang="zh-CN" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-05-deep-learning/foundation-models/"><link rel="alternate" hreflang="ja" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-05-deep-learning/foundation-models/"><link rel="alternate" hreflang="x-default" href="https://www.cv-learn.com/visual-slam-roadmap/level-05-deep-learning/foundation-models/"><!-- Open Graph --><meta property="og:type" content="article"><meta property="og:site_name" content="Visual-SLAM Developer Roadmap"><meta property="og:title" content="파운데이션 모델 — Visual-SLAM Roadmap"><meta property="og:description" content="파운데이션 모델(foundation model)이란 대규모의 다양한 데이터에서 한 번 사전학습된 후, 고정된 특징 추출기로 그대로 쓰이거나 경미하게 미세조정되거나 프롬프팅되어 여러 다운스트림 작업에 재사용되는 대형 네트워크를 말한다. 이 용어가 SLAM 어휘에 들어온 것은, 이러한 모델들의 물결이 인식 백본으로 곧바로 유용하다는 것이 드러났기 때문이다: CLIP(이미지-텍스트 임베딩), SAM(프롬프트 가능한 세그멘테이션), DINOv2(자기지도 시각 특징), Depth Anything(단안 깊이), 그리고 DUSt3R 계열(…"><meta property="og:url" content="https://www.cv-learn.com/visual-slam-roadmap/ko/level-05-deep-learning/foundation-models/"><meta property="og:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="ko_KR"><meta property="og:locale:alternate" content="en_US"><meta property="og:locale:alternate" content="zh_CN"><meta property="og:locale:alternate" content="ja_JP"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="파운데이션 모델 — Visual-SLAM Roadmap"><meta name="twitter:description" content="파운데이션 모델(foundation model)이란 대규모의 다양한 데이터에서 한 번 사전학습된 후, 고정된 특징 추출기로 그대로 쓰이거나 경미하게 미세조정되거나 프롬프팅되어 여러 다운스트림 작업에 재사용되는 대형 네트워크를 말한다. 이 용어가 SLAM 어휘에 들어온 것은, 이러한 모델들의 물결이 인식 백본으로 곧바로 유용하다는 것이 드러났기 때문이다: CLIP(이미지-텍스트 임베딩), SAM(프롬프트 가능한 세그멘테이션), DINOv2(자기지도 시각 특징), Depth Anything(단안 깊이), 그리고 DUSt3R 계열(…"><meta name="twitter:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><!-- Google AdSense --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5473245269912288" crossorigin="anonymous"></script><!-- Google Analytics 4 --><!-- Microsoft Clarity --><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"파운데이션 모델","description":"파운데이션 모델(foundation model)이란 대규모의 다양한 데이터에서 한 번 사전학습된 후, 고정된 특징 추출기로 그대로 쓰이거나 경미하게 미세조정되거나 프롬프팅되어 여러 다운스트림 작업에 재사용되는 대형 네트워크를 말한다. 이 용어가 SLAM 어휘에 들어온 것은, 이러한 모델들의 물결이 인식 백본으로 곧바로 유용하다는 것이 드러났기 때문이다: CLIP(이미지-텍스트 임베딩), SAM(프롬프트 가능한 세그멘테이션), DINOv2(자기지도 시각 특징), Depth Anything(단안 깊이), 그리고 DUSt3R 계열(…","inLanguage":"ko","url":"https://www.cv-learn.com/visual-slam-roadmap/ko/level-05-deep-learning/foundation-models/","isPartOf":{"@type":"WebSite","name":"Visual-SLAM Developer Roadmap","url":"https://www.cv-learn.com/visual-slam-roadmap/"},"author":{"@type":"Person","name":"Hyunggi Chang","url":"https://github.com/changh95"},"license":"https://opensource.org/licenses/MIT"}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Visual-SLAM Roadmap","item":"https://www.cv-learn.com/visual-slam-roadmap/ko/"},{"@type":"ListItem","position":2,"name":"딥러닝 + SLAM","item":"https://www.cv-learn.com/visual-slam-roadmap/ko/level-05-deep-learning/"},{"@type":"ListItem","position":3,"name":"파운데이션 모델","item":"https://www.cv-learn.com/visual-slam-roadmap/ko/level-05-deep-learning/foundation-models/"}]}</script><link rel="stylesheet" href="/visual-slam-roadmap/_astro/readme.DemmKpdz.css"></head><body class="graph-paper min-h-screen text-inkline font-sans"><header class="border-b border-paper-line bg-paper/90 backdrop-blur sticky top-0 z-10"><nav class="mx-auto max-w-5xl px-5 py-3 flex items-center gap-4"><a href="/visual-slam-roadmap/ko/" class="font-display font-semibold tracking-wide text-sm uppercase text-scan-500 hover:opacity-80">VSLAM<span class="opacity-60">//</span>Roadmap</a><a href="https://ko-fi.com/changh95" target="_blank" rel="noopener" class="font-mono text-[11px] font-medium px-2.5 py-1 text-white bg-[#00b9fe] hover:opacity-85 transition-opacity leading-tight">♥ Support me if you liked this content!</a><a href="https://github.com/changh95/visual-slam-roadmap" class="ml-auto hidden sm:inline font-mono text-xs text-slate-500 hover:text-scan-500">GitHub &nearr;</a><div class="flex font-mono text-[11px] border border-paper-line bg-paper divide-paper-line divide-x ml-auto sm:ml-0" role="group" aria-label="Language"><a href="/visual-slam-roadmap/level-05-deep-learning/foundation-models/" data-lang="en" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">EN</a><a href="/visual-slam-roadmap/ko/level-05-deep-learning/foundation-models/" data-lang="ko" aria-current="true" class="px-2 py-1 transition-colors bg-scan-500/10 text-scan-500 font-medium">KO</a><a href="/visual-slam-roadmap/zh/level-05-deep-learning/foundation-models/" data-lang="zh" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">ZH</a><a href="/visual-slam-roadmap/ja/level-05-deep-learning/foundation-models/" data-lang="ja" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">JA</a></div></nav></header><main class="mx-auto max-w-3xl px-5 py-10"><nav class="font-mono text-xs text-slate-500 mb-6"><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/ko/">로드맵</a><span class="mx-1">/</span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/ko/level-05-deep-learning/">레벨 05 · 딥러닝 + SLAM</a></nav><article class="prose prose-slate max-w-none prose-headings:font-display prose-a:text-scan-500 prose-a:decoration-scan-300/50 hover:prose-a:decoration-scan-500 prose-blockquote:font-mono prose-blockquote:text-sm prose-blockquote:not-italic bg-paper/80 border border-paper-line p-6 sm:p-8"><h1 id="파운데이션-모델">파운데이션 모델</h1>
+<p>*파운데이션 모델(foundation model)*이란 대규모의 다양한 데이터에서 한 번 사전학습된 후, 고정된 특징 추출기로 그대로 쓰이거나 경미하게 미세조정되거나 프롬프팅되어 여러 다운스트림 작업에 재사용되는 대형 네트워크를 말한다. 이 용어가 SLAM 어휘에 들어온 것은, 이러한 모델들의 물결이 인식 백본으로 곧바로 유용하다는 것이 드러났기 때문이다: CLIP(이미지-텍스트 임베딩), SAM(프롬프트 가능한 세그멘테이션), DINOv2(자기지도 시각 특징), Depth Anything(단안 깊이), 그리고 DUSt3R 계열(원시 이미지 쌍으로부터의 양안 3D 재구성).</p>
+<h2 id="무엇이-바뀌었나">무엇이 바뀌었나</h2>
+<p>이것이 왜 중요한지는 이전의 표준과 대비할 때 가장 잘 드러난다. 고전적인 학습 모듈(SuperPoint, MonoDepth)은 적당한 규모의 데이터셋에서 태스크별로 학습되어 그 편향을 그대로 물려받았고, 새로운 도메인에 배치하려면 흔히 재학습이 필요했다. 파운데이션 모델은 이 경제성을 바꾼다.</p>
+<ul>
+<li><strong>제로샷 강건성</strong>: 인터넷 규모 데이터로 사전학습된 특징은 조명, 계절, 스타일 같은 외관 변화를 견뎌내는데, 이는 수작업 특징과 소규모 학습 특징 모두를 깨뜨리는 변화다. 예를 들어 RoMa는 바로 이러한 강건성을 위해 고정된 DINOv2 특징 위에 조밀 매칭을 구축한다.</li>
+<li><strong>재사용 가능한 백본</strong>: 하나의 고정된 인코더가 장소 인식, 매칭, 세그멘테이션, 깊이 헤드를 동시에 지원할 수 있다 — 로봇에서 여러 작업이 연산을 공유해야 할 때 매력적인 특성이다.</li>
+<li><strong>개방형 어휘 의미론</strong>: CLIP 스타일 임베딩은 지도가 고정된 레이블 집합 없이 언어 질의(“소화기를 찾아라”)에 응답하도록 만든다 — ConceptFusion, ConceptGraphs, 언어 기반 scene graph의 토대다.</li>
+<li><strong>대규모 기하학적 사전 정보</strong>: DUSt3R와 MASt3R는 전통적으로 다중 뷰 기하학의 영역이던 3D 재구성 자체도, 이미지 쌍으로부터 직접 포인트맵을 출력하는 사전학습 모델로 흡수될 수 있음을 보이며, 그 위에 SLAM 시스템(MASt3R-SLAM)이 구축된다.</li>
+</ul>
+<h2 id="각-계열이-제공하는-것">각 계열이 제공하는 것</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>계열</th><th>학습 데이터 / 방식</th><th>SLAM이 얻는 것</th></tr></thead><tbody><tr><td>CLIP / SigLIP</td><td>이미지-텍스트 쌍, 대조 학습</td><td>지도와 장소 설명을 위한 개방형 어휘 의미론</td></tr><tr><td>SAM / SAM 2</td><td>대규모 프롬프트 가능 세그멘테이션</td><td>객체 수준 및 동적 SLAM을 위한 클래스 무관 인스턴스 마스크</td></tr><tr><td>DINOv2</td><td>자기지도 ViT</td><td>매칭, VPR, 대응점 탐색을 위한 강건한 조밀 특징</td></tr><tr><td>Depth Anything (V1/V2), Metric3D</td><td>대규모 (자기)지도 깊이 학습</td><td>깊이 센서가 없는 곳을 위한 조밀 단안 깊이 사전 정보</td></tr><tr><td>DUSt3R / MASt3R / VGGT</td><td>포즈가 있는 이미지 쌍/집합</td><td>피드포워드 포인트맵, 매칭, 포즈 — 추론으로서의 기하학</td></tr></tbody></table>
+<p>이 목록을 알고 있으면 시스템을 설계할 때 무엇을 “공짜로” 얻을 수 있는지, 그리고 그것이 고전적인 레벨 3/4 모듈 중 어느 것을 대체할 수 있는지 알 수 있다.</p>
+<h2 id="slam-시스템은-실제로-이를-어떻게-소비하는가">SLAM 시스템은 실제로 이를 어떻게 소비하는가</h2>
+<ul>
+<li><strong>고정된 특징 + 고전적 추정</strong>: 파운데이션 특징을 추출한 다음, 그 위에서 고전적인 매칭/RANSAC/BA를 실행한다(DINOv2 위의 RoMa; 서펠 또는 가우시안별로 CLIP 특징을 융합하는 개방형 어휘 지도). 기하학은 정밀하게 유지되고, 인식만 강건해진다.</li>
+<li><strong>피드포워드 기하학 + 얇은 SLAM 레이어</strong>: DUSt3R 계열 모델은 포인트맵을 직접 출력하며, MASt3R-SLAM 같은 시스템은 이 네트워크 주위에 키프레이밍, 필터링, 전역 최적화를 추가한다 — 모델이 프론트엔드이자 미드엔드의 대부분을 차지한다.</li>
+<li><strong>키프레임 단위 스케줄링과 증류</strong>: 프레임마다 ViT-L을 돌리는 것은 임베디드 하드웨어에서 감당할 수 없으므로, 시스템은 파운데이션 모델을 키프레임에서만 실행하거나 그 출력을 지도에 캐시하거나, 프레임 단위 경로를 위해 작은 학생 모델로 증류한다.</li>
+</ul>
+<h2 id="감안해야-할-트레이드오프">감안해야 할 트레이드오프</h2>
+<ul>
+<li><strong>연산 부담</strong>: 임베디드 하드웨어에서의 실시간 SLAM은 프레임마다 대형 ViT 추론을 감당하지 못할 수 있다 — 처음부터 키프레임 단위 사용이나 증류를 고려해야 한다.</li>
+<li><strong>거친 출력</strong>: 특징은 대체로 패치 해상도(예: 이미지의 1/14)로 나오고, 깊이 예측은 흔히 메트릭이 아니라 상대적/어파인 스케일이다 — 기하학적 최적화 전에 정밀도 지향 정제 또는 스케일 정렬 단계가 대개 필요하다.</li>
+<li><strong>통계적 실패 모드</strong>: 파운데이션 모델은 재투영 오차 검사가 잡아낼 수 있는 방식으로 확신 있게 틀릴 수 있다 — 반사면에서의 환각적 깊이, 의미상 타당하지만 기하학적으로 일관되지 않은 매칭 등. 이는 네트워크 출력을 무조건 신뢰하기보다 고전적인 기하학적 검증을 루프 안에 유지해야 한다는 강력한 근거다.</li>
+<li><strong>라이선스와 재현성</strong>: 모델 가중치, 학습 데이터, 사용 조건은 제각각이다 — 고정된 서드파티 백본 위에 구축된 시스템은 그 업데이트 주기와 편향을 그대로 물려받는다.</li>
+</ul>
+<h2 id="실용적인-레시피">실용적인 레시피</h2>
+<p>레벨 5 이후에 걸쳐 나타나는 패턴은 이렇다: 파이프라인에서 <em>강건성이 중요하거나, 의미론적이거나, 조건이 나쁜</em> 부분(장소 인식, 넓은 베이스라인 매칭, 단안 깊이, 개방형 어휘 레이블)에는 파운데이션 모델 특징을 사용하고, <em>정밀도가 중요한</em> 부분(포즈 최적화, 매핑 일관성)에는 고전적 추정을 유지하는 것이다. 가장 최신 시스템들 — MASt3R-SLAM, ConceptGraphs 스타일 의미론적 매핑 — 은 정확히 이런 형태다: 대형 사전학습 모델 위에 얹힌 얇은 기하학 레이어.</p>
+<h2 id="slam에서의-의미">SLAM에서의 의미</h2>
+<p>파운데이션 모델은 SLAM 프론트엔드의 정의를 다시 쓰고 있다: 태스크별 네트워크를 학습하는 대신, 현대 시스템은 점점 고정된 사전학습 백본을 조합한다 — 그리고 가장 최신의 SLAM 시스템(MASt3R-SLAM, ConceptGraphs 스타일 의미론적 매핑)은 바로 이러한 모델 위에 얹힌 얇은 기하학 레이어다. 각 계열이 무엇을 제공하는지(CLIP: 의미론, SAM: 마스크, DINOv2: 강건한 특징, Depth Anything: 깊이, DUSt3R: 기하학) 아는 것은 시스템을 설계할 때 무엇을 “공짜로” 얻을 수 있는지를 알려준다.</p>
+<h2 id="관련-문서">관련 문서</h2>
+<ul>
+<li><a href="/visual-slam-roadmap/ko/level-11-world-models-spatial-ai/clip/">CLIP</a></li>
+<li><a href="/visual-slam-roadmap/ko/level-05-deep-learning/sam/">SAM</a></li>
+<li><a href="/visual-slam-roadmap/ko/level-05-deep-learning/depth-anything/">Depth Anything</a></li>
+<li><a href="/visual-slam-roadmap/ko/level-05-deep-learning/dust3r/">DUSt3R</a></li>
+<li><a href="/visual-slam-roadmap/ko/level-05-deep-learning/roma/">RoMa</a></li>
+<li><a href="/visual-slam-roadmap/ko/level-05-deep-learning/mast3r-slam/">MASt3R-SLAM</a></li>
+<li><a href="/visual-slam-roadmap/ko/level-05-deep-learning/conceptgraphs/">ConceptGraphs</a></li>
+</ul></article><div class="mt-10"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5473245269912288" data-ad-slot="2335164071" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></main><footer class="mx-auto max-w-5xl px-5 py-10 font-mono text-xs space-y-2 text-slate-400"><p><a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap/pulls">제안은 언제든 환영합니다 — 저장소에 PR을 제출해 주세요.</a></p><p>MIT License &copy; 2026 Hyunggi Chang · built from the <a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap">roadmap repository</a></p></footer><script type="module">document.querySelectorAll(`a[data-lang]`).forEach(e=>{e.addEventListener(`click`,()=>{try{localStorage.setItem(`vslam-lang`,e.dataset.lang)}catch{}})});</script></body></html>

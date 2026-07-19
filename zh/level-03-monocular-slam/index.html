@@ -1,0 +1,253 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>单目SLAM — Visual-SLAM Roadmap</title><meta name="description" content="传统单目SLAM — 特征法、直接法、半直接法、SfM、动态场景"><link rel="canonical" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-03-monocular-slam/"><meta name="robots" content="index, follow, max-image-preview:large"><meta name="theme-color" content="#faf7f0"><link rel="icon" href="/visual-slam-roadmap/favicon.svg" type="image/svg+xml"><link rel="sitemap" href="/visual-slam-roadmap/sitemap-index.xml"><link rel="alternate" hreflang="en" href="https://www.cv-learn.com/visual-slam-roadmap/level-03-monocular-slam/"><link rel="alternate" hreflang="ko" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-03-monocular-slam/"><link rel="alternate" hreflang="zh-CN" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-03-monocular-slam/"><link rel="alternate" hreflang="ja" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-03-monocular-slam/"><link rel="alternate" hreflang="x-default" href="https://www.cv-learn.com/visual-slam-roadmap/level-03-monocular-slam/"><!-- Open Graph --><meta property="og:type" content="website"><meta property="og:site_name" content="Visual-SLAM Developer Roadmap"><meta property="og:title" content="单目SLAM — Visual-SLAM Roadmap"><meta property="og:description" content="传统单目SLAM — 特征法、直接法、半直接法、SfM、动态场景"><meta property="og:url" content="https://www.cv-learn.com/visual-slam-roadmap/zh/level-03-monocular-slam/"><meta property="og:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="zh_CN"><meta property="og:locale:alternate" content="en_US"><meta property="og:locale:alternate" content="ko_KR"><meta property="og:locale:alternate" content="ja_JP"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="单目SLAM — Visual-SLAM Roadmap"><meta name="twitter:description" content="传统单目SLAM — 特征法、直接法、半直接法、SfM、动态场景"><meta name="twitter:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><!-- Google AdSense --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5473245269912288" crossorigin="anonymous"></script><!-- Google Analytics 4 --><!-- Microsoft Clarity --><link rel="stylesheet" href="/visual-slam-roadmap/_astro/readme.DemmKpdz.css"></head><body class="graph-paper min-h-screen text-inkline font-sans"><header class="border-b border-paper-line bg-paper/90 backdrop-blur sticky top-0 z-10"><nav class="mx-auto max-w-5xl px-5 py-3 flex items-center gap-4"><a href="/visual-slam-roadmap/zh/" class="font-display font-semibold tracking-wide text-sm uppercase text-scan-500 hover:opacity-80">VSLAM<span class="opacity-60">//</span>Roadmap</a><a href="https://ko-fi.com/changh95" target="_blank" rel="noopener" class="font-mono text-[11px] font-medium px-2.5 py-1 text-white bg-[#00b9fe] hover:opacity-85 transition-opacity leading-tight">♥ Support me if you liked this content!</a><a href="https://github.com/changh95/visual-slam-roadmap" class="ml-auto hidden sm:inline font-mono text-xs text-slate-500 hover:text-scan-500">GitHub &nearr;</a><div class="flex font-mono text-[11px] border border-paper-line bg-paper divide-paper-line divide-x ml-auto sm:ml-0" role="group" aria-label="Language"><a href="/visual-slam-roadmap/level-03-monocular-slam/" data-lang="en" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">EN</a><a href="/visual-slam-roadmap/ko/level-03-monocular-slam/" data-lang="ko" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">KO</a><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/" data-lang="zh" aria-current="true" class="px-2 py-1 transition-colors bg-scan-500/10 text-scan-500 font-medium">ZH</a><a href="/visual-slam-roadmap/ja/level-03-monocular-slam/" data-lang="ja" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">JA</a></div></nav></header><main class="mx-auto max-w-5xl px-5 py-10"><p class="font-mono text-xs text-scan-500 tracking-[0.25em] uppercase">第 03 级 / 11</p><h1 class="font-display font-bold text-3xl sm:text-4xl mt-2">单目SLAM</h1><p class="mt-2 text-slate-500 max-w-2xl">传统单目SLAM — 特征法、直接法、半直接法、SfM、动态场景</p><article class="prose prose-slate max-w-none mt-8 prose-headings:font-display prose-a:text-scan-500 prose-a:decoration-scan-300/50 hover:prose-a:decoration-scan-500 prose-table:font-sans prose-table:text-sm bg-paper/80 border border-paper-line p-6 sm:p-8"><h3>关键概念</h3>
+<ul>
+<li><strong><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/vo-vs-slam/">VO与SLAM的区别</a></strong> — VO是局部的(无回环检测)，SLAM包含全局地图+回环检测</li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/scale-ambiguity/">尺度歧义</a></strong> — 单目SLAM的根本局限；从传统几何方法本身无法恢复绝对尺度(学习型度量深度先验，如Metric3D或MASt3R，可提供近似尺度)</li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/covisibility-graph/">共视图(Covisibility graph)</a></strong> — 关键帧之间共享地图点可见性；ORB-SLAM的核心数据结构</li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/visual-place-recognition-vpr/">视觉地点识别(VPR)</a></strong> — 识别曾到访过的地点，用于回环检测</li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/self-supervised-depth/">自监督深度估计</a></strong> — 在没有真值的情况下学习单目深度(Monodepth2, Godard 2019)</li>
+</ul>
+<h3>基于特征点的SLAM</h3>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>作者/年份</th>
+<th>关键概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/visual-odometry/">视觉里程计(Visual Odometry)</a></td>
+<td><a href="https://ieeexplore.ieee.org/document/1315094">Nistér 2004</a></td>
+<td>五点法本质矩阵求解器、RANSAC、三角化、VO(仅局部、无回环检测)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/monoslam/"><strong>MonoSLAM</strong></a></td>
+<td><a href="https://ieeexplore.ieee.org/document/4160954">Davison 2007</a></td>
+<td><strong>首个实时单目SLAM</strong>，基于EKF，单相机，稀疏3D地图，概率化特征初始化</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/ptam/">PTAM</a></td>
+<td><a href="https://www.robots.ox.ac.uk/~gk/publications/KleinMurray2007ISMAR.pdf">Klein &#x26; Murray 2007</a></td>
+<td>FAST特征、跟踪、<strong>前端/后端分离</strong>、并行线程、关键帧、建图、光束法平差、手动初始化</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/visual-slam-why-filter/">Visual-SLAM why filter?</a></td>
+<td><a href="https://doi.org/10.1016/j.imavis.2012.02.009">Strasdat 2012</a></td>
+<td>光束法平差、尺度感知BA、仅运动BA(motion-only BA)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/orb-slam/"><strong>ORB-SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/1502.00956">Mur-Artal 2015</a></td>
+<td>ORB特征点、<strong>自动初始化(单应矩阵与基础矩阵的选择)</strong>、跟踪线程、基于共视图的局部BA + 回环检测时的全局BA、局部建图、大规模场景、回环检测、视觉词袋、全局优化、共视图、<strong>地图点管理(剔除、合并)</strong></td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/pop-up-slam/">Pop-up SLAM</a></td>
+<td><a href="https://arxiv.org/abs/1703.07334">Yang 2016</a></td>
+<td>线特征/面特征</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/pl-slam/">PL-SLAM</a></td>
+<td><a href="https://www.albertpumarola.com/research/pl-slam/index.html">Pumarola 2017</a></td>
+<td>点特征/线特征</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/orb-slam2/"><strong>ORB-SLAM2</strong></a></td>
+<td><a href="https://arxiv.org/abs/1610.06475">Mur-Artal 2017</a></td>
+<td>→ 立体SLAM、→ RGB-D SLAM</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/cubeslam/">CubeSLAM</a></td>
+<td><a href="https://arxiv.org/abs/1806.00557">Yang 2019</a></td>
+<td>单目3D立方体检测+SLAM，9自由度物体表示</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/openvslam/">OpenVSLAM</a></td>
+<td><a href="https://arxiv.org/abs/1910.01122">Sumikura 2019</a></td>
+<td>基于ORB的SLAM框架，透视/鱼眼/全景相机模型，地图保存/加载+定位模式</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/stella-vslam/"><strong>Stella-VSLAM</strong></a></td>
+<td><a href="https://github.com/stella-cv/stella_vslam">Community 2021</a></td>
+<td>OpenVSLAM的继任者，重新采用新许可证(→ 也见于第7级)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/ucoslam/">UcoSLAM</a></td>
+<td><a href="https://arxiv.org/abs/1902.03729">Muñoz-Salinas 2019</a></td>
+<td>基准标记(Fiducial markers)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/deepfusion/">DeepFusion</a></td>
+<td><a href="https://arxiv.org/abs/2207.12244">Laidlow 2019</a></td>
+<td>稠密单目重建，半稠密MVS+CNN深度/梯度预测，基于学习不确定性的概率融合</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/orb-slam3/"><strong>ORB-SLAM3</strong></a></td>
+<td><a href="https://arxiv.org/abs/2007.11898">Campos 2020</a></td>
+<td>单目+立体+VIO，多地图，IMU集成</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/dxslam/">DXSLAM</a></td>
+<td><a href="https://arxiv.org/abs/2008.05416">Li 2020</a></td>
+<td>用于SLAM的深度特征</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/pycuvslam/"><strong>PyCuVSLAM</strong></a></td>
+<td><a href="https://github.com/NVlabs/pycuvslam">NVIDIA 2025</a></td>
+<td>Python+CUDA GPU加速VSLAM工具包(cuVSLAM封装；立体/多相机VIO)</td>
+</tr>
+</tbody>
+</table>
+<h3>直接法SLAM</h3>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>作者/年份</th>
+<th>关键概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/dtam/"><strong>DTAM</strong></a></td>
+<td><a href="https://ieeexplore.ieee.org/document/6126513">Newcombe 2011</a></td>
+<td>稠密建图、关键帧建图、GPGPU</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/lsd-slam/"><strong>LSD-SLAM</strong></a></td>
+<td><a href="https://cvg.cit.tum.de/research/vslam/lsdslam">Engel 2014</a></td>
+<td>光度误差最小化、高梯度像素/边缘、大规模场景、回环检测、位姿图优化</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/dso/"><strong>DSO</strong></a></td>
+<td><a href="https://arxiv.org/abs/1607.02565">Engel 2016</a></td>
+<td>光度光束法平差、滑动窗口BA、无回环检测/全局优化</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/ldso/"><strong>LDSO</strong></a></td>
+<td><a href="https://arxiv.org/abs/1808.01111">Gao 2018</a></td>
+<td>DSO+回环检测(基于BoW)，弥补了DSO的主要短板</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/cnn-slam/">CNN-SLAM</a></td>
+<td><a href="https://arxiv.org/abs/1704.03489">Tateno 2017</a></td>
+<td>深度来自LSD-SLAM+深度网络预测、语义标签</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/dvso/">DVSO</a></td>
+<td><a href="https://arxiv.org/abs/1807.02570">Yang 2018</a></td>
+<td>深度单图像深度估计、StackNet</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/d3vo/">D3VO</a></td>
+<td><a href="https://arxiv.org/abs/2003.01060">Yang 2020</a></td>
+<td>深度单图像深度估计、深度位姿估计、深度不确定性(aleatoric uncertainty)建模</td>
+</tr>
+</tbody>
+</table>
+<h3>半直接法(混合方法)</h3>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>作者/年份</th>
+<th>关键概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/svo/">SVO</a></td>
+<td><a href="https://ieeexplore.ieee.org/document/6906584">Forster 2014</a></td>
+<td>FAST特征检测、稀疏直接图像对齐、深度滤波器</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/svo2/">SVO2</a></td>
+<td><a href="https://rpg.ifi.uzh.ch/svo2.html">Forster 2017</a></td>
+<td>多相机/鱼眼相机、概率深度估计、直接法收敛、稀疏方法、光束法平差</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-07-stereo-slam/stereo-dso/"><strong>Stereo DSO</strong></a></td>
+<td><a href="https://arxiv.org/abs/1708.07878">Wang 2017</a></td>
+<td>→ 立体SLAM</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-06-vio-vins/vi-dso/">VI-DSO</a></td>
+<td><a href="https://arxiv.org/abs/1804.05625">von Stumberg 2018</a></td>
+<td>→ VIO/VINS</td>
+</tr>
+</tbody>
+</table>
+<h3>SfM工具</h3>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>作者/年份</th>
+<th>关键概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/colmap/"><strong>COLMAP</strong></a></td>
+<td><a href="https://colmap.github.io/">Schönberger 2016</a></td>
+<td>事实标准的增量式SfM+MVS流水线(C++/CUDA, pycolmap绑定)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/glomap/"><strong>GLOMAP</strong></a></td>
+<td><a href="https://arxiv.org/abs/2407.20219">Pan 2024</a></td>
+<td>重新审视全局SfM — 与COLMAP兼容，建图速度大幅提升</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/instantsfm/"><strong>InstantSfM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2510.13310">Zhong 2025</a></td>
+<td>GPU原生的稀疏感知SfM流水线，相比COLMAP大幅提速</td>
+</tr>
+</tbody>
+</table>
+<h3>动态环境SLAM</h3>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>作者/年份</th>
+<th>关键概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/dynaslam/"><strong>DynaSLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/1806.05620">Bescós 2018</a></td>
+<td>Mask R-CNN动态物体剔除+背景补全(inpainting)，基于ORB-SLAM2</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/ds-slam/">DS-SLAM</a></td>
+<td><a href="https://arxiv.org/abs/1809.08379">Yu 2018</a></td>
+<td>语义分割(SegNet)+运动一致性检查</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/maskfusion/">MaskFusion</a></td>
+<td><a href="https://arxiv.org/abs/1804.09194">Rünz 2018</a></td>
+<td>RGB-D场景中多个运动物体的识别、跟踪与重建</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/mid-fusion/">MID-Fusion</a></td>
+<td><a href="https://arxiv.org/abs/1812.07976">Xu 2019</a></td>
+<td>基于八叉树的物体级多实例动态RGB-D SLAM</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/vdo-slam/"><strong>VDO-SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2005.11052">Zhang 2020</a></td>
+<td>动态物体感知SLAM，相机运动与物体运动联合估计</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/dynaslam-ii/">DynaSLAM II</a></td>
+<td><a href="https://arxiv.org/abs/2010.07820">Bescós 2021</a></td>
+<td>紧耦合的多物体跟踪与SLAM</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/monst3r/"><strong>MonST3R</strong></a></td>
+<td><a href="https://arxiv.org/abs/2410.03825">Zhang 2024</a></td>
+<td>在存在运动的场景下进行DUSt3R系列点图估计</td>
+</tr>
+</tbody>
+</table></article><nav class="mt-8 flex justify-between font-mono text-sm"><span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/zh/level-02-getting-familiar/">&larr; 02 · 熟悉SLAM</a></span><span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/zh/level-04-rgbd-slam/">04 · RGB-D SLAM &rarr;</a></span></nav></main><footer class="mx-auto max-w-5xl px-5 py-10 font-mono text-xs space-y-2 text-slate-400"><p><a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap/pulls">欢迎提出建议 — 请向本仓库提交 PR。</a></p><p>MIT License &copy; 2026 Hyunggi Chang · built from the <a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap">roadmap repository</a></p></footer><script type="module">document.querySelectorAll(`a[data-lang]`).forEach(e=>{e.addEventListener(`click`,()=>{try{localStorage.setItem(`vslam-lang`,e.dataset.lang)}catch{}})});</script></body></html>

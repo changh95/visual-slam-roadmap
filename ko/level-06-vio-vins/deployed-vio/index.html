@@ -1,0 +1,77 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>배포된 VIO — Visual-SLAM Roadmap</title><meta name="description" content="세계에서 가장 대량으로 사용되는 SLAM 시스템은 연구용 코드베이스가 아니라, 소비자용 XR 및 모바일 기기 안에 있는 VIO 스택이다. Meta Quest 헤드셋, Apple의 ARKit(아이폰/아이패드, Vision Pro), Google의 ARCore는 각각 수억 대의 기기에서 시각-관성 추적을 실행한다. 이들이 최적화 대상으로 삼는 제약 조건이 학술 시스템이 최적화하는 벤치마크와 크게 다르기 때문에, 사례 연구로서 살펴볼 가치가 있다."><link rel="canonical" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-06-vio-vins/deployed-vio/"><meta name="robots" content="index, follow, max-image-preview:large"><meta name="theme-color" content="#faf7f0"><link rel="icon" href="/visual-slam-roadmap/favicon.svg" type="image/svg+xml"><link rel="sitemap" href="/visual-slam-roadmap/sitemap-index.xml"><link rel="alternate" hreflang="en" href="https://www.cv-learn.com/visual-slam-roadmap/level-06-vio-vins/deployed-vio/"><link rel="alternate" hreflang="ko" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-06-vio-vins/deployed-vio/"><link rel="alternate" hreflang="zh-CN" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-06-vio-vins/deployed-vio/"><link rel="alternate" hreflang="ja" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-06-vio-vins/deployed-vio/"><link rel="alternate" hreflang="x-default" href="https://www.cv-learn.com/visual-slam-roadmap/level-06-vio-vins/deployed-vio/"><!-- Open Graph --><meta property="og:type" content="article"><meta property="og:site_name" content="Visual-SLAM Developer Roadmap"><meta property="og:title" content="배포된 VIO — Visual-SLAM Roadmap"><meta property="og:description" content="세계에서 가장 대량으로 사용되는 SLAM 시스템은 연구용 코드베이스가 아니라, 소비자용 XR 및 모바일 기기 안에 있는 VIO 스택이다. Meta Quest 헤드셋, Apple의 ARKit(아이폰/아이패드, Vision Pro), Google의 ARCore는 각각 수억 대의 기기에서 시각-관성 추적을 실행한다. 이들이 최적화 대상으로 삼는 제약 조건이 학술 시스템이 최적화하는 벤치마크와 크게 다르기 때문에, 사례 연구로서 살펴볼 가치가 있다."><meta property="og:url" content="https://www.cv-learn.com/visual-slam-roadmap/ko/level-06-vio-vins/deployed-vio/"><meta property="og:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="ko_KR"><meta property="og:locale:alternate" content="en_US"><meta property="og:locale:alternate" content="zh_CN"><meta property="og:locale:alternate" content="ja_JP"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="배포된 VIO — Visual-SLAM Roadmap"><meta name="twitter:description" content="세계에서 가장 대량으로 사용되는 SLAM 시스템은 연구용 코드베이스가 아니라, 소비자용 XR 및 모바일 기기 안에 있는 VIO 스택이다. Meta Quest 헤드셋, Apple의 ARKit(아이폰/아이패드, Vision Pro), Google의 ARCore는 각각 수억 대의 기기에서 시각-관성 추적을 실행한다. 이들이 최적화 대상으로 삼는 제약 조건이 학술 시스템이 최적화하는 벤치마크와 크게 다르기 때문에, 사례 연구로서 살펴볼 가치가 있다."><meta name="twitter:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><!-- Google AdSense --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5473245269912288" crossorigin="anonymous"></script><!-- Google Analytics 4 --><!-- Microsoft Clarity --><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"배포된 VIO","description":"세계에서 가장 대량으로 사용되는 SLAM 시스템은 연구용 코드베이스가 아니라, 소비자용 XR 및 모바일 기기 안에 있는 VIO 스택이다. Meta Quest 헤드셋, Apple의 ARKit(아이폰/아이패드, Vision Pro), Google의 ARCore는 각각 수억 대의 기기에서 시각-관성 추적을 실행한다. 이들이 최적화 대상으로 삼는 제약 조건이 학술 시스템이 최적화하는 벤치마크와 크게 다르기 때문에, 사례 연구로서 살펴볼 가치가 있다.","inLanguage":"ko","url":"https://www.cv-learn.com/visual-slam-roadmap/ko/level-06-vio-vins/deployed-vio/","isPartOf":{"@type":"WebSite","name":"Visual-SLAM Developer Roadmap","url":"https://www.cv-learn.com/visual-slam-roadmap/"},"author":{"@type":"Person","name":"Hyunggi Chang","url":"https://github.com/changh95"},"license":"https://opensource.org/licenses/MIT"}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Visual-SLAM Roadmap","item":"https://www.cv-learn.com/visual-slam-roadmap/ko/"},{"@type":"ListItem","position":2,"name":"VIO / VINS","item":"https://www.cv-learn.com/visual-slam-roadmap/ko/level-06-vio-vins/"},{"@type":"ListItem","position":3,"name":"배포된 VIO","item":"https://www.cv-learn.com/visual-slam-roadmap/ko/level-06-vio-vins/deployed-vio/"}]}</script><link rel="stylesheet" href="/visual-slam-roadmap/_astro/readme.DemmKpdz.css"></head><body class="graph-paper min-h-screen text-inkline font-sans"><header class="border-b border-paper-line bg-paper/90 backdrop-blur sticky top-0 z-10"><nav class="mx-auto max-w-5xl px-5 py-3 flex items-center gap-4"><a href="/visual-slam-roadmap/ko/" class="font-display font-semibold tracking-wide text-sm uppercase text-scan-500 hover:opacity-80">VSLAM<span class="opacity-60">//</span>Roadmap</a><a href="https://ko-fi.com/changh95" target="_blank" rel="noopener" class="font-mono text-[11px] font-medium px-2.5 py-1 text-white bg-[#00b9fe] hover:opacity-85 transition-opacity leading-tight">♥ Support me if you liked this content!</a><a href="https://github.com/changh95/visual-slam-roadmap" class="ml-auto hidden sm:inline font-mono text-xs text-slate-500 hover:text-scan-500">GitHub &nearr;</a><div class="flex font-mono text-[11px] border border-paper-line bg-paper divide-paper-line divide-x ml-auto sm:ml-0" role="group" aria-label="Language"><a href="/visual-slam-roadmap/level-06-vio-vins/deployed-vio/" data-lang="en" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">EN</a><a href="/visual-slam-roadmap/ko/level-06-vio-vins/deployed-vio/" data-lang="ko" aria-current="true" class="px-2 py-1 transition-colors bg-scan-500/10 text-scan-500 font-medium">KO</a><a href="/visual-slam-roadmap/zh/level-06-vio-vins/deployed-vio/" data-lang="zh" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">ZH</a><a href="/visual-slam-roadmap/ja/level-06-vio-vins/deployed-vio/" data-lang="ja" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">JA</a></div></nav></header><main class="mx-auto max-w-3xl px-5 py-10"><nav class="font-mono text-xs text-slate-500 mb-6"><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/ko/">로드맵</a><span class="mx-1">/</span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/ko/level-06-vio-vins/">레벨 06 · VIO / VINS</a></nav><article class="prose prose-slate max-w-none prose-headings:font-display prose-a:text-scan-500 prose-a:decoration-scan-300/50 hover:prose-a:decoration-scan-500 prose-blockquote:font-mono prose-blockquote:text-sm prose-blockquote:not-italic bg-paper/80 border border-paper-line p-6 sm:p-8"><h1 id="배포된-vio">배포된 VIO</h1>
+<p>세계에서 가장 대량으로 사용되는 SLAM 시스템은 연구용 코드베이스가 아니라, 소비자용 XR 및 모바일 기기 안에 있는 VIO 스택이다. Meta Quest 헤드셋, Apple의 ARKit(아이폰/아이패드, Vision Pro), Google의 ARCore는 각각 수억 대의 기기에서 시각-관성 추적을 실행한다. 이들이 최적화 대상으로 삼는 제약 조건이 학술 시스템이 최적화하는 벤치마크와 크게 다르기 때문에, 사례 연구로서 살펴볼 가치가 있다.</p>
+<h2 id="상용-xr-스택의-모습">상용 XR 스택의 모습</h2>
+<p>공통적인 레시피는 인사이드-아웃 트래킹이다:</p>
+<ul>
+<li><strong>센서</strong>: 여러 대의 넓은 시야각 그레이스케일 카메라(헤드셋은 일반적으로 여러 대를, 폰은 한 대를 사용)와 하나 이상의 IMU를 하드웨어적으로 동기화하여 사용.</li>
+<li><strong>추정기</strong>: 온디바이스에서 연속적으로 실행되는 긴밀 결합 시각-관성 추정기 — 슬라이딩 윈도우 최적화 또는 필터링.</li>
+<li><strong>헤드셋의 추가 기능</strong>: 손에 든 컨트롤러와(최신 기기에서는) 손의 추적이 헤드 자세 추정 위에 레이어로 추가됨.</li>
+<li><strong>개발자 인터페이스</strong>: ARKit, ARCore 같은 폰 AR 프레임워크는 VIO 출력을 6-DoF 카메라 자세와 희소 특징점, 평면 검출, 추적 품질 상태, 영구 앵커로 노출한다.</li>
+</ul>
+<p>공개된 기술적 세부 사항은 제한적이다(이들은 독점 시스템이다), 그러나 넓은 아키텍처 — 다중 카메라 + IMU 긴밀 결합 추정과 재위치추정/매핑 계층 — 는 이 레벨이 다루는 공개 문헌과 일치한다.</p>
+<h2 id="벤치마크-우선순위-vs-제품-우선순위">벤치마크 우선순위 vs 제품 우선순위</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th>학술 벤치마크</th><th>출시된 기기</th></tr></thead><tbody><tr><td>주요 지표</td><td>궤적 RMSE</td><td>시간당 인지되는 추적 실패</td></tr><tr><td>환경</td><td>정제된 데이터셋</td><td>모든 침실, 사무실, 기차, 거울</td></tr><tr><td>컴퓨팅</td><td>데스크탑 CPU/GPU</td><td>공유 모바일 SoC, 엄격한 전력 예산</td></tr><tr><td>캘리브레이션</td><td>오프라인에서 수행, 정확하다고 가정</td><td>온도와 낙하에 따라 변동; 온라인으로 보정</td></tr><tr><td>초기화</td><td>전문가가 기록한 여기(excitation) 운동</td><td>훈련받지 않은 사용자가 제공하는 임의의 운동</td></tr><tr><td>실패 처리</td><td>시퀀스 제외 / 보고</td><td>우아하게 저하되고, 눈에 띄지 않게 복구되어야 함</td></tr></tbody></table>
+<h2 id="배포가-문제를-어떻게-바꾸는가">배포가 문제를 어떻게 바꾸는가</h2>
+<ul>
+<li><strong>강건성이 정확도를 이긴다.</strong> 벤치마크는 RMSE를 신경 쓰지만, 헤드셋은 어두운 침실, 텅 빈 벽, 거울, 움직이는 기차, 격렬하게 머리를 흔드는 사용자에서도 추적이 <em>절대</em> 눈에 띄게 실패하지 않아야 한다. 최고 정확도보다는 저하 모드 동작, 빠른 재위치추정, 우아한 폴백(예: 시각적 특징이 사라지면 3-DoF 회전 추적으로 전환)에 엄청난 엔지니어링 노력이 들어간다. 저조도, 저텍스처, 동적 장면, 센서 포화 같은 실패 유형 분류가 벤치마크 순위표보다 로드맵을 더 많이 이끈다.</li>
+<li><strong>지연 시간과 전력은 엄격한 제약이다.</strong> 모션-투-포톤 지연 시간은(자세 예측 및 렌더링된 프레임의 지연 단계 재투영과 결합하여) 멀미를 피할 만큼 충분히 낮아야 하며, 전체 스택은 렌더링과 SoC를 공유하면서 모바일 전력 예산 내에서 계속 실행되어야 한다. 이는 경량 프론트엔드, 고정소수점/DSP 구현, 전용 코프로세서, 신중한 스레드 스케줄링을 이끌며 — MSCKF 계열의 효율성(CPU 사이클당 정확도)이 다른 어느 곳보다 여기에서 더 중요한 이유다.</li>
+<li><strong>대규모 캘리브레이션.</strong> 수백만 대의 기기가 있다는 것은 공장별 개별 캘리브레이션에 더해 카메라-IMU 외부/내부 파라미터와 시간 오프셋의 <em>온라인</em> 보정이 필요하다는 것을 의미한다 — 기기는 온도와 낙하에 따라 변형된다. OpenVINS 시대 논문들의 연구 주제였던 온라인 캘리브레이션이 프로덕션에서는 기본 요구 사항이다.</li>
+<li><strong>매핑은 제품 기능이다.</strong> 영구 앵커, 다중 사용자 AR를 위한 공유/클라우드 앵커, 헤드셋의 “룸스케일” 경계 시스템은 맵 재사용과 재위치추정 문제이다 — 공개 문헌에서 maplab이 다루었던 루프 클로저와 다중 세션 매핑의 배포판 사촌이다.</li>
+<li><strong>프라이버시와 안전 제약</strong>은 무엇을 저장하거나 업로드할 수 있는지를 결정한다: 맵은 일반적으로 (사진이 아니라) 특징 디스크립터와 기하 정보로 추상화되며 가능한 경우 온디바이스에서 처리된다.</li>
+<li><strong>사용자가 시스템의 일부다.</strong> 초기화는 훈련받지 않은 사용자가 제공하는 임의의 운동으로 작동해야 하며(“모든 축을 여기시키라”는 지침이 없이), 관측 가능성에 기인한 저하(정지에 가까운 호버링, 순수 회전)는 눈에 띄지 않게 처리되어야 한다 — VIO가 필요로 하는 것을 아는 전문가가 기록한 데이터셋과는 뚜렷이 대조된다.</li>
+</ul>
+<h2 id="소스-코드-없이-이들을-연구하는-이유">소스 코드 없이 이들을 연구하는 이유</h2>
+<p>세 가지 이유가 있다. 첫째, 제약 조건의 집합이 공개 문헌이 왜 그런 모습을 하고 있는지를 설명한다: 효율성에 집착하는 필터, 온라인 캘리브레이션, 빠른 재위치추정, 일관성 관련 장치는 정확히 출시되는 제품이 필요로 하는 것이다. 둘째, 공개된 산출물 — 개발자 API(앵커, 평면 검출, 추적 상태 알림), 기기 분해 조사, 이 팀들의 발표/논문 — 은 구현이 비공개로 유지되더라도 아키텍처에 대한 정보를 제공한다. 셋째, 이 로드맵의 많은 오픈 시스템은 이 팀들에서 왔거나 이 팀들로 간 사람들이 작성했다 — 설계 DNA가 공유된다.</p>
+<h2 id="무엇을-취해야-하는가">무엇을 취해야 하는가</h2>
+<p>배포된 VIO를 이 레벨의 <em>요구 사항 문서</em>로 다루라: 여러분이 연구하는 어떤 공개 시스템도 배포 체크리스트에 따라 평가할 수 있다 — 어두운 곳에서는 어떻게 되는가? 재위치추정은 얼마나 빠른가? 자체 캘리브레이션을 추정하는가? 우아하게 저하되는가? 몇 밀리와트인가? — 그리고 여러분이 발견하는 격차가 바로 업계가 실제로 대가를 지불하는 연구 문제이다.</p>
+<h2 id="slam에서의-의미">SLAM에서의 의미</h2>
+<p>배포된 VIO는 이 레벨의 내용이 학술적인 것만은 아니라는 증거다: MSCKF 스타일 필터링, 사전 적분, 온라인 캘리브레이션, 관측 가능성을 고려한 설계가 정확히 소비자 기기에 탑재되는 것들이다. 배포 제약 조건(강건성, 지연 시간, 전력, 캘리브레이션 드리프트)을 연구하면 업계가 실제로 대가를 지불하는 연구 문제가 무엇인지 알 수 있으며 — 이 팀들에서 왔거나 이 팀들로 간 저자들이 작성한 공개 시스템의 설계 선택도 설명해준다.</p>
+<h2 id="관련-문서">관련 문서</h2>
+<ul>
+<li><a href="/visual-slam-roadmap/ko/level-06-vio-vins/tightly-coupled-vs-loosely-coupled/">Tightly-coupled vs Loosely-coupled</a> — 배포된 스택이 사용하는 아키텍처.</li>
+<li><a href="/visual-slam-roadmap/ko/level-06-vio-vins/msckf/">MSCKF</a> — 임베디드 컴퓨팅 예산에 적합한 효율적인 필터링 접근법.</li>
+<li><a href="/visual-slam-roadmap/ko/level-06-vio-vins/openvins/">OpenVINS</a> — 프로덕션 스택이 필요로 하는 온라인 캘리브레이션 장치를 갖춘 오픈 소스 시스템.</li>
+<li><a href="/visual-slam-roadmap/ko/level-06-vio-vins/okvis/">OKVIS</a> — 초기 AR/MAV 배포 연구 시대의 키프레임 슬라이딩 윈도우 VIO.</li>
+<li><a href="/visual-slam-roadmap/ko/level-06-vio-vins/maplab/">maplab</a> — 다중 세션 매핑과 재위치추정, 영구 앵커의 연구적 대응물.</li>
+<li><a href="/visual-slam-roadmap/ko/level-06-vio-vins/observability/">Observability</a> — 퇴화된 사용자 운동을 우아하게 처리하는 이론적 배경.</li>
+</ul></article><div class="mt-10"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5473245269912288" data-ad-slot="2335164071" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></main><footer class="mx-auto max-w-5xl px-5 py-10 font-mono text-xs space-y-2 text-slate-400"><p><a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap/pulls">제안은 언제든 환영합니다 — 저장소에 PR을 제출해 주세요.</a></p><p>MIT License &copy; 2026 Hyunggi Chang · built from the <a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap">roadmap repository</a></p></footer><script type="module">document.querySelectorAll(`a[data-lang]`).forEach(e=>{e.addEventListener(`click`,()=>{try{localStorage.setItem(`vslam-lang`,e.dataset.lang)}catch{}})});</script></body></html>

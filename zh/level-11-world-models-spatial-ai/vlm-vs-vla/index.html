@@ -1,0 +1,89 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>VLM vs VLA — Visual-SLAM Roadmap</title><meta name="description" content="视觉-语言模型（Vision-Language Models，VLM） 是联合在图像与文本上训练的神经网络。它们对视觉输入进行推理：将其与任意文本标签进行分类、描述它、回答关于它的问题。视觉-语言-动作模型（Vision-Language-Action Models，VLA） 在 VLM 的基础上再进一步：它们额外输出机器人动作。这一区别听起来很小；但在架构和理念上，它是感知模块与策略之间的分野。"><link rel="canonical" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/vlm-vs-vla/"><meta name="robots" content="index, follow, max-image-preview:large"><meta name="theme-color" content="#faf7f0"><link rel="icon" href="/visual-slam-roadmap/favicon.svg" type="image/svg+xml"><link rel="sitemap" href="/visual-slam-roadmap/sitemap-index.xml"><link rel="alternate" hreflang="en" href="https://www.cv-learn.com/visual-slam-roadmap/level-11-world-models-spatial-ai/vlm-vs-vla/"><link rel="alternate" hreflang="ko" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-11-world-models-spatial-ai/vlm-vs-vla/"><link rel="alternate" hreflang="zh-CN" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/vlm-vs-vla/"><link rel="alternate" hreflang="ja" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/vlm-vs-vla/"><link rel="alternate" hreflang="x-default" href="https://www.cv-learn.com/visual-slam-roadmap/level-11-world-models-spatial-ai/vlm-vs-vla/"><!-- Open Graph --><meta property="og:type" content="article"><meta property="og:site_name" content="Visual-SLAM Developer Roadmap"><meta property="og:title" content="VLM vs VLA — Visual-SLAM Roadmap"><meta property="og:description" content="视觉-语言模型（Vision-Language Models，VLM） 是联合在图像与文本上训练的神经网络。它们对视觉输入进行推理：将其与任意文本标签进行分类、描述它、回答关于它的问题。视觉-语言-动作模型（Vision-Language-Action Models，VLA） 在 VLM 的基础上再进一步：它们额外输出机器人动作。这一区别听起来很小；但在架构和理念上，它是感知模块与策略之间的分野。"><meta property="og:url" content="https://www.cv-learn.com/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/vlm-vs-vla/"><meta property="og:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="zh_CN"><meta property="og:locale:alternate" content="en_US"><meta property="og:locale:alternate" content="ko_KR"><meta property="og:locale:alternate" content="ja_JP"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="VLM vs VLA — Visual-SLAM Roadmap"><meta name="twitter:description" content="视觉-语言模型（Vision-Language Models，VLM） 是联合在图像与文本上训练的神经网络。它们对视觉输入进行推理：将其与任意文本标签进行分类、描述它、回答关于它的问题。视觉-语言-动作模型（Vision-Language-Action Models，VLA） 在 VLM 的基础上再进一步：它们额外输出机器人动作。这一区别听起来很小；但在架构和理念上，它是感知模块与策略之间的分野。"><meta name="twitter:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><!-- Google AdSense --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5473245269912288" crossorigin="anonymous"></script><!-- Google Analytics 4 --><!-- Microsoft Clarity --><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"VLM vs VLA","description":"视觉-语言模型（Vision-Language Models，VLM） 是联合在图像与文本上训练的神经网络。它们对视觉输入进行推理：将其与任意文本标签进行分类、描述它、回答关于它的问题。视觉-语言-动作模型（Vision-Language-Action Models，VLA） 在 VLM 的基础上再进一步：它们额外输出机器人动作。这一区别听起来很小；但在架构和理念上，它是感知模块与策略之间的分野。","inLanguage":"zh-CN","url":"https://www.cv-learn.com/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/vlm-vs-vla/","isPartOf":{"@type":"WebSite","name":"Visual-SLAM Developer Roadmap","url":"https://www.cv-learn.com/visual-slam-roadmap/"},"author":{"@type":"Person","name":"Hyunggi Chang","url":"https://github.com/changh95"},"license":"https://opensource.org/licenses/MIT"}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Visual-SLAM Roadmap","item":"https://www.cv-learn.com/visual-slam-roadmap/zh/"},{"@type":"ListItem","position":2,"name":"世界模型与空间智能","item":"https://www.cv-learn.com/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/"},{"@type":"ListItem","position":3,"name":"VLM vs VLA","item":"https://www.cv-learn.com/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/vlm-vs-vla/"}]}</script><link rel="stylesheet" href="/visual-slam-roadmap/_astro/readme.DemmKpdz.css"></head><body class="graph-paper min-h-screen text-inkline font-sans"><header class="border-b border-paper-line bg-paper/90 backdrop-blur sticky top-0 z-10"><nav class="mx-auto max-w-5xl px-5 py-3 flex items-center gap-4"><a href="/visual-slam-roadmap/zh/" class="font-display font-semibold tracking-wide text-sm uppercase text-scan-500 hover:opacity-80">VSLAM<span class="opacity-60">//</span>Roadmap</a><a href="https://ko-fi.com/changh95" target="_blank" rel="noopener" class="font-mono text-[11px] font-medium px-2.5 py-1 text-white bg-[#00b9fe] hover:opacity-85 transition-opacity leading-tight">♥ Support me if you liked this content!</a><a href="https://github.com/changh95/visual-slam-roadmap" class="ml-auto hidden sm:inline font-mono text-xs text-slate-500 hover:text-scan-500">GitHub &nearr;</a><div class="flex font-mono text-[11px] border border-paper-line bg-paper divide-paper-line divide-x ml-auto sm:ml-0" role="group" aria-label="Language"><a href="/visual-slam-roadmap/level-11-world-models-spatial-ai/vlm-vs-vla/" data-lang="en" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">EN</a><a href="/visual-slam-roadmap/ko/level-11-world-models-spatial-ai/vlm-vs-vla/" data-lang="ko" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">KO</a><a href="/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/vlm-vs-vla/" data-lang="zh" aria-current="true" class="px-2 py-1 transition-colors bg-scan-500/10 text-scan-500 font-medium">ZH</a><a href="/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/vlm-vs-vla/" data-lang="ja" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">JA</a></div></nav></header><main class="mx-auto max-w-3xl px-5 py-10"><nav class="font-mono text-xs text-slate-500 mb-6"><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/zh/">路线图</a><span class="mx-1">/</span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/">级别 11 · 世界模型与空间智能</a></nav><article class="prose prose-slate max-w-none prose-headings:font-display prose-a:text-scan-500 prose-a:decoration-scan-300/50 hover:prose-a:decoration-scan-500 prose-blockquote:font-mono prose-blockquote:text-sm prose-blockquote:not-italic bg-paper/80 border border-paper-line p-6 sm:p-8"><h1 id="vlm-vs-vla">VLM vs VLA</h1>
+<p><strong>视觉-语言模型（Vision-Language Models，VLM）</strong> 是联合在图像与文本上训练的神经网络。它们<em>对视觉输入进行推理</em>：将其与任意文本标签进行分类、描述它、回答关于它的问题。<strong>视觉-语言-动作模型（Vision-Language-Action Models，VLA）</strong> 在 VLM 的基础上再进一步：它们额外输出<strong>机器人动作</strong>。这一区别听起来很小；但在架构和理念上，它是感知模块与策略之间的分野。</p>
+<h2 id="vlm感知与推理">VLM：感知与推理</h2>
+<p>本层级中的 VLM 谱系展示了三代架构演进：</p>
+<ul>
+<li><strong>CLIP</strong> 通过在 4 亿网络图文对上做对比训练，学习一个共享的图像-文本嵌入空间——其输出是一个<em>嵌入</em>，“推理”体现为相似度检索（零样本分类、检索）。</li>
+<li><strong>BLIP-2</strong> 通过一个小型 Q-Former，将一个冻结的图像编码器与一个冻结的 LLM 连接起来，使输出变为以图像为条件<em>生成的语言</em>——如图像描述、视觉问答、指令跟随——训练成本仅为端到端训练的一小部分。</li>
+<li><strong>LLaVA</strong> 走得更简单：用一个单一的线性投影层，把冻结的 CLIP 编码器的视觉 token 连接到 LLM，再通过在视觉对话数据上的指令微调，把整个系统变成一个视觉聊天机器人。</li>
+</ul>
+<p>无论内部机制如何，VLM 的输出始终是语言、嵌入或分数——它能感知和理解，但不会行动。</p>
+<h2 id="vla把闭环延伸到动作">VLA：把闭环延伸到动作</h2>
+<p>RT-2 引入的标准技巧是<strong>把连续的机器人指令离散化为 token</strong>：末端执行器位置/旋转的增量、夹爪状态或导航方向被分箱（例如每个自由度分为 256 个桶），每个桶被赋予模型词表中的一个 token。于是”行动”就变成了下一个 token 预测：给定当前摄像头图像和一条语言指令，模型自回归地生成动作 token，再将其解码为电机指令。</p>
+<ul>
+<li><strong>RT-2</strong> 在网络数据<em>和</em>机器人示教数据上共同微调一个大型 VLM，使同一个网络既能回答问题，也能输出动作。</li>
+<li><strong>OpenVLA</strong> 以 70 亿参数的规模开源了这一配方，其中一个显著特点是在语言骨干之前融合了两个视觉编码器——DINOv2（空间性、以物体为中心的特征）和 SigLIP（语义性、文本对齐特征）——这印证了视觉编码器的质量确实是制约 VLA 性能的一个真实瓶颈。</li>
+<li><strong>NaVILA</strong> 把这一配方从桌面操作任务扩展到了腿式机器人导航。</li>
+</ul>
+<h2 id="并排对比">并排对比</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th>VLM</th><th>VLA</th></tr></thead><tbody><tr><td>输入</td><td>图像 + 文本</td><td>图像 + 文本（+ 机器人状态/历史）</td></tr><tr><td>输出</td><td>文本、嵌入、相似度分数</td><td>机器人动作 token（可选附带文本）</td></tr><tr><td>训练数据</td><td>互联网图文对</td><td>VLM 初始化 + 机器人示教数据</td></tr><tr><td>示例</td><td>CLIP、SigLIP、BLIP-2、LLaVA</td><td>RT-2、OpenVLA、NaVILA</td></tr><tr><td>在机器人中的角色</td><td>感知与语义推理</td><td>端到端（或高层）控制策略</td></tr></tbody></table>
+<h2 id="为什么要在-vlm-之上构建-vla">为什么要在 VLM 之上构建 VLA？</h2>
+<p>因为迁移。机器人示教数据集与互联网规模相比微不足道，但一个 VLM 骨干网络已经知道物体是什么、如何被描述，以及世界大致如何运作。RT-2 的核心成果正是<em>涌现式泛化</em>——能够操作和跟随机器人训练数据中从未出现过的物体和指令，原因仅仅是底层 VLM 已经在网络数据中见过它们。若只在机器人数据上从零训练一个 VLA，就会丢掉这一先验。</p>
+<h2 id="设计张力以及-slam-的位置">设计张力——以及 SLAM 的位置</h2>
+<p>VLA 把感知、推理和控制压缩进一个网络，这有利于端到端优化，但放弃了模块化机器人技术栈所维护的显式几何状态（地图、位姿）。在模块化模式下，技术栈是这样的：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>感知</mtext><mover><mo stretchy="true" minsize="3.0em">→</mo><mpadded width="+0.6em" lspace="0.3em"><mtext>SLAM</mtext></mpadded></mover><mtext>地图 + 位姿</mtext><mover><mo stretchy="true" minsize="3.0em">→</mo><mpadded width="+0.6em" lspace="0.3em"><mtext>VLM</mtext></mpadded></mover><mtext>场景理解</mtext><mover><mo stretchy="true" minsize="3.0em">→</mo><mpadded width="+0.6em" lspace="0.3em"><mtext>VLA</mtext></mpadded></mover><mtext>动作</mtext></mrow><annotation encoding="application/x-tex">\text{感知} \xrightarrow{\text{SLAM}} \text{地图 + 位姿} \xrightarrow{\text{VLM}} \text{场景理解} \xrightarrow{\text{VLA}} \text{动作}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.1113em;vertical-align:-0.011em;"></span><span class="mord text"><span class="mord cjk_fallback">感知</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel x-arrow"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1003em;"><span style="top:-3.322em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight x-arrow-pad"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">SLAM</span></span></span></span></span><span class="svg-align" style="top:-2.689em;"><span class="pstrut" style="height:2.7em;"></span><span class="hide-tail" style="height:0.522em;min-width:1.469em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="0.522em" viewBox="0 0 400000 522" preserveAspectRatio="xMaxYMin slice"><path d="M0 241v40h399891c-47.3 35.3-84 78-110 128
+-16.7 32-27.7 63.7-33 95 0 1.3-.2 2.7-.5 4-.3 1.3-.5 2.3-.5 3 0 7.3 6.7 11 20
+ 11 8 0 13.2-.8 15.5-2.5 2.3-1.7 4.2-5.5 5.5-11.5 2-13.3 5.7-27 11-41 14.7-44.7
+ 39-84.5 73-119.5s73.7-60.2 119-75.5c6-2 9-5.7 9-11s-3-9-9-11c-45.3-15.3-85
+-40.5-119-75.5s-58.3-74.8-73-119.5c-4.7-14-8.3-27.3-11-40-1.3-6.7-3.2-10.8-5.5
+-12.5-2.3-1.7-7.5-2.5-15.5-2.5-14 0-21 3.7-21 11 0 2 2 10.3 6 25 20.7 83.3 67
+ 151.7 139 205zm0 0v40h399900v-40z"></path></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.011em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.1837em;vertical-align:-0.0833em;"></span><span class="mord text"><span class="mord cjk_fallback">地图</span><span class="mord"> + </span><span class="mord cjk_fallback">位姿</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel x-arrow"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1003em;"><span style="top:-3.322em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight x-arrow-pad"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">VLM</span></span></span></span></span><span class="svg-align" style="top:-2.689em;"><span class="pstrut" style="height:2.7em;"></span><span class="hide-tail" style="height:0.522em;min-width:1.469em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="0.522em" viewBox="0 0 400000 522" preserveAspectRatio="xMaxYMin slice"><path d="M0 241v40h399891c-47.3 35.3-84 78-110 128
+-16.7 32-27.7 63.7-33 95 0 1.3-.2 2.7-.5 4-.3 1.3-.5 2.3-.5 3 0 7.3 6.7 11 20
+ 11 8 0 13.2-.8 15.5-2.5 2.3-1.7 4.2-5.5 5.5-11.5 2-13.3 5.7-27 11-41 14.7-44.7
+ 39-84.5 73-119.5s73.7-60.2 119-75.5c6-2 9-5.7 9-11s-3-9-9-11c-45.3-15.3-85
+-40.5-119-75.5s-58.3-74.8-73-119.5c-4.7-14-8.3-27.3-11-40-1.3-6.7-3.2-10.8-5.5
+-12.5-2.3-1.7-7.5-2.5-15.5-2.5-14 0-21 3.7-21 11 0 2 2 10.3 6 25 20.7 83.3 67
+ 151.7 139 205zm0 0v40h399900v-40z"></path></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.011em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.1113em;vertical-align:-0.011em;"></span><span class="mord text"><span class="mord cjk_fallback">场景理解</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel x-arrow"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1003em;"><span style="top:-3.322em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight x-arrow-pad"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">VLA</span></span></span></span></span><span class="svg-align" style="top:-2.689em;"><span class="pstrut" style="height:2.7em;"></span><span class="hide-tail" style="height:0.522em;min-width:1.469em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="0.522em" viewBox="0 0 400000 522" preserveAspectRatio="xMaxYMin slice"><path d="M0 241v40h399891c-47.3 35.3-84 78-110 128
+-16.7 32-27.7 63.7-33 95 0 1.3-.2 2.7-.5 4-.3 1.3-.5 2.3-.5 3 0 7.3 6.7 11 20
+ 11 8 0 13.2-.8 15.5-2.5 2.3-1.7 4.2-5.5 5.5-11.5 2-13.3 5.7-27 11-41 14.7-44.7
+ 39-84.5 73-119.5s73.7-60.2 119-75.5c6-2 9-5.7 9-11s-3-9-9-11c-45.3-15.3-85
+-40.5-119-75.5s-58.3-74.8-73-119.5c-4.7-14-8.3-27.3-11-40-1.3-6.7-3.2-10.8-5.5
+-12.5-2.3-1.7-7.5-2.5-15.5-2.5-14 0-21 3.7-21 11 0 2 2 10.3 6 25 20.7 83.3 67
+ 151.7 139 205zm0 0v40h399900v-40z"></path></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.011em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord cjk_fallback">动作</span></span></span></span></span></span></p>
+<p>端到端的替代方案则完全跳过了显式几何。哪种方式更胜一筹很可能取决于任务：已知空间中的精密操作和长时程导航偏向于依赖显式的 SLAM 状态；而短时程、开放世界的指令跟随则可能更偏向端到端策略。目前大多数 VLA 完全没有度量记忆——而这正是 SLAM 重新登场的地方。</p>
+<h2 id="对slam的意义">对SLAM的意义</h2>
+<p>VLM 已经在重塑 SLAM：把 CLIP 风格的嵌入附加到三维地图上，就能产生开放词汇的场景理解（LERF、ConceptFusion），使地图能够被自由形式的文本查询。VLA 则为该领域提出了更宏大的架构问题——未来的机器人究竟会使用一个显式的 SLAM 地图、再由 VLA 在其之上做规划（SLAM 作为 VLA 所欠缺的度量记忆），还是采用完全绕开显式几何的端到端策略。了解每一类模型的长处所在，就能知道经典空间表示仍然在哪些地方大有用处：长时程导航、度量精度以及持久地图。</p>
+<h2 id="相关条目">相关条目</h2>
+<ul>
+<li><a href="/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/clip/">CLIP</a></li>
+<li><a href="/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/blip-2/">BLIP-2</a></li>
+<li><a href="/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/rt-2/">RT-2</a></li>
+<li><a href="/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/openvla/">OpenVLA</a></li>
+<li><a href="/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/navila/">NaVILA</a></li>
+<li><a href="/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/spatial-ai/">Spatial AI</a></li>
+</ul></article><div class="mt-10"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5473245269912288" data-ad-slot="2335164071" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></main><footer class="mx-auto max-w-5xl px-5 py-10 font-mono text-xs space-y-2 text-slate-400"><p><a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap/pulls">欢迎提出建议 — 请向本仓库提交 PR。</a></p><p>MIT License &copy; 2026 Hyunggi Chang · built from the <a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap">roadmap repository</a></p></footer><script type="module">document.querySelectorAll(`a[data-lang]`).forEach(e=>{e.addEventListener(`click`,()=>{try{localStorage.setItem(`vslam-lang`,e.dataset.lang)}catch{}})});</script></body></html>

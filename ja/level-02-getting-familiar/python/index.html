@@ -1,0 +1,77 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Python — Visual-SLAM Roadmap</title><meta name="description" content="C++は大半のSLAMシステムのリアルタイムコアを動かすが、Pythonはそのコアの周囲にある全てのものの言語である。典型的なSLAMのワークフローでは、Pythonを3つの用途で使用する。"><link rel="canonical" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-02-getting-familiar/python/"><meta name="robots" content="index, follow, max-image-preview:large"><meta name="theme-color" content="#faf7f0"><link rel="icon" href="/visual-slam-roadmap/favicon.svg" type="image/svg+xml"><link rel="sitemap" href="/visual-slam-roadmap/sitemap-index.xml"><link rel="alternate" hreflang="en" href="https://www.cv-learn.com/visual-slam-roadmap/level-02-getting-familiar/python/"><link rel="alternate" hreflang="ko" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-02-getting-familiar/python/"><link rel="alternate" hreflang="zh-CN" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-02-getting-familiar/python/"><link rel="alternate" hreflang="ja" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-02-getting-familiar/python/"><link rel="alternate" hreflang="x-default" href="https://www.cv-learn.com/visual-slam-roadmap/level-02-getting-familiar/python/"><!-- Open Graph --><meta property="og:type" content="article"><meta property="og:site_name" content="Visual-SLAM Developer Roadmap"><meta property="og:title" content="Python — Visual-SLAM Roadmap"><meta property="og:description" content="C++は大半のSLAMシステムのリアルタイムコアを動かすが、Pythonはそのコアの周囲にある全てのものの言語である。典型的なSLAMのワークフローでは、Pythonを3つの用途で使用する。"><meta property="og:url" content="https://www.cv-learn.com/visual-slam-roadmap/ja/level-02-getting-familiar/python/"><meta property="og:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="ja_JP"><meta property="og:locale:alternate" content="en_US"><meta property="og:locale:alternate" content="ko_KR"><meta property="og:locale:alternate" content="zh_CN"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Python — Visual-SLAM Roadmap"><meta name="twitter:description" content="C++は大半のSLAMシステムのリアルタイムコアを動かすが、Pythonはそのコアの周囲にある全てのものの言語である。典型的なSLAMのワークフローでは、Pythonを3つの用途で使用する。"><meta name="twitter:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><!-- Google AdSense --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5473245269912288" crossorigin="anonymous"></script><!-- Google Analytics 4 --><!-- Microsoft Clarity --><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Python","description":"C++は大半のSLAMシステムのリアルタイムコアを動かすが、Pythonはそのコアの周囲にある全てのものの言語である。典型的なSLAMのワークフローでは、Pythonを3つの用途で使用する。","inLanguage":"ja","url":"https://www.cv-learn.com/visual-slam-roadmap/ja/level-02-getting-familiar/python/","isPartOf":{"@type":"WebSite","name":"Visual-SLAM Developer Roadmap","url":"https://www.cv-learn.com/visual-slam-roadmap/"},"author":{"@type":"Person","name":"Hyunggi Chang","url":"https://github.com/changh95"},"license":"https://opensource.org/licenses/MIT"}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Visual-SLAM Roadmap","item":"https://www.cv-learn.com/visual-slam-roadmap/ja/"},{"@type":"ListItem","position":2,"name":"SLAMに慣れる","item":"https://www.cv-learn.com/visual-slam-roadmap/ja/level-02-getting-familiar/"},{"@type":"ListItem","position":3,"name":"Python","item":"https://www.cv-learn.com/visual-slam-roadmap/ja/level-02-getting-familiar/python/"}]}</script><link rel="stylesheet" href="/visual-slam-roadmap/_astro/readme.DemmKpdz.css"></head><body class="graph-paper min-h-screen text-inkline font-sans"><header class="border-b border-paper-line bg-paper/90 backdrop-blur sticky top-0 z-10"><nav class="mx-auto max-w-5xl px-5 py-3 flex items-center gap-4"><a href="/visual-slam-roadmap/ja/" class="font-display font-semibold tracking-wide text-sm uppercase text-scan-500 hover:opacity-80">VSLAM<span class="opacity-60">//</span>Roadmap</a><a href="https://ko-fi.com/changh95" target="_blank" rel="noopener" class="font-mono text-[11px] font-medium px-2.5 py-1 text-white bg-[#00b9fe] hover:opacity-85 transition-opacity leading-tight">♥ Support me if you liked this content!</a><a href="https://github.com/changh95/visual-slam-roadmap" class="ml-auto hidden sm:inline font-mono text-xs text-slate-500 hover:text-scan-500">GitHub &nearr;</a><div class="flex font-mono text-[11px] border border-paper-line bg-paper divide-paper-line divide-x ml-auto sm:ml-0" role="group" aria-label="Language"><a href="/visual-slam-roadmap/level-02-getting-familiar/python/" data-lang="en" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">EN</a><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/python/" data-lang="ko" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">KO</a><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/python/" data-lang="zh" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">ZH</a><a href="/visual-slam-roadmap/ja/level-02-getting-familiar/python/" data-lang="ja" aria-current="true" class="px-2 py-1 transition-colors bg-scan-500/10 text-scan-500 font-medium">JA</a></div></nav></header><main class="mx-auto max-w-3xl px-5 py-10"><nav class="font-mono text-xs text-slate-500 mb-6"><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/ja/">ロードマップ</a><span class="mx-1">/</span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/ja/level-02-getting-familiar/">レベル 02 · SLAMに慣れる</a></nav><article class="prose prose-slate max-w-none prose-headings:font-display prose-a:text-scan-500 prose-a:decoration-scan-300/50 hover:prose-a:decoration-scan-500 prose-blockquote:font-mono prose-blockquote:text-sm prose-blockquote:not-italic bg-paper/80 border border-paper-line p-6 sm:p-8"><h1 id="python">Python</h1>
+<p>C++は大半のSLAMシステムのリアルタイムコアを動かすが、<strong>Python</strong>はそのコアの周囲にある全てのものの言語である。典型的なSLAMのワークフローでは、Pythonを3つの用途で使用する。</p>
+<ul>
+<li><strong>ディープラーニング</strong>: PyTorch(および同種のツール)はPythonファーストである。学習された特徴(SuperPoint)、マッチャー(SuperGlue/LightGlue)、単眼深度、そしてDROID-SLAMのようなエンドツーエンドのシステムは、いずれもPythonで学習され — そして通常は最初にプロトタイピングされる。</li>
+<li><strong>解析とプロッティング</strong>: 配列演算のためのNumPy、軌跡やエラープロットのためのMatplotlib、そしてグラウンドトゥルースに対するATE/RPEを計算するための評価ツール。SLAMの実行がおかしくなったとき、軌跡、特徴数、残差ヒストグラムをプロットする簡易なノートブックは、しばしば最速のデバッグ手段である。</li>
+<li><strong>システムスクリプトとグルーコード</strong>: データセットのダウンロードと変換、バッチ実験ランナー、キャリブレーションパイプライン、CIジョブ、そして時間的制約の緩いコンポーネント向けのROS 2ノード(<code>rclpy</code>)。</li>
+</ul>
+<p>多くの中核的なSLAMライブラリはPythonバインディングを公開しているため、C++に触れずに完全なパイプラインをプロトタイピングできる。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>ライブラリ</th><th>Pythonエントリーポイント</th></tr></thead><tbody><tr><td>OpenCV</td><td><code>opencv-python</code> (<code>cv2</code>)</td></tr><tr><td>GTSAM</td><td>公式Pythonラッパー</td></tr><tr><td>g2o</td><td>コミュニティによるバインディング(例: g2opy)</td></tr><tr><td>Open3D</td><td>ネイティブPython API(点群、ICP、TSDF)</td></tr></tbody></table>
+<p>一般的かつ生産的なパターンは<em>Pythonでプロトタイピングし、C++に移植する</em>ことである。データセットに対して<code>cv2</code>とNumPyでアルゴリズムを検証し、設計が固まったらホットループをC++/Eigenに再実装する。Pythonにとどまる必要がある研究コードについては、pybind11によってパフォーマンスが重要なC++部分をラップしつつ、実験ロジックはPythonに残すことができる — 両方の利点を得られる。</p>
+<p>早期に身につけておくべき実践的な習慣: プロジェクトごとに仮想環境(venv/conda/uv)を使用すること、再現性のために依存関係のバージョンを固定すること、そしてNumPyは行優先の規約を使い、OpenCVの画像は<code>[row, col]</code> = <code>[y, x]</code>でインデックスされることを覚えておくこと — これは座標の転置に関する典型的なバグの原因である。</p>
+<h2 id="pythonにおけるslamツールの一例">PythonにおけるSLAMツールの一例</h2>
+<p>ツールボックスに持っておくべき最も有用な1つのスクリプトは軌跡評価である。閉形式の最小二乗剛体アラインメント(Umeyamaの方法、SVD経由)で推定値をグラウンドトゥルースに整合させ、ATE RMSEを計算するのは、NumPyでたった十数行で書ける。</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#D73A49">import</span><span style="color:#24292E"> numpy </span><span style="color:#D73A49">as</span><span style="color:#24292E"> np</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D73A49">def</span><span style="color:#6F42C1"> align_and_ate</span><span style="color:#24292E">(P_est, P_gt):          </span><span style="color:#6A737D"># both Nx3</span></span>
+<span class="line"><span style="color:#24292E">    mu_e, mu_g </span><span style="color:#D73A49">=</span><span style="color:#24292E"> P_est.mean(</span><span style="color:#005CC5">0</span><span style="color:#24292E">), P_gt.mean(</span><span style="color:#005CC5">0</span><span style="color:#24292E">)</span></span>
+<span class="line"><span style="color:#24292E">    U, S, Vt </span><span style="color:#D73A49">=</span><span style="color:#24292E"> np.linalg.svd((P_gt </span><span style="color:#D73A49">-</span><span style="color:#24292E"> mu_g).T </span><span style="color:#D73A49">@</span><span style="color:#24292E"> (P_est </span><span style="color:#D73A49">-</span><span style="color:#24292E"> mu_e))</span></span>
+<span class="line"><span style="color:#24292E">    D </span><span style="color:#D73A49">=</span><span style="color:#24292E"> np.diag([</span><span style="color:#005CC5">1</span><span style="color:#24292E">, </span><span style="color:#005CC5">1</span><span style="color:#24292E">, np.sign(np.linalg.det(U </span><span style="color:#D73A49">@</span><span style="color:#24292E"> Vt))])</span></span>
+<span class="line"><span style="color:#24292E">    R </span><span style="color:#D73A49">=</span><span style="color:#24292E"> U </span><span style="color:#D73A49">@</span><span style="color:#24292E"> D </span><span style="color:#D73A49">@</span><span style="color:#24292E"> Vt                        </span><span style="color:#6A737D"># rotation aligning est -> gt</span></span>
+<span class="line"><span style="color:#24292E">    t </span><span style="color:#D73A49">=</span><span style="color:#24292E"> mu_g </span><span style="color:#D73A49">-</span><span style="color:#24292E"> R </span><span style="color:#D73A49">@</span><span style="color:#24292E"> mu_e</span></span>
+<span class="line"><span style="color:#24292E">    err </span><span style="color:#D73A49">=</span><span style="color:#24292E"> P_gt </span><span style="color:#D73A49">-</span><span style="color:#24292E"> (P_est </span><span style="color:#D73A49">@</span><span style="color:#24292E"> R.T </span><span style="color:#D73A49">+</span><span style="color:#24292E"> t)        </span><span style="color:#6A737D"># residuals after alignment</span></span>
+<span class="line"><span style="color:#D73A49">    return</span><span style="color:#24292E"> np.sqrt((err </span><span style="color:#D73A49">**</span><span style="color:#005CC5"> 2</span><span style="color:#24292E">).sum(</span><span style="color:#005CC5">1</span><span style="color:#24292E">).mean())   </span><span style="color:#6A737D"># ATE RMSE</span></span></code></pre>
+<p>これは基本的に、広く使われている<code>evo</code>パッケージ(<code>pip install evo</code>)が行っていることと同じである — 実際には、TUM/KITTI/EuRoCフォーマット、プロット、RPEには<code>evo</code>を使うが、上記の数学を知っておくことで、その出力がブラックボックスにならなくなる。</p>
+<h2 id="pythonを十分に高速にする">Pythonを十分に高速にする</h2>
+<p>Pythonの遅さは、ほぼ全て<em>ループ</em>の問題である。以下は経験則である。</p>
+<ul>
+<li><strong>NumPyでベクトル化する</strong> — 10万点の変換は<code>for</code>ループではなく1回の行列積(<code>(R @ pts.T).T + t</code>)であり、その差はしばしば100倍に及ぶ。</li>
+<li><strong>GILがどこで影響するかを知る</strong> — Pythonスレッドは、CPUバウンドの純粋なPythonコードを並列化しない。NumPy/OpenCVの呼び出しはGILを解放し、<code>multiprocessing</code>はバッチ実験でGILを回避する。</li>
+<li><strong>最適化の前にプロファイリングする</strong> — <code>cProfile</code>や行単位のプロファイラは通常1つのホットループを明らかにする。すべてを移植するのではなく、まさにその部分だけをNumPy、Numba、または小さなpybind11拡張に移すこと。</li>
+<li><strong>dtypeに注意する</strong> — 意図しない<code>float64</code>は<code>float32</code>に比べてメモリトラフィックを倍増させる。<code>uint8</code>として届く画像配列は算術演算で暗黙的にオーバーフローする(<code>img1 - img2</code>はラップアラウンドする)。</li>
+</ul>
+<h2 id="よくある落とし穴">よくある落とし穴</h2>
+<ul>
+<li><strong>座標/レイアウトの混乱</strong> — <code>img[y, x]</code>、<code>(x, y)</code>としての<code>pts</code>: OpenCVはそのAPI全体で両方の規約を混在させている(OpenCVのノートを参照)。</li>
+<li><strong>エイリアシングとコピーの混同</strong> — NumPyのスライスは<em>ビュー</em>を返す。スライスを変更すると元の配列が変更される。コピーを意図する場合は<code>.copy()</code>を使うこと。</li>
+<li><strong>環境の腐敗</strong> — <code>opencv-python</code>と<code>opencv-contrib-python</code>の衝突、CUDA/PyTorchのバージョン不整合。プロジェクトごとに固定された環境ファイルを1つ持つことで、何週間にも及ぶデバッグセッションを防げる。</li>
+<li><strong>クォータニオンの規約</strong> — ライブラリによって<code>(w, x, y, z)</code>と<code>(x, y, z, w)</code>のどちらの順序を使うかが異なる(例えばSciPyは<code>xyzw</code>を使う)。順序を誤ると、明らかに壊れているのではなく微妙に間違った回転が生成される。</li>
+</ul>
+<h2 id="slamにおける意義">SLAMにおける意義</h2>
+<p>現代のSLAM研究は幾何学と学習の交差点に位置しており、学習の側はPythonを言語としている。古典的なシステムであっても、評価・可視化・データセットツールのエコシステムはPythonベースである。それに習熟することで、実験を実行し、C++システムが実際に何をしているかを理解する速度が大幅に向上する。</p>
+<h2 id="ハンズオン">ハンズオン</h2>
+<ul>
+<li><a href="https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part1_ch02_07">Basic Python programming</a></li>
+</ul>
+<h2 id="関連ノート">関連ノート</h2>
+<ul>
+<li><a href="/visual-slam-roadmap/ja/level-02-getting-familiar/cpp/">C++</a></li>
+<li><a href="/visual-slam-roadmap/ja/level-02-getting-familiar/cpp-python-interop/">C++/Python interop</a></li>
+<li><a href="/visual-slam-roadmap/ja/level-02-getting-familiar/opencv/">OpenCV</a></li>
+<li><a href="/visual-slam-roadmap/ja/level-02-getting-familiar/bash-linux/">Bash/Linux</a></li>
+</ul></article><div class="mt-10"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5473245269912288" data-ad-slot="2335164071" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></main><footer class="mx-auto max-w-5xl px-5 py-10 font-mono text-xs space-y-2 text-slate-400"><p><a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap/pulls">ご提案を歓迎します — リポジトリにPRを送ってください。</a></p><p>MIT License &copy; 2026 Hyunggi Chang · built from the <a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap">roadmap repository</a></p></footer><script type="module">document.querySelectorAll(`a[data-lang]`).forEach(e=>{e.addEventListener(`click`,()=>{try{localStorage.setItem(`vslam-lang`,e.dataset.lang)}catch{}})});</script></body></html>

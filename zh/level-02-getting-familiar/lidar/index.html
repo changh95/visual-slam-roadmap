@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>LiDAR — Visual-SLAM Roadmap</title><meta name="description" content="LiDAR（激光探测与测距，Light Detection and Ranging）是一种主动式外部感知传感器：它发射激光脉冲并计时返回信号，直接测量到表面的距离。扫描式LiDAR通常以10-20 Hz输出密集的3D点云,具有出色的测距精度（约±2 cm量级），并且——由于它自带照明——能在黑暗中工作,基本不受环境光影响。"><link rel="canonical" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-02-getting-familiar/lidar/"><meta name="robots" content="index, follow, max-image-preview:large"><meta name="theme-color" content="#faf7f0"><link rel="icon" href="/visual-slam-roadmap/favicon.svg" type="image/svg+xml"><link rel="sitemap" href="/visual-slam-roadmap/sitemap-index.xml"><link rel="alternate" hreflang="en" href="https://www.cv-learn.com/visual-slam-roadmap/level-02-getting-familiar/lidar/"><link rel="alternate" hreflang="ko" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-02-getting-familiar/lidar/"><link rel="alternate" hreflang="zh-CN" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-02-getting-familiar/lidar/"><link rel="alternate" hreflang="ja" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-02-getting-familiar/lidar/"><link rel="alternate" hreflang="x-default" href="https://www.cv-learn.com/visual-slam-roadmap/level-02-getting-familiar/lidar/"><!-- Open Graph --><meta property="og:type" content="article"><meta property="og:site_name" content="Visual-SLAM Developer Roadmap"><meta property="og:title" content="LiDAR — Visual-SLAM Roadmap"><meta property="og:description" content="LiDAR（激光探测与测距，Light Detection and Ranging）是一种主动式外部感知传感器：它发射激光脉冲并计时返回信号，直接测量到表面的距离。扫描式LiDAR通常以10-20 Hz输出密集的3D点云,具有出色的测距精度（约±2 cm量级），并且——由于它自带照明——能在黑暗中工作,基本不受环境光影响。"><meta property="og:url" content="https://www.cv-learn.com/visual-slam-roadmap/zh/level-02-getting-familiar/lidar/"><meta property="og:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="zh_CN"><meta property="og:locale:alternate" content="en_US"><meta property="og:locale:alternate" content="ko_KR"><meta property="og:locale:alternate" content="ja_JP"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="LiDAR — Visual-SLAM Roadmap"><meta name="twitter:description" content="LiDAR（激光探测与测距，Light Detection and Ranging）是一种主动式外部感知传感器：它发射激光脉冲并计时返回信号，直接测量到表面的距离。扫描式LiDAR通常以10-20 Hz输出密集的3D点云,具有出色的测距精度（约±2 cm量级），并且——由于它自带照明——能在黑暗中工作,基本不受环境光影响。"><meta name="twitter:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><!-- Google AdSense --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5473245269912288" crossorigin="anonymous"></script><!-- Google Analytics 4 --><!-- Microsoft Clarity --><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"LiDAR","description":"LiDAR（激光探测与测距，Light Detection and Ranging）是一种主动式外部感知传感器：它发射激光脉冲并计时返回信号，直接测量到表面的距离。扫描式LiDAR通常以10-20 Hz输出密集的3D点云,具有出色的测距精度（约±2 cm量级），并且——由于它自带照明——能在黑暗中工作,基本不受环境光影响。","inLanguage":"zh-CN","url":"https://www.cv-learn.com/visual-slam-roadmap/zh/level-02-getting-familiar/lidar/","isPartOf":{"@type":"WebSite","name":"Visual-SLAM Developer Roadmap","url":"https://www.cv-learn.com/visual-slam-roadmap/"},"author":{"@type":"Person","name":"Hyunggi Chang","url":"https://github.com/changh95"},"license":"https://opensource.org/licenses/MIT"}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Visual-SLAM Roadmap","item":"https://www.cv-learn.com/visual-slam-roadmap/zh/"},{"@type":"ListItem","position":2,"name":"熟悉SLAM","item":"https://www.cv-learn.com/visual-slam-roadmap/zh/level-02-getting-familiar/"},{"@type":"ListItem","position":3,"name":"LiDAR","item":"https://www.cv-learn.com/visual-slam-roadmap/zh/level-02-getting-familiar/lidar/"}]}</script><link rel="stylesheet" href="/visual-slam-roadmap/_astro/readme.DemmKpdz.css"></head><body class="graph-paper min-h-screen text-inkline font-sans"><header class="border-b border-paper-line bg-paper/90 backdrop-blur sticky top-0 z-10"><nav class="mx-auto max-w-5xl px-5 py-3 flex items-center gap-4"><a href="/visual-slam-roadmap/zh/" class="font-display font-semibold tracking-wide text-sm uppercase text-scan-500 hover:opacity-80">VSLAM<span class="opacity-60">//</span>Roadmap</a><a href="https://ko-fi.com/changh95" target="_blank" rel="noopener" class="font-mono text-[11px] font-medium px-2.5 py-1 text-white bg-[#00b9fe] hover:opacity-85 transition-opacity leading-tight">♥ Support me if you liked this content!</a><a href="https://github.com/changh95/visual-slam-roadmap" class="ml-auto hidden sm:inline font-mono text-xs text-slate-500 hover:text-scan-500">GitHub &nearr;</a><div class="flex font-mono text-[11px] border border-paper-line bg-paper divide-paper-line divide-x ml-auto sm:ml-0" role="group" aria-label="Language"><a href="/visual-slam-roadmap/level-02-getting-familiar/lidar/" data-lang="en" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">EN</a><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/lidar/" data-lang="ko" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">KO</a><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/lidar/" data-lang="zh" aria-current="true" class="px-2 py-1 transition-colors bg-scan-500/10 text-scan-500 font-medium">ZH</a><a href="/visual-slam-roadmap/ja/level-02-getting-familiar/lidar/" data-lang="ja" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">JA</a></div></nav></header><main class="mx-auto max-w-3xl px-5 py-10"><nav class="font-mono text-xs text-slate-500 mb-6"><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/zh/">路线图</a><span class="mx-1">/</span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/zh/level-02-getting-familiar/">级别 02 · 熟悉SLAM</a></nav><article class="prose prose-slate max-w-none prose-headings:font-display prose-a:text-scan-500 prose-a:decoration-scan-300/50 hover:prose-a:decoration-scan-500 prose-blockquote:font-mono prose-blockquote:text-sm prose-blockquote:not-italic bg-paper/80 border border-paper-line p-6 sm:p-8"><h1 id="lidar">LiDAR</h1>
+<p>**LiDAR（激光探测与测距，Light Detection and Ranging）**是一种主动式外部感知传感器：它发射激光脉冲并计时返回信号，直接测量到表面的距离。扫描式LiDAR通常以10-20 Hz输出密集的3D点云,具有出色的测距精度（约±2 cm量级），并且——由于它自带照明——能在黑暗中工作,基本不受环境光影响。</p>
+<h2 id="lidar测量数据包含什么">LiDAR测量数据包含什么</h2>
+<p>每个发射的脉冲沿一个已知的波束方向返回一个**距离（range）**值；距离加方向就得到传感器坐标系下的一个3D点。一次完整扫描将这些点打包成一个点云,其中每个点通常携带：</p>
+<ul>
+<li>传感器坐标系下的<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo separator="true">,</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(x, y, z)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.044em;">z</span><span class="mclose">)</span></span></span></span>坐标，</li>
+<li><strong>强度（intensity）</strong>（回波强度——可作为一种粗略的”纹理”用于匹配,以及用于检测回射表面），</li>
+<li><strong>环/通道索引（ring/channel index）</strong>（由哪个激光器产生——编码了扫描的垂直结构），</li>
+<li>扫描内<strong>每点的时间戳（per-point timestamp）</strong>（对下面的去畸变至关重要）。</li>
+</ul>
+<p>两大主要硬件类别：</p>
+<ul>
+<li><strong>旋转式（机械）LiDAR</strong>——例如Velodyne HDL-64、Ouster OS1——一列旋转的发射器水平扫描360°，产生环状点。这是自动驾驶和移动机器人的经典选择。</li>
+<li><strong>固态LiDAR</strong>——例如Livox传感器、穹顶式装置——没有大型运动部件,采用固定的（通常是不规则、非重复性的）扫描模式,视场有限。更便宜、更耐用；其独特的扫描模式催生了新的里程计算法。</li>
+</ul>
+<h2 id="运动畸变">运动畸变</h2>
+<p>扫描式传感器特有的一个反复出现的主题：以10-20 Hz运行时，一次扫描大约需要50-100 ms采集完成，而平台在这段时间内会发生明显的移动。因此扫描起点和终点的点是在<em>不同</em>的传感器位姿下表达的,如果将该扫描当作刚体处理,几何结构就会被拖抹。每个严谨的LiDAR流水线都会进行<strong>去畸变（de-skew）</strong>：每个点使用针对其各自时间戳插值得到的位姿重新投影，运动来自IMU或匀速模型。这正是LiDAR与IMU如此天然搭配的主要原因之一。</p>
+<h2 id="相机与lidar的比较">相机与LiDAR的比较</h2>
+<p>与相机相比,两者的权衡十分鲜明：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th>相机</th><th>LiDAR</th></tr></thead><tbody><tr><td>深度</td><td>间接（三角化）</td><td>直接、度量精确</td></tr><tr><td>光照</td><td>黑暗/高动态范围场景下失效</td><td>不受环境光影响</td></tr><tr><td>数据</td><td>密集纹理、色彩、语义</td><td>稀疏几何,无色彩</td></tr><tr><td>失效场景</td><td>低纹理、模糊</td><td>雨/雾/尘,几何退化场景（长走廊、开阔场地）</td></tr><tr><td>成本/重量/功耗</td><td>低</td><td>更高</td></tr></tbody></table>
+<p>LiDAR的失效模式值得特别强调,因为它们是<em>几何性</em>的,而非光度性的：一条又长又缺乏特征的走廊或隧道会在某些方向上约束传感器而在另一些方向上不然（扫描匹配会沿着走廊轴自由滑动），开阔场地缺少可匹配的结构,而雨、雾、尘埃或玻璃会产生虚假或缺失的回波。退化检测与处理本身就是第9层级中的一个独立主题。</p>
+<h2 id="lidar-slam技术栈">LiDAR SLAM技术栈</h2>
+<p>LiDAR SLAM有其自身的算法栈,将在第9层级中展开：</p>
+<ul>
+<li>**扫描匹配（Scan matching）**通过ICP变体实现——连续扫描之间点到点或点到面的对齐（本层级中的3D-3D对应关系机制）。</li>
+<li><strong>基于特征的里程计</strong>在边缘点和平面点上进行——LOAM系列通过局部曲率提取尖锐/平坦点,并对这些点而非整个点云进行匹配。</li>
+<li><strong>地图表示</strong>——面元地图（surfel maps，SuMa）、体素/TSDF地图、占用八叉树。</li>
+<li><strong>紧耦合LiDAR-惯性里程计</strong>——LIO-SAM（因子图）、FAST-LIO2（迭代卡尔曼滤波），其中IMU负责去畸变和快速动态处理。</li>
+</ul>
+<p>由于相机和LiDAR的失效模式是互补的——在视觉缺乏纹理的地方,LiDAR提供几何信息；在几何退化的地方,相机提供纹理和语义信息——路线图从该节点指向<strong>视觉-LiDAR融合</strong>：LVI-SAM、R3LIVE和FAST-LIVO等系统融合了两者（加上IMU），获得单一传感器都无法达到的鲁棒性。</p>
+<h2 id="对slam的意义">对SLAM的意义</h2>
+<p>当度量精度和光照鲁棒性不可妥协时,LiDAR是首选传感器——自动驾驶车辆、测绘、工业机器人。对于视觉SLAM的学习者而言,理解LiDAR具有双重意义：它定义了视觉SLAM最强有力的替代范式（有助于诚实地选择传感器），同时它也是视觉-LiDAR融合系统的一半——这类系统日益代表着鲁棒场地机器人领域的技术前沿。</p>
+<h2 id="相关条目">相关条目</h2>
+<ul>
+<li><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/exteroceptive-sensor/">外部感知传感器</a></li>
+<li><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/multi-sensor-calibration/">多传感器标定</a></li>
+<li><a href="/visual-slam-roadmap/zh/level-09-lidar-visual-lidar-slam/loam/">LOAM</a></li>
+<li><a href="/visual-slam-roadmap/zh/level-09-lidar-visual-lidar-slam/lidar-visual-inertial-lvi/">LiDAR-视觉-惯性（LVI）</a></li>
+<li><a href="/visual-slam-roadmap/zh/level-09-lidar-visual-lidar-slam/fast-lio2/">FAST-LIO2</a></li>
+</ul></article><div class="mt-10"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5473245269912288" data-ad-slot="2335164071" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></main><footer class="mx-auto max-w-5xl px-5 py-10 font-mono text-xs space-y-2 text-slate-400"><p><a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap/pulls">欢迎提出建议 — 请向本仓库提交 PR。</a></p><p>MIT License &copy; 2026 Hyunggi Chang · built from the <a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap">roadmap repository</a></p></footer><script type="module">document.querySelectorAll(`a[data-lang]`).forEach(e=>{e.addEventListener(`click`,()=>{try{localStorage.setItem(`vslam-lang`,e.dataset.lang)}catch{}})});</script></body></html>

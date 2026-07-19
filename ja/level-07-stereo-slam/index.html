@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>ステレオSLAM — Visual-SLAM Roadmap</title><meta name="description" content="ステレオペアによるメトリックスケールと深度"><link rel="canonical" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-07-stereo-slam/"><meta name="robots" content="index, follow, max-image-preview:large"><meta name="theme-color" content="#faf7f0"><link rel="icon" href="/visual-slam-roadmap/favicon.svg" type="image/svg+xml"><link rel="sitemap" href="/visual-slam-roadmap/sitemap-index.xml"><link rel="alternate" hreflang="en" href="https://www.cv-learn.com/visual-slam-roadmap/level-07-stereo-slam/"><link rel="alternate" hreflang="ko" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-07-stereo-slam/"><link rel="alternate" hreflang="zh-CN" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-07-stereo-slam/"><link rel="alternate" hreflang="ja" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-07-stereo-slam/"><link rel="alternate" hreflang="x-default" href="https://www.cv-learn.com/visual-slam-roadmap/level-07-stereo-slam/"><!-- Open Graph --><meta property="og:type" content="website"><meta property="og:site_name" content="Visual-SLAM Developer Roadmap"><meta property="og:title" content="ステレオSLAM — Visual-SLAM Roadmap"><meta property="og:description" content="ステレオペアによるメトリックスケールと深度"><meta property="og:url" content="https://www.cv-learn.com/visual-slam-roadmap/ja/level-07-stereo-slam/"><meta property="og:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="ja_JP"><meta property="og:locale:alternate" content="en_US"><meta property="og:locale:alternate" content="ko_KR"><meta property="og:locale:alternate" content="zh_CN"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="ステレオSLAM — Visual-SLAM Roadmap"><meta name="twitter:description" content="ステレオペアによるメトリックスケールと深度"><meta name="twitter:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><!-- Google AdSense --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5473245269912288" crossorigin="anonymous"></script><!-- Google Analytics 4 --><!-- Microsoft Clarity --><link rel="stylesheet" href="/visual-slam-roadmap/_astro/readme.DemmKpdz.css"></head><body class="graph-paper min-h-screen text-inkline font-sans"><header class="border-b border-paper-line bg-paper/90 backdrop-blur sticky top-0 z-10"><nav class="mx-auto max-w-5xl px-5 py-3 flex items-center gap-4"><a href="/visual-slam-roadmap/ja/" class="font-display font-semibold tracking-wide text-sm uppercase text-scan-500 hover:opacity-80">VSLAM<span class="opacity-60">//</span>Roadmap</a><a href="https://ko-fi.com/changh95" target="_blank" rel="noopener" class="font-mono text-[11px] font-medium px-2.5 py-1 text-white bg-[#00b9fe] hover:opacity-85 transition-opacity leading-tight">♥ Support me if you liked this content!</a><a href="https://github.com/changh95/visual-slam-roadmap" class="ml-auto hidden sm:inline font-mono text-xs text-slate-500 hover:text-scan-500">GitHub &nearr;</a><div class="flex font-mono text-[11px] border border-paper-line bg-paper divide-paper-line divide-x ml-auto sm:ml-0" role="group" aria-label="Language"><a href="/visual-slam-roadmap/level-07-stereo-slam/" data-lang="en" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">EN</a><a href="/visual-slam-roadmap/ko/level-07-stereo-slam/" data-lang="ko" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">KO</a><a href="/visual-slam-roadmap/zh/level-07-stereo-slam/" data-lang="zh" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">ZH</a><a href="/visual-slam-roadmap/ja/level-07-stereo-slam/" data-lang="ja" aria-current="true" class="px-2 py-1 transition-colors bg-scan-500/10 text-scan-500 font-medium">JA</a></div></nav></header><main class="mx-auto max-w-5xl px-5 py-10"><p class="font-mono text-xs text-scan-500 tracking-[0.25em] uppercase">レベル 07 / 11</p><h1 class="font-display font-bold text-3xl sm:text-4xl mt-2">ステレオSLAM</h1><p class="mt-2 text-slate-500 max-w-2xl">ステレオペアによるメトリックスケールと深度</p><article class="prose prose-slate max-w-none mt-8 prose-headings:font-display prose-a:text-scan-500 prose-a:decoration-scan-300/50 hover:prose-a:decoration-scan-500 prose-table:font-sans prose-table:text-sm bg-paper/80 border border-paper-line p-6 sm:p-8"><h3>キーコンセプト</h3>
+<ul>
+<li><strong><a href="/visual-slam-roadmap/ja/level-07-stereo-slam/stereo-rectification/">ステレオレクティフィケーション</a></strong> — 効率的な視差探索のためのエピポーラアライメント</li>
+<li><strong><a href="/visual-slam-roadmap/ja/level-07-stereo-slam/disparity-vs-depth/">視差対深度</a></strong> — d = f·B/Z、ベースラインが深度の範囲・精度を決定する</li>
+<li><strong><a href="/visual-slam-roadmap/ja/level-07-stereo-slam/scale-observability/">スケールの可観測性</a></strong> — ステレオはメトリックスケールを提供する(モノキュラとは異なる)</li>
+</ul>
+<h3>システム</h3>
+<table>
+<thead>
+<tr>
+<th>システム</th>
+<th>著者/年</th>
+<th>キーコンセプト</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-07-stereo-slam/s-ptam/"><strong>S-PTAM</strong></a></td>
+<td><a href="https://github.com/lrse/sptam">Pire 2017</a></td>
+<td>ステレオ版PTAM、ROS対応、リアルタイム</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-03-monocular-slam/orb-slam2/"><strong>ORB-SLAM2</strong></a> (stereo)</td>
+<td><a href="https://arxiv.org/abs/1610.06475">Mur-Artal 2017</a></td>
+<td>ステレオ+RGB-Dモード、ループクロージング、リローカリゼーション</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-07-stereo-slam/stereomsckf/"><strong>StereoMSCKF</strong></a></td>
+<td><a href="https://arxiv.org/abs/1712.00036">Sun 2018</a></td>
+<td>ステレオ対応MSCKF、リソース制約のあるプラットフォームでも効率的</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-04-rgbd-slam/rtab-map/"><strong>RTAB-Map</strong></a></td>
+<td><a href="https://ieeexplore.ieee.org/document/6942560">Labbé 2019</a></td>
+<td>マルチセンサー(ステレオ/RGB-D/LiDAR)、メモリ管理、大規模環境対応(→ Level 4にも掲載)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-03-monocular-slam/orb-slam3/"><strong>ORB-SLAM3</strong></a> (stereo)</td>
+<td><a href="https://arxiv.org/abs/2007.11898">Campos 2020</a></td>
+<td>マルチマップ、Atlas、ステレオ+IMU</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-03-monocular-slam/stella-vslam/"><strong>Stella-VSLAM</strong></a></td>
+<td><a href="https://github.com/stella-cv/stella_vslam">Community 2021</a></td>
+<td>OpenVSLAMの後継、ステレオ対応(→ Level 3にも掲載)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-07-stereo-slam/stereo-dso/"><strong>Stereo DSO</strong></a></td>
+<td><a href="https://arxiv.org/abs/1708.07878">Wang 2017</a></td>
+<td>直接疎ステレオオドメトリ、大規模環境対応(DSOの拡張)</td>
+</tr>
+</tbody>
+</table></article><nav class="mt-8 flex justify-between font-mono text-sm"><span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/ja/level-06-vio-vins/">&larr; 06 · VIO / VINS</a></span><span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/ja/level-08-collaborative-slam/">08 · 協調型SLAM &rarr;</a></span></nav></main><footer class="mx-auto max-w-5xl px-5 py-10 font-mono text-xs space-y-2 text-slate-400"><p><a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap/pulls">ご提案を歓迎します — リポジトリにPRを送ってください。</a></p><p>MIT License &copy; 2026 Hyunggi Chang · built from the <a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap">roadmap repository</a></p></footer><script type="module">document.querySelectorAll(`a[data-lang]`).forEach(e=>{e.addEventListener(`click`,()=>{try{localStorage.setItem(`vslam-lang`,e.dataset.lang)}catch{}})});</script></body></html>

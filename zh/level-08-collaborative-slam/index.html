@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>协同SLAM — Visual-SLAM Roadmap</title><meta name="description" content="多机器人建图、跨机器人回环检测、地图合并"><link rel="canonical" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-08-collaborative-slam/"><meta name="robots" content="index, follow, max-image-preview:large"><meta name="theme-color" content="#faf7f0"><link rel="icon" href="/visual-slam-roadmap/favicon.svg" type="image/svg+xml"><link rel="sitemap" href="/visual-slam-roadmap/sitemap-index.xml"><link rel="alternate" hreflang="en" href="https://www.cv-learn.com/visual-slam-roadmap/level-08-collaborative-slam/"><link rel="alternate" hreflang="ko" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-08-collaborative-slam/"><link rel="alternate" hreflang="zh-CN" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-08-collaborative-slam/"><link rel="alternate" hreflang="ja" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-08-collaborative-slam/"><link rel="alternate" hreflang="x-default" href="https://www.cv-learn.com/visual-slam-roadmap/level-08-collaborative-slam/"><!-- Open Graph --><meta property="og:type" content="website"><meta property="og:site_name" content="Visual-SLAM Developer Roadmap"><meta property="og:title" content="协同SLAM — Visual-SLAM Roadmap"><meta property="og:description" content="多机器人建图、跨机器人回环检测、地图合并"><meta property="og:url" content="https://www.cv-learn.com/visual-slam-roadmap/zh/level-08-collaborative-slam/"><meta property="og:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="zh_CN"><meta property="og:locale:alternate" content="en_US"><meta property="og:locale:alternate" content="ko_KR"><meta property="og:locale:alternate" content="ja_JP"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="协同SLAM — Visual-SLAM Roadmap"><meta name="twitter:description" content="多机器人建图、跨机器人回环检测、地图合并"><meta name="twitter:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><!-- Google AdSense --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5473245269912288" crossorigin="anonymous"></script><!-- Google Analytics 4 --><!-- Microsoft Clarity --><link rel="stylesheet" href="/visual-slam-roadmap/_astro/readme.DemmKpdz.css"></head><body class="graph-paper min-h-screen text-inkline font-sans"><header class="border-b border-paper-line bg-paper/90 backdrop-blur sticky top-0 z-10"><nav class="mx-auto max-w-5xl px-5 py-3 flex items-center gap-4"><a href="/visual-slam-roadmap/zh/" class="font-display font-semibold tracking-wide text-sm uppercase text-scan-500 hover:opacity-80">VSLAM<span class="opacity-60">//</span>Roadmap</a><a href="https://ko-fi.com/changh95" target="_blank" rel="noopener" class="font-mono text-[11px] font-medium px-2.5 py-1 text-white bg-[#00b9fe] hover:opacity-85 transition-opacity leading-tight">♥ Support me if you liked this content!</a><a href="https://github.com/changh95/visual-slam-roadmap" class="ml-auto hidden sm:inline font-mono text-xs text-slate-500 hover:text-scan-500">GitHub &nearr;</a><div class="flex font-mono text-[11px] border border-paper-line bg-paper divide-paper-line divide-x ml-auto sm:ml-0" role="group" aria-label="Language"><a href="/visual-slam-roadmap/level-08-collaborative-slam/" data-lang="en" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">EN</a><a href="/visual-slam-roadmap/ko/level-08-collaborative-slam/" data-lang="ko" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">KO</a><a href="/visual-slam-roadmap/zh/level-08-collaborative-slam/" data-lang="zh" aria-current="true" class="px-2 py-1 transition-colors bg-scan-500/10 text-scan-500 font-medium">ZH</a><a href="/visual-slam-roadmap/ja/level-08-collaborative-slam/" data-lang="ja" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">JA</a></div></nav></header><main class="mx-auto max-w-5xl px-5 py-10"><p class="font-mono text-xs text-scan-500 tracking-[0.25em] uppercase">第 08 级 / 11</p><h1 class="font-display font-bold text-3xl sm:text-4xl mt-2">协同SLAM</h1><p class="mt-2 text-slate-500 max-w-2xl">多机器人建图、跨机器人回环检测、地图合并</p><article class="prose prose-slate max-w-none mt-8 prose-headings:font-display prose-a:text-scan-500 prose-a:decoration-scan-300/50 hover:prose-a:decoration-scan-500 prose-table:font-sans prose-table:text-sm bg-paper/80 border border-paper-line p-6 sm:p-8"><h3>关键概念</h3>
+<ul>
+<li><strong><a href="/visual-slam-roadmap/zh/level-08-collaborative-slam/centralized-vs-decentralized/">集中式与分布式</a></strong> — 单一服务器对比点对点(peer-to-peer)地图合并</li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-08-collaborative-slam/inter-robot-loop-closure/">跨机器人回环检测</a></strong> — 在不同机器人视角下进行地点识别</li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-08-collaborative-slam/communication-constraints/">通信约束</a></strong> — 带宽受限下的地图共享，稀疏描述子</li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-08-collaborative-slam/map-merging/">地图合并</a></strong> — 将不同机器人的子地图对齐合并为一张全局地图</li>
+</ul>
+<h3>系统</h3>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>作者/年份</th>
+<th>关键概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-08-collaborative-slam/c2tam/"><strong>C2TAM</strong></a></td>
+<td><a href="https://ieeexplore.ieee.org/document/6696630">Riazuelo 2014</a></td>
+<td>基于云端的协同单目SLAM</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-08-collaborative-slam/ccm-slam/"><strong>CCM-SLAM</strong></a></td>
+<td><a href="https://github.com/v4rl-ucy/ccm_slam">Schmuck &#x26; Chli 2019</a></td>
+<td>集中式协同单目SLAM，对通信故障具有鲁棒性</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-08-collaborative-slam/door-slam/"><strong>DOOR-SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/1909.12198">Lajoie 2020</a></td>
+<td>分布式、抗外点的SLAM，具有成对一致性检验</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-08-collaborative-slam/kimera-multi/"><strong>Kimera-Multi</strong></a></td>
+<td><a href="https://arxiv.org/abs/2106.14386">Tian 2022</a></td>
+<td>分布式多机器人度量-语义SLAM，网格重建</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-08-collaborative-slam/swarm-slam/"><strong>Swarm-SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2301.06230">Lajoie 2024</a></td>
+<td>分布式、稀疏、可扩展的协同SLAM，支持LiDAR/立体/RGB-D</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-08-collaborative-slam/coped/"><strong>CoPeD</strong></a></td>
+<td><a href="https://arxiv.org/abs/2405.14731">Zhou 2024</a></td>
+<td>多机器人协同感知数据集(真实场景，空中+地面机器人)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-08-collaborative-slam/maplab-2-0/"><strong>maplab 2.0</strong></a></td>
+<td><a href="https://arxiv.org/abs/2212.00654">Cramariuc 2023</a></td>
+<td>多会话、多机器人视觉惯性建图</td>
+</tr>
+</tbody>
+</table></article><nav class="mt-8 flex justify-between font-mono text-sm"><span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/zh/level-07-stereo-slam/">&larr; 07 · 立体SLAM</a></span><span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/zh/level-09-lidar-visual-lidar-slam/">09 · LiDAR与视觉-LiDAR融合 &rarr;</a></span></nav></main><footer class="mx-auto max-w-5xl px-5 py-10 font-mono text-xs space-y-2 text-slate-400"><p><a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap/pulls">欢迎提出建议 — 请向本仓库提交 PR。</a></p><p>MIT License &copy; 2026 Hyunggi Chang · built from the <a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap">roadmap repository</a></p></footer><script type="module">document.querySelectorAll(`a[data-lang]`).forEach(e=>{e.addEventListener(`click`,()=>{try{localStorage.setItem(`vslam-lang`,e.dataset.lang)}catch{}})});</script></body></html>

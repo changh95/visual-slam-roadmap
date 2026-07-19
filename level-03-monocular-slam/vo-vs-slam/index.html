@@ -1,0 +1,81 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>VO vs SLAM — Visual-SLAM Roadmap</title><meta name="description" content="Visual Odometry (VO) estimates local, incremental camera motion from consecutive frames: match or track features frame-to-frame (or minimise photometric error, for direct methods), estimate the relative pose, and chain the estimates. VO has no notion of a global map and cannot perform loop closur…"><link rel="canonical" href="https://www.cv-learn.com/visual-slam-roadmap/level-03-monocular-slam/vo-vs-slam/"><meta name="robots" content="index, follow, max-image-preview:large"><meta name="theme-color" content="#faf7f0"><link rel="icon" href="/visual-slam-roadmap/favicon.svg" type="image/svg+xml"><link rel="sitemap" href="/visual-slam-roadmap/sitemap-index.xml"><link rel="alternate" hreflang="en" href="https://www.cv-learn.com/visual-slam-roadmap/level-03-monocular-slam/vo-vs-slam/"><link rel="alternate" hreflang="ko" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-03-monocular-slam/vo-vs-slam/"><link rel="alternate" hreflang="zh-CN" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-03-monocular-slam/vo-vs-slam/"><link rel="alternate" hreflang="ja" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-03-monocular-slam/vo-vs-slam/"><link rel="alternate" hreflang="x-default" href="https://www.cv-learn.com/visual-slam-roadmap/level-03-monocular-slam/vo-vs-slam/"><!-- Open Graph --><meta property="og:type" content="article"><meta property="og:site_name" content="Visual-SLAM Developer Roadmap"><meta property="og:title" content="VO vs SLAM — Visual-SLAM Roadmap"><meta property="og:description" content="Visual Odometry (VO) estimates local, incremental camera motion from consecutive frames: match or track features frame-to-frame (or minimise photometric error, for direct methods), estimate the relative pose, and chain the estimates. VO has no notion of a global map and cannot perform loop closur…"><meta property="og:url" content="https://www.cv-learn.com/visual-slam-roadmap/level-03-monocular-slam/vo-vs-slam/"><meta property="og:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="en_US"><meta property="og:locale:alternate" content="ko_KR"><meta property="og:locale:alternate" content="zh_CN"><meta property="og:locale:alternate" content="ja_JP"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="VO vs SLAM — Visual-SLAM Roadmap"><meta name="twitter:description" content="Visual Odometry (VO) estimates local, incremental camera motion from consecutive frames: match or track features frame-to-frame (or minimise photometric error, for direct methods), estimate the relative pose, and chain the estimates. VO has no notion of a global map and cannot perform loop closur…"><meta name="twitter:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><!-- Google AdSense --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5473245269912288" crossorigin="anonymous"></script><!-- Google Analytics 4 --><!-- Microsoft Clarity --><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"VO vs SLAM","description":"Visual Odometry (VO) estimates local, incremental camera motion from consecutive frames: match or track features frame-to-frame (or minimise photometric error, for direct methods), estimate the relative pose, and chain the estimates. VO has no notion of a global map and cannot perform loop closur…","inLanguage":"en","url":"https://www.cv-learn.com/visual-slam-roadmap/level-03-monocular-slam/vo-vs-slam/","isPartOf":{"@type":"WebSite","name":"Visual-SLAM Developer Roadmap","url":"https://www.cv-learn.com/visual-slam-roadmap/"},"author":{"@type":"Person","name":"Hyunggi Chang","url":"https://github.com/changh95"},"license":"https://opensource.org/licenses/MIT"}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Visual-SLAM Roadmap","item":"https://www.cv-learn.com/visual-slam-roadmap/"},{"@type":"ListItem","position":2,"name":"Level 3: Monocular Visual-SLAM","item":"https://www.cv-learn.com/visual-slam-roadmap/level-03-monocular-slam/"},{"@type":"ListItem","position":3,"name":"VO vs SLAM","item":"https://www.cv-learn.com/visual-slam-roadmap/level-03-monocular-slam/vo-vs-slam/"}]}</script><link rel="stylesheet" href="/visual-slam-roadmap/_astro/readme.DemmKpdz.css"></head><body class="graph-paper min-h-screen text-inkline font-sans"><header class="border-b border-paper-line bg-paper/90 backdrop-blur sticky top-0 z-10"><nav class="mx-auto max-w-5xl px-5 py-3 flex items-center gap-4"><a href="/visual-slam-roadmap/" class="font-display font-semibold tracking-wide text-sm uppercase text-scan-500 hover:opacity-80">VSLAM<span class="opacity-60">//</span>Roadmap</a><a href="https://ko-fi.com/changh95" target="_blank" rel="noopener" class="font-mono text-[11px] font-medium px-2.5 py-1 text-white bg-[#00b9fe] hover:opacity-85 transition-opacity leading-tight">♥ Support me if you liked this content!</a><a href="https://github.com/changh95/visual-slam-roadmap" class="ml-auto hidden sm:inline font-mono text-xs text-slate-500 hover:text-scan-500">GitHub &nearr;</a><div class="flex font-mono text-[11px] border border-paper-line bg-paper divide-paper-line divide-x ml-auto sm:ml-0" role="group" aria-label="Language"><a href="/visual-slam-roadmap/level-03-monocular-slam/vo-vs-slam/" data-lang="en" aria-current="true" class="px-2 py-1 transition-colors bg-scan-500/10 text-scan-500 font-medium">EN</a><a href="/visual-slam-roadmap/ko/level-03-monocular-slam/vo-vs-slam/" data-lang="ko" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">KO</a><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/vo-vs-slam/" data-lang="zh" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">ZH</a><a href="/visual-slam-roadmap/ja/level-03-monocular-slam/vo-vs-slam/" data-lang="ja" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">JA</a></div></nav></header><main class="mx-auto max-w-3xl px-5 py-10"><nav class="font-mono text-xs text-slate-500 mb-6"><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/">roadmap</a><span class="mx-1">/</span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/level-03-monocular-slam/">level 03 · Monocular Visual-SLAM</a></nav><article class="prose prose-slate max-w-none prose-headings:font-display prose-a:text-scan-500 prose-a:decoration-scan-300/50 hover:prose-a:decoration-scan-500 prose-blockquote:font-mono prose-blockquote:text-sm prose-blockquote:not-italic bg-paper/80 border border-paper-line p-6 sm:p-8"><h1 id="vo-vs-slam">VO vs SLAM</h1>
+<p><strong>Visual Odometry (VO)</strong> estimates local, incremental camera motion from consecutive frames: match or track features frame-to-frame (or minimise photometric error, for direct methods), estimate the relative pose, and chain the estimates. VO has no notion of a global map and cannot perform loop closure — so drift accumulates unboundedly. Return to your starting point after a long loop and a pure VO trajectory will not close.</p>
+<p><strong>Visual SLAM</strong> extends VO with the machinery of global consistency:</p>
+<ul>
+<li>a <strong>persistent global map</strong> (landmarks/keyframes) that survives beyond the local sliding window, enabling re-observation of old landmarks;</li>
+<li><strong>place recognition</strong> to detect loop closures — revisits of previously mapped areas;</li>
+<li><strong>global optimisation</strong> (pose-graph optimisation or global bundle adjustment) that redistributes accumulated drift when a loop is detected;</li>
+<li>usually also <strong>relocalization</strong>: recovering the pose from the map after tracking failure.</li>
+</ul>
+<p>A compact comparison:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Aspect</th><th>VO</th><th>SLAM</th></tr></thead><tbody><tr><td>Scope</td><td>Local (window of recent frames)</td><td>Global (whole trajectory + map)</td></tr><tr><td>Drift</td><td>Grows without bound</td><td>Corrected at loop closures</td></tr><tr><td>Map</td><td>None, or temporary local map</td><td>Persistent, reusable</td></tr><tr><td>Cost</td><td>Low, bounded</td><td>Higher; grows with map size</td></tr><tr><td>Failure recovery</td><td>Lost is lost</td><td>Relocalize against the map</td></tr></tbody></table>
+<h2 id="what-a-vo-pipeline-actually-does">What a VO pipeline actually does</h2>
+<p>Concretely, a feature-based VO iteration looks like this — worth internalising because it is also the tracking thread of every feature-based SLAM system:</p>
+<ol>
+<li><strong>Detect/track</strong> features in the new frame (FAST/ORB detection, or KLT tracking from the previous frame).</li>
+<li><strong>Associate</strong> with the previous frame(s): descriptor matching or tracked correspondences, pruned by RANSAC.</li>
+<li><strong>Estimate relative pose</strong>: essential matrix from 2D-2D matches (initialisation), or PnP against locally triangulated 3D points (steady state).</li>
+<li><strong>Triangulate</strong> new points from the estimated motion, to keep the local 3D structure alive.</li>
+<li><strong>Locally refine</strong>: a small bundle adjustment over the last few frames/keyframes (windowed BA).</li>
+</ol>
+<p>Direct VO replaces steps 1-3 with photometric alignment: minimise pixel intensity error between frames over the pose (and per-pixel depths), skipping explicit correspondences. Either way, the output is a chain of relative poses — and every stage after step 3 exists to slow drift, not eliminate it.</p>
+<p>The corresponding metrics: <strong>RPE (relative pose error)</strong> measures the error of pose increments over fixed distances/time offsets — drift rate, VO’s honest score. <strong>ATE (absolute trajectory error)</strong> measures global position error after aligning the estimate to ground truth — dominated by whether loops were closed, SLAM’s score. A system with excellent RPE and poor ATE is a good odometer without global consistency; the reverse suggests strong loop closure over a noisy front-end.</p>
+<h2 id="the-boundary-is-a-spectrum">The boundary is a spectrum</h2>
+<p>DSO and SVO are VO systems; LDSO is “DSO + loop closure”, i.e. the same front-end promoted to SLAM. ORB-SLAM’s tracking thread alone is essentially a VO system — the local mapping and loop closing threads are what make it SLAM. In VIO the same distinction appears as <em>odometry</em> (MSCKF, VINS front-end) versus <em>full SLAM with map reuse</em> (ORB-SLAM3, VINS-Mono with loop closure enabled).</p>
+<p>Which one you need is an engineering decision. If only short-horizon ego-motion matters (e.g. feeding a controller, drone stabilisation), VO’s bounded compute and simplicity win. If the robot revisits places, operates for long periods, or must localise in a prior map, you need SLAM — nothing else stops unbounded drift.</p>
+<h2 id="common-pitfalls">Common pitfalls</h2>
+<ul>
+<li><strong>Comparing ATE across categories</strong>: judging a VO system by ATE on a loopy sequence (or a SLAM system by RPE alone) misreads what each is designed to do; check which metric and which alignment (6-DoF vs 7-DoF for monocular) a paper reports.</li>
+<li><strong>Assuming loop closure is free</strong>: promoting VO to SLAM adds a place-recognition database, verification logic, global optimisation, and — critically — new failure modes (false loops). A robust VO can beat a fragile SLAM in practice.</li>
+<li><strong>Unbounded map growth</strong>: “just keep everything” SLAM degrades over hours of operation; keyframe culling and map management are part of the SLAM contract, not optional extras.</li>
+<li><strong>Relocalization ≠ loop closure</strong>: both use place recognition, but relocalization recovers <em>tracking</em> against the existing map, while loop closure adds <em>constraints</em> that deform the map; conflating them muddles system design discussions.</li>
+</ul>
+<h2 id="why-it-matters-for-slam">Why it matters for SLAM</h2>
+<p>This distinction organises the entire field: nearly every system you will study is either a VO/odometry method, or a SLAM system built by wrapping map management, place recognition, and global optimisation around a VO core. Knowing which claims a paper makes (local accuracy vs global consistency) tells you which benchmarks matter — RPE for VO, ATE with loop closures for SLAM — and what its failure modes will be.</p>
+<h2 id="hands-on">Hands-on</h2>
+<ul>
+<li><a href="https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part2_ch02_05">MonoVO hands-on</a></li>
+</ul>
+<h2 id="related">Related</h2>
+<ul>
+<li><a href="/visual-slam-roadmap/level-03-monocular-slam/visual-odometry/">Visual Odometry</a></li>
+<li><a href="/visual-slam-roadmap/level-03-monocular-slam/visual-place-recognition-vpr/">Visual Place Recognition (VPR)</a></li>
+<li><a href="/visual-slam-roadmap/level-02-getting-familiar/pose-graph-optimization/">Pose graph optimization</a></li>
+<li><a href="/visual-slam-roadmap/level-03-monocular-slam/ldso/">LDSO</a></li>
+<li><a href="/visual-slam-roadmap/level-03-monocular-slam/orb-slam/">ORB-SLAM</a></li>
+</ul></article><div class="mt-10"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5473245269912288" data-ad-slot="2335164071" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></main><footer class="mx-auto max-w-5xl px-5 py-10 font-mono text-xs space-y-2 text-slate-400"><p><a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap/pulls">Suggestions are welcome — please submit a PR to the repository.</a></p><p>MIT License &copy; 2026 Hyunggi Chang · built from the <a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap">roadmap repository</a></p></footer><script type="module">document.querySelectorAll(`a[data-lang]`).forEach(e=>{e.addEventListener(`click`,()=>{try{localStorage.setItem(`vslam-lang`,e.dataset.lang)}catch{}})});</script></body></html>

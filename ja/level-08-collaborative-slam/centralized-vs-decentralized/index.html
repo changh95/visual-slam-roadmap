@@ -1,0 +1,78 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>集中型 対 分散型 — Visual-SLAM Roadmap</title><meta name="description" content="協調型(マルチロボット)SLAMシステムは、グローバルマップがどこで組み立てられるかにおいて最も根本的に異なる。"><link rel="canonical" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-08-collaborative-slam/centralized-vs-decentralized/"><meta name="robots" content="index, follow, max-image-preview:large"><meta name="theme-color" content="#faf7f0"><link rel="icon" href="/visual-slam-roadmap/favicon.svg" type="image/svg+xml"><link rel="sitemap" href="/visual-slam-roadmap/sitemap-index.xml"><link rel="alternate" hreflang="en" href="https://www.cv-learn.com/visual-slam-roadmap/level-08-collaborative-slam/centralized-vs-decentralized/"><link rel="alternate" hreflang="ko" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-08-collaborative-slam/centralized-vs-decentralized/"><link rel="alternate" hreflang="zh-CN" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-08-collaborative-slam/centralized-vs-decentralized/"><link rel="alternate" hreflang="ja" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-08-collaborative-slam/centralized-vs-decentralized/"><link rel="alternate" hreflang="x-default" href="https://www.cv-learn.com/visual-slam-roadmap/level-08-collaborative-slam/centralized-vs-decentralized/"><!-- Open Graph --><meta property="og:type" content="article"><meta property="og:site_name" content="Visual-SLAM Developer Roadmap"><meta property="og:title" content="集中型 対 分散型 — Visual-SLAM Roadmap"><meta property="og:description" content="協調型(マルチロボット)SLAMシステムは、グローバルマップがどこで組み立てられるかにおいて最も根本的に異なる。"><meta property="og:url" content="https://www.cv-learn.com/visual-slam-roadmap/ja/level-08-collaborative-slam/centralized-vs-decentralized/"><meta property="og:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="ja_JP"><meta property="og:locale:alternate" content="en_US"><meta property="og:locale:alternate" content="ko_KR"><meta property="og:locale:alternate" content="zh_CN"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="集中型 対 分散型 — Visual-SLAM Roadmap"><meta name="twitter:description" content="協調型(マルチロボット)SLAMシステムは、グローバルマップがどこで組み立てられるかにおいて最も根本的に異なる。"><meta name="twitter:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><!-- Google AdSense --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5473245269912288" crossorigin="anonymous"></script><!-- Google Analytics 4 --><!-- Microsoft Clarity --><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"集中型 対 分散型","description":"協調型(マルチロボット)SLAMシステムは、グローバルマップがどこで組み立てられるかにおいて最も根本的に異なる。","inLanguage":"ja","url":"https://www.cv-learn.com/visual-slam-roadmap/ja/level-08-collaborative-slam/centralized-vs-decentralized/","isPartOf":{"@type":"WebSite","name":"Visual-SLAM Developer Roadmap","url":"https://www.cv-learn.com/visual-slam-roadmap/"},"author":{"@type":"Person","name":"Hyunggi Chang","url":"https://github.com/changh95"},"license":"https://opensource.org/licenses/MIT"}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Visual-SLAM Roadmap","item":"https://www.cv-learn.com/visual-slam-roadmap/ja/"},{"@type":"ListItem","position":2,"name":"協調型SLAM","item":"https://www.cv-learn.com/visual-slam-roadmap/ja/level-08-collaborative-slam/"},{"@type":"ListItem","position":3,"name":"集中型 対 分散型","item":"https://www.cv-learn.com/visual-slam-roadmap/ja/level-08-collaborative-slam/centralized-vs-decentralized/"}]}</script><link rel="stylesheet" href="/visual-slam-roadmap/_astro/readme.DemmKpdz.css"></head><body class="graph-paper min-h-screen text-inkline font-sans"><header class="border-b border-paper-line bg-paper/90 backdrop-blur sticky top-0 z-10"><nav class="mx-auto max-w-5xl px-5 py-3 flex items-center gap-4"><a href="/visual-slam-roadmap/ja/" class="font-display font-semibold tracking-wide text-sm uppercase text-scan-500 hover:opacity-80">VSLAM<span class="opacity-60">//</span>Roadmap</a><a href="https://ko-fi.com/changh95" target="_blank" rel="noopener" class="font-mono text-[11px] font-medium px-2.5 py-1 text-white bg-[#00b9fe] hover:opacity-85 transition-opacity leading-tight">♥ Support me if you liked this content!</a><a href="https://github.com/changh95/visual-slam-roadmap" class="ml-auto hidden sm:inline font-mono text-xs text-slate-500 hover:text-scan-500">GitHub &nearr;</a><div class="flex font-mono text-[11px] border border-paper-line bg-paper divide-paper-line divide-x ml-auto sm:ml-0" role="group" aria-label="Language"><a href="/visual-slam-roadmap/level-08-collaborative-slam/centralized-vs-decentralized/" data-lang="en" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">EN</a><a href="/visual-slam-roadmap/ko/level-08-collaborative-slam/centralized-vs-decentralized/" data-lang="ko" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">KO</a><a href="/visual-slam-roadmap/zh/level-08-collaborative-slam/centralized-vs-decentralized/" data-lang="zh" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">ZH</a><a href="/visual-slam-roadmap/ja/level-08-collaborative-slam/centralized-vs-decentralized/" data-lang="ja" aria-current="true" class="px-2 py-1 transition-colors bg-scan-500/10 text-scan-500 font-medium">JA</a></div></nav></header><main class="mx-auto max-w-3xl px-5 py-10"><nav class="font-mono text-xs text-slate-500 mb-6"><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/ja/">ロードマップ</a><span class="mx-1">/</span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/ja/level-08-collaborative-slam/">レベル 08 · 協調型SLAM</a></nav><article class="prose prose-slate max-w-none prose-headings:font-display prose-a:text-scan-500 prose-a:decoration-scan-300/50 hover:prose-a:decoration-scan-500 prose-blockquote:font-mono prose-blockquote:text-sm prose-blockquote:not-italic bg-paper/80 border border-paper-line p-6 sm:p-8"><h1 id="集中型-対-分散型">集中型 対 分散型</h1>
+<p>協調型(マルチロボット)SLAMシステムは、グローバルマップが<em>どこで</em>組み立てられるかにおいて最も根本的に異なる。</p>
+<h2 id="集中型アーキテクチャ">集中型アーキテクチャ</h2>
+<p>単一のサーバー(地上基地局またはクラウド)がすべてのロボットからデータを集約し、グローバル最適化を行う。各ロボットは軽量なローカルフロントエンド(トラッキング、キーフレーム選択)を実行し、キーフレーム、記述子、あるいはサブマップをサーバーへストリーミングする。サーバーはロボット間の場所認識、マップ統合、グローバルバンドル調整を行い、補正されたマップをブロードキャストで返す。例: C2TAM(クラウドベースのPTAM)、CCM-SLAM(サーバー + ORB-SLAMクライアント)、maplab 2.0(マルチセッション統合)。</p>
+<p>ネットワークを流れるもの: 上りはキーフレーム(キーポイント + 記述子 + 位置推定)、下りは最適化されたマップ補正。生の画像はロボット上に留まる。</p>
+<ul>
+<li>利点: 最も強いグローバル一貫性(サーバーがすべてを見る)、単純なクライアント、ロボットからオフロードされる重い計算、単一の権威あるマップ。</li>
+<li>欠点: 単一障害点、サーバーへの接続性が必要、サーバーの帯域幅と計算量はチームの規模に応じてスケールしなければならない、通信インフラによって行動範囲が制限される。</li>
+</ul>
+<p>うまく設計された集中型システムは、それでも緩やかに劣化する: CCM-SLAMのクライアントは、キーフレームをバッファリングし後から遡って同期させることで、切断中もトラッキングを継続する。つまりサーバーは<em>共有</em>マップにとって重要だが、各ロボットの安全性にとっては重要ではない。</p>
+<h2 id="分散型ピアツーピアアーキテクチャ">分散型(ピアツーピア)アーキテクチャ</h2>
+<p>サーバーは存在しない。ロボットは通信範囲内にある近隣ロボットと直接情報を交換し、各ロボットは(部分的な)グローバルマップの自分自身の推定を保持する。最適化は分散される — 各ロボットは自身の軌道変数を反復更新し、境界/セパレータ位置の推定だけを近隣と交換し、ネットワークがグローバル最適解に向かって収束するまでこれを繰り返す。例: DOOR-SLAM、Kimera-Multi、Swarm-SLAM。</p>
+<p>ネットワークを流れるもの: 遭遇時のコンパクトな場所認識記述子、続いて候補となるクロージャを検証するための特徴、そして小さな反復ごとの最適化メッセージ — マップ全体を流すことは決してない。</p>
+<ul>
+<li>利点: 単一障害点がない、より大きなチームにスケールする、断続的なアドホックリンクでも動作する、生データを各ロボット上に留めることができる(プライバシー/帯域幅)。</li>
+<li>欠点: グローバル一貫性の達成が難しい — 分散最適化はより収束が遅く、各ロボットが一時的に異なるバージョンのマップを保持することがあり、中央の権威がロボット間のループクロージングを検証しないため、頑健な外れ値除去(例: PCM、graduated non-convexity)が不可欠になる。</li>
+</ul>
+<h2 id="比較">比較</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th>集中型</th><th>分散型</th></tr></thead><tbody><tr><td>グローバル最適化</td><td>サーバー上、厳密</td><td>分散、反復的</td></tr><tr><td>障害耐性</td><td>サーバーが重要</td><td>緩やかに劣化</td></tr><tr><td>通信</td><td>ロボット-サーバー間</td><td>ロボット-ロボット間(近隣)</td></tr><tr><td>外れ値の検証</td><td>サーバーがすべてのクロージャを見る</td><td>頑健なバックエンド(PCM、GNC)が必要</td></tr><tr><td>マップのバージョン管理</td><td>単一の権威あるマップ</td><td>一時的に分岐するローカルなビュー</td></tr><tr><td>典型的なチーム規模</td><td>小規模(2-4)</td><td>より大きな群れ</td></tr></tbody></table>
+<h2 id="選び方">選び方</h2>
+<ul>
+<li>信頼できるインフラ(倉庫WiFi、研究室、クラウドリンク)と小規模チーム → <strong>集中型</strong>: 1つの正確な共有マップへの最も単純な道筋。</li>
+<li>断続的、短距離、または妨害を受けるリンク(地下、災害対応、群れ) → <strong>分散型</strong>: ネットワークが分断されても動作を続ける唯一のアーキテクチャ。</li>
+<li>ライブでの協調ではなく、多数のセッションにわたる長期的なマッピング → 集中型の<em>オフライン</em>統合(maplab 2.0のスタイル)がしばしば十分であり、ライブ帯域幅の問題を完全に回避できる。</li>
+<li>実務ではハイブリッドも一般的である: ロボットは現場でピアツーピアに動作し、接続が回復した際に中央サーバーへダンプする。</li>
+</ul>
+<p>根本的な緊張関係は一貫性と通信コストの間にある: 集中型システムはより強いグローバル一貫性を達成するが単一障害点を生み出す。分散型システムはより頑健だがグローバルな最適化が難しい。最近の研究(Kimera-Multi、Swarm-SLAM)は、頑健な外れ値除去を伴う分散型アーキテクチャへと傾いている。</p>
+<h2 id="slamにおける意義">SLAMにおける意義</h2>
+<p>アーキテクチャの選択は、協調型SLAM設計における他のすべてを左右する — 何が送信されるか、ループクロージングがどこで検証されるか、マップ統合がどのように行われるか、システムがどのように失敗するか。信頼できるWiFiを持つ小規模チームには、集中型システムが正確な共有マップへの最も単純な道筋である。群れ、地下探索、あるいは妨害を受けるネットワークには、分散型設計だけが生き残る。</p>
+<h2 id="関連ノート">関連ノート</h2>
+<ul>
+<li><a href="/visual-slam-roadmap/ja/level-08-collaborative-slam/ccm-slam/">CCM-SLAM</a></li>
+<li><a href="/visual-slam-roadmap/ja/level-08-collaborative-slam/kimera-multi/">Kimera-Multi</a></li>
+<li><a href="/visual-slam-roadmap/ja/level-08-collaborative-slam/swarm-slam/">Swarm-SLAM</a></li>
+<li><a href="/visual-slam-roadmap/ja/level-08-collaborative-slam/communication-constraints/">Communication constraints</a></li>
+<li><a href="/visual-slam-roadmap/ja/level-08-collaborative-slam/map-merging/">Map merging</a></li>
+<li><a href="/visual-slam-roadmap/ja/level-08-collaborative-slam/door-slam/">DOOR-SLAM</a></li>
+</ul></article><div class="mt-10"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5473245269912288" data-ad-slot="2335164071" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></main><footer class="mx-auto max-w-5xl px-5 py-10 font-mono text-xs space-y-2 text-slate-400"><p><a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap/pulls">ご提案を歓迎します — リポジトリにPRを送ってください。</a></p><p>MIT License &copy; 2026 Hyunggi Chang · built from the <a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap">roadmap repository</a></p></footer><script type="module">document.querySelectorAll(`a[data-lang]`).forEach(e=>{e.addEventListener(`click`,()=>{try{localStorage.setItem(`vslam-lang`,e.dataset.lang)}catch{}})});</script></body></html>

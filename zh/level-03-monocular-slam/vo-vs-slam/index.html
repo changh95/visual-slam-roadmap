@@ -1,0 +1,81 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>VO vs SLAM — Visual-SLAM Roadmap</title><meta name="description" content="视觉里程计（Visual Odometry, VO） 从连续帧中估计局部的、增量式的相机运动：在帧间匹配或跟踪特征（对于直接法，则是最小化光度误差），估计相对位姿，并将这些估计链接起来。VO没有全局地图的概念，也无法执行回环检测——因此漂移会无限累积。沿着一个较长的环走一圈回到起点后，纯VO轨迹是无法闭合的。"><link rel="canonical" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-03-monocular-slam/vo-vs-slam/"><meta name="robots" content="index, follow, max-image-preview:large"><meta name="theme-color" content="#faf7f0"><link rel="icon" href="/visual-slam-roadmap/favicon.svg" type="image/svg+xml"><link rel="sitemap" href="/visual-slam-roadmap/sitemap-index.xml"><link rel="alternate" hreflang="en" href="https://www.cv-learn.com/visual-slam-roadmap/level-03-monocular-slam/vo-vs-slam/"><link rel="alternate" hreflang="ko" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-03-monocular-slam/vo-vs-slam/"><link rel="alternate" hreflang="zh-CN" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-03-monocular-slam/vo-vs-slam/"><link rel="alternate" hreflang="ja" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-03-monocular-slam/vo-vs-slam/"><link rel="alternate" hreflang="x-default" href="https://www.cv-learn.com/visual-slam-roadmap/level-03-monocular-slam/vo-vs-slam/"><!-- Open Graph --><meta property="og:type" content="article"><meta property="og:site_name" content="Visual-SLAM Developer Roadmap"><meta property="og:title" content="VO vs SLAM — Visual-SLAM Roadmap"><meta property="og:description" content="视觉里程计（Visual Odometry, VO） 从连续帧中估计局部的、增量式的相机运动：在帧间匹配或跟踪特征（对于直接法，则是最小化光度误差），估计相对位姿，并将这些估计链接起来。VO没有全局地图的概念，也无法执行回环检测——因此漂移会无限累积。沿着一个较长的环走一圈回到起点后，纯VO轨迹是无法闭合的。"><meta property="og:url" content="https://www.cv-learn.com/visual-slam-roadmap/zh/level-03-monocular-slam/vo-vs-slam/"><meta property="og:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="zh_CN"><meta property="og:locale:alternate" content="en_US"><meta property="og:locale:alternate" content="ko_KR"><meta property="og:locale:alternate" content="ja_JP"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="VO vs SLAM — Visual-SLAM Roadmap"><meta name="twitter:description" content="视觉里程计（Visual Odometry, VO） 从连续帧中估计局部的、增量式的相机运动：在帧间匹配或跟踪特征（对于直接法，则是最小化光度误差），估计相对位姿，并将这些估计链接起来。VO没有全局地图的概念，也无法执行回环检测——因此漂移会无限累积。沿着一个较长的环走一圈回到起点后，纯VO轨迹是无法闭合的。"><meta name="twitter:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><!-- Google AdSense --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5473245269912288" crossorigin="anonymous"></script><!-- Google Analytics 4 --><!-- Microsoft Clarity --><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"VO vs SLAM","description":"视觉里程计（Visual Odometry, VO） 从连续帧中估计局部的、增量式的相机运动：在帧间匹配或跟踪特征（对于直接法，则是最小化光度误差），估计相对位姿，并将这些估计链接起来。VO没有全局地图的概念，也无法执行回环检测——因此漂移会无限累积。沿着一个较长的环走一圈回到起点后，纯VO轨迹是无法闭合的。","inLanguage":"zh-CN","url":"https://www.cv-learn.com/visual-slam-roadmap/zh/level-03-monocular-slam/vo-vs-slam/","isPartOf":{"@type":"WebSite","name":"Visual-SLAM Developer Roadmap","url":"https://www.cv-learn.com/visual-slam-roadmap/"},"author":{"@type":"Person","name":"Hyunggi Chang","url":"https://github.com/changh95"},"license":"https://opensource.org/licenses/MIT"}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Visual-SLAM Roadmap","item":"https://www.cv-learn.com/visual-slam-roadmap/zh/"},{"@type":"ListItem","position":2,"name":"单目SLAM","item":"https://www.cv-learn.com/visual-slam-roadmap/zh/level-03-monocular-slam/"},{"@type":"ListItem","position":3,"name":"VO vs SLAM","item":"https://www.cv-learn.com/visual-slam-roadmap/zh/level-03-monocular-slam/vo-vs-slam/"}]}</script><link rel="stylesheet" href="/visual-slam-roadmap/_astro/readme.DemmKpdz.css"></head><body class="graph-paper min-h-screen text-inkline font-sans"><header class="border-b border-paper-line bg-paper/90 backdrop-blur sticky top-0 z-10"><nav class="mx-auto max-w-5xl px-5 py-3 flex items-center gap-4"><a href="/visual-slam-roadmap/zh/" class="font-display font-semibold tracking-wide text-sm uppercase text-scan-500 hover:opacity-80">VSLAM<span class="opacity-60">//</span>Roadmap</a><a href="https://ko-fi.com/changh95" target="_blank" rel="noopener" class="font-mono text-[11px] font-medium px-2.5 py-1 text-white bg-[#00b9fe] hover:opacity-85 transition-opacity leading-tight">♥ Support me if you liked this content!</a><a href="https://github.com/changh95/visual-slam-roadmap" class="ml-auto hidden sm:inline font-mono text-xs text-slate-500 hover:text-scan-500">GitHub &nearr;</a><div class="flex font-mono text-[11px] border border-paper-line bg-paper divide-paper-line divide-x ml-auto sm:ml-0" role="group" aria-label="Language"><a href="/visual-slam-roadmap/level-03-monocular-slam/vo-vs-slam/" data-lang="en" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">EN</a><a href="/visual-slam-roadmap/ko/level-03-monocular-slam/vo-vs-slam/" data-lang="ko" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">KO</a><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/vo-vs-slam/" data-lang="zh" aria-current="true" class="px-2 py-1 transition-colors bg-scan-500/10 text-scan-500 font-medium">ZH</a><a href="/visual-slam-roadmap/ja/level-03-monocular-slam/vo-vs-slam/" data-lang="ja" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">JA</a></div></nav></header><main class="mx-auto max-w-3xl px-5 py-10"><nav class="font-mono text-xs text-slate-500 mb-6"><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/zh/">路线图</a><span class="mx-1">/</span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/zh/level-03-monocular-slam/">级别 03 · 单目SLAM</a></nav><article class="prose prose-slate max-w-none prose-headings:font-display prose-a:text-scan-500 prose-a:decoration-scan-300/50 hover:prose-a:decoration-scan-500 prose-blockquote:font-mono prose-blockquote:text-sm prose-blockquote:not-italic bg-paper/80 border border-paper-line p-6 sm:p-8"><h1 id="vo-vs-slam">VO vs SLAM</h1>
+<p><strong>视觉里程计（Visual Odometry, VO）</strong> 从连续帧中估计局部的、增量式的相机运动：在帧间匹配或跟踪特征（对于直接法，则是最小化光度误差），估计相对位姿，并将这些估计链接起来。VO没有全局地图的概念，也无法执行回环检测——因此漂移会无限累积。沿着一个较长的环走一圈回到起点后，纯VO轨迹是无法闭合的。</p>
+<p><strong>视觉SLAM</strong> 在VO的基础上扩展了全局一致性机制：</p>
+<ul>
+<li>一个<strong>持久的全局地图</strong>（地标点/关键帧），在局部滑动窗口之外依然存在，使得可以重新观测到旧的地标点；</li>
+<li><strong>位置识别</strong>，用于检测回环——即对此前已建图区域的重访；</li>
+<li><strong>全局优化</strong>（位姿图优化或全局光束法平差），当检测到回环时，重新分配累积的漂移；</li>
+<li>通常还包括<strong>重定位</strong>：在跟踪失败后从地图中恢复位姿。</li>
+</ul>
+<p>一个简明的对比：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>方面</th><th>VO</th><th>SLAM</th></tr></thead><tbody><tr><td>范围</td><td>局部（近期帧的窗口）</td><td>全局（整条轨迹+地图）</td></tr><tr><td>漂移</td><td>无限增长</td><td>在回环处被校正</td></tr><tr><td>地图</td><td>无，或临时局部地图</td><td>持久、可复用</td></tr><tr><td>成本</td><td>低，有界</td><td>更高；随地图规模增长</td></tr><tr><td>故障恢复</td><td>丢失即永久丢失</td><td>相对地图进行重定位</td></tr></tbody></table>
+<h2 id="vo流程实际做了什么">VO流程实际做了什么</h2>
+<p>具体来说，一次基于特征的VO迭代大致如下——值得内化理解，因为它同时也是每个基于特征的SLAM系统的跟踪线程：</p>
+<ol>
+<li>在新帧中<strong>检测/跟踪</strong>特征（FAST/ORB检测，或从上一帧进行KLT跟踪）。</li>
+<li>与前一帧（或多帧）进行<strong>关联</strong>：描述子匹配或已跟踪的对应关系，经RANSAC剔除误匹配。</li>
+<li><strong>估计相对位姿</strong>：由2D-2D匹配得到本质矩阵（初始化阶段），或对局部三角化的3D点进行PnP（稳态阶段）。</li>
+<li>从估计的运动中<strong>三角化</strong>新的点，以维持局部3D结构的持续更新。</li>
+<li><strong>局部细化</strong>：对最近若干帧/关键帧进行小规模光束法平差（滑动窗口BA）。</li>
+</ol>
+<p>直接法VO用光度对齐取代步骤1-3：在位姿（以及逐像素深度）上最小化帧间像素强度误差，跳过显式的对应关系建立。无论哪种方式，输出都是一串相对位姿链——第3步之后的每一个阶段都是为了减缓漂移，而不是消除漂移。</p>
+<p>对应的评价指标：**RPE（相对位姿误差）**衡量在固定距离/时间间隔上位姿增量的误差——即漂移率，是VO的诚实评分。**ATE（绝对轨迹误差）**衡量将估计结果与真值对齐后的全局位置误差——主要取决于是否闭合了回环，是SLAM的评分。一个RPE优异但ATE较差的系统是一个没有全局一致性的优秀里程计；反之则说明该系统在噪声较大的前端之上拥有强大的回环检测能力。</p>
+<h2 id="二者的边界是一个连续谱">二者的边界是一个连续谱</h2>
+<p>DSO和SVO是VO系统；LDSO是”DSO+回环检测”，即同一前端被提升为SLAM。ORB-SLAM的跟踪线程本身基本上就是一个VO系统——正是局部建图线程和回环检测线程使其成为SLAM。在VIO中，同样的区分体现为<em>里程计</em>（MSCKF、VINS前端）与<em>具有地图复用功能的完整SLAM</em>（ORB-SLAM3、启用回环检测的VINS-Mono）之间的对比。</p>
+<p>需要哪一种是一个工程决策。如果只关心短时间尺度的自我运动（例如为控制器提供输入、无人机稳定控制），VO的有界计算量和简洁性更有优势。如果机器人会重访某些地点、需要长期运行，或必须在先验地图中定位，那么就需要SLAM——没有其他手段能够阻止无限的漂移。</p>
+<h2 id="常见陷阱">常见陷阱</h2>
+<ul>
+<li><strong>跨类别比较ATE</strong>：用ATE来评判一个在有环路序列上运行的VO系统（或仅用RPE来评判一个SLAM系统）会误读它们各自的设计目标；应检查论文报告的是哪种指标以及哪种对齐方式（单目情形下的6自由度还是7自由度）。</li>
+<li><strong>假设回环检测是免费的</strong>：将VO升级为SLAM会增加位置识别数据库、验证逻辑、全局优化，以及——最关键的——新的失效模式（错误回环）。在实践中，一个鲁棒的VO可能胜过一个脆弱的SLAM。</li>
+<li><strong>地图无限增长</strong>：“什么都保留”的SLAM在长时间运行数小时后性能会下降；关键帧剔除和地图管理是SLAM系统的基本要求，而不是可选项。</li>
+<li><strong>重定位≠回环检测</strong>：两者都使用位置识别，但重定位是相对已有地图恢复<em>跟踪</em>，而回环检测则是添加使地图发生形变的<em>约束</em>；将二者混为一谈会使系统设计的讨论变得混乱。</li>
+</ul>
+<h2 id="对slam的意义">对SLAM的意义</h2>
+<p>这一区分组织了整个领域：你将学习的几乎每一个系统，都或者是一种VO/里程计方法，或者是一个通过在VO核心之外包裹地图管理、位置识别和全局优化而构建的SLAM系统。了解一篇论文所声称的是哪一类（局部精度还是全局一致性），能够告诉你哪些基准指标是重要的——VO看RPE，带回环检测的SLAM看ATE——以及它的失效模式将会是什么。</p>
+<h2 id="动手实践">动手实践</h2>
+<ul>
+<li><a href="https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part2_ch02_05">MonoVO动手实践</a></li>
+</ul>
+<h2 id="相关条目">相关条目</h2>
+<ul>
+<li><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/visual-odometry/">Visual Odometry</a></li>
+<li><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/visual-place-recognition-vpr/">Visual Place Recognition (VPR)</a></li>
+<li><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/pose-graph-optimization/">位姿图优化</a></li>
+<li><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/ldso/">LDSO</a></li>
+<li><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/orb-slam/">ORB-SLAM</a></li>
+</ul></article><div class="mt-10"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5473245269912288" data-ad-slot="2335164071" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></main><footer class="mx-auto max-w-5xl px-5 py-10 font-mono text-xs space-y-2 text-slate-400"><p><a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap/pulls">欢迎提出建议 — 请向本仓库提交 PR。</a></p><p>MIT License &copy; 2026 Hyunggi Chang · built from the <a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap">roadmap repository</a></p></footer><script type="module">document.querySelectorAll(`a[data-lang]`).forEach(e=>{e.addEventListener(`click`,()=>{try{localStorage.setItem(`vslam-lang`,e.dataset.lang)}catch{}})});</script></body></html>

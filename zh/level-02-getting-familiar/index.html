@@ -1,0 +1,170 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>熟悉SLAM — Visual-SLAM Roadmap</title><meta name="description" content="几何、优化与SLAM系统的结构剖析"><link rel="canonical" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-02-getting-familiar/"><meta name="robots" content="index, follow, max-image-preview:large"><meta name="theme-color" content="#faf7f0"><link rel="icon" href="/visual-slam-roadmap/favicon.svg" type="image/svg+xml"><link rel="sitemap" href="/visual-slam-roadmap/sitemap-index.xml"><link rel="alternate" hreflang="en" href="https://www.cv-learn.com/visual-slam-roadmap/level-02-getting-familiar/"><link rel="alternate" hreflang="ko" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-02-getting-familiar/"><link rel="alternate" hreflang="zh-CN" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-02-getting-familiar/"><link rel="alternate" hreflang="ja" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-02-getting-familiar/"><link rel="alternate" hreflang="x-default" href="https://www.cv-learn.com/visual-slam-roadmap/level-02-getting-familiar/"><!-- Open Graph --><meta property="og:type" content="website"><meta property="og:site_name" content="Visual-SLAM Developer Roadmap"><meta property="og:title" content="熟悉SLAM — Visual-SLAM Roadmap"><meta property="og:description" content="几何、优化与SLAM系统的结构剖析"><meta property="og:url" content="https://www.cv-learn.com/visual-slam-roadmap/zh/level-02-getting-familiar/"><meta property="og:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="zh_CN"><meta property="og:locale:alternate" content="en_US"><meta property="og:locale:alternate" content="ko_KR"><meta property="og:locale:alternate" content="ja_JP"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="熟悉SLAM — Visual-SLAM Roadmap"><meta name="twitter:description" content="几何、优化与SLAM系统的结构剖析"><meta name="twitter:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><!-- Google AdSense --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5473245269912288" crossorigin="anonymous"></script><!-- Google Analytics 4 --><!-- Microsoft Clarity --><link rel="stylesheet" href="/visual-slam-roadmap/_astro/readme.DemmKpdz.css"></head><body class="graph-paper min-h-screen text-inkline font-sans"><header class="border-b border-paper-line bg-paper/90 backdrop-blur sticky top-0 z-10"><nav class="mx-auto max-w-5xl px-5 py-3 flex items-center gap-4"><a href="/visual-slam-roadmap/zh/" class="font-display font-semibold tracking-wide text-sm uppercase text-scan-500 hover:opacity-80">VSLAM<span class="opacity-60">//</span>Roadmap</a><a href="https://ko-fi.com/changh95" target="_blank" rel="noopener" class="font-mono text-[11px] font-medium px-2.5 py-1 text-white bg-[#00b9fe] hover:opacity-85 transition-opacity leading-tight">♥ Support me if you liked this content!</a><a href="https://github.com/changh95/visual-slam-roadmap" class="ml-auto hidden sm:inline font-mono text-xs text-slate-500 hover:text-scan-500">GitHub &nearr;</a><div class="flex font-mono text-[11px] border border-paper-line bg-paper divide-paper-line divide-x ml-auto sm:ml-0" role="group" aria-label="Language"><a href="/visual-slam-roadmap/level-02-getting-familiar/" data-lang="en" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">EN</a><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/" data-lang="ko" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">KO</a><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/" data-lang="zh" aria-current="true" class="px-2 py-1 transition-colors bg-scan-500/10 text-scan-500 font-medium">ZH</a><a href="/visual-slam-roadmap/ja/level-02-getting-familiar/" data-lang="ja" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">JA</a></div></nav></header><main class="mx-auto max-w-5xl px-5 py-10"><p class="font-mono text-xs text-scan-500 tracking-[0.25em] uppercase">第 02 级 / 11</p><h1 class="font-display font-bold text-3xl sm:text-4xl mt-2">熟悉SLAM</h1><p class="mt-2 text-slate-500 max-w-2xl">几何、优化与SLAM系统的结构剖析</p><article class="prose prose-slate max-w-none mt-8 prose-headings:font-display prose-a:text-scan-500 prose-a:decoration-scan-300/50 hover:prose-a:decoration-scan-500 prose-table:font-sans prose-table:text-sm bg-paper/80 border border-paper-line p-6 sm:p-8"><h3>编程(核心)</h3>
+<ul>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/cpp/">C++</a></strong>: 面向对象编程、现代C++、数据结构与算法、编译器、CMake/Makefile/Ninja、设计模式、OpenCV C++</li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/c/">C</a></strong></li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/git-github/">Git/GitHub</a></strong></li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/opencv/">OpenCV</a></strong> (opencv-python)</li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/python/">Python</a></strong>: 深度学习、绘图、系统脚本</li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/bash-linux/">Bash/Linux</a></strong>: ssh、命令行文本编辑器/Vim/tmux</li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/math-libraries/">数学库</a></strong>: Eigen、Ceres-solver/GTSAM/g2o</li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/cpp-python-interop/">C++/Python互操作</a></strong>: PyBind11、nanobind</li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/ros-ros2/">ROS/ROS2</a></strong></li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/docker/">Docker</a></strong></li>
+</ul>
+<h3>编程(可选 — 面向SLAM岗位的工程技能)</h3>
+<ul>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/concurrency/">并发</a></strong>: SIMD-SSE/AVX/Neon、OpenMP、CUDA</li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/edge-deployment/">边缘端部署</a></strong>: 学习型前端的TensorRT/ONNX导出、Jetson性能测试</li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/mobile/">移动端</a></strong>: Android(Java/Kotlin)、iOS(Objective-C/Swift)</li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/csharp/">C#</a></strong>: Unity AR、Microsoft HoloLens</li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/ci-cd/">CI/CD</a></strong>: GitHub Actions</li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/simulation/">仿真</a></strong>: Gazebo、Isaac Sim</li>
+</ul>
+<h3>图像处理</h3>
+<ul>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/keypoints/">关键点</a></strong> → 检测器/描述子
+<ul>
+<li><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/sift/">SIFT</a>、<a href="/visual-slam-roadmap/zh/level-02-getting-familiar/fast/">FAST</a>、<a href="/visual-slam-roadmap/zh/level-02-getting-familiar/orb/">ORB</a>、<a href="/visual-slam-roadmap/zh/level-02-getting-familiar/akaze/">AKAZE</a></li>
+<li>深度特征: <a href="/visual-slam-roadmap/zh/level-05-deep-learning/r2d2/">R2D2</a>、<a href="/visual-slam-roadmap/zh/level-05-deep-learning/superpoint/">SuperPoint</a></li>
+</ul>
+</li>
+<li><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/image-pyramid/">图像金字塔</a>、<a href="/visual-slam-roadmap/zh/level-02-getting-familiar/orb/">oFAST</a>、<a href="/visual-slam-roadmap/zh/level-02-getting-familiar/orb/">rBRIEF</a></li>
+</ul>
+<h3>局部特征匹配</h3>
+<ul>
+<li><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/brute-force-matching/">暴力匹配(Brute-Force)</a>、<a href="/visual-slam-roadmap/zh/level-02-getting-familiar/flann/">FLANN</a>、<a href="/visual-slam-roadmap/zh/level-02-getting-familiar/kd-tree/">Kd-Tree</a></li>
+<li><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/lsh/">LSH</a>、<a href="/visual-slam-roadmap/zh/level-02-getting-familiar/lsh/">多探针LSH</a>、<a href="/visual-slam-roadmap/zh/level-02-getting-familiar/hbst/">HBST</a></li>
+<li><a href="/visual-slam-roadmap/zh/level-05-deep-learning/superglue/">SuperGlue</a></li>
+</ul>
+<h3>全局特征匹配</h3>
+<ul>
+<li><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/bag-of-visual-words/">视觉词袋(Bag of Visual Words)</a>、<a href="/visual-slam-roadmap/zh/level-05-deep-learning/netvlad/">NetVLAD</a></li>
+<li><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/deep-image-retrieval/">深度图像检索</a>、<a href="/visual-slam-roadmap/zh/level-05-deep-learning/hloc/">层次化定位</a></li>
+</ul>
+<h3>特征跟踪</h3>
+<ul>
+<li><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/optical-flow/">光流</a>、<a href="/visual-slam-roadmap/zh/level-02-getting-familiar/klt-tracker/">KLT跟踪器</a></li>
+</ul>
+<h3>多视图几何</h3>
+<ul>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/2d-2d-correspondence/">2D-2D对应关系</a></strong>: <a href="/visual-slam-roadmap/zh/level-01-beginner/epipolar-geometry/">本质矩阵/基础矩阵</a>、<a href="/visual-slam-roadmap/zh/level-01-beginner/epipolar-geometry/">单应矩阵</a></li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/2d-3d-correspondence/">2D-3D对应关系</a></strong>: <a href="/visual-slam-roadmap/zh/level-02-getting-familiar/pnp/">P3P</a>、<a href="/visual-slam-roadmap/zh/level-02-getting-familiar/pnp/">PnP</a>、<a href="/visual-slam-roadmap/zh/level-01-beginner/svd/">SVD</a></li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/3d-3d-correspondence/">3D-3D对应关系</a></strong>: <a href="/visual-slam-roadmap/zh/level-04-rgbd-slam/icp/">ICP</a></li>
+</ul>
+<h3>外点剔除</h3>
+<ul>
+<li><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/ransac/">RANSAC</a>、<a href="/visual-slam-roadmap/zh/level-02-getting-familiar/prosac/">PROSAC</a>、<a href="/visual-slam-roadmap/zh/level-02-getting-familiar/m-estimator/">M-估计器(M-Estimator)</a>、<a href="/visual-slam-roadmap/zh/level-02-getting-familiar/maxcon/">MAXCON</a>、<a href="/visual-slam-roadmap/zh/level-02-getting-familiar/convex-relaxation/">凸松弛</a></li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/robust-pose-graph-optimization/">鲁棒位姿图优化</a></strong>: 可切换约束(Switchable constraints)、动态协方差缩放(DCS)、成对一致性最大化(PCM)</li>
+</ul>
+<h3>可证明最优算法</h3>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>作者/年份</th>
+<th>关键概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/se-sync/"><strong>SE-Sync</strong></a></td>
+<td><a href="https://arxiv.org/abs/1611.00128">Rosen 2019</a></td>
+<td>通过SDP+黎曼优化实现可证明的位姿图优化(arXiv 2016, IJRR 2019)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/teaserpp/"><strong>TEASER++</strong></a></td>
+<td><a href="https://arxiv.org/abs/2001.07715">Yang 2020</a></td>
+<td>点云配准，对90%以上外点鲁棒，TLS+最大团(T-RO/RSS 2020)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/gnc/"><strong>GNC</strong></a></td>
+<td><a href="https://arxiv.org/abs/1909.08605">Yang 2020</a></td>
+<td>渐进非凸化(Graduated Non-Convexity)，从凸优化连续过渡到鲁棒代价函数</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/quasar/"><strong>QUASAR</strong></a></td>
+<td><a href="https://arxiv.org/abs/1905.12536">Yang 2019</a></td>
+<td>可证明最优的旋转搜索(含外点的Wahba问题)，四元数QCQP+SDP松弛</td>
+</tr>
+</tbody>
+</table>
+<h3>最小二乘优化</h3>
+<ul>
+<li><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/reprojection-error/">重投影误差</a>、<a href="/visual-slam-roadmap/zh/level-02-getting-familiar/bundle-adjustment/">光束法平差</a></li>
+<li><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/non-linear-optimization/">非线性优化</a>、<a href="/visual-slam-roadmap/zh/level-02-getting-familiar/lie-groups/">李代数</a></li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/lie-groups/">李群</a></strong>: SO(3)、SE(3)</li>
+<li><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/gauss-newton/">高斯-牛顿法</a>、<a href="/visual-slam-roadmap/zh/level-02-getting-familiar/levenberg-marquardt/">列文伯格-马夸尔特法(Levenberg-Marquardt)</a></li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/pose-graph-optimization/">位姿图优化</a></strong></li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/schur-complement-sparsity/">舒尔补/稀疏性</a></strong></li>
+</ul>
+<h3>运动模型</h3>
+<ul>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/proprioceptive-sensor/">本体感知传感器</a></strong>: IMU、轮速计</li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/odometry/">里程计</a></strong>(位姿)</li>
+</ul>
+<h3>观测模型</h3>
+<ul>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/exteroceptive-sensor/">外部感知传感器</a></strong>: 相机、LiDAR</li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/landmark/">地标点(Landmark)</a></strong>(地图)</li>
+<li><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/map-inference-as-sparse-nonlinear-least-squares/">联合优化</a>、<a href="/visual-slam-roadmap/zh/level-02-getting-familiar/mle-and-map/">最大似然估计与最大后验估计(MLE &#x26; MAP)</a></li>
+</ul>
+<h3>因子图优化</h3>
+<ul>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/factor-graph/">因子图</a></strong>: 将SLAM表示为变量(位姿、地标点)与因子(观测量)构成的二部图</li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/map-inference-as-sparse-nonlinear-least-squares/">将MAP推断表示为稀疏非线性最小二乘问题</a></strong>；变量消元与贝叶斯树(Bayes tree)</li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/incremental-smoothing/">增量式平滑</a></strong>: iSAM / iSAM2</li>
+<li>**<a href="/visual-slam-roadmap/zh/level-02-getting-familiar/marginalization/">边缘化</a>**与固定滞后平滑(fixed-lag smoothing)</li>
+<li>参考文献: <a href="https://www.cs.cmu.edu/~kaess/pub/Dellaert17fnt.pdf">Dellaert &#x26; Kaess, <em>Factor Graphs for Robot Perception</em> (2017)</a>; GTSAM教程</li>
+</ul>
+<h3>高斯信念传播</h3>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>作者/年份</th>
+<th>关键概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/futuremapping-1/"><strong>FutureMapping 1</strong></a></td>
+<td><a href="https://arxiv.org/abs/1803.11288">Davison 2018</a></td>
+<td>Spatial AI的计算结构，用于SLAM的高斯信念传播(GBP)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/futuremapping-2/"><strong>FutureMapping 2</strong></a></td>
+<td><a href="https://arxiv.org/abs/1910.14139">Davison 2019</a></td>
+<td>将GBP作为Spatial AI的核心基础，GBP的可视化介绍</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/ba-on-graph-processor/"><strong>BA on Graph Processor</strong></a></td>
+<td><a href="https://arxiv.org/abs/2003.03134">Ortiz 2020</a></td>
+<td>在Graphcore IPU上进行光束法平差，基于分块(tile)的并行化</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/dancers/"><strong>DANCeRS</strong></a></td>
+<td><a href="https://arxiv.org/abs/2508.18153">Patwardhan 2025</a></td>
+<td>基于GBP的机器人集群分布式共识</td>
+</tr>
+</tbody>
+</table>
+<h3>建图</h3>
+<ul>
+<li><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/point-cloud/">点云</a>、<a href="/visual-slam-roadmap/zh/level-02-getting-familiar/occupancy-grid-mapping/">占据栅格建图</a>、<a href="/visual-slam-roadmap/zh/level-04-rgbd-slam/tsdf-vs-surfel-maps/">TSDF</a>、<a href="/visual-slam-roadmap/zh/level-04-rgbd-slam/tsdf-vs-surfel-maps/">面元(Surfel)</a>、<a href="/visual-slam-roadmap/zh/level-02-getting-familiar/voxel-map/">体素地图</a></li>
+</ul>
+<h3>传感器</h3>
+<ul>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/camera-device/">相机设备</a></strong>: 广角/远心镜头、镜头MTF、CCD/CMOS、卷帘/全局快门、曝光/ISO、<a href="/visual-slam-roadmap/zh/level-01-beginner/stereo-vision/">立体视觉</a>、<a href="/visual-slam-roadmap/zh/level-04-rgbd-slam/depth-from-sensor/">RGB-D</a>、<a href="/visual-slam-roadmap/zh/level-04-rgbd-slam/depth-from-sensor/">结构光</a>、<a href="/visual-slam-roadmap/zh/level-04-rgbd-slam/depth-from-sensor/">主动红外/ToF</a></li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/lidar/">LiDAR</a></strong> → <a href="/visual-slam-roadmap/zh/level-09-lidar-visual-lidar-slam/lidar-visual-inertial-lvi/">视觉-LiDAR融合</a></li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/imu/">IMU</a></strong> → VIO</li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/radar/">RADAR</a></strong> → <a href="/visual-slam-roadmap/zh/level-02-getting-familiar/camera-device/">传感器</a>融合、<a href="/visual-slam-roadmap/zh/level-02-getting-familiar/extended-kalman-filter/">扩展卡尔曼滤波器</a></li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/sonar/">声呐(Sonar)</a></strong></li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/multi-sensor-calibration/">多传感器标定</a></strong>: 相机-IMU、相机-LiDAR(<a href="https://github.com/ethz-asl/kalibr">Kalibr</a>)</li>
+</ul>
+<h3>评估</h3>
+<ul>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/metrics/">评价指标</a></strong>: ATE(绝对轨迹误差)、RPE(相对位姿误差)</li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/consistency/">一致性</a></strong>: NEES(归一化估计误差平方)</li>
+<li><strong>数据集</strong>: <a href="https://www.cvlibs.net/datasets/kitti/">KITTI</a>、<a href="https://cvg.cit.tum.de/data/datasets/rgbd-dataset">TUM RGB-D</a>、<a href="https://projects.asl.ethz.ch/datasets/euroc-mav/">EuRoC</a>、<a href="https://arxiv.org/abs/2003.14338">TartanAir</a>、<a href="https://arxiv.org/abs/1804.06120">TUM-VI</a>、<a href="https://arxiv.org/abs/2009.06364">4Seasons</a>、<a href="https://hilti-challenge.com/">Hilti SLAM Challenge</a>、<a href="https://arxiv.org/abs/2003.05691">Newer College</a>、<a href="https://www.projectaria.com/">Project Aria</a></li>
+<li><strong>工具</strong>: <a href="https://github.com/MichaelGrupp/evo">evo</a>(轨迹评估)</li>
+</ul></article><nav class="mt-8 flex justify-between font-mono text-sm"><span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/zh/level-01-beginner/">&larr; 01 · 入门</a></span><span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/zh/level-03-monocular-slam/">03 · 单目SLAM &rarr;</a></span></nav></main><footer class="mx-auto max-w-5xl px-5 py-10 font-mono text-xs space-y-2 text-slate-400"><p><a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap/pulls">欢迎提出建议 — 请向本仓库提交 PR。</a></p><p>MIT License &copy; 2026 Hyunggi Chang · built from the <a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap">roadmap repository</a></p></footer><script type="module">document.querySelectorAll(`a[data-lang]`).forEach(e=>{e.addEventListener(`click`,()=>{try{localStorage.setItem(`vslam-lang`,e.dataset.lang)}catch{}})});</script></body></html>

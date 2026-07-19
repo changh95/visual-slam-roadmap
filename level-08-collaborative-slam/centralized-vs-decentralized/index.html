@@ -1,0 +1,78 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Centralized vs Decentralized — Visual-SLAM Roadmap</title><meta name="description" content="Collaborative (multi-robot) SLAM systems differ most fundamentally in where the global map is assembled."><link rel="canonical" href="https://www.cv-learn.com/visual-slam-roadmap/level-08-collaborative-slam/centralized-vs-decentralized/"><meta name="robots" content="index, follow, max-image-preview:large"><meta name="theme-color" content="#faf7f0"><link rel="icon" href="/visual-slam-roadmap/favicon.svg" type="image/svg+xml"><link rel="sitemap" href="/visual-slam-roadmap/sitemap-index.xml"><link rel="alternate" hreflang="en" href="https://www.cv-learn.com/visual-slam-roadmap/level-08-collaborative-slam/centralized-vs-decentralized/"><link rel="alternate" hreflang="ko" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-08-collaborative-slam/centralized-vs-decentralized/"><link rel="alternate" hreflang="zh-CN" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-08-collaborative-slam/centralized-vs-decentralized/"><link rel="alternate" hreflang="ja" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-08-collaborative-slam/centralized-vs-decentralized/"><link rel="alternate" hreflang="x-default" href="https://www.cv-learn.com/visual-slam-roadmap/level-08-collaborative-slam/centralized-vs-decentralized/"><!-- Open Graph --><meta property="og:type" content="article"><meta property="og:site_name" content="Visual-SLAM Developer Roadmap"><meta property="og:title" content="Centralized vs Decentralized — Visual-SLAM Roadmap"><meta property="og:description" content="Collaborative (multi-robot) SLAM systems differ most fundamentally in where the global map is assembled."><meta property="og:url" content="https://www.cv-learn.com/visual-slam-roadmap/level-08-collaborative-slam/centralized-vs-decentralized/"><meta property="og:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="en_US"><meta property="og:locale:alternate" content="ko_KR"><meta property="og:locale:alternate" content="zh_CN"><meta property="og:locale:alternate" content="ja_JP"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Centralized vs Decentralized — Visual-SLAM Roadmap"><meta name="twitter:description" content="Collaborative (multi-robot) SLAM systems differ most fundamentally in where the global map is assembled."><meta name="twitter:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><!-- Google AdSense --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5473245269912288" crossorigin="anonymous"></script><!-- Google Analytics 4 --><!-- Microsoft Clarity --><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Centralized vs Decentralized","description":"Collaborative (multi-robot) SLAM systems differ most fundamentally in where the global map is assembled.","inLanguage":"en","url":"https://www.cv-learn.com/visual-slam-roadmap/level-08-collaborative-slam/centralized-vs-decentralized/","isPartOf":{"@type":"WebSite","name":"Visual-SLAM Developer Roadmap","url":"https://www.cv-learn.com/visual-slam-roadmap/"},"author":{"@type":"Person","name":"Hyunggi Chang","url":"https://github.com/changh95"},"license":"https://opensource.org/licenses/MIT"}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Visual-SLAM Roadmap","item":"https://www.cv-learn.com/visual-slam-roadmap/"},{"@type":"ListItem","position":2,"name":"Level 8: Collaborative / Multi-Robot SLAM","item":"https://www.cv-learn.com/visual-slam-roadmap/level-08-collaborative-slam/"},{"@type":"ListItem","position":3,"name":"Centralized vs Decentralized","item":"https://www.cv-learn.com/visual-slam-roadmap/level-08-collaborative-slam/centralized-vs-decentralized/"}]}</script><link rel="stylesheet" href="/visual-slam-roadmap/_astro/readme.DemmKpdz.css"></head><body class="graph-paper min-h-screen text-inkline font-sans"><header class="border-b border-paper-line bg-paper/90 backdrop-blur sticky top-0 z-10"><nav class="mx-auto max-w-5xl px-5 py-3 flex items-center gap-4"><a href="/visual-slam-roadmap/" class="font-display font-semibold tracking-wide text-sm uppercase text-scan-500 hover:opacity-80">VSLAM<span class="opacity-60">//</span>Roadmap</a><a href="https://ko-fi.com/changh95" target="_blank" rel="noopener" class="font-mono text-[11px] font-medium px-2.5 py-1 text-white bg-[#00b9fe] hover:opacity-85 transition-opacity leading-tight">♥ Support me if you liked this content!</a><a href="https://github.com/changh95/visual-slam-roadmap" class="ml-auto hidden sm:inline font-mono text-xs text-slate-500 hover:text-scan-500">GitHub &nearr;</a><div class="flex font-mono text-[11px] border border-paper-line bg-paper divide-paper-line divide-x ml-auto sm:ml-0" role="group" aria-label="Language"><a href="/visual-slam-roadmap/level-08-collaborative-slam/centralized-vs-decentralized/" data-lang="en" aria-current="true" class="px-2 py-1 transition-colors bg-scan-500/10 text-scan-500 font-medium">EN</a><a href="/visual-slam-roadmap/ko/level-08-collaborative-slam/centralized-vs-decentralized/" data-lang="ko" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">KO</a><a href="/visual-slam-roadmap/zh/level-08-collaborative-slam/centralized-vs-decentralized/" data-lang="zh" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">ZH</a><a href="/visual-slam-roadmap/ja/level-08-collaborative-slam/centralized-vs-decentralized/" data-lang="ja" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">JA</a></div></nav></header><main class="mx-auto max-w-3xl px-5 py-10"><nav class="font-mono text-xs text-slate-500 mb-6"><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/">roadmap</a><span class="mx-1">/</span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/level-08-collaborative-slam/">level 08 · Collaborative / Multi-Robot SLAM</a></nav><article class="prose prose-slate max-w-none prose-headings:font-display prose-a:text-scan-500 prose-a:decoration-scan-300/50 hover:prose-a:decoration-scan-500 prose-blockquote:font-mono prose-blockquote:text-sm prose-blockquote:not-italic bg-paper/80 border border-paper-line p-6 sm:p-8"><h1 id="centralized-vs-decentralized">Centralized vs Decentralized</h1>
+<p>Collaborative (multi-robot) SLAM systems differ most fundamentally in <em>where</em> the global map is assembled.</p>
+<h2 id="centralized-architecture">Centralized architecture</h2>
+<p>A single server (ground station or cloud) aggregates data from all robots and performs global optimization. Each robot runs a lightweight local front-end (tracking, keyframe selection) and streams keyframes, descriptors, or submaps to the server; the server performs cross-robot place recognition, map merging, and global bundle adjustment, then broadcasts the corrected map back. Examples: C2TAM (cloud-based PTAM), CCM-SLAM (server + ORB-SLAM clients), maplab 2.0 (multi-session merging).</p>
+<p>What flows over the network: keyframes (keypoints + descriptors + pose estimates) up; optimized map corrections down. Raw images stay on the robot.</p>
+<ul>
+<li>Pros: tightest global consistency (the server sees everything), simple clients, heavy computation offloaded from robots, one authoritative map.</li>
+<li>Cons: single point of failure, requires connectivity to the server, server bandwidth and compute must scale with the team, and range is limited by the communication infrastructure.</li>
+</ul>
+<p>A well-designed centralized system still degrades gracefully: CCM-SLAM clients keep tracking through dropouts by buffering keyframes and synchronizing retroactively, so the server is critical for the <em>shared</em> map but not for each robot’s safety.</p>
+<h2 id="decentralized-peer-to-peer-architecture">Decentralized (peer-to-peer) architecture</h2>
+<p>There is no server: robots exchange information directly with neighbors when within communication range, and each robot maintains its own estimate of the (partially) global map. Optimization is distributed — each robot iterates on its own trajectory variables and exchanges only estimates of the boundary/separator poses with its neighbors, repeating until the network converges toward the global optimum. Examples: DOOR-SLAM, Kimera-Multi, Swarm-SLAM.</p>
+<p>What flows over the network: compact place-recognition descriptors during encounters, then features for verifying candidate closures, then small per-iteration optimization messages — never whole maps.</p>
+<ul>
+<li>Pros: no single point of failure, scales to larger teams, works with intermittent ad-hoc links, and raw data can stay on each robot (privacy/bandwidth).</li>
+<li>Cons: global consistency is harder — distributed optimizers converge more slowly, each robot may temporarily hold a different version of the map, and robust outlier rejection (e.g., PCM, graduated non-convexity) becomes essential because no central authority vets inter-robot loop closures.</li>
+</ul>
+<h2 id="comparison">Comparison</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th>Centralized</th><th>Decentralized</th></tr></thead><tbody><tr><td>Global optimization</td><td>at server, exact</td><td>distributed, iterative</td></tr><tr><td>Failure tolerance</td><td>server is critical</td><td>degrades gracefully</td></tr><tr><td>Communication</td><td>robot-to-server</td><td>robot-to-robot (neighbors)</td></tr><tr><td>Outlier vetting</td><td>server sees all closures</td><td>robust back-ends (PCM, GNC) required</td></tr><tr><td>Map versioning</td><td>one authoritative map</td><td>temporarily divergent local views</td></tr><tr><td>Typical team size</td><td>small (2-4)</td><td>larger swarms</td></tr></tbody></table>
+<h2 id="how-to-choose">How to choose</h2>
+<ul>
+<li>Reliable infrastructure (warehouse WiFi, lab, cloud link) and a small team → <strong>centralized</strong>: simplest path to one accurate shared map.</li>
+<li>Intermittent, short-range, or contested links (subterranean, disaster response, swarms) → <strong>decentralized</strong>: the only architecture that keeps working when the network fragments.</li>
+<li>Long-lived mapping across many sessions rather than live collaboration → a centralized <em>offline</em> merger (maplab 2.0 style) often suffices, sidestepping live-bandwidth issues entirely.</li>
+<li>Hybrids are common in practice: robots run peer-to-peer in the field and dump to a central server when they regain connectivity.</li>
+</ul>
+<p>The fundamental tension is between consistency and communication cost: centralized systems achieve tighter global consistency but create a single point of failure; decentralized systems are more robust but harder to optimize globally. Recent work (Kimera-Multi, Swarm-SLAM) trends toward decentralized architectures with robust outlier rejection.</p>
+<h2 id="why-it-matters-for-slam">Why it matters for SLAM</h2>
+<p>The architecture choice drives everything else in a collaborative SLAM design — what gets transmitted, where loop closures are verified, how map merging happens, and how the system fails. For a small team with reliable WiFi, a centralized system is the simplest path to an accurate shared map; for swarms, subterranean exploration, or contested networks, decentralized designs are the only ones that survive.</p>
+<h2 id="related">Related</h2>
+<ul>
+<li><a href="/visual-slam-roadmap/level-08-collaborative-slam/ccm-slam/">CCM-SLAM</a></li>
+<li><a href="/visual-slam-roadmap/level-08-collaborative-slam/kimera-multi/">Kimera-Multi</a></li>
+<li><a href="/visual-slam-roadmap/level-08-collaborative-slam/swarm-slam/">Swarm-SLAM</a></li>
+<li><a href="/visual-slam-roadmap/level-08-collaborative-slam/communication-constraints/">Communication constraints</a></li>
+<li><a href="/visual-slam-roadmap/level-08-collaborative-slam/map-merging/">Map merging</a></li>
+<li><a href="/visual-slam-roadmap/level-08-collaborative-slam/door-slam/">DOOR-SLAM</a></li>
+</ul></article><div class="mt-10"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5473245269912288" data-ad-slot="2335164071" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></main><footer class="mx-auto max-w-5xl px-5 py-10 font-mono text-xs space-y-2 text-slate-400"><p><a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap/pulls">Suggestions are welcome — please submit a PR to the repository.</a></p><p>MIT License &copy; 2026 Hyunggi Chang · built from the <a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap">roadmap repository</a></p></footer><script type="module">document.querySelectorAll(`a[data-lang]`).forEach(e=>{e.addEventListener(`click`,()=>{try{localStorage.setItem(`vslam-lang`,e.dataset.lang)}catch{}})});</script></body></html>

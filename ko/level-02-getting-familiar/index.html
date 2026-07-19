@@ -1,0 +1,170 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>SLAM과 친해지기 — Visual-SLAM Roadmap</title><meta name="description" content="기하학, 최적화, SLAM 시스템의 구조"><link rel="canonical" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-02-getting-familiar/"><meta name="robots" content="index, follow, max-image-preview:large"><meta name="theme-color" content="#faf7f0"><link rel="icon" href="/visual-slam-roadmap/favicon.svg" type="image/svg+xml"><link rel="sitemap" href="/visual-slam-roadmap/sitemap-index.xml"><link rel="alternate" hreflang="en" href="https://www.cv-learn.com/visual-slam-roadmap/level-02-getting-familiar/"><link rel="alternate" hreflang="ko" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-02-getting-familiar/"><link rel="alternate" hreflang="zh-CN" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-02-getting-familiar/"><link rel="alternate" hreflang="ja" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-02-getting-familiar/"><link rel="alternate" hreflang="x-default" href="https://www.cv-learn.com/visual-slam-roadmap/level-02-getting-familiar/"><!-- Open Graph --><meta property="og:type" content="website"><meta property="og:site_name" content="Visual-SLAM Developer Roadmap"><meta property="og:title" content="SLAM과 친해지기 — Visual-SLAM Roadmap"><meta property="og:description" content="기하학, 최적화, SLAM 시스템의 구조"><meta property="og:url" content="https://www.cv-learn.com/visual-slam-roadmap/ko/level-02-getting-familiar/"><meta property="og:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="ko_KR"><meta property="og:locale:alternate" content="en_US"><meta property="og:locale:alternate" content="zh_CN"><meta property="og:locale:alternate" content="ja_JP"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="SLAM과 친해지기 — Visual-SLAM Roadmap"><meta name="twitter:description" content="기하학, 최적화, SLAM 시스템의 구조"><meta name="twitter:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><!-- Google AdSense --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5473245269912288" crossorigin="anonymous"></script><!-- Google Analytics 4 --><!-- Microsoft Clarity --><link rel="stylesheet" href="/visual-slam-roadmap/_astro/readme.DemmKpdz.css"></head><body class="graph-paper min-h-screen text-inkline font-sans"><header class="border-b border-paper-line bg-paper/90 backdrop-blur sticky top-0 z-10"><nav class="mx-auto max-w-5xl px-5 py-3 flex items-center gap-4"><a href="/visual-slam-roadmap/ko/" class="font-display font-semibold tracking-wide text-sm uppercase text-scan-500 hover:opacity-80">VSLAM<span class="opacity-60">//</span>Roadmap</a><a href="https://ko-fi.com/changh95" target="_blank" rel="noopener" class="font-mono text-[11px] font-medium px-2.5 py-1 text-white bg-[#00b9fe] hover:opacity-85 transition-opacity leading-tight">♥ Support me if you liked this content!</a><a href="https://github.com/changh95/visual-slam-roadmap" class="ml-auto hidden sm:inline font-mono text-xs text-slate-500 hover:text-scan-500">GitHub &nearr;</a><div class="flex font-mono text-[11px] border border-paper-line bg-paper divide-paper-line divide-x ml-auto sm:ml-0" role="group" aria-label="Language"><a href="/visual-slam-roadmap/level-02-getting-familiar/" data-lang="en" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">EN</a><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/" data-lang="ko" aria-current="true" class="px-2 py-1 transition-colors bg-scan-500/10 text-scan-500 font-medium">KO</a><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/" data-lang="zh" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">ZH</a><a href="/visual-slam-roadmap/ja/level-02-getting-familiar/" data-lang="ja" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">JA</a></div></nav></header><main class="mx-auto max-w-5xl px-5 py-10"><p class="font-mono text-xs text-scan-500 tracking-[0.25em] uppercase">레벨 02 / 11</p><h1 class="font-display font-bold text-3xl sm:text-4xl mt-2">SLAM과 친해지기</h1><p class="mt-2 text-slate-500 max-w-2xl">기하학, 최적화, SLAM 시스템의 구조</p><article class="prose prose-slate max-w-none mt-8 prose-headings:font-display prose-a:text-scan-500 prose-a:decoration-scan-300/50 hover:prose-a:decoration-scan-500 prose-table:font-sans prose-table:text-sm bg-paper/80 border border-paper-line p-6 sm:p-8"><h3>프로그래밍 (핵심)</h3>
+<ul>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/cpp/">C++</a></strong>: OOP, Modern C++, 자료구조와 알고리즘, 컴파일러, CMake/Makefile/Ninja, 디자인 패턴, OpenCV C++</li>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/c/">C</a></strong></li>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/git-github/">Git/GitHub</a></strong></li>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/opencv/">OpenCV</a></strong> (opencv-python)</li>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/python/">Python</a></strong>: 딥러닝, 그래프 플롯, 시스템 스크립트</li>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/bash-linux/">Bash/Linux</a></strong>: ssh, CLI 텍스트 에디터/Vim/tmux</li>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/math-libraries/">수학 라이브러리</a></strong>: Eigen, Ceres-solver/GTSAM/g2o</li>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/cpp-python-interop/">C++/Python 상호운용</a></strong>: PyBind11, nanobind</li>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/ros-ros2/">ROS/ROS2</a></strong></li>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/docker/">Docker</a></strong></li>
+</ul>
+<h3>프로그래밍 (선택 — SLAM 취업을 위한 엔지니어링 역량)</h3>
+<ul>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/concurrency/">동시성</a></strong>: SIMD-SSE/AVX/Neon, OpenMP, CUDA</li>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/edge-deployment/">엣지 배포</a></strong>: 학습된 프론트엔드의 TensorRT/ONNX 내보내기, Jetson 벤치마킹</li>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/mobile/">모바일</a></strong>: Android (Java/Kotlin), iOS (Objective-C/Swift)</li>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/csharp/">C#</a></strong>: Unity AR, Microsoft HoloLens</li>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/ci-cd/">CI/CD</a></strong>: GitHub Actions</li>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/simulation/">시뮬레이션</a></strong>: Gazebo, Isaac Sim</li>
+</ul>
+<h3>이미지 처리</h3>
+<ul>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/keypoints/">키포인트</a></strong> → 검출기/디스크립터
+<ul>
+<li><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/sift/">SIFT</a>, <a href="/visual-slam-roadmap/ko/level-02-getting-familiar/fast/">FAST</a>, <a href="/visual-slam-roadmap/ko/level-02-getting-familiar/orb/">ORB</a>, <a href="/visual-slam-roadmap/ko/level-02-getting-familiar/akaze/">AKAZE</a></li>
+<li>딥 특징점: <a href="/visual-slam-roadmap/ko/level-05-deep-learning/r2d2/">R2D2</a>, <a href="/visual-slam-roadmap/ko/level-05-deep-learning/superpoint/">SuperPoint</a></li>
+</ul>
+</li>
+<li><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/image-pyramid/">이미지 피라미드</a>, <a href="/visual-slam-roadmap/ko/level-02-getting-familiar/orb/">oFAST</a>, <a href="/visual-slam-roadmap/ko/level-02-getting-familiar/orb/">rBRIEF</a></li>
+</ul>
+<h3>지역 특징 매칭</h3>
+<ul>
+<li><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/brute-force-matching/">브루트 포스</a>, <a href="/visual-slam-roadmap/ko/level-02-getting-familiar/flann/">FLANN</a>, <a href="/visual-slam-roadmap/ko/level-02-getting-familiar/kd-tree/">Kd-트리</a></li>
+<li><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/lsh/">LSH</a>, <a href="/visual-slam-roadmap/ko/level-02-getting-familiar/lsh/">Multi-probe LSH</a>, <a href="/visual-slam-roadmap/ko/level-02-getting-familiar/hbst/">HBST</a></li>
+<li><a href="/visual-slam-roadmap/ko/level-05-deep-learning/superglue/">SuperGlue</a></li>
+</ul>
+<h3>전역 특징 매칭</h3>
+<ul>
+<li><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/bag-of-visual-words/">시각적 단어 가방(BoVW)</a>, <a href="/visual-slam-roadmap/ko/level-05-deep-learning/netvlad/">NetVLAD</a></li>
+<li><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/deep-image-retrieval/">딥러닝 기반 이미지 검색</a>, <a href="/visual-slam-roadmap/ko/level-05-deep-learning/hloc/">계층적 위치 추정</a></li>
+</ul>
+<h3>특징 추적</h3>
+<ul>
+<li><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/optical-flow/">옵티컬 플로우</a>, <a href="/visual-slam-roadmap/ko/level-02-getting-familiar/klt-tracker/">KLT 추적기</a></li>
+</ul>
+<h3>다중 뷰 기하학</h3>
+<ul>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/2d-2d-correspondence/">2D-2D 대응점</a></strong>: <a href="/visual-slam-roadmap/ko/level-01-beginner/epipolar-geometry/">Essential/Fundamental</a>, <a href="/visual-slam-roadmap/ko/level-01-beginner/epipolar-geometry/">호모그래피</a></li>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/2d-3d-correspondence/">2D-3D 대응점</a></strong>: <a href="/visual-slam-roadmap/ko/level-02-getting-familiar/pnp/">P3P</a>, <a href="/visual-slam-roadmap/ko/level-02-getting-familiar/pnp/">PnP</a>, <a href="/visual-slam-roadmap/ko/level-01-beginner/svd/">SVD</a></li>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/3d-3d-correspondence/">3D-3D 대응점</a></strong>: <a href="/visual-slam-roadmap/ko/level-04-rgbd-slam/icp/">ICP</a></li>
+</ul>
+<h3>이상치 제거</h3>
+<ul>
+<li><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/ransac/">RANSAC</a>, <a href="/visual-slam-roadmap/ko/level-02-getting-familiar/prosac/">PROSAC</a>, <a href="/visual-slam-roadmap/ko/level-02-getting-familiar/m-estimator/">M-Estimator</a>, <a href="/visual-slam-roadmap/ko/level-02-getting-familiar/maxcon/">MAXCON</a>, <a href="/visual-slam-roadmap/ko/level-02-getting-familiar/convex-relaxation/">볼록 완화</a></li>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/robust-pose-graph-optimization/">강건 포즈 그래프 최적화</a></strong>: 전환 가능한 제약 조건, 동적 공분산 스케일링(DCS), 쌍별 일관성 최대화(PCM)</li>
+</ul>
+<h3>인증 가능한 최적 알고리즘</h3>
+<table>
+<thead>
+<tr>
+<th>시스템</th>
+<th>저자/연도</th>
+<th>핵심 개념</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/se-sync/"><strong>SE-Sync</strong></a></td>
+<td><a href="https://arxiv.org/abs/1611.00128">Rosen 2019</a></td>
+<td>SDP + 리만 최적화를 통한 인증 가능한 포즈 그래프 최적화 (arXiv 2016, IJRR 2019)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/teaserpp/"><strong>TEASER++</strong></a></td>
+<td><a href="https://arxiv.org/abs/2001.07715">Yang 2020</a></td>
+<td>포인트 클라우드 정합, 90%+ 이상치에 강건, TLS + Max Clique (T-RO/RSS 2020)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/gnc/"><strong>GNC</strong></a></td>
+<td><a href="https://arxiv.org/abs/1909.08605">Yang 2020</a></td>
+<td>Graduated Non-Convexity, 볼록 → 강건 비용으로의 연속화(continuation)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/quasar/"><strong>QUASAR</strong></a></td>
+<td><a href="https://arxiv.org/abs/1905.12536">Yang 2019</a></td>
+<td>인증 가능한 최적 회전 탐색(이상치가 있는 Wahba 문제), 쿼터니언 QCQP + SDP 완화</td>
+</tr>
+</tbody>
+</table>
+<h3>최소제곱 최적화</h3>
+<ul>
+<li><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/reprojection-error/">재투영 오차</a>, <a href="/visual-slam-roadmap/ko/level-02-getting-familiar/bundle-adjustment/">번들 조정</a></li>
+<li><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/non-linear-optimization/">비선형 최적화</a>, <a href="/visual-slam-roadmap/ko/level-02-getting-familiar/lie-groups/">리 대수</a></li>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/lie-groups/">리 군</a></strong>: SO(3), SE(3)</li>
+<li><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/gauss-newton/">가우스-뉴턴</a>, <a href="/visual-slam-roadmap/ko/level-02-getting-familiar/levenberg-marquardt/">레벤버그-마쿼트</a></li>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/pose-graph-optimization/">포즈 그래프 최적화</a></strong></li>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/schur-complement-sparsity/">슈어 보완 / 희소성</a></strong></li>
+</ul>
+<h3>운동 모델</h3>
+<ul>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/proprioceptive-sensor/">고유수용 센서</a></strong>: IMU, 휠</li>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/odometry/">오도메트리</a></strong> (포즈)</li>
+</ul>
+<h3>관측 모델</h3>
+<ul>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/exteroceptive-sensor/">외부수용 센서</a></strong>: 카메라, LiDAR</li>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/landmark/">랜드마크</a></strong> (맵)</li>
+<li><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/map-inference-as-sparse-nonlinear-least-squares/">공동 최적화</a>, <a href="/visual-slam-roadmap/ko/level-02-getting-familiar/mle-and-map/">MLE와 MAP</a></li>
+</ul>
+<h3>팩터 그래프 최적화</h3>
+<ul>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/factor-graph/">팩터 그래프</a></strong>: 변수(포즈, 랜드마크)와 팩터(관측값)로 이루어진 이분 그래프로서의 SLAM</li>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/map-inference-as-sparse-nonlinear-least-squares/">희소 비선형 최소제곱으로서의 MAP 추론</a></strong>; 변수 제거와 베이즈 트리</li>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/incremental-smoothing/">증분 스무딩</a></strong>: iSAM / iSAM2</li>
+<li>**<a href="/visual-slam-roadmap/ko/level-02-getting-familiar/marginalization/">주변화</a>**와 고정 래그 스무딩</li>
+<li>참고 자료: <a href="https://www.cs.cmu.edu/~kaess/pub/Dellaert17fnt.pdf">Dellaert &#x26; Kaess, <em>Factor Graphs for Robot Perception</em> (2017)</a>; GTSAM 튜토리얼</li>
+</ul>
+<h3>가우시안 신뢰 전파</h3>
+<table>
+<thead>
+<tr>
+<th>시스템</th>
+<th>저자/연도</th>
+<th>핵심 개념</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/futuremapping-1/"><strong>FutureMapping 1</strong></a></td>
+<td><a href="https://arxiv.org/abs/1803.11288">Davison 2018</a></td>
+<td>공간 AI의 연산 구조, SLAM을 위한 GBP</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/futuremapping-2/"><strong>FutureMapping 2</strong></a></td>
+<td><a href="https://arxiv.org/abs/1910.14139">Davison 2019</a></td>
+<td>핵심 공간 AI 프리미티브로서의 GBP, GBP에 대한 시각적 입문</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/ba-on-graph-processor/"><strong>BA on Graph Processor</strong></a></td>
+<td><a href="https://arxiv.org/abs/2003.03134">Ortiz 2020</a></td>
+<td>Graphcore IPU에서의 번들 조정, 타일 기반 병렬성</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/dancers/"><strong>DANCeRS</strong></a></td>
+<td><a href="https://arxiv.org/abs/2508.18153">Patwardhan 2025</a></td>
+<td>로봇 군집에서의 GBP 기반 분산 합의</td>
+</tr>
+</tbody>
+</table>
+<h3>맵 표현</h3>
+<ul>
+<li><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/point-cloud/">포인트 클라우드</a>, <a href="/visual-slam-roadmap/ko/level-02-getting-familiar/occupancy-grid-mapping/">점유 격자 매핑</a>, <a href="/visual-slam-roadmap/ko/level-04-rgbd-slam/tsdf-vs-surfel-maps/">TSDF</a>, <a href="/visual-slam-roadmap/ko/level-04-rgbd-slam/tsdf-vs-surfel-maps/">서펠</a>, <a href="/visual-slam-roadmap/ko/level-02-getting-familiar/voxel-map/">복셀 맵</a></li>
+</ul>
+<h3>센서</h3>
+<ul>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/camera-device/">카메라 장치</a></strong>: 광각/텔레센트릭 렌즈, 렌즈 MTF, CCD/CMOS, 롤링/글로벌 셔터, 노출/ISO, <a href="/visual-slam-roadmap/ko/level-01-beginner/stereo-vision/">스테레오비전</a>, <a href="/visual-slam-roadmap/ko/level-04-rgbd-slam/depth-from-sensor/">RGB-D</a>, <a href="/visual-slam-roadmap/ko/level-04-rgbd-slam/depth-from-sensor/">구조광</a>, <a href="/visual-slam-roadmap/ko/level-04-rgbd-slam/depth-from-sensor/">능동 IR/ToF</a></li>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/lidar/">LiDAR</a></strong> → <a href="/visual-slam-roadmap/ko/level-09-lidar-visual-lidar-slam/lidar-visual-inertial-lvi/">Visual-LiDAR 융합</a></li>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/imu/">IMU</a></strong> → VIO</li>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/radar/">RADAR</a></strong> → <a href="/visual-slam-roadmap/ko/level-02-getting-familiar/camera-device/">센서</a> 융합, <a href="/visual-slam-roadmap/ko/level-02-getting-familiar/extended-kalman-filter/">확장 칼만 필터</a></li>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/sonar/">소나</a></strong></li>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/multi-sensor-calibration/">다중 센서 캘리브레이션</a></strong>: 카메라-IMU, 카메라-LiDAR (<a href="https://github.com/ethz-asl/kalibr">Kalibr</a>)</li>
+</ul>
+<h3>평가</h3>
+<ul>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/metrics/">지표</a></strong>: ATE (절대 궤적 오차), RPE (상대 자세 오차)</li>
+<li><strong><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/consistency/">일관성</a></strong>: NEES (정규화된 추정 오차 제곱)</li>
+<li><strong>데이터셋</strong>: <a href="https://www.cvlibs.net/datasets/kitti/">KITTI</a>, <a href="https://cvg.cit.tum.de/data/datasets/rgbd-dataset">TUM RGB-D</a>, <a href="https://projects.asl.ethz.ch/datasets/euroc-mav/">EuRoC</a>, <a href="https://arxiv.org/abs/2003.14338">TartanAir</a>, <a href="https://arxiv.org/abs/1804.06120">TUM-VI</a>, <a href="https://arxiv.org/abs/2009.06364">4Seasons</a>, <a href="https://hilti-challenge.com/">Hilti SLAM Challenge</a>, <a href="https://arxiv.org/abs/2003.05691">Newer College</a>, <a href="https://www.projectaria.com/">Project Aria</a></li>
+<li><strong>도구</strong>: <a href="https://github.com/MichaelGrupp/evo">evo</a> (궤적 평가)</li>
+</ul></article><nav class="mt-8 flex justify-between font-mono text-sm"><span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/ko/level-01-beginner/">&larr; 01 · 초급</a></span><span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/ko/level-03-monocular-slam/">03 · 단안 SLAM &rarr;</a></span></nav></main><footer class="mx-auto max-w-5xl px-5 py-10 font-mono text-xs space-y-2 text-slate-400"><p><a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap/pulls">제안은 언제든 환영합니다 — 저장소에 PR을 제출해 주세요.</a></p><p>MIT License &copy; 2026 Hyunggi Chang · built from the <a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap">roadmap repository</a></p></footer><script type="module">document.querySelectorAll(`a[data-lang]`).forEach(e=>{e.addEventListener(`click`,()=>{try{localStorage.setItem(`vslam-lang`,e.dataset.lang)}catch{}})});</script></body></html>

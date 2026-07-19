@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Level 7: Stereo SLAM — Visual-SLAM Roadmap</title><meta name="description" content="Metric scale and depth from stereo pairs"><link rel="canonical" href="https://www.cv-learn.com/visual-slam-roadmap/level-07-stereo-slam/"><meta name="robots" content="index, follow, max-image-preview:large"><meta name="theme-color" content="#faf7f0"><link rel="icon" href="/visual-slam-roadmap/favicon.svg" type="image/svg+xml"><link rel="sitemap" href="/visual-slam-roadmap/sitemap-index.xml"><link rel="alternate" hreflang="en" href="https://www.cv-learn.com/visual-slam-roadmap/level-07-stereo-slam/"><link rel="alternate" hreflang="ko" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-07-stereo-slam/"><link rel="alternate" hreflang="zh-CN" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-07-stereo-slam/"><link rel="alternate" hreflang="ja" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-07-stereo-slam/"><link rel="alternate" hreflang="x-default" href="https://www.cv-learn.com/visual-slam-roadmap/level-07-stereo-slam/"><!-- Open Graph --><meta property="og:type" content="website"><meta property="og:site_name" content="Visual-SLAM Developer Roadmap"><meta property="og:title" content="Level 7: Stereo SLAM — Visual-SLAM Roadmap"><meta property="og:description" content="Metric scale and depth from stereo pairs"><meta property="og:url" content="https://www.cv-learn.com/visual-slam-roadmap/level-07-stereo-slam/"><meta property="og:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="en_US"><meta property="og:locale:alternate" content="ko_KR"><meta property="og:locale:alternate" content="zh_CN"><meta property="og:locale:alternate" content="ja_JP"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Level 7: Stereo SLAM — Visual-SLAM Roadmap"><meta name="twitter:description" content="Metric scale and depth from stereo pairs"><meta name="twitter:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><!-- Google AdSense --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5473245269912288" crossorigin="anonymous"></script><!-- Google Analytics 4 --><!-- Microsoft Clarity --><link rel="stylesheet" href="/visual-slam-roadmap/_astro/readme.DemmKpdz.css"></head><body class="graph-paper min-h-screen text-inkline font-sans"><header class="border-b border-paper-line bg-paper/90 backdrop-blur sticky top-0 z-10"><nav class="mx-auto max-w-5xl px-5 py-3 flex items-center gap-4"><a href="/visual-slam-roadmap/" class="font-display font-semibold tracking-wide text-sm uppercase text-scan-500 hover:opacity-80">VSLAM<span class="opacity-60">//</span>Roadmap</a><a href="https://ko-fi.com/changh95" target="_blank" rel="noopener" class="font-mono text-[11px] font-medium px-2.5 py-1 text-white bg-[#00b9fe] hover:opacity-85 transition-opacity leading-tight">♥ Support me if you liked this content!</a><a href="https://github.com/changh95/visual-slam-roadmap" class="ml-auto hidden sm:inline font-mono text-xs text-slate-500 hover:text-scan-500">GitHub &nearr;</a><div class="flex font-mono text-[11px] border border-paper-line bg-paper divide-paper-line divide-x ml-auto sm:ml-0" role="group" aria-label="Language"><a href="/visual-slam-roadmap/level-07-stereo-slam/" data-lang="en" aria-current="true" class="px-2 py-1 transition-colors bg-scan-500/10 text-scan-500 font-medium">EN</a><a href="/visual-slam-roadmap/ko/level-07-stereo-slam/" data-lang="ko" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">KO</a><a href="/visual-slam-roadmap/zh/level-07-stereo-slam/" data-lang="zh" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">ZH</a><a href="/visual-slam-roadmap/ja/level-07-stereo-slam/" data-lang="ja" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">JA</a></div></nav></header><main class="mx-auto max-w-5xl px-5 py-10"><p class="font-mono text-xs text-scan-500 tracking-[0.25em] uppercase">Level 07 / 11</p><h1 class="font-display font-bold text-3xl sm:text-4xl mt-2">Stereo SLAM</h1><p class="mt-2 text-slate-500 max-w-2xl">Metric scale and depth from stereo pairs</p><article class="prose prose-slate max-w-none mt-8 prose-headings:font-display prose-a:text-scan-500 prose-a:decoration-scan-300/50 hover:prose-a:decoration-scan-500 prose-table:font-sans prose-table:text-sm bg-paper/80 border border-paper-line p-6 sm:p-8"><h3>Key Concepts</h3>
+<ul>
+<li><strong><a href="/visual-slam-roadmap/level-07-stereo-slam/stereo-rectification/">Stereo rectification</a></strong> — Epipolar alignment for efficient disparity search</li>
+<li><strong><a href="/visual-slam-roadmap/level-07-stereo-slam/disparity-vs-depth/">Disparity vs Depth</a></strong> — d = f·B/Z, baseline determines depth range/accuracy</li>
+<li><strong><a href="/visual-slam-roadmap/level-07-stereo-slam/scale-observability/">Scale observability</a></strong> — Stereo provides metric scale (unlike monocular)</li>
+</ul>
+<h3>Systems</h3>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Author/Year</th>
+<th>Key Concepts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/level-07-stereo-slam/s-ptam/"><strong>S-PTAM</strong></a></td>
+<td><a href="https://github.com/lrse/sptam">Pire 2017</a></td>
+<td>Stereo PTAM, ROS-compatible, real-time</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-03-monocular-slam/orb-slam2/"><strong>ORB-SLAM2</strong></a> (stereo)</td>
+<td><a href="https://arxiv.org/abs/1610.06475">Mur-Artal 2017</a></td>
+<td>Stereo + RGB-D modes, loop closure, relocalization</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-07-stereo-slam/stereomsckf/"><strong>StereoMSCKF</strong></a></td>
+<td><a href="https://arxiv.org/abs/1712.00036">Sun 2018</a></td>
+<td>MSCKF with stereo, efficient for resource-constrained platforms</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-04-rgbd-slam/rtab-map/"><strong>RTAB-Map</strong></a></td>
+<td><a href="https://ieeexplore.ieee.org/document/6942560">Labbé 2019</a></td>
+<td>Multi-sensor (stereo/RGB-D/LiDAR), memory management, large-scale (→ also in Level 4)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-03-monocular-slam/orb-slam3/"><strong>ORB-SLAM3</strong></a> (stereo)</td>
+<td><a href="https://arxiv.org/abs/2007.11898">Campos 2020</a></td>
+<td>Multi-map, Atlas, stereo + IMU</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-03-monocular-slam/stella-vslam/"><strong>Stella-VSLAM</strong></a></td>
+<td><a href="https://github.com/stella-cv/stella_vslam">Community 2021</a></td>
+<td>OpenVSLAM successor, stereo support (→ also in Level 3)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-07-stereo-slam/stereo-dso/"><strong>Stereo DSO</strong></a></td>
+<td><a href="https://arxiv.org/abs/1708.07878">Wang 2017</a></td>
+<td>Direct sparse stereo odometry, large-scale (DSO extension)</td>
+</tr>
+</tbody>
+</table>
+<hr></article><nav class="mt-8 flex justify-between font-mono text-sm"><span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/level-06-vio-vins/">&larr; Level 6: VIO / VINS</a></span><span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/level-08-collaborative-slam/">Level 8: Collaborative / Multi-Robot SLAM &rarr;</a></span></nav></main><footer class="mx-auto max-w-5xl px-5 py-10 font-mono text-xs space-y-2 text-slate-400"><p><a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap/pulls">Suggestions are welcome — please submit a PR to the repository.</a></p><p>MIT License &copy; 2026 Hyunggi Chang · built from the <a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap">roadmap repository</a></p></footer><script type="module">document.querySelectorAll(`a[data-lang]`).forEach(e=>{e.addEventListener(`click`,()=>{try{localStorage.setItem(`vslam-lang`,e.dataset.lang)}catch{}})});</script></body></html>

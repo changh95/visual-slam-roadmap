@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Foundation models — Visual-SLAM Roadmap</title><meta name="description" content="基础模型（foundation model）是指在海量、多样化的数据上一次性预训练出的大型网络，之后可复用于许多下游任务——无论是作为冻结的特征提取器、轻量微调，还是通过提示（prompt）调用。这一术语进入SLAM词汇表，是因为一批这样的模型被证明可以直接用作感知骨干网络：CLIP（图文嵌入）、SAM（可提示分割）、DINOv2（自监督视觉特征）、Depth Anything（单目深度）以及DUSt3R系列（从原始图像对进行双视图3D重建）。"><link rel="canonical" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-05-deep-learning/foundation-models/"><meta name="robots" content="index, follow, max-image-preview:large"><meta name="theme-color" content="#faf7f0"><link rel="icon" href="/visual-slam-roadmap/favicon.svg" type="image/svg+xml"><link rel="sitemap" href="/visual-slam-roadmap/sitemap-index.xml"><link rel="alternate" hreflang="en" href="https://www.cv-learn.com/visual-slam-roadmap/level-05-deep-learning/foundation-models/"><link rel="alternate" hreflang="ko" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-05-deep-learning/foundation-models/"><link rel="alternate" hreflang="zh-CN" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-05-deep-learning/foundation-models/"><link rel="alternate" hreflang="ja" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-05-deep-learning/foundation-models/"><link rel="alternate" hreflang="x-default" href="https://www.cv-learn.com/visual-slam-roadmap/level-05-deep-learning/foundation-models/"><!-- Open Graph --><meta property="og:type" content="article"><meta property="og:site_name" content="Visual-SLAM Developer Roadmap"><meta property="og:title" content="Foundation models — Visual-SLAM Roadmap"><meta property="og:description" content="基础模型（foundation model）是指在海量、多样化的数据上一次性预训练出的大型网络，之后可复用于许多下游任务——无论是作为冻结的特征提取器、轻量微调，还是通过提示（prompt）调用。这一术语进入SLAM词汇表，是因为一批这样的模型被证明可以直接用作感知骨干网络：CLIP（图文嵌入）、SAM（可提示分割）、DINOv2（自监督视觉特征）、Depth Anything（单目深度）以及DUSt3R系列（从原始图像对进行双视图3D重建）。"><meta property="og:url" content="https://www.cv-learn.com/visual-slam-roadmap/zh/level-05-deep-learning/foundation-models/"><meta property="og:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="zh_CN"><meta property="og:locale:alternate" content="en_US"><meta property="og:locale:alternate" content="ko_KR"><meta property="og:locale:alternate" content="ja_JP"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Foundation models — Visual-SLAM Roadmap"><meta name="twitter:description" content="基础模型（foundation model）是指在海量、多样化的数据上一次性预训练出的大型网络，之后可复用于许多下游任务——无论是作为冻结的特征提取器、轻量微调，还是通过提示（prompt）调用。这一术语进入SLAM词汇表，是因为一批这样的模型被证明可以直接用作感知骨干网络：CLIP（图文嵌入）、SAM（可提示分割）、DINOv2（自监督视觉特征）、Depth Anything（单目深度）以及DUSt3R系列（从原始图像对进行双视图3D重建）。"><meta name="twitter:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><!-- Google AdSense --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5473245269912288" crossorigin="anonymous"></script><!-- Google Analytics 4 --><!-- Microsoft Clarity --><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Foundation models","description":"基础模型（foundation model）是指在海量、多样化的数据上一次性预训练出的大型网络，之后可复用于许多下游任务——无论是作为冻结的特征提取器、轻量微调，还是通过提示（prompt）调用。这一术语进入SLAM词汇表，是因为一批这样的模型被证明可以直接用作感知骨干网络：CLIP（图文嵌入）、SAM（可提示分割）、DINOv2（自监督视觉特征）、Depth Anything（单目深度）以及DUSt3R系列（从原始图像对进行双视图3D重建）。","inLanguage":"zh-CN","url":"https://www.cv-learn.com/visual-slam-roadmap/zh/level-05-deep-learning/foundation-models/","isPartOf":{"@type":"WebSite","name":"Visual-SLAM Developer Roadmap","url":"https://www.cv-learn.com/visual-slam-roadmap/"},"author":{"@type":"Person","name":"Hyunggi Chang","url":"https://github.com/changh95"},"license":"https://opensource.org/licenses/MIT"}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Visual-SLAM Roadmap","item":"https://www.cv-learn.com/visual-slam-roadmap/zh/"},{"@type":"ListItem","position":2,"name":"深度学习 + SLAM","item":"https://www.cv-learn.com/visual-slam-roadmap/zh/level-05-deep-learning/"},{"@type":"ListItem","position":3,"name":"Foundation models","item":"https://www.cv-learn.com/visual-slam-roadmap/zh/level-05-deep-learning/foundation-models/"}]}</script><link rel="stylesheet" href="/visual-slam-roadmap/_astro/readme.DemmKpdz.css"></head><body class="graph-paper min-h-screen text-inkline font-sans"><header class="border-b border-paper-line bg-paper/90 backdrop-blur sticky top-0 z-10"><nav class="mx-auto max-w-5xl px-5 py-3 flex items-center gap-4"><a href="/visual-slam-roadmap/zh/" class="font-display font-semibold tracking-wide text-sm uppercase text-scan-500 hover:opacity-80">VSLAM<span class="opacity-60">//</span>Roadmap</a><a href="https://ko-fi.com/changh95" target="_blank" rel="noopener" class="font-mono text-[11px] font-medium px-2.5 py-1 text-white bg-[#00b9fe] hover:opacity-85 transition-opacity leading-tight">♥ Support me if you liked this content!</a><a href="https://github.com/changh95/visual-slam-roadmap" class="ml-auto hidden sm:inline font-mono text-xs text-slate-500 hover:text-scan-500">GitHub &nearr;</a><div class="flex font-mono text-[11px] border border-paper-line bg-paper divide-paper-line divide-x ml-auto sm:ml-0" role="group" aria-label="Language"><a href="/visual-slam-roadmap/level-05-deep-learning/foundation-models/" data-lang="en" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">EN</a><a href="/visual-slam-roadmap/ko/level-05-deep-learning/foundation-models/" data-lang="ko" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">KO</a><a href="/visual-slam-roadmap/zh/level-05-deep-learning/foundation-models/" data-lang="zh" aria-current="true" class="px-2 py-1 transition-colors bg-scan-500/10 text-scan-500 font-medium">ZH</a><a href="/visual-slam-roadmap/ja/level-05-deep-learning/foundation-models/" data-lang="ja" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">JA</a></div></nav></header><main class="mx-auto max-w-3xl px-5 py-10"><nav class="font-mono text-xs text-slate-500 mb-6"><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/zh/">路线图</a><span class="mx-1">/</span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/zh/level-05-deep-learning/">级别 05 · 深度学习 + SLAM</a></nav><article class="prose prose-slate max-w-none prose-headings:font-display prose-a:text-scan-500 prose-a:decoration-scan-300/50 hover:prose-a:decoration-scan-500 prose-blockquote:font-mono prose-blockquote:text-sm prose-blockquote:not-italic bg-paper/80 border border-paper-line p-6 sm:p-8"><h1 id="foundation-models">Foundation models</h1>
+<p>*基础模型（foundation model）*是指在海量、多样化的数据上一次性预训练出的大型网络，之后可复用于许多下游任务——无论是作为冻结的特征提取器、轻量微调，还是通过提示（prompt）调用。这一术语进入SLAM词汇表，是因为一批这样的模型被证明可以直接用作感知骨干网络：CLIP（图文嵌入）、SAM（可提示分割）、DINOv2（自监督视觉特征）、Depth Anything（单目深度）以及DUSt3R系列（从原始图像对进行双视图3D重建）。</p>
+<h2 id="发生了什么变化">发生了什么变化</h2>
+<p>要理解这为何重要，最好与此前的常规做法做对比。经典的学习模块（SuperPoint、MonoDepth）是针对单一任务、在中等规模数据集上训练的，因而继承了这些数据集的偏差；将它们部署到新领域往往意味着要重新训练。基础模型改变了这一经济学规律：</p>
+<ul>
+<li><strong>零样本鲁棒性</strong>：在互联网规模数据上预训练的特征，能够抵御那些会破坏手工设计特征和小规模学习特征的外观变化（光照、季节、风格）。例如RoMa正是为了这种鲁棒性，才在冻结的DINOv2特征上构建稠密匹配。</li>
+<li><strong>可复用骨干网络</strong>：单一冻结编码器可以同时服务于场景识别、匹配、分割和深度估计等头部——当机器人的计算资源需要在多个任务间共享时，这一点很有吸引力。</li>
+<li><strong>开放词汇语义</strong>：CLIP风格的嵌入让地图能够回答语言查询（“找到灭火器”），而不需要固定的标签集——这正是ConceptFusion、ConceptGraphs以及语言驱动场景图的基础。</li>
+<li><strong>大规模几何先验</strong>：DUSt3R和MASt3R表明，即便是3D重建本身——传统上属于多视图几何的领域——也可以被吸收进一个预训练模型中，直接从图像对输出点图（pointmap），并以此为基础构建SLAM系统（MASt3R-SLAM）。</li>
+</ul>
+<h2 id="各家族及其提供的能力">各家族及其提供的能力</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>家族</th><th>训练方式/数据</th><th>SLAM从中获得什么</th></tr></thead><tbody><tr><td>CLIP / SigLIP</td><td>图文对，对比学习</td><td>用于地图和场景描述的开放词汇语义</td></tr><tr><td>SAM / SAM 2</td><td>大规模可提示分割</td><td>用于物体级和动态SLAM的类别无关实例掩码</td></tr><tr><td>DINOv2</td><td>自监督ViT</td><td>用于匹配、场景识别（VPR）和对应关系的鲁棒稠密特征</td></tr><tr><td>Depth Anything（V1/V2）、Metric3D</td><td>大规模深度（自）监督</td><td>在无深度传感器场景下的稠密单目深度先验</td></tr><tr><td>DUSt3R / MASt3R / VGGT</td><td>有位姿的图像对/图像集合</td><td>前馈式的点图、匹配关系和位姿——几何作为推理</td></tr></tbody></table>
+<p>了解这份”菜单”能告诉你，在设计系统时现在可以”免费”获得什么——以及每个模型可以替代哪些经典的第3/4层级模块。</p>
+<h2 id="slam系统实际如何使用它们">SLAM系统实际如何使用它们</h2>
+<ul>
+<li><strong>冻结特征+经典估计</strong>：提取基础模型特征，然后在其上运行经典的匹配/RANSAC/BA（RoMa基于DINOv2；开放词汇地图在每个surfel或高斯上融合CLIP特征）。几何部分保持精确；感知部分则变得鲁棒。</li>
+<li><strong>前馈几何+轻量SLAM层</strong>：DUSt3R系列模型直接输出点图；像MASt3R-SLAM这样的系统在网络周围加入关键帧管理、滤波和全局优化——该模型同时充当前端<em>和</em>大部分中端。</li>
+<li><strong>关键帧速率调度与蒸馏</strong>：由于在嵌入式硬件上每帧运行一次ViT-L是负担不起的，系统通常只在关键帧上运行基础模型，将其输出缓存到地图中，或将其蒸馏为用于逐帧路径的小型学生网络。</li>
+</ul>
+<h2 id="需要注意的权衡">需要注意的权衡</h2>
+<ul>
+<li><strong>计算开销</strong>：在嵌入式硬件上进行实时SLAM，可能无法承受每帧一次大型ViT推理；需从设计之初就规划关键帧速率使用或蒸馏方案。</li>
+<li><strong>粗粒度输出</strong>：特征通常以patch分辨率给出（例如图像的1/14），深度预测往往是相对/仿射的而非度量尺度的——在进行几何优化之前，通常需要一个以精度为导向的细化或尺度对齐阶段。</li>
+<li><strong>统计性失败模式</strong>：基础模型可能以某种自信但错误的方式给出结果，而这种错误本可以被重投影误差检查发现——例如反射表面上的幻觉深度，或语义上合理但几何上不一致的匹配。这是一个强有力的论据，说明应在流程中保留经典的几何验证，而不是盲目信任网络输出。</li>
+<li><strong>许可与可复现性</strong>：模型权重、训练数据和使用条款各不相同；基于冻结第三方骨干网络构建的系统会继承其更新节奏和偏差。</li>
+</ul>
+<h2 id="实践方案">实践方案</h2>
+<p>在第5层级及以后逐渐浮现的模式是：将基础模型特征用于流程中<em>对鲁棒性要求高、语义性强，或病态（ill-posed）<em>的部分（场景识别、宽基线匹配、单目深度、开放词汇标签），而将经典估计保留给</em>对精度要求高</em>的部分（位姿优化、建图一致性）。最新的系统——MASt3R-SLAM、ConceptGraphs风格的语义建图——正是如此：在大型预训练模型之上叠加轻量的几何层。</p>
+<h2 id="对slam的意义">对SLAM的意义</h2>
+<p>基础模型正在重塑SLAM前端的定义：现代系统越来越倾向于组合冻结的预训练骨干网络，而不是训练特定任务的网络——最新的SLAM系统（MASt3R-SLAM、ConceptGraphs风格的语义建图）正是在这类模型之上叠加轻量几何层。了解每个家族提供的能力（CLIP：语义，SAM：掩码，DINOv2：鲁棒特征，Depth Anything：深度，DUSt3R：几何），能告诉你在设计系统时现在可以”免费”获得什么。</p>
+<h2 id="相关条目">相关条目</h2>
+<ul>
+<li><a href="/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/clip/">CLIP</a></li>
+<li><a href="/visual-slam-roadmap/zh/level-05-deep-learning/sam/">SAM</a></li>
+<li><a href="/visual-slam-roadmap/zh/level-05-deep-learning/depth-anything/">Depth Anything</a></li>
+<li><a href="/visual-slam-roadmap/zh/level-05-deep-learning/dust3r/">DUSt3R</a></li>
+<li><a href="/visual-slam-roadmap/zh/level-05-deep-learning/roma/">RoMa</a></li>
+<li><a href="/visual-slam-roadmap/zh/level-05-deep-learning/mast3r-slam/">MASt3R-SLAM</a></li>
+<li><a href="/visual-slam-roadmap/zh/level-05-deep-learning/conceptgraphs/">ConceptGraphs</a></li>
+</ul></article><div class="mt-10"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5473245269912288" data-ad-slot="2335164071" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></main><footer class="mx-auto max-w-5xl px-5 py-10 font-mono text-xs space-y-2 text-slate-400"><p><a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap/pulls">欢迎提出建议 — 请向本仓库提交 PR。</a></p><p>MIT License &copy; 2026 Hyunggi Chang · built from the <a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap">roadmap repository</a></p></footer><script type="module">document.querySelectorAll(`a[data-lang]`).forEach(e=>{e.addEventListener(`click`,()=>{try{localStorage.setItem(`vslam-lang`,e.dataset.lang)}catch{}})});</script></body></html>

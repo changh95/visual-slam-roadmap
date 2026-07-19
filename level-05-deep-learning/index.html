@@ -1,0 +1,839 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Level 5: Applying Deep Learning — Visual-SLAM Roadmap</title><meta name="description" content="Learned frontends, differentiable backends, end-to-end systems, foundation-model &amp; neural SLAM, scene understanding"><link rel="canonical" href="https://www.cv-learn.com/visual-slam-roadmap/level-05-deep-learning/"><meta name="robots" content="index, follow, max-image-preview:large"><meta name="theme-color" content="#faf7f0"><link rel="icon" href="/visual-slam-roadmap/favicon.svg" type="image/svg+xml"><link rel="sitemap" href="/visual-slam-roadmap/sitemap-index.xml"><link rel="alternate" hreflang="en" href="https://www.cv-learn.com/visual-slam-roadmap/level-05-deep-learning/"><link rel="alternate" hreflang="ko" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-05-deep-learning/"><link rel="alternate" hreflang="zh-CN" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-05-deep-learning/"><link rel="alternate" hreflang="ja" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-05-deep-learning/"><link rel="alternate" hreflang="x-default" href="https://www.cv-learn.com/visual-slam-roadmap/level-05-deep-learning/"><!-- Open Graph --><meta property="og:type" content="website"><meta property="og:site_name" content="Visual-SLAM Developer Roadmap"><meta property="og:title" content="Level 5: Applying Deep Learning — Visual-SLAM Roadmap"><meta property="og:description" content="Learned frontends, differentiable backends, end-to-end systems, foundation-model &amp; neural SLAM, scene understanding"><meta property="og:url" content="https://www.cv-learn.com/visual-slam-roadmap/level-05-deep-learning/"><meta property="og:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="en_US"><meta property="og:locale:alternate" content="ko_KR"><meta property="og:locale:alternate" content="zh_CN"><meta property="og:locale:alternate" content="ja_JP"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Level 5: Applying Deep Learning — Visual-SLAM Roadmap"><meta name="twitter:description" content="Learned frontends, differentiable backends, end-to-end systems, foundation-model &amp; neural SLAM, scene understanding"><meta name="twitter:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><!-- Google AdSense --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5473245269912288" crossorigin="anonymous"></script><!-- Google Analytics 4 --><!-- Microsoft Clarity --><link rel="stylesheet" href="/visual-slam-roadmap/_astro/readme.DemmKpdz.css"></head><body class="graph-paper min-h-screen text-inkline font-sans"><header class="border-b border-paper-line bg-paper/90 backdrop-blur sticky top-0 z-10"><nav class="mx-auto max-w-5xl px-5 py-3 flex items-center gap-4"><a href="/visual-slam-roadmap/" class="font-display font-semibold tracking-wide text-sm uppercase text-scan-500 hover:opacity-80">VSLAM<span class="opacity-60">//</span>Roadmap</a><a href="https://ko-fi.com/changh95" target="_blank" rel="noopener" class="font-mono text-[11px] font-medium px-2.5 py-1 text-white bg-[#00b9fe] hover:opacity-85 transition-opacity leading-tight">♥ Support me if you liked this content!</a><a href="https://github.com/changh95/visual-slam-roadmap" class="ml-auto hidden sm:inline font-mono text-xs text-slate-500 hover:text-scan-500">GitHub &nearr;</a><div class="flex font-mono text-[11px] border border-paper-line bg-paper divide-paper-line divide-x ml-auto sm:ml-0" role="group" aria-label="Language"><a href="/visual-slam-roadmap/level-05-deep-learning/" data-lang="en" aria-current="true" class="px-2 py-1 transition-colors bg-scan-500/10 text-scan-500 font-medium">EN</a><a href="/visual-slam-roadmap/ko/level-05-deep-learning/" data-lang="ko" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">KO</a><a href="/visual-slam-roadmap/zh/level-05-deep-learning/" data-lang="zh" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">ZH</a><a href="/visual-slam-roadmap/ja/level-05-deep-learning/" data-lang="ja" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">JA</a></div></nav></header><main class="mx-auto max-w-5xl px-5 py-10"><p class="font-mono text-xs text-scan-500 tracking-[0.25em] uppercase">Level 05 / 11</p><h1 class="font-display font-bold text-3xl sm:text-4xl mt-2">Applying Deep Learning</h1><p class="mt-2 text-slate-500 max-w-2xl">Learned frontends, differentiable backends, end-to-end systems, foundation-model &amp; neural SLAM, scene understanding</p><article class="prose prose-slate max-w-none mt-8 prose-headings:font-display prose-a:text-scan-500 prose-a:decoration-scan-300/50 hover:prose-a:decoration-scan-500 prose-table:font-sans prose-table:text-sm bg-paper/80 border border-paper-line p-6 sm:p-8"><h3>Key Concepts</h3>
+<ul>
+<li><strong><a href="/visual-slam-roadmap/level-05-deep-learning/learned-vs-hand-crafted/">Learned vs hand-crafted</a></strong> — Replacing individual classical modules (features, depth, matching) with networks vs end-to-end learning</li>
+<li><strong><a href="/visual-slam-roadmap/level-05-deep-learning/differentiability/">Differentiability</a></strong> — Making classical optimization (RANSAC, BA) differentiable so it can be trained through</li>
+<li><strong><a href="/visual-slam-roadmap/level-05-deep-learning/foundation-models/">Foundation models</a></strong> — Large pretrained models (CLIP, SAM, DUSt3R-family) as reusable perception backbones</li>
+</ul>
+<blockquote>
+<p>Level 5 is organized into five pillars:
+<strong>A. Frontend</strong> — learned perception components replacing hand-crafted modules
+<strong>B. Backend</strong> — learned/certifiable optimization replacing classical solvers
+<strong>C. Systems</strong> — end-to-end deep VO/SLAM pipelines
+<strong>D. Scene Understanding</strong> — semantic, language, and relational reasoning on SLAM maps
+<strong>E. Foundation-Model &#x26; Neural SLAM</strong> — pointmap transformers, NeRF- and 3DGS-based dense SLAM systems</p>
+</blockquote>
+<h3>A. Deep Frontend — Perception</h3>
+<h4>Feature Detection &#x26; Matching</h4>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Author/Year</th>
+<th>Key Concepts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/netvlad/"><strong>NetVLAD</strong></a></td>
+<td><a href="https://arxiv.org/abs/1511.07247">Arandjelović 2016</a></td>
+<td>VLAD, place recognition</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/superpoint/"><strong>SuperPoint</strong></a></td>
+<td><a href="https://arxiv.org/abs/1712.07629">DeTone 2017</a></td>
+<td>Homographic Adaptation, Self-supervised, VGG encoder + detector/descriptor heads</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/hardnet/">HardNet</a></td>
+<td><a href="https://arxiv.org/abs/1705.10872">Mishchuk 2017</a></td>
+<td>Learned local descriptor</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/r2d2/"><strong>R2D2</strong></a></td>
+<td><a href="https://arxiv.org/abs/1906.06195">Revaud 2019</a></td>
+<td>Repeatable + Reliable detector/descriptor, explicit repeatability/reliability maps</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/keynet/">KeyNet</a></td>
+<td><a href="https://arxiv.org/abs/1904.00889">Barroso-Laguna 2019</a></td>
+<td>Learned keypoint detector</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/hf-net/"><strong>HF-Net</strong></a></td>
+<td><a href="https://arxiv.org/abs/1812.03506">Sarlin 2019</a></td>
+<td>Global feature, Local feature, Visual localization</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/superglue/"><strong>SuperGlue</strong></a></td>
+<td><a href="https://arxiv.org/abs/1911.11763">Sarlin 2020</a></td>
+<td>Self/Cross-attention GNN, Sinkhorn optimal assignment, dustbin for outliers</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/disk/"><strong>DISK</strong></a></td>
+<td><a href="https://arxiv.org/abs/2006.13566">Tyszkiewicz 2020</a></td>
+<td>Policy gradient (RL) training, match success/failure as reward</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/patch-netvlad/">Patch NetVLAD</a></td>
+<td><a href="https://arxiv.org/abs/2103.01486">Hausler 2021</a></td>
+<td>Multi-scale patch-level VLAD</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/loftr/"><strong>LoFTR</strong></a></td>
+<td><a href="https://arxiv.org/abs/2104.00680">Sun 2021</a></td>
+<td>Detector-free, Transformer coarse-to-fine dense matching</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/lightglue/"><strong>LightGlue</strong></a></td>
+<td><a href="https://arxiv.org/abs/2306.13643">Lindenberger 2023</a></td>
+<td>Adaptive depth/width, 5-10× faster than SuperGlue</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/xfeat/"><strong>XFeat</strong></a></td>
+<td><a href="https://arxiv.org/abs/2404.19174">Potje 2024</a></td>
+<td>0.3M params, 1400 FPS (RTX 4090), 64-dim descriptor, embedded-friendly</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/roma/"><strong>RoMa</strong></a></td>
+<td><a href="https://arxiv.org/abs/2305.15404">Edstedt 2024</a></td>
+<td>DINOv2 foundation feature + coarse-to-fine dense matching</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/dedode/"><strong>DeDoDe</strong></a></td>
+<td><a href="https://arxiv.org/abs/2308.08479">Edstedt 2024</a></td>
+<td>Joint detect-and-describe in one stage</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/roma-v2/"><strong>RoMa v2</strong></a></td>
+<td><a href="https://arxiv.org/abs/2511.15706">Edstedt 2025</a></td>
+<td>Harder-better-faster-denser dense feature matching</td>
+</tr>
+</tbody>
+</table>
+<h4>Depth Estimation</h4>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Author/Year</th>
+<th>Key Concepts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/monodepth/">MonoDepth</a></td>
+<td><a href="https://arxiv.org/abs/1609.03677">Godard 2016</a></td>
+<td>Left-Right photometric consistency, self-supervised</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/midas/"><strong>MiDaS</strong></a></td>
+<td><a href="https://arxiv.org/abs/1907.01341">Ranftl 2020</a></td>
+<td>Multi-dataset mixing, scale-and-shift invariant loss, relative depth</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/dpt/"><strong>DPT</strong></a></td>
+<td><a href="https://arxiv.org/abs/2103.13413">Ranftl 2021</a></td>
+<td>Dense Prediction Transformer (ViT backbone), global context</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/zoedepth/"><strong>ZoeDepth</strong></a></td>
+<td><a href="https://arxiv.org/abs/2302.12288">Bhat 2023</a></td>
+<td>Zero-shot metric depth, Metric Bins Module</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/metric3d/"><strong>Metric3D</strong></a></td>
+<td><a href="https://arxiv.org/abs/2307.10984">Yin 2023</a></td>
+<td>Camera intrinsic-conditioned metric depth, Canonical Camera Space</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/depth-anything/"><strong>Depth Anything</strong></a></td>
+<td><a href="https://arxiv.org/abs/2401.10891">Yang 2024</a></td>
+<td>62M images, foundation model for monocular depth</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/depth-anything-v2/"><strong>Depth Anything V2</strong></a></td>
+<td><a href="https://arxiv.org/abs/2406.09414">Yang 2024</a></td>
+<td>Improved with synthetic data, better edge preservation</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/depth-anything-3/"><strong>Depth Anything 3</strong></a></td>
+<td><a href="https://arxiv.org/abs/2511.10647">Lin 2025</a></td>
+<td>Any-view geometry from arbitrary inputs, depth-ray prediction target, single plain transformer (DINOv2), teacher-student training</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/marigold/"><strong>Marigold</strong></a></td>
+<td><a href="https://arxiv.org/abs/2312.02145">Ke 2024</a></td>
+<td>Stable Diffusion for depth, fine detail, uncertainty via sampling</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/align3r/"><strong>Align3R</strong></a></td>
+<td><a href="https://arxiv.org/abs/2412.03079">Lu 2025</a></td>
+<td>Video temporal consistency, DUSt3R-based, CVPR 2025 Highlight</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/masked-depth-modeling-lingbot-depth/"><strong>Masked Depth Modeling (LingBot-Depth)</strong></a></td>
+<td><a href="https://arxiv.org/abs/2601.17895">Tan 2026</a></td>
+<td>Fixes RGB-D failures on glass/mirrors/metal</td>
+</tr>
+</tbody>
+</table>
+<h4>Optical Flow &#x26; Scene Flow</h4>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Author/Year</th>
+<th>Key Concepts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/flownet/"><strong>FlowNet</strong></a></td>
+<td><a href="https://arxiv.org/abs/1504.06852">Dosovitskiy 2015</a></td>
+<td>First end-to-end deep optical flow (SimpleNet / CorrNet)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/flownet-2-0/"><strong>FlowNet 2.0</strong></a></td>
+<td><a href="https://arxiv.org/abs/1612.01925">Ilg 2017</a></td>
+<td>Stacked networks, classical-level accuracy</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/pwc-net/"><strong>PWC-Net</strong></a></td>
+<td><a href="https://arxiv.org/abs/1709.02371">Sun 2018</a></td>
+<td>Pyramid-Warping-Cost volume, coarse-to-fine, 8.4M params</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/flownet3d/"><strong>FlowNet3D</strong></a></td>
+<td><a href="https://arxiv.org/abs/1806.01411">Liu 2019</a></td>
+<td>Point cloud scene flow, PointNet++ based</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/raft/"><strong>RAFT</strong></a></td>
+<td><a href="https://arxiv.org/abs/2003.12039">Teed 2020</a></td>
+<td>All-Pairs Correlation + iterative ConvGRU update, <strong>ECCV Best Paper</strong></td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/raft-3d/"><strong>RAFT-3D</strong></a></td>
+<td><a href="https://arxiv.org/abs/2012.00726">Teed 2021</a></td>
+<td>Scene flow (3D motion) from RAFT</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/flowformer/"><strong>FlowFormer</strong></a></td>
+<td><a href="https://arxiv.org/abs/2203.16194">Huang 2022</a></td>
+<td>Transformer on cost volume tokens, global context</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/sea-raft/"><strong>SEA-RAFT</strong></a></td>
+<td><a href="https://arxiv.org/abs/2405.14793">Wang 2024</a></td>
+<td>Efficient RAFT variant for real-time</td>
+</tr>
+</tbody>
+</table>
+<h4>Camera Pose Regression &#x26; Relocalization</h4>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Author/Year</th>
+<th>Key Concepts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/posenet/"><strong>PoseNet</strong></a></td>
+<td><a href="https://arxiv.org/abs/1505.07427">Kendall 2015</a></td>
+<td>CNN-based 6-DoF pose regression (APR), GoogLeNet backbone</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/dsac/"><strong>DSAC</strong></a></td>
+<td><a href="https://arxiv.org/abs/1611.05705">Brachmann 2017</a></td>
+<td>Differentiable RANSAC, Scene Coordinate Regression (SCR)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/dsacpp/"><strong>DSAC++</strong></a></td>
+<td><a href="https://arxiv.org/abs/1711.10228">Brachmann 2018</a></td>
+<td>Self-supervision, RGB-D support</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/cnn-pose-regression-limitations/">CNN Pose Regression Limitations</a></td>
+<td><a href="https://arxiv.org/abs/1903.07504">Sattler 2019</a></td>
+<td>Pose regression ≈ image retrieval performance</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/lm-reloc/">LM-Reloc</a></td>
+<td><a href="https://arxiv.org/abs/2010.06323">von Stumberg 2020</a></td>
+<td>Deep direct relocalization</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/dsac-star/"><strong>DSAC*</strong></a></td>
+<td><a href="https://arxiv.org/abs/2002.12324">Brachmann 2021</a></td>
+<td>Visual relocalization from RGB/RGB-D, improved learning stability (TPAMI)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/ace/"><strong>ACE</strong></a></td>
+<td><a href="https://arxiv.org/abs/2305.14059">Brachmann 2023</a></td>
+<td>Accelerated Coordinate Encoding, 5-min training per scene</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/ace-zero/"><strong>ACE Zero</strong></a></td>
+<td><a href="https://arxiv.org/abs/2404.14351">Brachmann 2024</a></td>
+<td>Zero-shot SCR, no pre-built 3D map needed</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/ace-g/"><strong>ACE-G</strong></a></td>
+<td><a href="https://arxiv.org/abs/2510.11605">Bruns 2025</a></td>
+<td>Generalizable SCR via query pretraining, new scenes without fine-tuning</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/ace-slam/"><strong>ACE-SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2512.14032">Alzugaray 2025</a></td>
+<td>Neural implicit real-time SLAM, network weights = map</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/hloc/"><strong>hloc</strong></a></td>
+<td><a href="https://github.com/cvg/Hierarchical-Localization">Sarlin 2019</a></td>
+<td>Toolbox implementing HF-Net's hierarchical localization: coarse (NetVLAD) → fine (SuperGlue)</td>
+</tr>
+</tbody>
+</table>
+<h4>Object Detection &#x26; Segmentation for SLAM</h4>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Author/Year</th>
+<th>Key Concepts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/yolo/"><strong>YOLO</strong></a> (v1→v11)</td>
+<td><a href="https://arxiv.org/abs/1506.02640">Redmon 2016→2024</a></td>
+<td>Real-time object detection, Ultralytics ecosystem</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/detr/"><strong>DETR</strong></a></td>
+<td><a href="https://arxiv.org/abs/2005.12872">Carion 2020</a></td>
+<td>Transformer detection, anchor-free, no NMS</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/rt-detr/"><strong>RT-DETR</strong></a></td>
+<td><a href="https://arxiv.org/abs/2304.08069">Zhao (Baidu) 2023</a></td>
+<td>Real-time DETR, YOLO-speed + Transformer quality</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/rf-detr/"><strong>RF-DETR</strong></a></td>
+<td><a href="https://arxiv.org/abs/2511.09554">Robinson 2025</a></td>
+<td>Weight-sharing NAS over DETRs, accuracy-latency Pareto tuning, first real-time detector past 60 AP on COCO</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/sam/"><strong>SAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2304.02643">Kirillov 2023</a></td>
+<td>Segment Anything, prompt-based, Foundation Model</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/sam-2/"><strong>SAM 2</strong></a></td>
+<td><a href="https://arxiv.org/abs/2408.00714">Meta 2024</a></td>
+<td>Video segmentation, Memory Attention, temporal consistency</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/sam-3/"><strong>SAM 3</strong></a></td>
+<td><a href="https://arxiv.org/abs/2511.16719">Carion 2025</a></td>
+<td>Promptable concept segmentation (noun-phrase / exemplar prompts), presence head, detector + memory-based video tracker</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/grounding-dino/"><strong>Grounding DINO</strong></a></td>
+<td><a href="https://arxiv.org/abs/2303.05499">Liu 2023</a></td>
+<td>Text-prompted detection → SAM pipeline (Grounded SAM)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/open-yolo-3d/"><strong>Open-YOLO 3D</strong></a></td>
+<td><a href="https://arxiv.org/abs/2406.02548">Boudjoghra 2024</a></td>
+<td>2D open-vocab detection → 3D instance seg, 16× faster</td>
+</tr>
+</tbody>
+</table>
+<h3>B. Deep Backend — Optimization</h3>
+<h4>Differentiable Bundle Adjustment</h4>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Author/Year</th>
+<th>Key Concepts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/ba-net/"><strong>BA-Net</strong></a></td>
+<td><a href="https://arxiv.org/abs/1806.04807">Tang 2019</a></td>
+<td>FPN + differentiable LM layer, end-to-end SfM (ICLR)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/droid-slam/"><strong>DROID-SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2108.10869">Teed 2021</a></td>
+<td>Dense optical flow + differentiable dense BA, all-pixels reprojection</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/dpvo/"><strong>DPVO</strong></a></td>
+<td><a href="https://arxiv.org/abs/2208.04726">Teed 2023</a></td>
+<td>Patch-based DROID-SLAM, 30+ FPS real-time</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/theseus/"><strong>Theseus</strong></a></td>
+<td><a href="https://arxiv.org/abs/2207.09442">Pineda (Meta) 2022</a></td>
+<td>Differentiable nonlinear optimization library (PyTorch)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/lietorch/"><strong>Lietorch</strong></a></td>
+<td><a href="https://github.com/princeton-vl/lietorch">Teed 2021</a></td>
+<td>Lie group operations for PyTorch (SE(3)/SO(3))</td>
+</tr>
+</tbody>
+</table>
+<h3>C. End-to-End Deep VO / SLAM Systems</h3>
+<h4>Self-supervised &#x26; Learned VO</h4>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Author/Year</th>
+<th>Key Concepts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/deepvo/">DeepVO</a></td>
+<td><a href="https://arxiv.org/abs/1709.08429">Wang 2017</a></td>
+<td>Supervised learning</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/sfm-learner/">SfM-Learner</a></td>
+<td><a href="https://arxiv.org/abs/1704.07813">Zhou 2017</a></td>
+<td>Unsupervised, deep depth + deep pose</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/demon/">DeMoN</a></td>
+<td><a href="https://arxiv.org/abs/1612.02401">Ummenhofer 2017</a></td>
+<td>Depth + Motion from two frames, encoder-decoder</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/undeepvo/">UndeepVO</a></td>
+<td><a href="https://arxiv.org/abs/1709.06841">Li 2018</a></td>
+<td>Stereo self-supervised, absolute scale recovery</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/deeptam/">DeepTAM</a></td>
+<td><a href="https://arxiv.org/abs/1808.01900">Zhou 2018</a></td>
+<td>Deep tracking and mapping, cost volume based</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/deepv2d/">DeepV2D</a></td>
+<td><a href="https://arxiv.org/abs/1812.04605">Teed 2018</a></td>
+<td>Iterative depth from video, differentiable geometry layers</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/depth-from-videos-in-the-wild/">Depth from Videos in the Wild</a></td>
+<td><a href="https://arxiv.org/abs/1904.04998">Gordon 2019</a></td>
+<td>Unconstrained video depth, learned camera intrinsics</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/neural-ray-surfaces/">Neural Ray Surfaces</a></td>
+<td><a href="https://arxiv.org/abs/2008.06630">Vasiljevic 2020</a></td>
+<td>Learned ray surface model, non-pinhole cameras</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/gradslam/">GradSLAM</a></td>
+<td><a href="https://arxiv.org/abs/1910.10672">Murthy 2020</a></td>
+<td>Differentiable SLAM framework (PyTorch, supports multiple SLAM backends)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/deepslam/">DeepSLAM</a></td>
+<td><a href="https://ieeexplore.ieee.org/document/9047170">Li 2020</a></td>
+<td>TrackingNet, MappingNet, LoopNet</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/monorec/">MonoRec</a></td>
+<td><a href="https://arxiv.org/abs/2011.11814">Wimbauer 2021</a></td>
+<td>Self-supervised monocular 3D reconstruction, moving objects</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/tandem/">TANDEM</a></td>
+<td><a href="https://arxiv.org/abs/2111.07418">Koestler 2021</a></td>
+<td>Real-time tracking + dense mapping via MVS depth, DSO-based</td>
+</tr>
+</tbody>
+</table>
+<h4>Learning-based SLAM Systems</h4>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Author/Year</th>
+<th>Key Concepts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/droid-slam/"><strong>DROID-SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2108.10869">Teed 2021</a></td>
+<td>Differentiable BA, dense optical flow, end-to-end learned</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/tartanvo/">TartanVO</a></td>
+<td><a href="https://arxiv.org/abs/2011.00359">Wang 2021</a></td>
+<td>Generalizable visual odometry</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/dpv-slam/"><strong>DPV-SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2408.01654">Lipson 2024</a></td>
+<td>DPVO + loop closure, full SLAM (ECCV 2024)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/mac-vo/">MAC-VO</a></td>
+<td><a href="https://arxiv.org/abs/2409.09479">Qiu 2024</a></td>
+<td>Learning-based VO, metric-aware</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/vot/"><strong>VoT</strong></a></td>
+<td><a href="https://arxiv.org/abs/2510.03348">Yugay 2025</a></td>
+<td>Visual Odometry with Transformers (later retitled FVO)</td>
+</tr>
+</tbody>
+</table>
+<h4>Latent Representation SLAM</h4>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Author/Year</th>
+<th>Key Concepts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/codeslam/"><strong>CodeSLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/1804.00874">Bloesch 2018</a></td>
+<td>Depth as 128-dim latent code, photometric BA on codes + poses</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/scenecode/"><strong>SceneCode</strong></a></td>
+<td><a href="https://arxiv.org/abs/1903.06482">Zhi 2019</a></td>
+<td>Depth + semantic in single latent code, cross-modal constraints</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/deepfactors/"><strong>DeepFactors</strong></a></td>
+<td><a href="https://arxiv.org/abs/2001.05049">Czarnowski 2020</a></td>
+<td>Probabilistic depth codes + factor graph, GPU 30+ FPS</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/nodeslam/"><strong>NodeSLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2004.04485">Sucar 2020</a></td>
+<td>Object-level DeepSDF codes, occupancy VAE per object</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/codemapping/"><strong>CodeMapping</strong></a></td>
+<td><a href="https://arxiv.org/abs/2107.08994">Matsuki 2021</a></td>
+<td>Sparse SLAM + learned dense mapping, hybrid approach</td>
+</tr>
+</tbody>
+</table>
+<h4>Neural Rendering (reference)</h4>
+<blockquote>
+<p>NeRF/3DGS-based SLAM systems → see <strong>Pillar E below</strong></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Author/Year</th>
+<th>Key Concepts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/nerf/"><strong>NeRF</strong></a></td>
+<td><a href="https://arxiv.org/abs/2003.08934">Mildenhall 2020</a></td>
+<td>Neural Radiance Fields, novel view synthesis (foundational)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/difix3d/"><strong>DIFIX3D+</strong></a></td>
+<td><a href="https://arxiv.org/abs/2503.01774">Wu 2025</a></td>
+<td>Single-step diffusion for 3D reconstruction artifact removal (post-processing)</td>
+</tr>
+</tbody>
+</table>
+<h3>D. Scene Understanding</h3>
+<h4>Benchmarks &#x26; Foundations</h4>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Author/Year</th>
+<th>Key Concepts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/efm3d/"><strong>EFM3D</strong></a></td>
+<td><a href="https://arxiv.org/abs/2406.10224">Straub (Meta) 2024</a></td>
+<td>Egocentric Foundation Model 3D benchmark, depth/surface/semantic from ego-video</td>
+</tr>
+</tbody>
+</table>
+<h4>3D Scene Graph</h4>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Author/Year</th>
+<th>Key Concepts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/kimera-3d-dynamic-scene-graph/">Kimera / 3D Dynamic Scene Graph</a></td>
+<td><a href="https://arxiv.org/abs/2002.06289">Rosinol 2020</a></td>
+<td>Kimera-VIO, Kimera-Mesher, Kimera-PGMO, Kimera-Semantics, Kimera-DSG (stereo/mono visual-inertial pipeline)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/hydra/"><strong>Hydra</strong></a></td>
+<td><a href="https://arxiv.org/abs/2201.13360">Hughes (MIT SPARK) 2022</a></td>
+<td>Real-time hierarchical Scene Graph (mesh→objects→places→rooms→buildings)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/hydra-multi/"><strong>Hydra-Multi</strong></a></td>
+<td><a href="https://arxiv.org/abs/2304.13487">Chang 2023</a></td>
+<td>Distributed multi-robot 3D Scene Graph</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/clio/"><strong>Clio</strong></a></td>
+<td><a href="https://arxiv.org/abs/2404.13696">Maggio (MIT SPARK) 2024</a></td>
+<td>Open-set task-driven Scene Graph, CLIP embeddings per node</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/khronos/"><strong>Khronos</strong></a></td>
+<td><a href="https://arxiv.org/abs/2402.13817">Schmid (MIT SPARK) 2024</a></td>
+<td>Spatio-temporal Scene Graph, dynamic object history tracking</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/conceptgraphs/"><strong>ConceptGraphs</strong></a></td>
+<td><a href="https://arxiv.org/abs/2309.16650">Gu 2023</a></td>
+<td>Open-vocabulary 3D Scene Graph, SAM + CLIP + LLM relations</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h4>Semantic / Language-Grounded SLAM</h4>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Author/Year</th>
+<th>Key Concepts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/conceptfusion/"><strong>ConceptFusion</strong></a></td>
+<td><a href="https://arxiv.org/abs/2302.07241">Jatavallabhula (MIT) 2023</a></td>
+<td>CLIP features fused into 3D map, open-vocabulary language queries</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/lerf/"><strong>LERF</strong></a></td>
+<td><a href="https://arxiv.org/abs/2303.09553">Kerr 2023</a></td>
+<td>Language Embedded Radiance Fields, DINO multi-scale, NeRF + CLIP</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/openscene/"><strong>OpenScene</strong></a></td>
+<td><a href="https://arxiv.org/abs/2211.15654">Peng (ETH) 2023</a></td>
+<td>Language features back-projected to 3D point clouds</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/spatiallm/"><strong>SpatialLM</strong></a></td>
+<td><a href="https://github.com/manycore-research/SpatialLM">Mao 2025</a></td>
+<td>Point cloud → LLM, structured indoor modeling as Python scripts</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Also see: <a href="https://arxiv.org/abs/2409.18108"><strong>LEGS</strong></a>, <a href="https://arxiv.org/abs/2503.01646"><strong>OpenGS-SLAM</strong></a> (Pillar E above); <a href="https://arxiv.org/abs/2406.02548"><strong>Open-YOLO 3D</strong></a> (Level 5 Object Detection)</p>
+</blockquote>
+<h3>E. Foundation-Model &#x26; Neural-Representation SLAM</h3>
+<h4>Foundation-Model SLAM</h4>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Author/Year</th>
+<th>Key Concepts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/dust3r/"><strong>DUSt3R</strong></a></td>
+<td><a href="https://arxiv.org/abs/2312.14132">Wang 2024</a></td>
+<td>Pointmap regression from image pairs, no calibration needed</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/mast3r/"><strong>MASt3R</strong></a></td>
+<td><a href="https://arxiv.org/abs/2406.09756">Leroy 2024</a></td>
+<td>DUSt3R + local feature matching</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/mast3r-slam/"><strong>MASt3R-SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2412.12392">Murai 2024</a></td>
+<td>Real-time dense SLAM from MASt3R priors</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/vggt/"><strong>VGGT</strong></a></td>
+<td><a href="https://arxiv.org/abs/2503.11651">Wang (Meta) 2025</a></td>
+<td>Feed-forward inference of poses, depths, pointmaps, tracks from N views (<strong>CVPR 2025 Best Paper</strong>)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/vggt-slam/"><strong>VGGT-SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2505.12549">Maggio 2025</a></td>
+<td>Dense RGB SLAM optimized on the SL(4) manifold, VGGT frontend</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/vggt-slam-2-0/"><strong>VGGT-SLAM 2.0</strong></a></td>
+<td><a href="https://arxiv.org/abs/2601.19887">Maggio 2026</a></td>
+<td>Real-time dense feed-forward scene reconstruction</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/vggt-geo/"><strong>VGGT-Geo</strong></a></td>
+<td><a href="https://www.mdpi.com/2220-9964/15/2/85">Qin 2026</a></td>
+<td>Probabilistic geometric fusion of VGGT priors for dense indoor SLAM</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/iggt/"><strong>IGGT</strong></a></td>
+<td><a href="https://arxiv.org/abs/2510.22706">Li 2025</a></td>
+<td>Instance-grounded geometry transformer — unified 3D reconstruction + instance-level understanding</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/amb3r/"><strong>AMB3R</strong></a></td>
+<td><a href="https://arxiv.org/abs/2511.20343">Wang 2025</a></td>
+<td>Accurate feed-forward metric-scale 3D reconstruction with backend, SfM/SLAM support</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/mast3r-fusion/"><strong>MASt3R-Fusion</strong></a></td>
+<td><a href="https://arxiv.org/abs/2509.20757">Zhou 2025</a></td>
+<td>MASt3R feed-forward visual model + IMU + GNSS fusion</td>
+</tr>
+</tbody>
+</table>
+<h4>NeRF-based</h4>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Author/Year</th>
+<th>Key Concepts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/imap/"><strong>iMAP</strong></a></td>
+<td><a href="https://arxiv.org/abs/2103.12352">Sucar 2021</a></td>
+<td>First NeRF-SLAM, single MLP, real-time tracking/mapping</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/barf/"><strong>BARF</strong></a></td>
+<td><a href="https://arxiv.org/abs/2104.06405">Lin 2021</a></td>
+<td>Bundle-Adjusting NeRF, coarse-to-fine positional encoding, joint pose+NeRF opt (not full SLAM — pose+NeRF co-optimization)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/nice-slam/"><strong>NICE-SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2112.12130">Zhu &#x26; Peng 2022</a></td>
+<td>Hierarchical feature grid (coarse/mid/fine), scalable</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/co-slam/"><strong>Co-SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2304.14377">Wang 2023</a></td>
+<td>Hash grid (Instant-NGP) + coordinate encoding, 5-10× faster than NICE-SLAM</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/eslam/"><strong>ESLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2211.11704">Johari 2023</a></td>
+<td>Tri-plane representation, O(N²) vs O(N³) memory</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/point-slam/"><strong>Point-SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2304.04278">Sandström 2023</a></td>
+<td>Neural point cloud based</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/nerf-slam/"><strong>NeRF-SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2210.13641">Rosinol 2023</a></td>
+<td>NeRF + classical SLAM pipeline</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/nicer-slam/"><strong>NICER-SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2302.03594">Zhu 2024</a></td>
+<td>RGB-only NeRF-SLAM (no depth sensor), monocular depth integration</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/vmap/"><strong>vMAP</strong></a></td>
+<td><a href="https://arxiv.org/abs/2302.01838">Kong 2023</a></td>
+<td>Object-level NeRF-SLAM, per-object neural fields</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/go-slam/"><strong>GO-SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2309.02436">Zhang 2023</a></td>
+<td>Global optimization + NeRF-SLAM, loop closure + global BA</td>
+</tr>
+</tbody>
+</table>
+<h4>3DGS-based</h4>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Author/Year</th>
+<th>Key Concepts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/splatam/"><strong>SplaTAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2312.02126">Keetha 2024</a></td>
+<td>Among the first 3DGS SLAM systems (concurrent with GS-SLAM, MonoGS), RGB-D, silhouette-guided densification</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/monogs/"><strong>MonoGS</strong></a></td>
+<td><a href="https://arxiv.org/abs/2312.06741">Matsuki 2024</a></td>
+<td>First monocular 3DGS SLAM (CVPR 2024 highlight), direct rasterization-based tracking, analytic camera Jacobians</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/gs-icp-slam/"><strong>GS-ICP SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2403.12550">Ha 2024</a></td>
+<td>Gaussian-to-Gaussian ICP (Mahalanobis distance), geometric tracking</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/photo-slam/"><strong>Photo-SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2311.16728">Huang 2024</a></td>
+<td>Explicit geometry + implicit appearance (MLP color), anti-aliasing</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/rtg-slam/"><strong>RTG-SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2404.19706">Peng 2024</a></td>
+<td>Real-time focus, adaptive Gaussian budget, Jetson Orin 25 FPS</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/egg-fusion/"><strong>EGG-Fusion</strong></a></td>
+<td><a href="https://arxiv.org/abs/2512.01296">Pan 2025</a></td>
+<td>Geometry-aware Gaussian surfel fusion on the fly, information-filter-based, real-time</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/online-3dgs-modeling/"><strong>Online 3DGS Modeling</strong></a></td>
+<td><a href="https://arxiv.org/abs/2508.14014">Lee 2025</a></td>
+<td>Online 3D Gaussian Splatting modeling with novel view selection</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/activesplat/"><strong>ActiveSplat</strong></a></td>
+<td><a href="https://arxiv.org/abs/2410.21955">Li 2025</a></td>
+<td>Active mapping with 3DGS + Voronoi-based path planning</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/opengs-slam/"><strong>OpenGS-SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2503.01646">Yang 2025</a></td>
+<td>Open-set dense semantic 3DGS SLAM, object-level scene understanding</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/level-05-deep-learning/legs/"><strong>LEGS</strong></a></td>
+<td><a href="https://arxiv.org/abs/2409.18108">Yu 2024</a></td>
+<td>Language Embedded Gaussian Splats, real-time language-queryable 3D</td>
+</tr>
+</tbody>
+</table>
+<hr></article><nav class="mt-8 flex justify-between font-mono text-sm"><span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/level-04-rgbd-slam/">&larr; Level 4: RGB-D Visual-SLAM</a></span><span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/level-06-vio-vins/">Level 6: VIO / VINS &rarr;</a></span></nav></main><footer class="mx-auto max-w-5xl px-5 py-10 font-mono text-xs space-y-2 text-slate-400"><p><a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap/pulls">Suggestions are welcome — please submit a PR to the repository.</a></p><p>MIT License &copy; 2026 Hyunggi Chang · built from the <a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap">roadmap repository</a></p></footer><script type="module">document.querySelectorAll(`a[data-lang]`).forEach(e=>{e.addEventListener(`click`,()=>{try{localStorage.setItem(`vslam-lang`,e.dataset.lang)}catch{}})});</script></body></html>

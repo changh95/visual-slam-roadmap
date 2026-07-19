@@ -1,0 +1,89 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>VLM vs VLA — Visual-SLAM Roadmap</title><meta name="description" content="Vision-Language Models (VLM) は、画像とテキストの両方で共同学習されたニューラルネットワークである。これらは視覚入力を推論する — 任意のテキストラベルに対して分類する、記述する、それについての質問に答える。Vision-Language-Action Models (VLA) は、VLMをある重要な一点で拡張する。すなわち、追加でロボットの行動を出力する。この違いは小さく聞こえるが、アーキテクチャ的にも思想的にも、知覚モジュールと方策(ポリシー)の違いに相当する。"><link rel="canonical" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/vlm-vs-vla/"><meta name="robots" content="index, follow, max-image-preview:large"><meta name="theme-color" content="#faf7f0"><link rel="icon" href="/visual-slam-roadmap/favicon.svg" type="image/svg+xml"><link rel="sitemap" href="/visual-slam-roadmap/sitemap-index.xml"><link rel="alternate" hreflang="en" href="https://www.cv-learn.com/visual-slam-roadmap/level-11-world-models-spatial-ai/vlm-vs-vla/"><link rel="alternate" hreflang="ko" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-11-world-models-spatial-ai/vlm-vs-vla/"><link rel="alternate" hreflang="zh-CN" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/vlm-vs-vla/"><link rel="alternate" hreflang="ja" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/vlm-vs-vla/"><link rel="alternate" hreflang="x-default" href="https://www.cv-learn.com/visual-slam-roadmap/level-11-world-models-spatial-ai/vlm-vs-vla/"><!-- Open Graph --><meta property="og:type" content="article"><meta property="og:site_name" content="Visual-SLAM Developer Roadmap"><meta property="og:title" content="VLM vs VLA — Visual-SLAM Roadmap"><meta property="og:description" content="Vision-Language Models (VLM) は、画像とテキストの両方で共同学習されたニューラルネットワークである。これらは視覚入力を推論する — 任意のテキストラベルに対して分類する、記述する、それについての質問に答える。Vision-Language-Action Models (VLA) は、VLMをある重要な一点で拡張する。すなわち、追加でロボットの行動を出力する。この違いは小さく聞こえるが、アーキテクチャ的にも思想的にも、知覚モジュールと方策(ポリシー)の違いに相当する。"><meta property="og:url" content="https://www.cv-learn.com/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/vlm-vs-vla/"><meta property="og:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="ja_JP"><meta property="og:locale:alternate" content="en_US"><meta property="og:locale:alternate" content="ko_KR"><meta property="og:locale:alternate" content="zh_CN"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="VLM vs VLA — Visual-SLAM Roadmap"><meta name="twitter:description" content="Vision-Language Models (VLM) は、画像とテキストの両方で共同学習されたニューラルネットワークである。これらは視覚入力を推論する — 任意のテキストラベルに対して分類する、記述する、それについての質問に答える。Vision-Language-Action Models (VLA) は、VLMをある重要な一点で拡張する。すなわち、追加でロボットの行動を出力する。この違いは小さく聞こえるが、アーキテクチャ的にも思想的にも、知覚モジュールと方策(ポリシー)の違いに相当する。"><meta name="twitter:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><!-- Google AdSense --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5473245269912288" crossorigin="anonymous"></script><!-- Google Analytics 4 --><!-- Microsoft Clarity --><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"VLM vs VLA","description":"Vision-Language Models (VLM) は、画像とテキストの両方で共同学習されたニューラルネットワークである。これらは視覚入力を推論する — 任意のテキストラベルに対して分類する、記述する、それについての質問に答える。Vision-Language-Action Models (VLA) は、VLMをある重要な一点で拡張する。すなわち、追加でロボットの行動を出力する。この違いは小さく聞こえるが、アーキテクチャ的にも思想的にも、知覚モジュールと方策(ポリシー)の違いに相当する。","inLanguage":"ja","url":"https://www.cv-learn.com/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/vlm-vs-vla/","isPartOf":{"@type":"WebSite","name":"Visual-SLAM Developer Roadmap","url":"https://www.cv-learn.com/visual-slam-roadmap/"},"author":{"@type":"Person","name":"Hyunggi Chang","url":"https://github.com/changh95"},"license":"https://opensource.org/licenses/MIT"}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Visual-SLAM Roadmap","item":"https://www.cv-learn.com/visual-slam-roadmap/ja/"},{"@type":"ListItem","position":2,"name":"ワールドモデルとSpatial AI","item":"https://www.cv-learn.com/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/"},{"@type":"ListItem","position":3,"name":"VLM vs VLA","item":"https://www.cv-learn.com/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/vlm-vs-vla/"}]}</script><link rel="stylesheet" href="/visual-slam-roadmap/_astro/readme.DemmKpdz.css"></head><body class="graph-paper min-h-screen text-inkline font-sans"><header class="border-b border-paper-line bg-paper/90 backdrop-blur sticky top-0 z-10"><nav class="mx-auto max-w-5xl px-5 py-3 flex items-center gap-4"><a href="/visual-slam-roadmap/ja/" class="font-display font-semibold tracking-wide text-sm uppercase text-scan-500 hover:opacity-80">VSLAM<span class="opacity-60">//</span>Roadmap</a><a href="https://ko-fi.com/changh95" target="_blank" rel="noopener" class="font-mono text-[11px] font-medium px-2.5 py-1 text-white bg-[#00b9fe] hover:opacity-85 transition-opacity leading-tight">♥ Support me if you liked this content!</a><a href="https://github.com/changh95/visual-slam-roadmap" class="ml-auto hidden sm:inline font-mono text-xs text-slate-500 hover:text-scan-500">GitHub &nearr;</a><div class="flex font-mono text-[11px] border border-paper-line bg-paper divide-paper-line divide-x ml-auto sm:ml-0" role="group" aria-label="Language"><a href="/visual-slam-roadmap/level-11-world-models-spatial-ai/vlm-vs-vla/" data-lang="en" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">EN</a><a href="/visual-slam-roadmap/ko/level-11-world-models-spatial-ai/vlm-vs-vla/" data-lang="ko" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">KO</a><a href="/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/vlm-vs-vla/" data-lang="zh" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">ZH</a><a href="/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/vlm-vs-vla/" data-lang="ja" aria-current="true" class="px-2 py-1 transition-colors bg-scan-500/10 text-scan-500 font-medium">JA</a></div></nav></header><main class="mx-auto max-w-3xl px-5 py-10"><nav class="font-mono text-xs text-slate-500 mb-6"><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/ja/">ロードマップ</a><span class="mx-1">/</span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/">レベル 11 · ワールドモデルとSpatial AI</a></nav><article class="prose prose-slate max-w-none prose-headings:font-display prose-a:text-scan-500 prose-a:decoration-scan-300/50 hover:prose-a:decoration-scan-500 prose-blockquote:font-mono prose-blockquote:text-sm prose-blockquote:not-italic bg-paper/80 border border-paper-line p-6 sm:p-8"><h1 id="vlm-vs-vla">VLM vs VLA</h1>
+<p><strong>Vision-Language Models (VLM)</strong> は、画像とテキストの両方で共同学習されたニューラルネットワークである。これらは視覚入力を<em>推論する</em> — 任意のテキストラベルに対して分類する、記述する、それについての質問に答える。<strong>Vision-Language-Action Models (VLA)</strong> は、VLMをある重要な一点で拡張する。すなわち、追加で<strong>ロボットの行動</strong>を出力する。この違いは小さく聞こえるが、アーキテクチャ的にも思想的にも、知覚モジュールと方策(ポリシー)の違いに相当する。</p>
+<h2 id="vlm-知覚と推論">VLM: 知覚と推論</h2>
+<p>このレベルにおけるVLMの系譜は、3つのアーキテクチャ世代を示している。</p>
+<ul>
+<li><strong>CLIP</strong>は、4億件のウェブ画像-テキストペアに対する対照学習によって、共有された画像-テキスト埋め込み空間を学習する — 出力は<em>埋め込み</em>であり、「推論」とは類似度検索(ゼロショット分類、検索)である。</li>
+<li><strong>BLIP-2</strong>は、小さなQ-Formerを用いて凍結された画像エンコーダと凍結されたLLMを橋渡しし、出力は画像に条件付けられた<em>生成された言語</em>となる — キャプション生成、VQA、指示追従 — しかもエンドツーエンド学習のわずかな一部のコストで実現する。</li>
+<li><strong>LLaVA</strong>はさらに単純である。単一の線形射影が凍結されたCLIPエンコーダの視覚トークンをLLMに接続し、視覚的な対話に対する指示チューニングによって、その結果を視覚チャットボットに変える。</li>
+</ul>
+<p>内部構造がどうであれ、VLMの出力は常に言語、埋め込み、あるいはスコアである — 知覚し理解するが、行動はしない。</p>
+<h2 id="vla-行動へのループを閉じる">VLA: 行動へのループを閉じる</h2>
+<p>RT-2によって導入された標準的な手法は、<strong>連続的なロボットコマンドをトークンに離散化する</strong>ことである。エンドエフェクタの位置/回転の差分、グリッパー状態、ナビゲーションの方位などは(例えば自由度ごとに256ビンで)ビン分割され、各ビンにはモデルの語彙内のトークンが割り当てられる。行動を出力することは、次に次トークン予測になる。現在のカメラ画像と言語指示が与えられると、モデルは自己回帰的に行動トークンを生成し、それがモーターコマンドにデコードされる。</p>
+<ul>
+<li><strong>RT-2</strong>は、大規模なVLMをウェブデータ<em>と</em>ロボットの実演データの両方で共同ファインチューニングし、同一のネットワークが質問に答えつつ行動も出力する。</li>
+<li><strong>OpenVLA</strong>は、このレシピを70億パラメータでオープンソース化した。特筆すべきは、言語バックボーンの前で2つの視覚エンコーダ — DINOv2(空間的で物体中心の特徴)とSigLIP(セマンティックでテキスト整合の特徴)— を融合している点であり、これは視覚エンコーダの品質がVLAの性能における実際のボトルネックであることを示す証拠である。</li>
+<li><strong>NaVILA</strong>は、このレシピをテーブルトップ操作から脚式ロボットのナビゲーションへと拡張する。</li>
+</ul>
+<h2 id="対比表">対比表</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th>VLM</th><th>VLA</th></tr></thead><tbody><tr><td>入力</td><td>画像+テキスト</td><td>画像+テキスト(+ロボットの状態/履歴)</td></tr><tr><td>出力</td><td>テキスト、埋め込み、類似度スコア</td><td>ロボットの行動トークン(オプションでテキストも)</td></tr><tr><td>学習データ</td><td>インターネット上の画像-テキストペア</td><td>VLMの初期化+ロボット実演データ</td></tr><tr><td>例</td><td>CLIP、SigLIP、BLIP-2、LLaVA</td><td>RT-2、OpenVLA、NaVILA</td></tr><tr><td>ロボットにおける役割</td><td>知覚とセマンティックな推論</td><td>エンドツーエンド(あるいは高レベル)の制御方策</td></tr></tbody></table>
+<h2 id="なぜvlmの上にvlaを構築するのか">なぜVLMの上にVLAを構築するのか</h2>
+<p>転移である。ロボットの実演データセットはインターネットに比べて極めて小さいが、VLMバックボーンは既に、物体とは何か、それがどのように記述されるか、世界がおおよそどのように機能するかを知っている。RT-2の目玉となる成果は<em>創発的な汎化</em>であった — ロボットの学習では一度も見たことのない物体の操作や指示への追従が、単に基盤となるVLMがそれらをウェブ上で見ていたという理由だけで実現した。ロボットデータのみからVLAをゼロから学習することは、この事前知識を捨ててしまうことになる。</p>
+<h2 id="設計上の緊張関係--そしてslamの位置づけ">設計上の緊張関係 — そしてSLAMの位置づけ</h2>
+<p>VLAは知覚、推論、制御を単一のネットワークに集約し、エンドツーエンドの最適化を行うが、その代わりにモジュラー型のロボットスタックが維持している明示的な幾何状態(マップ、姿勢)を放棄する。モジュラー型のパターンでは、スタックは次のように書ける。</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>知覚</mtext><mover><mo stretchy="true" minsize="3.0em">→</mo><mpadded width="+0.6em" lspace="0.3em"><mtext>SLAM</mtext></mpadded></mover><mtext>マップ+姿勢</mtext><mover><mo stretchy="true" minsize="3.0em">→</mo><mpadded width="+0.6em" lspace="0.3em"><mtext>VLM</mtext></mpadded></mover><mtext>シーン理解</mtext><mover><mo stretchy="true" minsize="3.0em">→</mo><mpadded width="+0.6em" lspace="0.3em"><mtext>VLA</mtext></mpadded></mover><mtext>行動</mtext></mrow><annotation encoding="application/x-tex">\text{知覚} \xrightarrow{\text{SLAM}} \text{マップ+姿勢} \xrightarrow{\text{VLM}} \text{シーン理解} \xrightarrow{\text{VLA}} \text{行動}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.1113em;vertical-align:-0.011em;"></span><span class="mord text"><span class="mord cjk_fallback">知覚</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel x-arrow"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1003em;"><span style="top:-3.322em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight x-arrow-pad"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">SLAM</span></span></span></span></span><span class="svg-align" style="top:-2.689em;"><span class="pstrut" style="height:2.7em;"></span><span class="hide-tail" style="height:0.522em;min-width:1.469em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="0.522em" viewBox="0 0 400000 522" preserveAspectRatio="xMaxYMin slice"><path d="M0 241v40h399891c-47.3 35.3-84 78-110 128
+-16.7 32-27.7 63.7-33 95 0 1.3-.2 2.7-.5 4-.3 1.3-.5 2.3-.5 3 0 7.3 6.7 11 20
+ 11 8 0 13.2-.8 15.5-2.5 2.3-1.7 4.2-5.5 5.5-11.5 2-13.3 5.7-27 11-41 14.7-44.7
+ 39-84.5 73-119.5s73.7-60.2 119-75.5c6-2 9-5.7 9-11s-3-9-9-11c-45.3-15.3-85
+-40.5-119-75.5s-58.3-74.8-73-119.5c-4.7-14-8.3-27.3-11-40-1.3-6.7-3.2-10.8-5.5
+-12.5-2.3-1.7-7.5-2.5-15.5-2.5-14 0-21 3.7-21 11 0 2 2 10.3 6 25 20.7 83.3 67
+ 151.7 139 205zm0 0v40h399900v-40z"></path></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.011em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.1837em;vertical-align:-0.0833em;"></span><span class="mord text"><span class="mord cjk_fallback">マップ</span><span class="mord">+</span><span class="mord cjk_fallback">姿勢</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel x-arrow"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1003em;"><span style="top:-3.322em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight x-arrow-pad"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">VLM</span></span></span></span></span><span class="svg-align" style="top:-2.689em;"><span class="pstrut" style="height:2.7em;"></span><span class="hide-tail" style="height:0.522em;min-width:1.469em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="0.522em" viewBox="0 0 400000 522" preserveAspectRatio="xMaxYMin slice"><path d="M0 241v40h399891c-47.3 35.3-84 78-110 128
+-16.7 32-27.7 63.7-33 95 0 1.3-.2 2.7-.5 4-.3 1.3-.5 2.3-.5 3 0 7.3 6.7 11 20
+ 11 8 0 13.2-.8 15.5-2.5 2.3-1.7 4.2-5.5 5.5-11.5 2-13.3 5.7-27 11-41 14.7-44.7
+ 39-84.5 73-119.5s73.7-60.2 119-75.5c6-2 9-5.7 9-11s-3-9-9-11c-45.3-15.3-85
+-40.5-119-75.5s-58.3-74.8-73-119.5c-4.7-14-8.3-27.3-11-40-1.3-6.7-3.2-10.8-5.5
+-12.5-2.3-1.7-7.5-2.5-15.5-2.5-14 0-21 3.7-21 11 0 2 2 10.3 6 25 20.7 83.3 67
+ 151.7 139 205zm0 0v40h399900v-40z"></path></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.011em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.1113em;vertical-align:-0.011em;"></span><span class="mord text"><span class="mord cjk_fallback">シーン理解</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel x-arrow"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1003em;"><span style="top:-3.322em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight x-arrow-pad"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">VLA</span></span></span></span></span><span class="svg-align" style="top:-2.689em;"><span class="pstrut" style="height:2.7em;"></span><span class="hide-tail" style="height:0.522em;min-width:1.469em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="0.522em" viewBox="0 0 400000 522" preserveAspectRatio="xMaxYMin slice"><path d="M0 241v40h399891c-47.3 35.3-84 78-110 128
+-16.7 32-27.7 63.7-33 95 0 1.3-.2 2.7-.5 4-.3 1.3-.5 2.3-.5 3 0 7.3 6.7 11 20
+ 11 8 0 13.2-.8 15.5-2.5 2.3-1.7 4.2-5.5 5.5-11.5 2-13.3 5.7-27 11-41 14.7-44.7
+ 39-84.5 73-119.5s73.7-60.2 119-75.5c6-2 9-5.7 9-11s-3-9-9-11c-45.3-15.3-85
+-40.5-119-75.5s-58.3-74.8-73-119.5c-4.7-14-8.3-27.3-11-40-1.3-6.7-3.2-10.8-5.5
+-12.5-2.3-1.7-7.5-2.5-15.5-2.5-14 0-21 3.7-21 11 0 2 2 10.3 6 25 20.7 83.3 67
+ 151.7 139 205zm0 0v40h399900v-40z"></path></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.011em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord cjk_fallback">行動</span></span></span></span></span></span></p>
+<p>エンドツーエンドの代替案は、明示的な幾何を完全に省略する。どちらが優れているかはおそらくタスクに依存する。既知の空間における精密な操作や長期のナビゲーションは明示的なSLAM状態を有利にし、短期的でオープンワールドな指示追従はエンドツーエンドの方策を有利にするかもしれない。現在のほとんどのVLAは計量的な記憶を全く持っておらず — これはまさにSLAMが再び登場する場面である。</p>
+<h2 id="slamにおける意義">SLAMにおける意義</h2>
+<p>VLMは既にSLAMを再形成しつつある。CLIP型の埋め込みを3Dマップに付与することで、任意の自由形式テキストでマップを問い合わせられるオープン語彙シーン理解(LERF、ConceptFusion)が得られる。VLAは、この分野にとってより大きなアーキテクチャ上の問いを提起する — 将来のロボットは、その上でVLAが計画を立てる明示的なSLAMマップを使うのか(SLAMをVLAに欠けている計量的記憶として使う)、それとも明示的な幾何を完全に迂回するエンドツーエンドの方策を使うのか。それぞれのモデルクラスがどこで強みを持つかを知ることは、古典的な空間表現が今なお存在価値を持つ領域 — 長期ナビゲーション、計量精度、永続的なマップ — を教えてくれる。</p>
+<h2 id="関連ノート">関連ノート</h2>
+<ul>
+<li><a href="/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/clip/">CLIP</a></li>
+<li><a href="/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/blip-2/">BLIP-2</a></li>
+<li><a href="/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/rt-2/">RT-2</a></li>
+<li><a href="/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/openvla/">OpenVLA</a></li>
+<li><a href="/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/navila/">NaVILA</a></li>
+<li><a href="/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/spatial-ai/">Spatial AI</a></li>
+</ul></article><div class="mt-10"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5473245269912288" data-ad-slot="2335164071" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></main><footer class="mx-auto max-w-5xl px-5 py-10 font-mono text-xs space-y-2 text-slate-400"><p><a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap/pulls">ご提案を歓迎します — リポジトリにPRを送ってください。</a></p><p>MIT License &copy; 2026 Hyunggi Chang · built from the <a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap">roadmap repository</a></p></footer><script type="module">document.querySelectorAll(`a[data-lang]`).forEach(e=>{e.addEventListener(`click`,()=>{try{localStorage.setItem(`vslam-lang`,e.dataset.lang)}catch{}})});</script></body></html>

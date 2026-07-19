@@ -1,0 +1,135 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>VIO / VINS — Visual-SLAM Roadmap</title><meta name="description" content="カメラとIMUの融合 — フィルタリング対最適化"><link rel="canonical" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-06-vio-vins/"><meta name="robots" content="index, follow, max-image-preview:large"><meta name="theme-color" content="#faf7f0"><link rel="icon" href="/visual-slam-roadmap/favicon.svg" type="image/svg+xml"><link rel="sitemap" href="/visual-slam-roadmap/sitemap-index.xml"><link rel="alternate" hreflang="en" href="https://www.cv-learn.com/visual-slam-roadmap/level-06-vio-vins/"><link rel="alternate" hreflang="ko" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-06-vio-vins/"><link rel="alternate" hreflang="zh-CN" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-06-vio-vins/"><link rel="alternate" hreflang="ja" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-06-vio-vins/"><link rel="alternate" hreflang="x-default" href="https://www.cv-learn.com/visual-slam-roadmap/level-06-vio-vins/"><!-- Open Graph --><meta property="og:type" content="website"><meta property="og:site_name" content="Visual-SLAM Developer Roadmap"><meta property="og:title" content="VIO / VINS — Visual-SLAM Roadmap"><meta property="og:description" content="カメラとIMUの融合 — フィルタリング対最適化"><meta property="og:url" content="https://www.cv-learn.com/visual-slam-roadmap/ja/level-06-vio-vins/"><meta property="og:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="ja_JP"><meta property="og:locale:alternate" content="en_US"><meta property="og:locale:alternate" content="ko_KR"><meta property="og:locale:alternate" content="zh_CN"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="VIO / VINS — Visual-SLAM Roadmap"><meta name="twitter:description" content="カメラとIMUの融合 — フィルタリング対最適化"><meta name="twitter:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><!-- Google AdSense --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5473245269912288" crossorigin="anonymous"></script><!-- Google Analytics 4 --><!-- Microsoft Clarity --><link rel="stylesheet" href="/visual-slam-roadmap/_astro/readme.DemmKpdz.css"></head><body class="graph-paper min-h-screen text-inkline font-sans"><header class="border-b border-paper-line bg-paper/90 backdrop-blur sticky top-0 z-10"><nav class="mx-auto max-w-5xl px-5 py-3 flex items-center gap-4"><a href="/visual-slam-roadmap/ja/" class="font-display font-semibold tracking-wide text-sm uppercase text-scan-500 hover:opacity-80">VSLAM<span class="opacity-60">//</span>Roadmap</a><a href="https://ko-fi.com/changh95" target="_blank" rel="noopener" class="font-mono text-[11px] font-medium px-2.5 py-1 text-white bg-[#00b9fe] hover:opacity-85 transition-opacity leading-tight">♥ Support me if you liked this content!</a><a href="https://github.com/changh95/visual-slam-roadmap" class="ml-auto hidden sm:inline font-mono text-xs text-slate-500 hover:text-scan-500">GitHub &nearr;</a><div class="flex font-mono text-[11px] border border-paper-line bg-paper divide-paper-line divide-x ml-auto sm:ml-0" role="group" aria-label="Language"><a href="/visual-slam-roadmap/level-06-vio-vins/" data-lang="en" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">EN</a><a href="/visual-slam-roadmap/ko/level-06-vio-vins/" data-lang="ko" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">KO</a><a href="/visual-slam-roadmap/zh/level-06-vio-vins/" data-lang="zh" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">ZH</a><a href="/visual-slam-roadmap/ja/level-06-vio-vins/" data-lang="ja" aria-current="true" class="px-2 py-1 transition-colors bg-scan-500/10 text-scan-500 font-medium">JA</a></div></nav></header><main class="mx-auto max-w-5xl px-5 py-10"><p class="font-mono text-xs text-scan-500 tracking-[0.25em] uppercase">レベル 06 / 11</p><h1 class="font-display font-bold text-3xl sm:text-4xl mt-2">VIO / VINS</h1><p class="mt-2 text-slate-500 max-w-2xl">カメラとIMUの融合 — フィルタリング対最適化</p><article class="prose prose-slate max-w-none mt-8 prose-headings:font-display prose-a:text-scan-500 prose-a:decoration-scan-300/50 hover:prose-a:decoration-scan-500 prose-table:font-sans prose-table:text-sm bg-paper/80 border border-paper-line p-6 sm:p-8"><h3>キーコンセプト</h3>
+<ul>
+<li><strong><a href="/visual-slam-roadmap/ja/level-06-vio-vins/tightly-coupled-vs-loosely-coupled/">密結合対疎結合</a></strong> — 視覚情報と慣性情報を同時に最適化するか、個別に最適化するか</li>
+<li><strong><a href="/visual-slam-roadmap/ja/level-06-vio-vins/filter-based-vs-optimization-based/">フィルタベース対最適化ベース</a></strong> — EKFアプローチ対非線形最適化(BA)</li>
+<li><strong><a href="/visual-slam-roadmap/ja/level-06-vio-vins/imu-preintegration/">IMUプリインテグレーション</a></strong> — キーフレーム間でIMU観測値を積分する手法(Lupton 2012;多様体上での形式化: Forster 2015)</li>
+<li><strong><a href="/visual-slam-roadmap/ja/level-06-vio-vins/imu-noise-model/">IMUノイズモデル</a></strong> — バイアス、ランダムウォーク、Allan分散</li>
+<li><strong><a href="/visual-slam-roadmap/ja/level-06-vio-vins/observability/">可観測性</a></strong> — VIOには観測不能な4自由度が存在する(3自由度のグローバル並進+ヨー角);等加速度運動下ではスケールも追加的に観測不能になる</li>
+<li><strong><a href="/visual-slam-roadmap/ja/level-06-vio-vins/deployed-vio/">実運用されているVIO</a></strong> — 商用XRスタック(Meta Quest、ARKit/ARCore)は最も広く展開されているVIOシステムであり、ケーススタディとして学ぶ価値がある</li>
+</ul>
+<h3>基礎</h3>
+<table>
+<thead>
+<tr>
+<th>リソース</th>
+<th>著者/年</th>
+<th>キーコンセプト</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-06-vio-vins/introduction-to-inertial-navigation/"><strong>Introduction to Inertial Navigation</strong></a></td>
+<td><a href="https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-696.html">Woodman 2007</a></td>
+<td>IMUの基礎、座標系、誤差要因 — 必須の前提知識</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-06-vio-vins/imu-preintegration-on-manifold/">IMU Preintegration on Manifold</a></td>
+<td><a href="https://arxiv.org/abs/1512.02363">Forster 2015</a></td>
+<td>多様体上でのプリインテグレーション、再積分不要のバイアス補正</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-06-vio-vins/quaternion-kinematics-for-error-state-kf/">Quaternion kinematics for error-state KF</a></td>
+<td><a href="https://arxiv.org/abs/1711.02508">Solà 2017</a></td>
+<td>クォータニオンの数学、誤差状態表現</td>
+</tr>
+</tbody>
+</table>
+<h3>フィルタベース</h3>
+<table>
+<thead>
+<tr>
+<th>システム</th>
+<th>著者/年</th>
+<th>キーコンセプト</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-06-vio-vins/msckf/"><strong>MSCKF</strong></a></td>
+<td><a href="https://ieeexplore.ieee.org/document/4209642">Mourikis 2007</a></td>
+<td>Multi-State Constraint KF、状態にランドマークを持たない効率的なVIO</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-06-vio-vins/rovio/">ROVIO</a></td>
+<td><a href="https://github.com/ethz-asl/rovio">Bloesch 2015</a></td>
+<td>ロボット中心のVIO、直接輝度トラッキング+EKF</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-06-vio-vins/openvins/"><strong>OpenVINS</strong></a></td>
+<td><a href="https://docs.openvins.com/">Geneva 2020</a></td>
+<td>オープンソースのMSCKF、モジュール式、拡張可能</td>
+</tr>
+</tbody>
+</table>
+<h3>最適化ベース</h3>
+<table>
+<thead>
+<tr>
+<th>システム</th>
+<th>著者/年</th>
+<th>キーコンセプト</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-06-vio-vins/okvis/">OKVIS</a></td>
+<td><a href="https://journals.sagepub.com/doi/10.1177/0278364914554813">Leutenegger 2015</a></td>
+<td>キーフレームベース、密結合、スライディングウィンドウ最適化</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-06-vio-vins/vins-mono/"><strong>VINS-Mono</strong></a></td>
+<td><a href="https://arxiv.org/abs/1708.03852">Qin 2018</a></td>
+<td>密結合、リローカリゼーション、ループクロージング、ポーズグラフ最適化</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-06-vio-vins/vi-dso/">VI-DSO</a></td>
+<td><a href="https://arxiv.org/abs/1804.05625">von Stumberg 2018</a></td>
+<td>直接疎VIO、動的マージナライゼーション、輝度誤差</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-06-vio-vins/vins-fusion/">VINS-Fusion</a></td>
+<td><a href="https://arxiv.org/abs/1901.03638">Qin 2019</a></td>
+<td>ステレオ+GPS融合の拡張</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-06-vio-vins/maplab/">maplab</a></td>
+<td><a href="https://arxiv.org/abs/1711.10250">Schneider 2018</a></td>
+<td>マルチセッション視覚慣性マッピングフレームワーク</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-06-vio-vins/kimera-vio/"><strong>Kimera-VIO</strong></a></td>
+<td><a href="https://arxiv.org/abs/1910.02490">Rosinol 2020</a></td>
+<td>Kimeraパイプライン向けの高速VIOフロントエンド、structureless視覚ファクター</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-06-vio-vins/basalt/">Basalt</a></td>
+<td><a href="https://arxiv.org/abs/1904.06504">Usenko 2020</a></td>
+<td>マージナライゼーション事前分布の非線形ファクター復元(NFR)、視覚慣性オドメトリ+マッピング</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-03-monocular-slam/orb-slam3/"><strong>ORB-SLAM3</strong></a></td>
+<td><a href="https://arxiv.org/abs/2007.11898">Campos 2020</a></td>
+<td>VIOモード、マルチマップ、IMU初期化</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-06-vio-vins/dm-vio/"><strong>DM-VIO</strong></a></td>
+<td><a href="https://arxiv.org/abs/2201.04114">von Stumberg 2022</a></td>
+<td>直接法(DSOベース)のモノキュラVIO、遅延マージナライゼーション、IMU初期化のためのポーズグラフBA</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-06-vio-vins/okvis2/"><strong>OKVIS2</strong></a></td>
+<td><a href="https://arxiv.org/abs/2202.09199">Leutenegger 2022</a></td>
+<td>マルチセッション、改良されたマージナライゼーション</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-06-vio-vins/airvo/">AirVO</a></td>
+<td><a href="https://arxiv.org/abs/2212.07595">Xu 2023</a></td>
+<td>点・線VIO、照明変化にロバスト</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-06-vio-vins/okvis2-x/"><strong>OKVIS2-X</strong></a></td>
+<td><a href="https://arxiv.org/abs/2510.04612">Boche &#x26; Leutenegger 2025</a></td>
+<td>マルチセンサーSLAM(視覚+慣性+深度+LiDAR+GNSS)、高密度な体積占有地図、大規模環境向けのサブマッピング(9km以上)、EuRoC/Hilti22でSOTA</td>
+</tr>
+</tbody>
+</table></article><nav class="mt-8 flex justify-between font-mono text-sm"><span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/ja/level-05-deep-learning/">&larr; 05 · 深層学習+SLAM</a></span><span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/ja/level-07-stereo-slam/">07 · ステレオSLAM &rarr;</a></span></nav></main><footer class="mx-auto max-w-5xl px-5 py-10 font-mono text-xs space-y-2 text-slate-400"><p><a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap/pulls">ご提案を歓迎します — リポジトリにPRを送ってください。</a></p><p>MIT License &copy; 2026 Hyunggi Chang · built from the <a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap">roadmap repository</a></p></footer><script type="module">document.querySelectorAll(`a[data-lang]`).forEach(e=>{e.addEventListener(`click`,()=>{try{localStorage.setItem(`vslam-lang`,e.dataset.lang)}catch{}})});</script></body></html>

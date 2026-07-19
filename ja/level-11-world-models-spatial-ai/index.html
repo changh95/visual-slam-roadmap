@@ -1,0 +1,141 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>ワールドモデルとSpatial AI — Visual-SLAM Roadmap</title><meta name="description" content="SLAM地図から学習されたワールド表現へ"><link rel="canonical" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/"><meta name="robots" content="index, follow, max-image-preview:large"><meta name="theme-color" content="#faf7f0"><link rel="icon" href="/visual-slam-roadmap/favicon.svg" type="image/svg+xml"><link rel="sitemap" href="/visual-slam-roadmap/sitemap-index.xml"><link rel="alternate" hreflang="en" href="https://www.cv-learn.com/visual-slam-roadmap/level-11-world-models-spatial-ai/"><link rel="alternate" hreflang="ko" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-11-world-models-spatial-ai/"><link rel="alternate" hreflang="zh-CN" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/"><link rel="alternate" hreflang="ja" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/"><link rel="alternate" hreflang="x-default" href="https://www.cv-learn.com/visual-slam-roadmap/level-11-world-models-spatial-ai/"><!-- Open Graph --><meta property="og:type" content="website"><meta property="og:site_name" content="Visual-SLAM Developer Roadmap"><meta property="og:title" content="ワールドモデルとSpatial AI — Visual-SLAM Roadmap"><meta property="og:description" content="SLAM地図から学習されたワールド表現へ"><meta property="og:url" content="https://www.cv-learn.com/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/"><meta property="og:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="ja_JP"><meta property="og:locale:alternate" content="en_US"><meta property="og:locale:alternate" content="ko_KR"><meta property="og:locale:alternate" content="zh_CN"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="ワールドモデルとSpatial AI — Visual-SLAM Roadmap"><meta name="twitter:description" content="SLAM地図から学習されたワールド表現へ"><meta name="twitter:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><!-- Google AdSense --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5473245269912288" crossorigin="anonymous"></script><!-- Google Analytics 4 --><!-- Microsoft Clarity --><link rel="stylesheet" href="/visual-slam-roadmap/_astro/readme.DemmKpdz.css"></head><body class="graph-paper min-h-screen text-inkline font-sans"><header class="border-b border-paper-line bg-paper/90 backdrop-blur sticky top-0 z-10"><nav class="mx-auto max-w-5xl px-5 py-3 flex items-center gap-4"><a href="/visual-slam-roadmap/ja/" class="font-display font-semibold tracking-wide text-sm uppercase text-scan-500 hover:opacity-80">VSLAM<span class="opacity-60">//</span>Roadmap</a><a href="https://ko-fi.com/changh95" target="_blank" rel="noopener" class="font-mono text-[11px] font-medium px-2.5 py-1 text-white bg-[#00b9fe] hover:opacity-85 transition-opacity leading-tight">♥ Support me if you liked this content!</a><a href="https://github.com/changh95/visual-slam-roadmap" class="ml-auto hidden sm:inline font-mono text-xs text-slate-500 hover:text-scan-500">GitHub &nearr;</a><div class="flex font-mono text-[11px] border border-paper-line bg-paper divide-paper-line divide-x ml-auto sm:ml-0" role="group" aria-label="Language"><a href="/visual-slam-roadmap/level-11-world-models-spatial-ai/" data-lang="en" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">EN</a><a href="/visual-slam-roadmap/ko/level-11-world-models-spatial-ai/" data-lang="ko" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">KO</a><a href="/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/" data-lang="zh" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">ZH</a><a href="/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/" data-lang="ja" aria-current="true" class="px-2 py-1 transition-colors bg-scan-500/10 text-scan-500 font-medium">JA</a></div></nav></header><main class="mx-auto max-w-5xl px-5 py-10"><p class="font-mono text-xs text-scan-500 tracking-[0.25em] uppercase">レベル 11 / 11</p><h1 class="font-display font-bold text-3xl sm:text-4xl mt-2">ワールドモデルとSpatial AI</h1><p class="mt-2 text-slate-500 max-w-2xl">SLAM地図から学習されたワールド表現へ</p><article class="prose prose-slate max-w-none mt-8 prose-headings:font-display prose-a:text-scan-500 prose-a:decoration-scan-300/50 hover:prose-a:decoration-scan-500 prose-table:font-sans prose-table:text-sm bg-paper/80 border border-paper-line p-6 sm:p-8"><h3>キーコンセプト</h3>
+<ul>
+<li><strong><a href="/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/world-model/">ワールドモデル</a></strong> — 環境の力学を学習した生成モデルであり、予測や計画に利用できる</li>
+<li><strong><a href="/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/vlm-vs-vla/">VLM対VLA</a></strong> — 視覚言語モデル(VLM)は画像について推論する;視覚言語行動モデル(VLA)はさらにロボットの行動を出力する</li>
+<li><strong><a href="/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/spatial-ai/">Spatial AI</a></strong> — SLAM、シーン理解、学習されたワールド表現の融合(Davisonの提唱するFutureMappingのビジョン)</li>
+</ul>
+<h3>ワールドモデル</h3>
+<table>
+<thead>
+<tr>
+<th>システム</th>
+<th>著者/年</th>
+<th>キーコンセプト</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/gaia-1/"><strong>GAIA-1</strong></a></td>
+<td><a href="https://arxiv.org/abs/2309.17080">Wayve 2023</a></td>
+<td>運転向けワールドモデル、行動条件付きの未来シーン生成</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/sora-dit/"><strong>Sora / DiT</strong></a></td>
+<td><a href="https://openai.com/index/sora/">OpenAI 2024</a></td>
+<td>Diffusion Transformer、時空間パッチ、3次元理解の自然発生</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/nvidia-cosmos/"><strong>NVIDIA Cosmos</strong></a></td>
+<td><a href="https://github.com/NVIDIA/Cosmos">NVIDIA 2025</a></td>
+<td>Physical AIのためのワールド基盤モデルプラットフォーム、自動運転車/ロボット向けの合成データ</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/world-labs-marble/"><strong>World Labs / Marble</strong></a></td>
+<td><a href="https://www.worldlabs.ai/">Fei-Fei Li 2025</a></td>
+<td>画像/動画/テキストプロンプトから生成される3次元世界(持続的なガウシアンスプラットシーン)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/worldvla/"><strong>WorldVLA</strong></a></td>
+<td><a href="https://arxiv.org/abs/2506.21539">Cen (Alibaba) 2025</a></td>
+<td>自己回帰的な行動ワールドモデル、行動生成のために物理法則を学習</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/scenedino/"><strong>SceneDINO</strong></a></td>
+<td><a href="https://arxiv.org/abs/2507.06230">Jevtić 2025</a></td>
+<td>フィードフォワードな教師なしセマンティックシーン補完</td>
+</tr>
+</tbody>
+</table>
+<h3>生成3D</h3>
+<table>
+<thead>
+<tr>
+<th>システム</th>
+<th>著者/年</th>
+<th>キーコンセプト</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/dreamfusion/"><strong>DreamFusion</strong></a></td>
+<td><a href="https://arxiv.org/abs/2209.14988">Poole 2023</a></td>
+<td>Score Distillation Sampling(SDS)+NeRFによるText-to-3D</td>
+</tr>
+</tbody>
+</table>
+<h3>視覚言語モデル(VLM)</h3>
+<table>
+<thead>
+<tr>
+<th>システム</th>
+<th>著者/年</th>
+<th>キーコンセプト</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/clip/"><strong>CLIP</strong></a></td>
+<td><a href="https://arxiv.org/abs/2103.00020">Radford (OpenAI) 2021</a></td>
+<td>対照学習による画像・テキスト事前学習、4億ペア、ゼロショット</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/siglip/"><strong>SigLIP</strong></a></td>
+<td><a href="https://arxiv.org/abs/2303.15343">Zhai (Google) 2023</a></td>
+<td>シグモイド損失によるCLIP、より効率的、小型モデルでも高性能</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/blip-2/"><strong>BLIP-2</strong></a></td>
+<td><a href="https://arxiv.org/abs/2301.12597">Li (Salesforce) 2023</a></td>
+<td>Q-Formerが固定LLMと画像エンコーダを橋渡し</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/llava/"><strong>LLaVA</strong></a></td>
+<td><a href="https://arxiv.org/abs/2304.08485">Liu 2023</a></td>
+<td>LLaMA+視覚、対話型VLM</td>
+</tr>
+</tbody>
+</table>
+<h3>視覚言語行動モデル(VLA)</h3>
+<table>
+<thead>
+<tr>
+<th>システム</th>
+<th>著者/年</th>
+<th>キーコンセプト</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/rt-2/"><strong>RT-2</strong></a></td>
+<td><a href="https://arxiv.org/abs/2307.15818">Brohan (DeepMind) 2023</a></td>
+<td>ロボットの行動をテキストトークンとして表現、汎化能力の自然発生</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/openvla/"><strong>OpenVLA</strong></a></td>
+<td><a href="https://arxiv.org/abs/2406.09246">Kim 2024</a></td>
+<td>オープンソースVLA、SigLIP+Llama 7B+Action Head</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/navila/"><strong>NaVILA</strong></a></td>
+<td><a href="https://arxiv.org/abs/2412.04453">Cheng 2024</a></td>
+<td>脚式/車輪式ロボットのナビゲーション向け視覚言語行動モデル</td>
+</tr>
+</tbody>
+</table>
+<h3>リソース</h3>
+<table>
+<thead>
+<tr>
+<th>リソース</th>
+<th>著者/年</th>
+<th>キーコンセプト</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/KwanWaiPang/Awesome-Transformer-based-SLAM">Awesome-Transformer-based-SLAM</a></td>
+<td>KwanWaiPang</td>
+<td>Transformerベースの手法を厳選したGitHubリスト</td>
+</tr>
+</tbody>
+</table></article><nav class="mt-8 flex justify-between font-mono text-sm"><span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/ja/level-10-event-camera-slam/">&larr; 10 · イベントカメラSLAM</a></span><span></span></nav></main><footer class="mx-auto max-w-5xl px-5 py-10 font-mono text-xs space-y-2 text-slate-400"><p><a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap/pulls">ご提案を歓迎します — リポジトリにPRを送ってください。</a></p><p>MIT License &copy; 2026 Hyunggi Chang · built from the <a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap">roadmap repository</a></p></footer><script type="module">document.querySelectorAll(`a[data-lang]`).forEach(e=>{e.addEventListener(`click`,()=>{try{localStorage.setItem(`vslam-lang`,e.dataset.lang)}catch{}})});</script></body></html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>중앙집중식 대 분산식 — Visual-SLAM Roadmap</title><meta name="description" content="협업(다중 로봇) SLAM 시스템은 가장 근본적으로 전역 맵이 어디서 구축되는가에서 차이가 난다."><link rel="canonical" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-08-collaborative-slam/centralized-vs-decentralized/"><meta name="robots" content="index, follow, max-image-preview:large"><meta name="theme-color" content="#faf7f0"><link rel="icon" href="/visual-slam-roadmap/favicon.svg" type="image/svg+xml"><link rel="sitemap" href="/visual-slam-roadmap/sitemap-index.xml"><link rel="alternate" hreflang="en" href="https://www.cv-learn.com/visual-slam-roadmap/level-08-collaborative-slam/centralized-vs-decentralized/"><link rel="alternate" hreflang="ko" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-08-collaborative-slam/centralized-vs-decentralized/"><link rel="alternate" hreflang="zh-CN" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-08-collaborative-slam/centralized-vs-decentralized/"><link rel="alternate" hreflang="ja" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-08-collaborative-slam/centralized-vs-decentralized/"><link rel="alternate" hreflang="x-default" href="https://www.cv-learn.com/visual-slam-roadmap/level-08-collaborative-slam/centralized-vs-decentralized/"><!-- Open Graph --><meta property="og:type" content="article"><meta property="og:site_name" content="Visual-SLAM Developer Roadmap"><meta property="og:title" content="중앙집중식 대 분산식 — Visual-SLAM Roadmap"><meta property="og:description" content="협업(다중 로봇) SLAM 시스템은 가장 근본적으로 전역 맵이 어디서 구축되는가에서 차이가 난다."><meta property="og:url" content="https://www.cv-learn.com/visual-slam-roadmap/ko/level-08-collaborative-slam/centralized-vs-decentralized/"><meta property="og:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="ko_KR"><meta property="og:locale:alternate" content="en_US"><meta property="og:locale:alternate" content="zh_CN"><meta property="og:locale:alternate" content="ja_JP"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="중앙집중식 대 분산식 — Visual-SLAM Roadmap"><meta name="twitter:description" content="협업(다중 로봇) SLAM 시스템은 가장 근본적으로 전역 맵이 어디서 구축되는가에서 차이가 난다."><meta name="twitter:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><!-- Google AdSense --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5473245269912288" crossorigin="anonymous"></script><!-- Google Analytics 4 --><!-- Microsoft Clarity --><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"중앙집중식 대 분산식","description":"협업(다중 로봇) SLAM 시스템은 가장 근본적으로 전역 맵이 어디서 구축되는가에서 차이가 난다.","inLanguage":"ko","url":"https://www.cv-learn.com/visual-slam-roadmap/ko/level-08-collaborative-slam/centralized-vs-decentralized/","isPartOf":{"@type":"WebSite","name":"Visual-SLAM Developer Roadmap","url":"https://www.cv-learn.com/visual-slam-roadmap/"},"author":{"@type":"Person","name":"Hyunggi Chang","url":"https://github.com/changh95"},"license":"https://opensource.org/licenses/MIT"}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Visual-SLAM Roadmap","item":"https://www.cv-learn.com/visual-slam-roadmap/ko/"},{"@type":"ListItem","position":2,"name":"협업 SLAM","item":"https://www.cv-learn.com/visual-slam-roadmap/ko/level-08-collaborative-slam/"},{"@type":"ListItem","position":3,"name":"중앙집중식 대 분산식","item":"https://www.cv-learn.com/visual-slam-roadmap/ko/level-08-collaborative-slam/centralized-vs-decentralized/"}]}</script><link rel="stylesheet" href="/visual-slam-roadmap/_astro/readme.DemmKpdz.css"></head><body class="graph-paper min-h-screen text-inkline font-sans"><header class="border-b border-paper-line bg-paper/90 backdrop-blur sticky top-0 z-10"><nav class="mx-auto max-w-5xl px-5 py-3 flex items-center gap-4"><a href="/visual-slam-roadmap/ko/" class="font-display font-semibold tracking-wide text-sm uppercase text-scan-500 hover:opacity-80">VSLAM<span class="opacity-60">//</span>Roadmap</a><a href="https://ko-fi.com/changh95" target="_blank" rel="noopener" class="font-mono text-[11px] font-medium px-2.5 py-1 text-white bg-[#00b9fe] hover:opacity-85 transition-opacity leading-tight">♥ Support me if you liked this content!</a><a href="https://github.com/changh95/visual-slam-roadmap" class="ml-auto hidden sm:inline font-mono text-xs text-slate-500 hover:text-scan-500">GitHub &nearr;</a><div class="flex font-mono text-[11px] border border-paper-line bg-paper divide-paper-line divide-x ml-auto sm:ml-0" role="group" aria-label="Language"><a href="/visual-slam-roadmap/level-08-collaborative-slam/centralized-vs-decentralized/" data-lang="en" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">EN</a><a href="/visual-slam-roadmap/ko/level-08-collaborative-slam/centralized-vs-decentralized/" data-lang="ko" aria-current="true" class="px-2 py-1 transition-colors bg-scan-500/10 text-scan-500 font-medium">KO</a><a href="/visual-slam-roadmap/zh/level-08-collaborative-slam/centralized-vs-decentralized/" data-lang="zh" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">ZH</a><a href="/visual-slam-roadmap/ja/level-08-collaborative-slam/centralized-vs-decentralized/" data-lang="ja" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">JA</a></div></nav></header><main class="mx-auto max-w-3xl px-5 py-10"><nav class="font-mono text-xs text-slate-500 mb-6"><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/ko/">로드맵</a><span class="mx-1">/</span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/ko/level-08-collaborative-slam/">레벨 08 · 협업 SLAM</a></nav><article class="prose prose-slate max-w-none prose-headings:font-display prose-a:text-scan-500 prose-a:decoration-scan-300/50 hover:prose-a:decoration-scan-500 prose-blockquote:font-mono prose-blockquote:text-sm prose-blockquote:not-italic bg-paper/80 border border-paper-line p-6 sm:p-8"><h1 id="중앙집중식-대-분산식">중앙집중식 대 분산식</h1>
+<p>협업(다중 로봇) SLAM 시스템은 가장 근본적으로 전역 맵이 <em>어디서</em> 구축되는가에서 차이가 난다.</p>
+<h2 id="중앙집중식-아키텍처">중앙집중식 아키텍처</h2>
+<p>단일 서버(지상 기지국 또는 클라우드)가 모든 로봇으로부터 데이터를 집계하여 전역 최적화를 수행한다. 각 로봇은 경량 로컬 프론트엔드(추적, 키프레임 선택)를 실행하고 키프레임, 디스크립터, 또는 서브맵을 서버로 스트리밍한다. 서버는 로봇 간 장소 인식, 맵 병합, 전역 번들 조정을 수행한 다음 보정된 맵을 다시 방송한다. 예: C2TAM(클라우드 기반 PTAM), CCM-SLAM(서버 + ORB-SLAM 클라이언트), maplab 2.0(다중 세션 병합).</p>
+<p>네트워크로 흐르는 것: 키프레임(키포인트 + 디스크립터 + 포즈 추정값)은 올라가고, 최적화된 맵 보정은 내려간다. 원본 이미지는 로봇에 남는다.</p>
+<ul>
+<li>장점: 가장 강한 전역 일관성(서버가 모든 것을 봄), 단순한 클라이언트, 로봇에서 무거운 계산이 오프로드됨, 하나의 권위 있는 맵.</li>
+<li>단점: 단일 실패 지점, 서버와의 연결이 필요, 서버의 대역폭과 계산이 팀 규모에 맞춰 확장되어야 함, 통신 인프라에 의해 범위가 제한됨.</li>
+</ul>
+<p>잘 설계된 중앙집중식 시스템도 여전히 우아하게 저하된다: CCM-SLAM 클라이언트는 키프레임을 버퍼링하고 나중에 소급하여 동기화함으로써 연결 단절 중에도 계속 추적한다 — 서버는 <em>공유</em> 맵에는 중요하지만 각 로봇의 안전에는 필수적이지 않다.</p>
+<h2 id="분산식피어-투-피어-아키텍처">분산식(피어-투-피어) 아키텍처</h2>
+<p>서버가 없다: 로봇들은 통신 범위 내에 있을 때 이웃과 직접 정보를 교환하며, 각 로봇은 (부분적으로) 전역적인 맵에 대한 자신만의 추정값을 유지한다. 최적화는 분산되어 있다 — 각 로봇은 자신의 궤적 변수에 대해 반복하며 경계/분리자 포즈의 추정값만 이웃과 교환하고, 이를 네트워크가 전역 최적값으로 수렴할 때까지 반복한다. 예: DOOR-SLAM, Kimera-Multi, Swarm-SLAM.</p>
+<p>네트워크로 흐르는 것: 만남 중의 컴팩트한 장소 인식 디스크립터, 이어서 후보 클로저를 검증하기 위한 특징, 이어서 작은 반복별 최적화 메시지 — 전체 맵은 결코 흐르지 않는다.</p>
+<ul>
+<li>장점: 단일 실패 지점이 없음, 더 큰 팀으로 확장, 간헐적인 애드혹 링크에서도 작동, 원본 데이터가 각 로봇에 남을 수 있음(프라이버시/대역폭).</li>
+<li>단점: 전역 일관성이 더 어려움 — 분산 최적화기는 더 느리게 수렴하고, 각 로봇은 임시로 다른 버전의 맵을 가질 수 있으며, 중앙 권위가 로봇 간 루프 클로저를 검증하지 않기 때문에 강인한 이상값 제거(예: PCM, graduated non-convexity)가 필수가 된다.</li>
+</ul>
+<h2 id="비교">비교</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th>중앙집중식</th><th>분산식</th></tr></thead><tbody><tr><td>전역 최적화</td><td>서버에서, 정확함</td><td>분산적, 반복적</td></tr><tr><td>실패 내구성</td><td>서버가 핵심</td><td>우아하게 저하됨</td></tr><tr><td>통신</td><td>로봇-서버</td><td>로봇-로봇(이웃)</td></tr><tr><td>이상값 검증</td><td>서버가 모든 클로저를 봄</td><td>강인한 백엔드(PCM, GNC) 필요</td></tr><tr><td>맵 버전 관리</td><td>하나의 권위 있는 맵</td><td>임시로 분기된 로컬 뷰</td></tr><tr><td>일반적인 팀 규모</td><td>소규모(2-4)</td><td>더 큰 스웜</td></tr></tbody></table>
+<h2 id="어떻게-선택할까">어떻게 선택할까</h2>
+<ul>
+<li>신뢰할 수 있는 인프라(창고 WiFi, 실험실, 클라우드 링크)와 소규모 팀 → <strong>중앙집중식</strong>: 하나의 정확한 공유 맵으로 가는 가장 단순한 경로.</li>
+<li>간헐적이거나 짧은 범위, 또는 방해받는 링크(지하, 재난 대응, 스웜) → <strong>분산식</strong>: 네트워크가 분열될 때도 계속 작동하는 유일한 아키텍처.</li>
+<li>실시간 협업이 아닌 여러 세션에 걸친 장기적인 매핑 → maplab 2.0 스타일의 중앙집중식 <em>오프라인</em> 병합이 실시간 대역폭 문제를 완전히 피하며 충분한 경우가 많다.</li>
+<li>실무에서는 하이브리드도 흔하다: 로봇은 현장에서 피어-투-피어로 실행하고, 연결이 재확보되면 중앙 서버로 데이터를 넘긴다.</li>
+</ul>
+<p>근본적인 긴장 관계는 일관성과 통신 비용 사이에 있다: 중앙집중식 시스템은 더 강한 전역 일관성을 달성하지만 단일 실패 지점을 만든다. 분산식 시스템은 더 견고하지만 전역적으로 최적화하기 어렵다. 최근 연구(Kimera-Multi, Swarm-SLAM)는 강인한 이상값 제거를 갖춘 분산식 아키텍처 방향으로 흘러가고 있다.</p>
+<h2 id="slam에서의-의미">SLAM에서의 의미</h2>
+<p>아키텍처 선택은 협업 SLAM 설계에서 나머지 모든 것을 이끈다 — 무엇이 전송되는지, 루프 클로저가 어디서 검증되는지, 맵 병합이 어떻게 이루어지는지, 시스템이 어떻게 실패하는지. 신뢰할 수 있는 WiFi를 갖춘 소규모 팀에게는 중앙집중식 시스템이 정확한 공유 맵으로 가는 가장 단순한 경로다. 스웜, 지하 탐사, 또는 방해받는 네트워크에서는 분산식 설계만이 살아남는다.</p>
+<h2 id="관련-문서">관련 문서</h2>
+<ul>
+<li><a href="/visual-slam-roadmap/ko/level-08-collaborative-slam/ccm-slam/">CCM-SLAM</a></li>
+<li><a href="/visual-slam-roadmap/ko/level-08-collaborative-slam/kimera-multi/">Kimera-Multi</a></li>
+<li><a href="/visual-slam-roadmap/ko/level-08-collaborative-slam/swarm-slam/">Swarm-SLAM</a></li>
+<li><a href="/visual-slam-roadmap/ko/level-08-collaborative-slam/communication-constraints/">Communication constraints</a></li>
+<li><a href="/visual-slam-roadmap/ko/level-08-collaborative-slam/map-merging/">Map merging</a></li>
+<li><a href="/visual-slam-roadmap/ko/level-08-collaborative-slam/door-slam/">DOOR-SLAM</a></li>
+</ul></article><div class="mt-10"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5473245269912288" data-ad-slot="2335164071" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></main><footer class="mx-auto max-w-5xl px-5 py-10 font-mono text-xs space-y-2 text-slate-400"><p><a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap/pulls">제안은 언제든 환영합니다 — 저장소에 PR을 제출해 주세요.</a></p><p>MIT License &copy; 2026 Hyunggi Chang · built from the <a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap">roadmap repository</a></p></footer><script type="module">document.querySelectorAll(`a[data-lang]`).forEach(e=>{e.addEventListener(`click`,()=>{try{localStorage.setItem(`vslam-lang`,e.dataset.lang)}catch{}})});</script></body></html>

@@ -1,0 +1,23 @@
+# Visual-SLAM Developer Roadmap
+
+> A guided learning path for Visual-SLAM (Simultaneous Localization and Mapping with cameras): 11 levels from camera/math basics to world models, with 400+ study notes covering theory topics and landmark papers — each paper note includes the actual method, equations, and results — plus hands-on code exercises. Available in English, Korean, Chinese, and Japanese.
+
+Author: Hyunggi Chang (https://github.com/changh95). License: MIT.
+Source: https://github.com/changh95/visual-slam-roadmap
+
+## Levels
+- [Level 1: Beginner](https://www.cv-learn.com/visual-slam-roadmap/level-01-beginner/): math, programming, camera/image fundamentals
+- [Level 2: Getting Familiar with SLAM](https://www.cv-learn.com/visual-slam-roadmap/level-02-getting-familiar/): geometry, optimization, anatomy of a SLAM system
+- [Level 3: Monocular SLAM](https://www.cv-learn.com/visual-slam-roadmap/level-03-monocular-slam/): feature/direct paradigms through learning-based and foundation-model SLAM
+- [Level 4: RGB-D SLAM](https://www.cv-learn.com/visual-slam-roadmap/level-04-rgbd-slam/): dense tracking and volumetric/surfel fusion
+- [Level 5: Deep Learning + SLAM](https://www.cv-learn.com/visual-slam-roadmap/level-05-deep-learning/): learned frontends, differentiable backends, end-to-end systems, scene understanding
+- [Level 6: VIO / VINS](https://www.cv-learn.com/visual-slam-roadmap/level-06-vio-vins/): visual-inertial odometry, filtering vs optimization
+- [Level 7: Stereo SLAM](https://www.cv-learn.com/visual-slam-roadmap/level-07-stereo-slam/): metric scale and depth from stereo
+- [Level 8: Collaborative SLAM](https://www.cv-learn.com/visual-slam-roadmap/level-08-collaborative-slam/): multi-robot mapping and map merging
+- [Level 9: LiDAR & Visual-LiDAR Fusion](https://www.cv-learn.com/visual-slam-roadmap/level-09-lidar-visual-lidar-slam/): LiDAR odometry and camera-LiDAR-IMU fusion
+- [Level 10: Event Camera SLAM](https://www.cv-learn.com/visual-slam-roadmap/level-10-event-camera-slam/): asynchronous vision for HDR and high-speed motion
+- [Level 11: World Models & Spatial AI](https://www.cv-learn.com/visual-slam-roadmap/level-11-world-models-spatial-ai/): from SLAM maps to learned world representations
+
+## Resources
+- [Study Resources](https://www.cv-learn.com/visual-slam-roadmap/resources/): lectures, books, surveys, code exercises
+- [Code exercises (SLAM Zero-to-Hero)](https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero)

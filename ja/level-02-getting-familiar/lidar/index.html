@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>LiDAR — Visual-SLAM Roadmap</title><meta name="description" content="LiDAR（Light Detection and Ranging）は能動的な外界センサ（exteroceptive sensor）である。レーザーパルスを発射し、その反射を計測することで表面までの距離を直接測定する。走査型LiDARは典型的に10〜20 Hzで密な3D点群を出力し、優れた距離精度（およそ±2 cm程度）を持つ。また自ら照明を発するため、暗闇でも動作し、周囲光にほとんど影響されない。"><link rel="canonical" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-02-getting-familiar/lidar/"><meta name="robots" content="index, follow, max-image-preview:large"><meta name="theme-color" content="#faf7f0"><link rel="icon" href="/visual-slam-roadmap/favicon.svg" type="image/svg+xml"><link rel="sitemap" href="/visual-slam-roadmap/sitemap-index.xml"><link rel="alternate" hreflang="en" href="https://www.cv-learn.com/visual-slam-roadmap/level-02-getting-familiar/lidar/"><link rel="alternate" hreflang="ko" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-02-getting-familiar/lidar/"><link rel="alternate" hreflang="zh-CN" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-02-getting-familiar/lidar/"><link rel="alternate" hreflang="ja" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-02-getting-familiar/lidar/"><link rel="alternate" hreflang="x-default" href="https://www.cv-learn.com/visual-slam-roadmap/level-02-getting-familiar/lidar/"><!-- Open Graph --><meta property="og:type" content="article"><meta property="og:site_name" content="Visual-SLAM Developer Roadmap"><meta property="og:title" content="LiDAR — Visual-SLAM Roadmap"><meta property="og:description" content="LiDAR（Light Detection and Ranging）は能動的な外界センサ（exteroceptive sensor）である。レーザーパルスを発射し、その反射を計測することで表面までの距離を直接測定する。走査型LiDARは典型的に10〜20 Hzで密な3D点群を出力し、優れた距離精度（およそ±2 cm程度）を持つ。また自ら照明を発するため、暗闇でも動作し、周囲光にほとんど影響されない。"><meta property="og:url" content="https://www.cv-learn.com/visual-slam-roadmap/ja/level-02-getting-familiar/lidar/"><meta property="og:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="ja_JP"><meta property="og:locale:alternate" content="en_US"><meta property="og:locale:alternate" content="ko_KR"><meta property="og:locale:alternate" content="zh_CN"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="LiDAR — Visual-SLAM Roadmap"><meta name="twitter:description" content="LiDAR（Light Detection and Ranging）は能動的な外界センサ（exteroceptive sensor）である。レーザーパルスを発射し、その反射を計測することで表面までの距離を直接測定する。走査型LiDARは典型的に10〜20 Hzで密な3D点群を出力し、優れた距離精度（およそ±2 cm程度）を持つ。また自ら照明を発するため、暗闇でも動作し、周囲光にほとんど影響されない。"><meta name="twitter:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><!-- Google AdSense --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5473245269912288" crossorigin="anonymous"></script><!-- Google Analytics 4 --><!-- Microsoft Clarity --><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"LiDAR","description":"LiDAR（Light Detection and Ranging）は能動的な外界センサ（exteroceptive sensor）である。レーザーパルスを発射し、その反射を計測することで表面までの距離を直接測定する。走査型LiDARは典型的に10〜20 Hzで密な3D点群を出力し、優れた距離精度（およそ±2 cm程度）を持つ。また自ら照明を発するため、暗闇でも動作し、周囲光にほとんど影響されない。","inLanguage":"ja","url":"https://www.cv-learn.com/visual-slam-roadmap/ja/level-02-getting-familiar/lidar/","isPartOf":{"@type":"WebSite","name":"Visual-SLAM Developer Roadmap","url":"https://www.cv-learn.com/visual-slam-roadmap/"},"author":{"@type":"Person","name":"Hyunggi Chang","url":"https://github.com/changh95"},"license":"https://opensource.org/licenses/MIT"}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Visual-SLAM Roadmap","item":"https://www.cv-learn.com/visual-slam-roadmap/ja/"},{"@type":"ListItem","position":2,"name":"SLAMに慣れる","item":"https://www.cv-learn.com/visual-slam-roadmap/ja/level-02-getting-familiar/"},{"@type":"ListItem","position":3,"name":"LiDAR","item":"https://www.cv-learn.com/visual-slam-roadmap/ja/level-02-getting-familiar/lidar/"}]}</script><link rel="stylesheet" href="/visual-slam-roadmap/_astro/readme.DemmKpdz.css"></head><body class="graph-paper min-h-screen text-inkline font-sans"><header class="border-b border-paper-line bg-paper/90 backdrop-blur sticky top-0 z-10"><nav class="mx-auto max-w-5xl px-5 py-3 flex items-center gap-4"><a href="/visual-slam-roadmap/ja/" class="font-display font-semibold tracking-wide text-sm uppercase text-scan-500 hover:opacity-80">VSLAM<span class="opacity-60">//</span>Roadmap</a><a href="https://ko-fi.com/changh95" target="_blank" rel="noopener" class="font-mono text-[11px] font-medium px-2.5 py-1 text-white bg-[#00b9fe] hover:opacity-85 transition-opacity leading-tight">♥ Support me if you liked this content!</a><a href="https://github.com/changh95/visual-slam-roadmap" class="ml-auto hidden sm:inline font-mono text-xs text-slate-500 hover:text-scan-500">GitHub &nearr;</a><div class="flex font-mono text-[11px] border border-paper-line bg-paper divide-paper-line divide-x ml-auto sm:ml-0" role="group" aria-label="Language"><a href="/visual-slam-roadmap/level-02-getting-familiar/lidar/" data-lang="en" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">EN</a><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/lidar/" data-lang="ko" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">KO</a><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/lidar/" data-lang="zh" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">ZH</a><a href="/visual-slam-roadmap/ja/level-02-getting-familiar/lidar/" data-lang="ja" aria-current="true" class="px-2 py-1 transition-colors bg-scan-500/10 text-scan-500 font-medium">JA</a></div></nav></header><main class="mx-auto max-w-3xl px-5 py-10"><nav class="font-mono text-xs text-slate-500 mb-6"><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/ja/">ロードマップ</a><span class="mx-1">/</span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/ja/level-02-getting-familiar/">レベル 02 · SLAMに慣れる</a></nav><article class="prose prose-slate max-w-none prose-headings:font-display prose-a:text-scan-500 prose-a:decoration-scan-300/50 hover:prose-a:decoration-scan-500 prose-blockquote:font-mono prose-blockquote:text-sm prose-blockquote:not-italic bg-paper/80 border border-paper-line p-6 sm:p-8"><h1 id="lidar">LiDAR</h1>
+<p>**LiDAR（Light Detection and Ranging）**は能動的な外界センサ（exteroceptive sensor）である。レーザーパルスを発射し、その反射を計測することで表面までの距離を直接測定する。走査型LiDARは典型的に10〜20 Hzで密な3D点群を出力し、優れた距離精度（およそ±2 cm程度）を持つ。また自ら照明を発するため、暗闇でも動作し、周囲光にほとんど影響されない。</p>
+<h2 id="lidar計測に含まれるもの">LiDAR計測に含まれるもの</h2>
+<p>発射された各パルスは、既知のビーム方向に沿った**距離（range）**を返す。距離と方向からセンサ座標系における3D点が得られる。1回の走査はこれらを点群にまとめ、各点は通常次を保持する。</p>
+<ul>
+<li>センサ座標系における <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo separator="true">,</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(x, y, z)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.044em;">z</span><span class="mclose">)</span></span></span></span> 座標、</li>
+<li><strong>反射強度（intensity）</strong>（反射の強さ——マッチングのための粗い「テクスチャ」として、また再帰反射面の検出に有用）、</li>
+<li><strong>リング/チャンネル番号</strong>（どのレーザーがその点を生成したか——スキャンの垂直構造を符号化する）、</li>
+<li>走査内での<strong>点ごとのタイムスタンプ</strong>（以下で述べる歪み補正に不可欠）。</li>
+</ul>
+<p>主なハードウェアには2つの系統がある。</p>
+<ul>
+<li><strong>回転（機械式）LiDAR</strong>——例: Velodyne HDL-64、Ouster OS1——発光素子の列を回転させて水平方向に360°走査し、点のリングを生成する。自動運転や移動ロボットにおける古典的な選択肢である。</li>
+<li><strong>ソリッドステートLiDAR</strong>——例: Livoxセンサ、ドーム型ユニット——大きな可動部を持たず、固定された（しばしば不規則で非反復的な）走査パターンを、限られた視野で生成する。より安価で耐久性が高く、その独特な走査パターンが新しいオドメトリアルゴリズムを生む動機となった。</li>
+</ul>
+<h2 id="モーション歪みmotion-distortion">モーション歪み（Motion distortion）</h2>
+<p>走査型センサ特有の反復的なテーマがある。10〜20 Hzでは、1回の走査に約50〜100 msかかり、その間にプラットフォームは有意に移動する。したがって走査の開始点と終了点は<em>異なる</em>センサ姿勢で表現されており、スキャンを剛体として扱うと幾何がにじんでしまう。まともなLiDARパイプラインはすべて**歪み補正（de-skew）**を行う。各点は、その個別のタイムスタンプに対して補間された姿勢を用いて再投影され、動きの情報はIMUや等速モデルから得られる。これがLiDARがIMUと非常に自然に組み合わされる主な理由の一つである。</p>
+<h2 id="カメラ対lidar">カメラ対LiDAR</h2>
+<p>カメラと比較すると、トレードオフは明確である。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th>カメラ</th><th>LiDAR</th></tr></thead><tbody><tr><td>深度</td><td>間接的（三角測量）</td><td>直接的、メートル単位</td></tr><tr><td>照明</td><td>暗闇/HDRシーンで失敗</td><td>周囲光に依存しない</td></tr><tr><td>データ</td><td>密なテクスチャ、色、セマンティクス</td><td>疎な幾何、色なし</td></tr><tr><td>失敗ケース</td><td>低テクスチャ、ブラー</td><td>雨/霧/塵、幾何的に退化したシーン（長い通路、開けた野原）</td></tr><tr><td>コスト/重量/電力</td><td>低い</td><td>高い</td></tr></tbody></table>
+<p>LiDARの失敗モードは、それが<em>幾何的</em>であり測光的ではない点で強調に値する。長くて特徴のない通路やトンネルは、ある方向にはセンサを制約するが別の方向には制約しない（スキャンマッチングが通路の軸に沿って自由に滑る）、開けた野原はマッチングすべき構造がほとんどない、雨・霧・塵・ガラスは疑似的な、あるいは欠落した反射を生む。退化の検出と対処自体がレベル9の一つのトピックである。</p>
+<h2 id="lidar-slamスタック">LiDAR SLAMスタック</h2>
+<p>LiDAR SLAMには独自のアルゴリズムスタックがあり、レベル9で展開される。</p>
+<ul>
+<li><strong>スキャンマッチング</strong>——ICP系の手法による、連続するスキャンのpoint-to-pointまたはpoint-to-plane位置合わせ（このレベルで学んだ3D-3D対応の仕組み）。</li>
+<li><strong>特徴点ベースのオドメトリ</strong>——エッジ点と平面点に対して行う。LOAM系は局所曲率によって鋭い/平坦な点を抽出し、点群全体ではなくそれらをマッチングする。</li>
+<li><strong>地図表現</strong>——サーフェル地図（SuMa）、ボクセル/TSDF地図、占有オクトリー。</li>
+<li><strong>密結合LiDAR-慣性オドメトリ</strong>——LIO-SAM（ファクターグラフ）、FAST-LIO2（反復カルマンフィルタ）では、IMUが歪み補正と高速な動きの処理を担う。</li>
+</ul>
+<p>カメラとLiDARの失敗モードは相補的である——LiDARは視覚がテクスチャを持たない場所で幾何を与え、カメラは幾何が退化している場所でテクスチャとセマンティクスを与える——ため、このノードからのロードマップの矢印は<strong>Visual-LiDAR融合</strong>を指す。LVI-SAM、R3LIVE、FAST-LIVOのようなシステムは両者（とIMU）を融合し、どちらのセンサ単独では達成できないロバスト性を実現する。</p>
+<h2 id="slamにおける意義">SLAMにおける意義</h2>
+<p>LiDARは、メートル精度と照明ロバスト性が譲れない条件——自動運転車、測量、産業用ロボット——において選択されるセンサである。視覚SLAMを学ぶ者にとって、LiDARを理解することは二重の意味を持つ。それは視覚SLAMに対する最も強力な対抗パラダイムを定義し（センサ選択を公正に行うために有用）、また、ロバストなフィールドロボティクスの最先端をますます代表するようになっているvisual-LiDAR融合システムの半分でもある。</p>
+<h2 id="関連ノート">関連ノート</h2>
+<ul>
+<li><a href="/visual-slam-roadmap/ja/level-02-getting-familiar/exteroceptive-sensor/">Exteroceptive sensor</a></li>
+<li><a href="/visual-slam-roadmap/ja/level-02-getting-familiar/multi-sensor-calibration/">Multi-sensor calibration</a></li>
+<li><a href="/visual-slam-roadmap/ja/level-09-lidar-visual-lidar-slam/loam/">LOAM</a></li>
+<li><a href="/visual-slam-roadmap/ja/level-09-lidar-visual-lidar-slam/lidar-visual-inertial-lvi/">LiDAR-Visual-Inertial (LVI)</a></li>
+<li><a href="/visual-slam-roadmap/ja/level-09-lidar-visual-lidar-slam/fast-lio2/">FAST-LIO2</a></li>
+</ul></article><div class="mt-10"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5473245269912288" data-ad-slot="2335164071" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></main><footer class="mx-auto max-w-5xl px-5 py-10 font-mono text-xs space-y-2 text-slate-400"><p><a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap/pulls">ご提案を歓迎します — リポジトリにPRを送ってください。</a></p><p>MIT License &copy; 2026 Hyunggi Chang · built from the <a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap">roadmap repository</a></p></footer><script type="module">document.querySelectorAll(`a[data-lang]`).forEach(e=>{e.addEventListener(`click`,()=>{try{localStorage.setItem(`vslam-lang`,e.dataset.lang)}catch{}})});</script></body></html>

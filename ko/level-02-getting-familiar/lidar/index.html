@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>LiDAR — Visual-SLAM Roadmap</title><meta name="description" content="LiDAR (Light Detection and Ranging)는 능동형 외부감각(exteroceptive) 센서입니다: 레이저 펄스를 방출하고 반환 시간을 측정하여 표면까지의 거리를 직접 측정합니다. 스캐닝 LiDAR는 보통 10–20 Hz로 밀집 3D 포인트 클라우드를 출력하며 우수한 거리 정확도(약 ±2 cm)를 가지고, 스스로 조명을 제공하기 때문에 어둠 속에서도 동작하며 주변 조명에 거의 영향을 받지 않습니다."><link rel="canonical" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-02-getting-familiar/lidar/"><meta name="robots" content="index, follow, max-image-preview:large"><meta name="theme-color" content="#faf7f0"><link rel="icon" href="/visual-slam-roadmap/favicon.svg" type="image/svg+xml"><link rel="sitemap" href="/visual-slam-roadmap/sitemap-index.xml"><link rel="alternate" hreflang="en" href="https://www.cv-learn.com/visual-slam-roadmap/level-02-getting-familiar/lidar/"><link rel="alternate" hreflang="ko" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-02-getting-familiar/lidar/"><link rel="alternate" hreflang="zh-CN" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-02-getting-familiar/lidar/"><link rel="alternate" hreflang="ja" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-02-getting-familiar/lidar/"><link rel="alternate" hreflang="x-default" href="https://www.cv-learn.com/visual-slam-roadmap/level-02-getting-familiar/lidar/"><!-- Open Graph --><meta property="og:type" content="article"><meta property="og:site_name" content="Visual-SLAM Developer Roadmap"><meta property="og:title" content="LiDAR — Visual-SLAM Roadmap"><meta property="og:description" content="LiDAR (Light Detection and Ranging)는 능동형 외부감각(exteroceptive) 센서입니다: 레이저 펄스를 방출하고 반환 시간을 측정하여 표면까지의 거리를 직접 측정합니다. 스캐닝 LiDAR는 보통 10–20 Hz로 밀집 3D 포인트 클라우드를 출력하며 우수한 거리 정확도(약 ±2 cm)를 가지고, 스스로 조명을 제공하기 때문에 어둠 속에서도 동작하며 주변 조명에 거의 영향을 받지 않습니다."><meta property="og:url" content="https://www.cv-learn.com/visual-slam-roadmap/ko/level-02-getting-familiar/lidar/"><meta property="og:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="ko_KR"><meta property="og:locale:alternate" content="en_US"><meta property="og:locale:alternate" content="zh_CN"><meta property="og:locale:alternate" content="ja_JP"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="LiDAR — Visual-SLAM Roadmap"><meta name="twitter:description" content="LiDAR (Light Detection and Ranging)는 능동형 외부감각(exteroceptive) 센서입니다: 레이저 펄스를 방출하고 반환 시간을 측정하여 표면까지의 거리를 직접 측정합니다. 스캐닝 LiDAR는 보통 10–20 Hz로 밀집 3D 포인트 클라우드를 출력하며 우수한 거리 정확도(약 ±2 cm)를 가지고, 스스로 조명을 제공하기 때문에 어둠 속에서도 동작하며 주변 조명에 거의 영향을 받지 않습니다."><meta name="twitter:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><!-- Google AdSense --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5473245269912288" crossorigin="anonymous"></script><!-- Google Analytics 4 --><!-- Microsoft Clarity --><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"LiDAR","description":"LiDAR (Light Detection and Ranging)는 능동형 외부감각(exteroceptive) 센서입니다: 레이저 펄스를 방출하고 반환 시간을 측정하여 표면까지의 거리를 직접 측정합니다. 스캐닝 LiDAR는 보통 10–20 Hz로 밀집 3D 포인트 클라우드를 출력하며 우수한 거리 정확도(약 ±2 cm)를 가지고, 스스로 조명을 제공하기 때문에 어둠 속에서도 동작하며 주변 조명에 거의 영향을 받지 않습니다.","inLanguage":"ko","url":"https://www.cv-learn.com/visual-slam-roadmap/ko/level-02-getting-familiar/lidar/","isPartOf":{"@type":"WebSite","name":"Visual-SLAM Developer Roadmap","url":"https://www.cv-learn.com/visual-slam-roadmap/"},"author":{"@type":"Person","name":"Hyunggi Chang","url":"https://github.com/changh95"},"license":"https://opensource.org/licenses/MIT"}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Visual-SLAM Roadmap","item":"https://www.cv-learn.com/visual-slam-roadmap/ko/"},{"@type":"ListItem","position":2,"name":"SLAM과 친해지기","item":"https://www.cv-learn.com/visual-slam-roadmap/ko/level-02-getting-familiar/"},{"@type":"ListItem","position":3,"name":"LiDAR","item":"https://www.cv-learn.com/visual-slam-roadmap/ko/level-02-getting-familiar/lidar/"}]}</script><link rel="stylesheet" href="/visual-slam-roadmap/_astro/readme.DemmKpdz.css"></head><body class="graph-paper min-h-screen text-inkline font-sans"><header class="border-b border-paper-line bg-paper/90 backdrop-blur sticky top-0 z-10"><nav class="mx-auto max-w-5xl px-5 py-3 flex items-center gap-4"><a href="/visual-slam-roadmap/ko/" class="font-display font-semibold tracking-wide text-sm uppercase text-scan-500 hover:opacity-80">VSLAM<span class="opacity-60">//</span>Roadmap</a><a href="https://ko-fi.com/changh95" target="_blank" rel="noopener" class="font-mono text-[11px] font-medium px-2.5 py-1 text-white bg-[#00b9fe] hover:opacity-85 transition-opacity leading-tight">♥ Support me if you liked this content!</a><a href="https://github.com/changh95/visual-slam-roadmap" class="ml-auto hidden sm:inline font-mono text-xs text-slate-500 hover:text-scan-500">GitHub &nearr;</a><div class="flex font-mono text-[11px] border border-paper-line bg-paper divide-paper-line divide-x ml-auto sm:ml-0" role="group" aria-label="Language"><a href="/visual-slam-roadmap/level-02-getting-familiar/lidar/" data-lang="en" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">EN</a><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/lidar/" data-lang="ko" aria-current="true" class="px-2 py-1 transition-colors bg-scan-500/10 text-scan-500 font-medium">KO</a><a href="/visual-slam-roadmap/zh/level-02-getting-familiar/lidar/" data-lang="zh" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">ZH</a><a href="/visual-slam-roadmap/ja/level-02-getting-familiar/lidar/" data-lang="ja" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">JA</a></div></nav></header><main class="mx-auto max-w-3xl px-5 py-10"><nav class="font-mono text-xs text-slate-500 mb-6"><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/ko/">로드맵</a><span class="mx-1">/</span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/ko/level-02-getting-familiar/">레벨 02 · SLAM과 친해지기</a></nav><article class="prose prose-slate max-w-none prose-headings:font-display prose-a:text-scan-500 prose-a:decoration-scan-300/50 hover:prose-a:decoration-scan-500 prose-blockquote:font-mono prose-blockquote:text-sm prose-blockquote:not-italic bg-paper/80 border border-paper-line p-6 sm:p-8"><h1 id="lidar">LiDAR</h1>
+<p>**LiDAR (Light Detection and Ranging)**는 능동형 외부감각(exteroceptive) 센서입니다: 레이저 펄스를 방출하고 반환 시간을 측정하여 표면까지의 거리를 직접 측정합니다. 스캐닝 LiDAR는 보통 10–20 Hz로 밀집 3D 포인트 클라우드를 출력하며 우수한 거리 정확도(약 ±2 cm)를 가지고, 스스로 조명을 제공하기 때문에 어둠 속에서도 동작하며 주변 조명에 거의 영향을 받지 않습니다.</p>
+<h2 id="lidar-측정값이-담고-있는-것">LiDAR 측정값이 담고 있는 것</h2>
+<p>발사된 각 펄스는 알려진 빔 방향을 따라 **거리(range)**를 반환합니다; 거리와 방향이 합쳐지면 센서 프레임에서의 3D 점이 됩니다. 한 번의 완전한 스윕은 이들을 하나의 포인트 클라우드로 묶으며, 각 점은 보통 다음을 담고 있습니다:</p>
+<ul>
+<li>센서 프레임에서의 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo separator="true">,</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(x, y, z)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.044em;">z</span><span class="mclose">)</span></span></span></span> 좌표,</li>
+<li><strong>강도(intensity)</strong>(반환 강도 — 매칭을 위한 조악한 “텍스처”로, 그리고 재반사(retroreflective) 표면 검출에 유용),</li>
+<li><strong>링/채널 인덱스</strong>(어느 레이저가 이 점을 생성했는지 — 스캔의 수직 구조를 인코딩),</li>
+<li>스윕 내에서의 <strong>점별 타임스탬프</strong>(아래에서 다룰 디스큐잉(de-skewing)에 필수적).</li>
+</ul>
+<p>두 가지 주요 하드웨어 계열이 있습니다:</p>
+<ul>
+<li><strong>회전형(기계식) LiDAR</strong> — 예: Velodyne HDL-64, Ouster OS1 — 회전하는 방출기 기둥이 수평으로 360°를 스캔하며, 점들의 링을 생성합니다. 자율 주행과 모바일 로봇의 고전적인 선택입니다.</li>
+<li><strong>고체 상태(solid-state) LiDAR</strong> — 예: Livox 센서, 돔형 유닛 — 큰 움직이는 부품이 없고, 제한된 시야각을 가진 고정된(흔히 불규칙하고 비반복적인) 스캔 패턴을 가집니다. 더 저렴하고 내구성이 좋으며, 그 특이한 스캔 패턴은 새로운 오도메트리 알고리즘을 동기부여했습니다.</li>
+</ul>
+<h2 id="모션-왜곡">모션 왜곡</h2>
+<p>스캐닝 센서에만 있는 반복되는 주제입니다: 10–20 Hz에서, 한 번의 스윕은 획득에 약 50–100 ms가 걸리고, 그 시간 동안 플랫폼은 의미 있게 움직입니다. 따라서 스윕의 시작과 끝에서 나온 점들은 <em>서로 다른</em> 센서 포즈로 표현되며, 스캔을 강체로 취급하면 기하가 뭉개집니다. 모든 제대로 된 LiDAR 파이프라인은 **디스큐잉(de-skew)**을 수행합니다: 각 점은 IMU나 등속 모델에서 나오는 모션을 이용해 자신의 개별 타임스탬프에 대해 보간된 포즈로 재투영됩니다. 이것이 LiDAR가 IMU와 그토록 자연스럽게 짝을 이루는 주된 이유 중 하나입니다.</p>
+<h2 id="카메라-대-lidar">카메라 대 LiDAR</h2>
+<p>카메라와 비교하면 트레이드오프가 뚜렷합니다:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th>카메라</th><th>LiDAR</th></tr></thead><tbody><tr><td>깊이</td><td>간접적 (삼각측량)</td><td>직접적, 메트릭</td></tr><tr><td>조명</td><td>어둠/HDR 장면에서 실패</td><td>주변 조명과 무관</td></tr><tr><td>데이터</td><td>밀집 텍스처, 색상, 의미 정보</td><td>희소 기하, 색상 없음</td></tr><tr><td>실패 사례</td><td>낮은 텍스처, 블러</td><td>비/안개/먼지, 기하적으로 퇴화된 장면 (긴 복도, 열린 들판)</td></tr><tr><td>비용/무게/전력</td><td>낮음</td><td>높음</td></tr></tbody></table>
+<p>LiDAR의 실패 모드는 강조할 필요가 있습니다. 그것들이 <em>측광적</em>이 아니라 <em>기하적</em>이기 때문입니다: 길고 특징 없는 복도나 터널은 센서를 어떤 방향으로는 제약하지만 다른 방향으로는 제약하지 못하며(스캔 매칭이 복도 축을 따라 자유롭게 미끄러짐), 열린 들판은 매칭할 구조가 거의 없고, 비, 안개, 먼지, 유리는 잘못된 반사나 누락된 반사를 만들어냅니다. 퇴화(degeneracy) 감지와 처리는 Level 9의 별도 주제입니다.</p>
+<h2 id="lidar-slam-스택">LiDAR SLAM 스택</h2>
+<p>LiDAR SLAM은 Level 9에서 다루는 자체 알고리즘 스택을 가지고 있습니다:</p>
+<ul>
+<li>ICP 변형을 통한 <strong>스캔 매칭(scan matching)</strong> — 연속된 스캔의 점-대-점 또는 점-대-평면 정렬(이 레벨에서 다룬 3D-3D 대응 메커니즘입니다).</li>
+<li>에지와 평면 점에 대한 <strong>특징 기반 오도메트리</strong> — LOAM 계열은 지역 곡률로 뾰족한/평평한 점을 추출하여 완전한 클라우드 대신 그것들을 매칭합니다.</li>
+<li><strong>맵 표현</strong> — 서펠(surfel) 맵(SuMa), 복셀/TSDF 맵, 점유 옥트리(occupancy octree).</li>
+<li><strong>긴밀 결합(tightly-coupled) LiDAR-관성 오도메트리</strong> — LIO-SAM(팩터 그래프), FAST-LIO2(반복 칼만 필터), 여기서 IMU가 디스큐잉과 빠른 동역학을 처리합니다.</li>
+</ul>
+<p>카메라와 LiDAR의 실패 모드가 상호 보완적이기 때문에 — LiDAR는 시각이 텍스처가 없는 곳에 기하를 제공하고, 카메라는 기하가 퇴화된 곳에 텍스처와 의미 정보를 제공합니다 — 로드맵에서 이 노드로부터의 화살표는 <strong>시각-LiDAR 융합</strong>을 향합니다: LVI-SAM, R3LIVE, FAST-LIVO와 같은 시스템은 둘 다(그리고 IMU를) 융합하여 어느 센서 하나로도 달성할 수 없는 견고성을 얻습니다.</p>
+<h2 id="slam에서의-의미">SLAM에서의 의미</h2>
+<p>LiDAR는 메트릭 정확도와 조명 견고성이 타협 불가능할 때 선택하는 센서입니다 — 자율 주행 차량, 측량, 산업용 로봇. 시각 SLAM을 배우는 사람에게 LiDAR를 이해하는 것은 두 배로 중요합니다: 시각 SLAM에 대한 가장 강력한 대안 패러다임을 정의하고(센서를 솔직하게 선택하는 데 유용), 점점 더 견고한 현장 로보틱스의 최신 기술을 대표하는 시각-LiDAR 융합 시스템의 절반을 차지합니다.</p>
+<h2 id="관련-문서">관련 문서</h2>
+<ul>
+<li><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/exteroceptive-sensor/">Exteroceptive sensor</a></li>
+<li><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/multi-sensor-calibration/">Multi-sensor calibration</a></li>
+<li><a href="/visual-slam-roadmap/ko/level-09-lidar-visual-lidar-slam/loam/">LOAM</a></li>
+<li><a href="/visual-slam-roadmap/ko/level-09-lidar-visual-lidar-slam/lidar-visual-inertial-lvi/">LiDAR-Visual-Inertial (LVI)</a></li>
+<li><a href="/visual-slam-roadmap/ko/level-09-lidar-visual-lidar-slam/fast-lio2/">FAST-LIO2</a></li>
+</ul></article><div class="mt-10"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5473245269912288" data-ad-slot="2335164071" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></main><footer class="mx-auto max-w-5xl px-5 py-10 font-mono text-xs space-y-2 text-slate-400"><p><a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap/pulls">제안은 언제든 환영합니다 — 저장소에 PR을 제출해 주세요.</a></p><p>MIT License &copy; 2026 Hyunggi Chang · built from the <a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap">roadmap repository</a></p></footer><script type="module">document.querySelectorAll(`a[data-lang]`).forEach(e=>{e.addEventListener(`click`,()=>{try{localStorage.setItem(`vslam-lang`,e.dataset.lang)}catch{}})});</script></body></html>

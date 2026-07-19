@@ -1,0 +1,114 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Learned vs hand-crafted — Visual-SLAM Roadmap</title><meta name="description" content="古典的なSLAMは手作業で設計されたモジュールのパイプラインである: コーナー検出器（FAST、Harris）、記述子（ORB、SIFT）、マッチャー（最近傍＋比率テスト）、ロバスト推定（RANSAC）、そして非線形最小二乗バックエンドである。これらの各コンポーネントは人間の仮定を符号化している — 「良い」特徴とはどのようなものか、どのようなノイズ分布を想定するか、どのヒューリスティクスで外れ値を拒否するか。深層学習は代替手段を提供する: これらの関数をデータから学習させるというものである。"><link rel="canonical" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-05-deep-learning/learned-vs-hand-crafted/"><meta name="robots" content="index, follow, max-image-preview:large"><meta name="theme-color" content="#faf7f0"><link rel="icon" href="/visual-slam-roadmap/favicon.svg" type="image/svg+xml"><link rel="sitemap" href="/visual-slam-roadmap/sitemap-index.xml"><link rel="alternate" hreflang="en" href="https://www.cv-learn.com/visual-slam-roadmap/level-05-deep-learning/learned-vs-hand-crafted/"><link rel="alternate" hreflang="ko" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-05-deep-learning/learned-vs-hand-crafted/"><link rel="alternate" hreflang="zh-CN" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-05-deep-learning/learned-vs-hand-crafted/"><link rel="alternate" hreflang="ja" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-05-deep-learning/learned-vs-hand-crafted/"><link rel="alternate" hreflang="x-default" href="https://www.cv-learn.com/visual-slam-roadmap/level-05-deep-learning/learned-vs-hand-crafted/"><!-- Open Graph --><meta property="og:type" content="article"><meta property="og:site_name" content="Visual-SLAM Developer Roadmap"><meta property="og:title" content="Learned vs hand-crafted — Visual-SLAM Roadmap"><meta property="og:description" content="古典的なSLAMは手作業で設計されたモジュールのパイプラインである: コーナー検出器（FAST、Harris）、記述子（ORB、SIFT）、マッチャー（最近傍＋比率テスト）、ロバスト推定（RANSAC）、そして非線形最小二乗バックエンドである。これらの各コンポーネントは人間の仮定を符号化している — 「良い」特徴とはどのようなものか、どのようなノイズ分布を想定するか、どのヒューリスティクスで外れ値を拒否するか。深層学習は代替手段を提供する: これらの関数をデータから学習させるというものである。"><meta property="og:url" content="https://www.cv-learn.com/visual-slam-roadmap/ja/level-05-deep-learning/learned-vs-hand-crafted/"><meta property="og:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="ja_JP"><meta property="og:locale:alternate" content="en_US"><meta property="og:locale:alternate" content="ko_KR"><meta property="og:locale:alternate" content="zh_CN"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Learned vs hand-crafted — Visual-SLAM Roadmap"><meta name="twitter:description" content="古典的なSLAMは手作業で設計されたモジュールのパイプラインである: コーナー検出器（FAST、Harris）、記述子（ORB、SIFT）、マッチャー（最近傍＋比率テスト）、ロバスト推定（RANSAC）、そして非線形最小二乗バックエンドである。これらの各コンポーネントは人間の仮定を符号化している — 「良い」特徴とはどのようなものか、どのようなノイズ分布を想定するか、どのヒューリスティクスで外れ値を拒否するか。深層学習は代替手段を提供する: これらの関数をデータから学習させるというものである。"><meta name="twitter:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><!-- Google AdSense --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5473245269912288" crossorigin="anonymous"></script><!-- Google Analytics 4 --><!-- Microsoft Clarity --><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Learned vs hand-crafted","description":"古典的なSLAMは手作業で設計されたモジュールのパイプラインである: コーナー検出器（FAST、Harris）、記述子（ORB、SIFT）、マッチャー（最近傍＋比率テスト）、ロバスト推定（RANSAC）、そして非線形最小二乗バックエンドである。これらの各コンポーネントは人間の仮定を符号化している — 「良い」特徴とはどのようなものか、どのようなノイズ分布を想定するか、どのヒューリスティクスで外れ値を拒否するか。深層学習は代替手段を提供する: これらの関数をデータから学習させるというものである。","inLanguage":"ja","url":"https://www.cv-learn.com/visual-slam-roadmap/ja/level-05-deep-learning/learned-vs-hand-crafted/","isPartOf":{"@type":"WebSite","name":"Visual-SLAM Developer Roadmap","url":"https://www.cv-learn.com/visual-slam-roadmap/"},"author":{"@type":"Person","name":"Hyunggi Chang","url":"https://github.com/changh95"},"license":"https://opensource.org/licenses/MIT"}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Visual-SLAM Roadmap","item":"https://www.cv-learn.com/visual-slam-roadmap/ja/"},{"@type":"ListItem","position":2,"name":"深層学習+SLAM","item":"https://www.cv-learn.com/visual-slam-roadmap/ja/level-05-deep-learning/"},{"@type":"ListItem","position":3,"name":"Learned vs hand-crafted","item":"https://www.cv-learn.com/visual-slam-roadmap/ja/level-05-deep-learning/learned-vs-hand-crafted/"}]}</script><link rel="stylesheet" href="/visual-slam-roadmap/_astro/readme.DemmKpdz.css"></head><body class="graph-paper min-h-screen text-inkline font-sans"><header class="border-b border-paper-line bg-paper/90 backdrop-blur sticky top-0 z-10"><nav class="mx-auto max-w-5xl px-5 py-3 flex items-center gap-4"><a href="/visual-slam-roadmap/ja/" class="font-display font-semibold tracking-wide text-sm uppercase text-scan-500 hover:opacity-80">VSLAM<span class="opacity-60">//</span>Roadmap</a><a href="https://ko-fi.com/changh95" target="_blank" rel="noopener" class="font-mono text-[11px] font-medium px-2.5 py-1 text-white bg-[#00b9fe] hover:opacity-85 transition-opacity leading-tight">♥ Support me if you liked this content!</a><a href="https://github.com/changh95/visual-slam-roadmap" class="ml-auto hidden sm:inline font-mono text-xs text-slate-500 hover:text-scan-500">GitHub &nearr;</a><div class="flex font-mono text-[11px] border border-paper-line bg-paper divide-paper-line divide-x ml-auto sm:ml-0" role="group" aria-label="Language"><a href="/visual-slam-roadmap/level-05-deep-learning/learned-vs-hand-crafted/" data-lang="en" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">EN</a><a href="/visual-slam-roadmap/ko/level-05-deep-learning/learned-vs-hand-crafted/" data-lang="ko" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">KO</a><a href="/visual-slam-roadmap/zh/level-05-deep-learning/learned-vs-hand-crafted/" data-lang="zh" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">ZH</a><a href="/visual-slam-roadmap/ja/level-05-deep-learning/learned-vs-hand-crafted/" data-lang="ja" aria-current="true" class="px-2 py-1 transition-colors bg-scan-500/10 text-scan-500 font-medium">JA</a></div></nav></header><main class="mx-auto max-w-3xl px-5 py-10"><nav class="font-mono text-xs text-slate-500 mb-6"><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/ja/">ロードマップ</a><span class="mx-1">/</span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/ja/level-05-deep-learning/">レベル 05 · 深層学習+SLAM</a></nav><article class="prose prose-slate max-w-none prose-headings:font-display prose-a:text-scan-500 prose-a:decoration-scan-300/50 hover:prose-a:decoration-scan-500 prose-blockquote:font-mono prose-blockquote:text-sm prose-blockquote:not-italic bg-paper/80 border border-paper-line p-6 sm:p-8"><h1 id="learned-vs-hand-crafted">Learned vs hand-crafted</h1>
+<p>古典的なSLAMは手作業で設計されたモジュールのパイプラインである: コーナー検出器（FAST、Harris）、記述子（ORB、SIFT）、マッチャー（最近傍＋比率テスト）、ロバスト推定（RANSAC）、そして非線形最小二乗バックエンドである。これらの各コンポーネントは人間の仮定を符号化している — 「良い」特徴とはどのようなものか、どのようなノイズ分布を想定するか、どのヒューリスティクスで外れ値を拒否するか。深層学習は代替手段を提供する: これらの関数をデータから学習させるというものである。</p>
+<h2 id="2つの大きく異なる戦略">2つの大きく異なる戦略</h2>
+<p>学習をSLAMに適用する方法は2つあり、これらを区別しておくことが重要である:</p>
+<ul>
+<li><strong>モジュール置換（Module replacement）</strong>: 古典的なパイプライン構造を維持しつつ、個々の手作りモジュールを学習型のものに置き換える。システムは解釈可能性を保ち、その幾何的バックエンド（バンドル調整、姿勢グラフ最適化）は変更されない。</li>
+<li><strong>エンドツーエンド学習（End-to-end learning）</strong>: パイプライン全体（あるいはその大部分）を、画像から姿勢やマップへ直接写像するネットワークに置き換える。例えば、LSTMで動きを回帰するDeepVOや、微分可能なバンドル調整層の周りで再帰的な更新演算子を学習するDROID-SLAMなどである。</li>
+</ul>
+<h2 id="モジュールごとの置換対応表">モジュールごとの置換対応表</h2>
+<p>Level 5のほとんどは、どの古典的モジュールを各論文が置き換えるかを軸に構成されている:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>パイプライン段階</th><th>手作りの標準</th><th>学習型の置換</th></tr></thead><tbody><tr><td>キーポイント検出＋記述</td><td>FAST/Harris + ORB/SIFT</td><td>SuperPoint、R2D2、DISK、XFeat</td></tr><tr><td>マッチング</td><td>最近傍＋比率テスト</td><td>SuperGlue、LightGlue、LoFTR（検出器不要）</td></tr><tr><td>場所認識</td><td>bag-of-words (DBoW)</td><td>NetVLAD、Patch-NetVLAD、HF-Net</td></tr><tr><td>深度</td><td>ステレオブロックマッチング／深度センサ</td><td>MonoDepth、MiDaS、Depth Anything</td></tr><tr><td>オプティカルフロー</td><td>Lucas-Kanade、変分法フロー</td><td>RAFT、SEA-RAFT</td></tr><tr><td>リロカリゼーション</td><td>3Dマップに対する記述子マッチング</td><td>PoseNet（回帰）、DSAC/ACE（シーン座標）</td></tr><tr><td>外れ値除去／ソルバー</td><td>RANSAC、Gauss-Newton</td><td>DSAC（ソフトRANSAC）、アンロール／暗黙的BA層</td></tr></tbody></table>
+<p>新しい論文を読む際に最初に問うべきことは: *どの行に当てはまるか、そして古典的なバックエンドを保持しているか？*である。</p>
+<h2 id="それぞれが勝る場面">それぞれが勝る場面</h2>
+<p><strong>学習型モジュールが明確に勝る</strong>のは、手作りの仮定を破る条件下である: 激しい照明変化、テクスチャの弱い領域、動きブレ、季節や昼夜の見え方変化、ワイドベースラインマッチングなどである。学習型特徴はまさにこの変動性に対して訓練されているのに対し、手作りの記述子は設計者の想像力の範囲しか見ていない。</p>
+<p><strong>古典的モジュールが今も勝る</strong>のは、テクスチャが豊富で照明の良いシーンで高フレームレートが要求される場合である — ORBは計算コストが桁違いに低く、古典的な幾何は学習分布に関する懸念なしに正確で検証可能な解を与え、失敗モードも解析可能である。RANSACの失敗はインライア数から診断できるが、ネットワークの失敗はしばしば無音である。</p>
+<p><strong>エンドツーエンドの姿勢回帰は特に</strong>幾何に劣る: 姿勢を直接回帰するネットワーク（PoseNet型）は、三角測量よりも画像検索に近い振る舞いをし、その誤差はテクスチャが増えたりキャリブレーションが改善されたりしても幾何的手法のように縮小しない。これが、この分野がハイブリッド — 学習型の知覚と幾何的な推定 — に収束した理由である。</p>
+<h2 id="実践的な目安">実践的な目安</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>問い</th><th>古典的手法が有利</th><th>学習型手法が有利</th></tr></thead><tbody><tr><td>計算予算</td><td>組み込みCPU</td><td>GPU利用可能</td></tr><tr><td>環境</td><td>制御された、テクスチャのある環境</td><td>見え方の変化、低テクスチャ</td></tr><tr><td>解釈可能性／認証</td><td>必須</td><td>任意</td></tr><tr><td>対象領域の学習データ</td><td>乏しい</td><td>豊富</td></tr></tbody></table>
+<h2 id="学習型モジュール導入時のよくある落とし穴">学習型モジュール導入時のよくある落とし穴</h2>
+<ul>
+<li><strong>分布シフト</strong>: 屋外の landmark で訓練されたマッチャーは屋内では性能が低下する場合がある；論文のベンチマークだけでなく、必ず<em>自分の</em>領域のデータで検証すること。</li>
+<li><strong>スループットの見積もり</strong>: 論文はGPU推論時間を報告するが、ロボット上ではGPUを他の知覚タスクと共有する場合があり、前処理（リサイズ、正規化）が隠れたコストになることが多い。</li>
+<li><strong>規約の混在バグ</strong>: 学習型特徴は独自の解像度、スコア規約、サブピクセル挙動を持っている；ORB向けに調整されたパイプラインにSuperPointをしきい値（マッチング、RANSAC、キーフレーム選択）を再調整せずに組み込むのは、精度が静かに低下する典型的な原因である。</li>
+<li><strong>評価リーク</strong>: 一部の学習型モジュールは、評価に使われるベンチマークそのもの（あるいはその近縁データ）で訓練されている；比較を信頼する前に学習セットを確認すること。</li>
+</ul>
+<h2 id="ハイブリッドの合意">ハイブリッドの合意</h2>
+<p>実際には、最も成功している現代的なシステムはハイブリッドである: 学習型の知覚が古典的な幾何最適化に供給される（例えば、ORB-SLAM風パイプライン内の学習型特徴、あるいは古典的なBAソルバーの周りにあるDROID-SLAMの学習型更新）。SLAMの最尤推定の仕組みはブラックボックスでは打破しにくいが、それに供給する知覚層こそが学習が最初に価値を発揮する場所である。<a href="/visual-slam-roadmap/ja/level-05-deep-learning/differentiability/">Differentiability</a>のノートでは、この2つの半分を共に学習させる技術を取り上げている。</p>
+<h2 id="slamにおける意義">SLAMにおける意義</h2>
+<p>Level 5のほぼすべての論文は、学習型対手作りのスペクトル上の一点であり、ある手法がどこに位置するかを知ることで、その手法がどの問題を解決し、どのようなコストがかかるかがわかる。システムを設計する際、この枠組みは「深層学習を使うべきか？」という問いを、具体的な工学的な問い — どのモジュールが失敗しているのか、自分のプラットフォームで推論コストを負担できるのか、幾何は古典的なままにすべきなのか — に変換する。</p>
+<h2 id="関連ノート">関連ノート</h2>
+<ul>
+<li><a href="/visual-slam-roadmap/ja/level-05-deep-learning/superpoint/">SuperPoint</a></li>
+<li><a href="/visual-slam-roadmap/ja/level-05-deep-learning/superglue/">SuperGlue</a></li>
+<li><a href="/visual-slam-roadmap/ja/level-05-deep-learning/deepvo/">DeepVO</a></li>
+<li><a href="/visual-slam-roadmap/ja/level-05-deep-learning/droid-slam/">DROID-SLAM</a></li>
+<li><a href="/visual-slam-roadmap/ja/level-05-deep-learning/differentiability/">Differentiability</a></li>
+<li><a href="/visual-slam-roadmap/ja/level-05-deep-learning/netvlad/">NetVLAD</a></li>
+<li><a href="/visual-slam-roadmap/ja/level-05-deep-learning/foundation-models/">Foundation models</a></li>
+</ul></article><div class="mt-10"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5473245269912288" data-ad-slot="2335164071" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></main><footer class="mx-auto max-w-5xl px-5 py-10 font-mono text-xs space-y-2 text-slate-400"><p><a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap/pulls">ご提案を歓迎します — リポジトリにPRを送ってください。</a></p><p>MIT License &copy; 2026 Hyunggi Chang · built from the <a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap">roadmap repository</a></p></footer><script type="module">document.querySelectorAll(`a[data-lang]`).forEach(e=>{e.addEventListener(`click`,()=>{try{localStorage.setItem(`vslam-lang`,e.dataset.lang)}catch{}})});</script></body></html>

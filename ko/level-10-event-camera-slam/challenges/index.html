@@ -1,0 +1,65 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Challenges — Visual-SLAM Roadmap</title><meta name="description" content="이벤트 카메라에 장점을 부여하는 동일한 설계 선택이 실제 장애물도 만들어내는데, 이것이 아직 프로덕션 SLAM 시스템에서 표준으로 자리잡지 못한 이유입니다. 아래 각 과제는 감지 원리의 직접적인 귀결이며, 각각 자체적인 연구 흐름을 낳았습니다."><link rel="canonical" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-10-event-camera-slam/challenges/"><meta name="robots" content="index, follow, max-image-preview:large"><meta name="theme-color" content="#faf7f0"><link rel="icon" href="/visual-slam-roadmap/favicon.svg" type="image/svg+xml"><link rel="sitemap" href="/visual-slam-roadmap/sitemap-index.xml"><link rel="alternate" hreflang="en" href="https://www.cv-learn.com/visual-slam-roadmap/level-10-event-camera-slam/challenges/"><link rel="alternate" hreflang="ko" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-10-event-camera-slam/challenges/"><link rel="alternate" hreflang="zh-CN" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-10-event-camera-slam/challenges/"><link rel="alternate" hreflang="ja" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-10-event-camera-slam/challenges/"><link rel="alternate" hreflang="x-default" href="https://www.cv-learn.com/visual-slam-roadmap/level-10-event-camera-slam/challenges/"><!-- Open Graph --><meta property="og:type" content="article"><meta property="og:site_name" content="Visual-SLAM Developer Roadmap"><meta property="og:title" content="Challenges — Visual-SLAM Roadmap"><meta property="og:description" content="이벤트 카메라에 장점을 부여하는 동일한 설계 선택이 실제 장애물도 만들어내는데, 이것이 아직 프로덕션 SLAM 시스템에서 표준으로 자리잡지 못한 이유입니다. 아래 각 과제는 감지 원리의 직접적인 귀결이며, 각각 자체적인 연구 흐름을 낳았습니다."><meta property="og:url" content="https://www.cv-learn.com/visual-slam-roadmap/ko/level-10-event-camera-slam/challenges/"><meta property="og:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="ko_KR"><meta property="og:locale:alternate" content="en_US"><meta property="og:locale:alternate" content="zh_CN"><meta property="og:locale:alternate" content="ja_JP"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Challenges — Visual-SLAM Roadmap"><meta name="twitter:description" content="이벤트 카메라에 장점을 부여하는 동일한 설계 선택이 실제 장애물도 만들어내는데, 이것이 아직 프로덕션 SLAM 시스템에서 표준으로 자리잡지 못한 이유입니다. 아래 각 과제는 감지 원리의 직접적인 귀결이며, 각각 자체적인 연구 흐름을 낳았습니다."><meta name="twitter:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><!-- Google AdSense --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5473245269912288" crossorigin="anonymous"></script><!-- Google Analytics 4 --><!-- Microsoft Clarity --><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Challenges","description":"이벤트 카메라에 장점을 부여하는 동일한 설계 선택이 실제 장애물도 만들어내는데, 이것이 아직 프로덕션 SLAM 시스템에서 표준으로 자리잡지 못한 이유입니다. 아래 각 과제는 감지 원리의 직접적인 귀결이며, 각각 자체적인 연구 흐름을 낳았습니다.","inLanguage":"ko","url":"https://www.cv-learn.com/visual-slam-roadmap/ko/level-10-event-camera-slam/challenges/","isPartOf":{"@type":"WebSite","name":"Visual-SLAM Developer Roadmap","url":"https://www.cv-learn.com/visual-slam-roadmap/"},"author":{"@type":"Person","name":"Hyunggi Chang","url":"https://github.com/changh95"},"license":"https://opensource.org/licenses/MIT"}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Visual-SLAM Roadmap","item":"https://www.cv-learn.com/visual-slam-roadmap/ko/"},{"@type":"ListItem","position":2,"name":"이벤트 카메라 SLAM","item":"https://www.cv-learn.com/visual-slam-roadmap/ko/level-10-event-camera-slam/"},{"@type":"ListItem","position":3,"name":"Challenges","item":"https://www.cv-learn.com/visual-slam-roadmap/ko/level-10-event-camera-slam/challenges/"}]}</script><link rel="stylesheet" href="/visual-slam-roadmap/_astro/readme.DemmKpdz.css"></head><body class="graph-paper min-h-screen text-inkline font-sans"><header class="border-b border-paper-line bg-paper/90 backdrop-blur sticky top-0 z-10"><nav class="mx-auto max-w-5xl px-5 py-3 flex items-center gap-4"><a href="/visual-slam-roadmap/ko/" class="font-display font-semibold tracking-wide text-sm uppercase text-scan-500 hover:opacity-80">VSLAM<span class="opacity-60">//</span>Roadmap</a><a href="https://ko-fi.com/changh95" target="_blank" rel="noopener" class="font-mono text-[11px] font-medium px-2.5 py-1 text-white bg-[#00b9fe] hover:opacity-85 transition-opacity leading-tight">♥ Support me if you liked this content!</a><a href="https://github.com/changh95/visual-slam-roadmap" class="ml-auto hidden sm:inline font-mono text-xs text-slate-500 hover:text-scan-500">GitHub &nearr;</a><div class="flex font-mono text-[11px] border border-paper-line bg-paper divide-paper-line divide-x ml-auto sm:ml-0" role="group" aria-label="Language"><a href="/visual-slam-roadmap/level-10-event-camera-slam/challenges/" data-lang="en" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">EN</a><a href="/visual-slam-roadmap/ko/level-10-event-camera-slam/challenges/" data-lang="ko" aria-current="true" class="px-2 py-1 transition-colors bg-scan-500/10 text-scan-500 font-medium">KO</a><a href="/visual-slam-roadmap/zh/level-10-event-camera-slam/challenges/" data-lang="zh" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">ZH</a><a href="/visual-slam-roadmap/ja/level-10-event-camera-slam/challenges/" data-lang="ja" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">JA</a></div></nav></header><main class="mx-auto max-w-3xl px-5 py-10"><nav class="font-mono text-xs text-slate-500 mb-6"><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/ko/">로드맵</a><span class="mx-1">/</span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/ko/level-10-event-camera-slam/">레벨 10 · 이벤트 카메라 SLAM</a></nav><article class="prose prose-slate max-w-none prose-headings:font-display prose-a:text-scan-500 prose-a:decoration-scan-300/50 hover:prose-a:decoration-scan-500 prose-blockquote:font-mono prose-blockquote:text-sm prose-blockquote:not-italic bg-paper/80 border border-paper-line p-6 sm:p-8"><h1 id="challenges">Challenges</h1>
+<p>이벤트 카메라에 장점을 부여하는 동일한 설계 선택이 실제 장애물도 만들어내는데, 이것이 아직 프로덕션 SLAM 시스템에서 표준으로 자리잡지 못한 이유입니다. 아래 각 과제는 감지 원리의 직접적인 귀결이며, 각각 자체적인 연구 흐름을 낳았습니다.</p>
+<h2 id="절대-강도-없음">절대 강도 없음</h2>
+<p>이벤트는 밝기 그 자체가 아니라 밝기 <em>변화</em>를 인코딩합니다. 디스크립터, 장소 인식 네트워크, 또는 광도계 손실을 실행할 이미지가 없습니다. 외관을 복원하려면 공동 배치된 프레임 센서(공유 광학계 뒤에 DVS와 표준 센서를 짝지은 DAVIS처럼)나 강도 재구성 알고리즘이 필요하며, 둘 다 이벤트가 회피하고자 했던 한계를 일부 다시 끌어옵니다. 이것이 가장 근본적인 장애물입니다: 시각적 SLAM의 <em>인식</em> 관련 메커니즘(루프 클로저, 재위치 추정, 맵 재사용) 대부분이 외관을 전제로 합니다.</p>
+<h2 id="희소하고-비동기적인-출력">희소하고 비동기적인 출력</h2>
+<p>프레임도, 고정된 레이트도, 공통 타임스탬프의 밀집 픽셀 그리드도 존재하지 않습니다. 특징 검출기, 광학 흐름, 직접 정렬, CNN 등 사실상 고전적 비전 툴박스 전체가 이미지 배열을 전제로 하므로, 이벤트 데이터는 (새로운 알고리즘 설계를 통해) 네이티브로 처리되거나 중간 표현으로 집계되어야 하며, 후자는 센서를 선택한 바로 그 이유인 시간 해상도를 희생합니다. <a href="/visual-slam-roadmap/ko/level-10-event-camera-slam/event-representations/">Event representations</a> 문서가 이 트레이드오프를 자세히 다룹니다.</p>
+<h2 id="새로운-알고리즘이-필요함">새로운 알고리즘이 필요함</h2>
+<p>위 두 가지 때문에, 이벤트 기반 SLAM은 ORB-SLAM이나 DSO 스타일의 파이프라인을 그대로 재사용할 수 없었습니다. 이 분야는 자체적인 메커니즘을 새로 발명해야 했습니다: 모션 추정을 위한 대비 최대화, 데이터 연관을 위한 타임 서페이스, 이벤트 기반 특징 추적기(EKLT), 이벤트에 적응된 스테레오 매칭(ESVO), 시뮬레이션된 이벤트로 학습된 파이프라인(DEVO). 프레임 기반 SLAM에서 당연시되던 모든 서브시스템을 다시 구축해야 했습니다.</p>
+<h2 id="움직임에-의존하는-신호">움직임에 의존하는 신호</h2>
+<p>이벤트는 (카메라 대비) 강도 엣지가 움직이는 곳에서만 발화합니다. 느리거나 거의 정지한 움직임에서는 센서가 조용해지며 — 정지 비행 중인 드론은 시각적 신호를 거의 받지 못합니다 — 이벤트 스트림의 모습은 움직임 방향과 속도에 따라 달라집니다: 동일한 장면도 카메라가 어떻게 움직이는지에 따라 다르게 “보입니다”. 이는 매칭, 매핑, 루프 클로저를 복잡하게 만들며, 융합 시스템(Ultimate-SLAM, ESVIO)이 느린 영역을 위해 프레임 카메라를 루프에 계속 유지하는 핵심 이유입니다.</p>
+<h2 id="잡음-대역폭-급증-성숙도">잡음, 대역폭 급증, 성숙도</h2>
+<ul>
+<li><strong>잡음</strong>: 실제 센서는 상당한 허위(“잡음”) 이벤트를 생성하며, 유효 대비 임계값은 센서 개체마다, 온도와 장면 밝기에 따라 달라집니다 — 한 장치에서 튜닝된 알고리즘이 다른 장치에서는 조용히 성능이 저하될 수 있습니다.</li>
+<li><strong>대역폭 급증</strong>: 텍스처가 풍부한 장면이 빠르게 움직이면 초당 수백만 개의 이벤트를 방출하여 하류 처리를 포화시킬 수 있습니다 — 낮은 <em>평균</em> 대역폭이라는 장점이 최악의 경우에는 역전됩니다.</li>
+<li><strong>생태계 성숙도</strong>: 이벤트 기반 루프 클로저와 장소 인식은 대체로 아직 미해결 문제이며, 그 때문에 대부분의 시스템은 드리프트 보정이 없는 오도메트리 전용입니다. 센서는 여전히 상용 카메라에 비해 고가입니다(iniVation DAVIS나 Prophesee 장치 같은 현재 연구용 하드웨어는 대략 $500~$5000, 반면 USB 카메라는 수십 달러 수준).</li>
+<li><strong>시뮬레이션-실제 간극</strong>: 학습 기반 방법은 일반적으로 시뮬레이션된 이벤트(ESIM, v2e)로 학습되는데, 시뮬레이터는 실제 센서 잡음을 완벽하게 근사하지 못해 도메인 간극을 만들며, DEVO와 같은 시스템은 이를 명시적으로 극복해야 합니다.</li>
+</ul>
+<h2 id="요약">요약</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>과제</th><th>결과</th><th>일반적 완화 방법</th></tr></thead><tbody><tr><td>절대 강도 없음</td><td>인식/루프를 위한 외관 정보 없음</td><td>공동 배치된 프레임(DAVIS), 강도 재구성</td></tr><tr><td>비동기적 희소성</td><td>고전적 툴박스 적용 불가</td><td>이벤트 표현, 네이티브 이벤트 알고리즘</td></tr><tr><td>움직임 의존적 신호</td><td>정지 시 무신호; 시점 의존적 외관</td><td>프레임 + IMU 융합 (Ultimate-SLAM, ESVIO)</td></tr><tr><td>잡음 및 대역폭 급증</td><td>조용한 성능 저하, 처리 과부하</td><td>필터링, 모션 보상, 파라미터 튜닝</td></tr><tr><td>시뮬레이션-실제 간극</td><td>학습 모델이 시뮬레이터에 과적합</td><td>더 나은 시뮬레이터, 도메인 무작위화</td></tr></tbody></table>
+<h2 id="slam에서의-의미">SLAM에서의 의미</h2>
+<p>이벤트 카메라를 선택하는 것은 단순한 센서 교체가 아니라 시스템 차원의 결정입니다: 전체 프론트엔드를 다시 생각해야 하며, 드리프트 보정(루프 클로저) 지원은 프레임 기반 SLAM보다 훨씬 약합니다. 실제로 가장 성공적인 설계는 이벤트를 <em>보완물</em>로 취급합니다 — 이벤트를 프레임과 IMU와 융합(Ultimate-SLAM, ESVIO)하여 각 모달리티가 다른 모달리티의 사각지대를 덮도록 합니다. 이러한 한계를 이해하면 추가적인 복잡성이 언제 가치가 있는지 알 수 있습니다: 고속 플랫폼, HDR 환경, 저지연 제어가 필요한 경우입니다.</p>
+<h2 id="관련-문서">관련 문서</h2>
+<ul>
+<li><a href="/visual-slam-roadmap/ko/level-10-event-camera-slam/event-cameras-dvs/">Event cameras (DVS)</a></li>
+<li><a href="/visual-slam-roadmap/ko/level-10-event-camera-slam/advantages/">Advantages</a></li>
+<li><a href="/visual-slam-roadmap/ko/level-10-event-camera-slam/event-representations/">Event representations</a></li>
+<li><a href="/visual-slam-roadmap/ko/level-10-event-camera-slam/devo/">DEVO</a></li>
+<li><a href="/visual-slam-roadmap/ko/level-10-event-camera-slam/ultimate-slam/">Ultimate-SLAM</a></li>
+<li><a href="/visual-slam-roadmap/ko/level-10-event-camera-slam/event-based-vision-survey/">Event-based Vision Survey</a></li>
+</ul></article><div class="mt-10"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5473245269912288" data-ad-slot="2335164071" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></main><footer class="mx-auto max-w-5xl px-5 py-10 font-mono text-xs space-y-2 text-slate-400"><p><a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap/pulls">제안은 언제든 환영합니다 — 저장소에 PR을 제출해 주세요.</a></p><p>MIT License &copy; 2026 Hyunggi Chang · built from the <a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap">roadmap repository</a></p></footer><script type="module">document.querySelectorAll(`a[data-lang]`).forEach(e=>{e.addEventListener(`click`,()=>{try{localStorage.setItem(`vslam-lang`,e.dataset.lang)}catch{}})});</script></body></html>

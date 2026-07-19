@@ -1,0 +1,78 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>集中式与去中心化架构对比 — Visual-SLAM Roadmap</title><meta name="description" content="协作（多机器人）SLAM 系统之间最根本的区别在于全局地图在何处被构建。"><link rel="canonical" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-08-collaborative-slam/centralized-vs-decentralized/"><meta name="robots" content="index, follow, max-image-preview:large"><meta name="theme-color" content="#faf7f0"><link rel="icon" href="/visual-slam-roadmap/favicon.svg" type="image/svg+xml"><link rel="sitemap" href="/visual-slam-roadmap/sitemap-index.xml"><link rel="alternate" hreflang="en" href="https://www.cv-learn.com/visual-slam-roadmap/level-08-collaborative-slam/centralized-vs-decentralized/"><link rel="alternate" hreflang="ko" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-08-collaborative-slam/centralized-vs-decentralized/"><link rel="alternate" hreflang="zh-CN" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-08-collaborative-slam/centralized-vs-decentralized/"><link rel="alternate" hreflang="ja" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-08-collaborative-slam/centralized-vs-decentralized/"><link rel="alternate" hreflang="x-default" href="https://www.cv-learn.com/visual-slam-roadmap/level-08-collaborative-slam/centralized-vs-decentralized/"><!-- Open Graph --><meta property="og:type" content="article"><meta property="og:site_name" content="Visual-SLAM Developer Roadmap"><meta property="og:title" content="集中式与去中心化架构对比 — Visual-SLAM Roadmap"><meta property="og:description" content="协作（多机器人）SLAM 系统之间最根本的区别在于全局地图在何处被构建。"><meta property="og:url" content="https://www.cv-learn.com/visual-slam-roadmap/zh/level-08-collaborative-slam/centralized-vs-decentralized/"><meta property="og:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="zh_CN"><meta property="og:locale:alternate" content="en_US"><meta property="og:locale:alternate" content="ko_KR"><meta property="og:locale:alternate" content="ja_JP"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="集中式与去中心化架构对比 — Visual-SLAM Roadmap"><meta name="twitter:description" content="协作（多机器人）SLAM 系统之间最根本的区别在于全局地图在何处被构建。"><meta name="twitter:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><!-- Google AdSense --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5473245269912288" crossorigin="anonymous"></script><!-- Google Analytics 4 --><!-- Microsoft Clarity --><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"集中式与去中心化架构对比","description":"协作（多机器人）SLAM 系统之间最根本的区别在于全局地图在何处被构建。","inLanguage":"zh-CN","url":"https://www.cv-learn.com/visual-slam-roadmap/zh/level-08-collaborative-slam/centralized-vs-decentralized/","isPartOf":{"@type":"WebSite","name":"Visual-SLAM Developer Roadmap","url":"https://www.cv-learn.com/visual-slam-roadmap/"},"author":{"@type":"Person","name":"Hyunggi Chang","url":"https://github.com/changh95"},"license":"https://opensource.org/licenses/MIT"}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Visual-SLAM Roadmap","item":"https://www.cv-learn.com/visual-slam-roadmap/zh/"},{"@type":"ListItem","position":2,"name":"协同SLAM","item":"https://www.cv-learn.com/visual-slam-roadmap/zh/level-08-collaborative-slam/"},{"@type":"ListItem","position":3,"name":"集中式与去中心化架构对比","item":"https://www.cv-learn.com/visual-slam-roadmap/zh/level-08-collaborative-slam/centralized-vs-decentralized/"}]}</script><link rel="stylesheet" href="/visual-slam-roadmap/_astro/readme.DemmKpdz.css"></head><body class="graph-paper min-h-screen text-inkline font-sans"><header class="border-b border-paper-line bg-paper/90 backdrop-blur sticky top-0 z-10"><nav class="mx-auto max-w-5xl px-5 py-3 flex items-center gap-4"><a href="/visual-slam-roadmap/zh/" class="font-display font-semibold tracking-wide text-sm uppercase text-scan-500 hover:opacity-80">VSLAM<span class="opacity-60">//</span>Roadmap</a><a href="https://ko-fi.com/changh95" target="_blank" rel="noopener" class="font-mono text-[11px] font-medium px-2.5 py-1 text-white bg-[#00b9fe] hover:opacity-85 transition-opacity leading-tight">♥ Support me if you liked this content!</a><a href="https://github.com/changh95/visual-slam-roadmap" class="ml-auto hidden sm:inline font-mono text-xs text-slate-500 hover:text-scan-500">GitHub &nearr;</a><div class="flex font-mono text-[11px] border border-paper-line bg-paper divide-paper-line divide-x ml-auto sm:ml-0" role="group" aria-label="Language"><a href="/visual-slam-roadmap/level-08-collaborative-slam/centralized-vs-decentralized/" data-lang="en" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">EN</a><a href="/visual-slam-roadmap/ko/level-08-collaborative-slam/centralized-vs-decentralized/" data-lang="ko" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">KO</a><a href="/visual-slam-roadmap/zh/level-08-collaborative-slam/centralized-vs-decentralized/" data-lang="zh" aria-current="true" class="px-2 py-1 transition-colors bg-scan-500/10 text-scan-500 font-medium">ZH</a><a href="/visual-slam-roadmap/ja/level-08-collaborative-slam/centralized-vs-decentralized/" data-lang="ja" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">JA</a></div></nav></header><main class="mx-auto max-w-3xl px-5 py-10"><nav class="font-mono text-xs text-slate-500 mb-6"><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/zh/">路线图</a><span class="mx-1">/</span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/zh/level-08-collaborative-slam/">级别 08 · 协同SLAM</a></nav><article class="prose prose-slate max-w-none prose-headings:font-display prose-a:text-scan-500 prose-a:decoration-scan-300/50 hover:prose-a:decoration-scan-500 prose-blockquote:font-mono prose-blockquote:text-sm prose-blockquote:not-italic bg-paper/80 border border-paper-line p-6 sm:p-8"><h1 id="集中式与去中心化架构对比">集中式与去中心化架构对比</h1>
+<p>协作（多机器人）SLAM 系统之间最根本的区别在于全局地图<em>在何处</em>被构建。</p>
+<h2 id="集中式架构">集中式架构</h2>
+<p>一台单一的服务器（地面站或云端）汇聚来自所有机器人的数据并执行全局优化。每个机器人运行一个轻量级的本地前端（跟踪、关键帧选择），并将关键帧、描述子或子地图流式传输给服务器；服务器执行跨机器人场景识别、地图融合和全局光束法平差，然后将校正后的地图广播回去。示例：C2TAM（基于云的 PTAM）、CCM-SLAM（服务器 + ORB-SLAM 客户端）、maplab 2.0（多会话融合）。</p>
+<p>网络上传输的内容：关键帧（关键点+描述子+位姿估计）向上传输；优化后的地图校正向下传输。原始图像保留在机器人本地。</p>
+<ul>
+<li>优点：最紧密的全局一致性（服务器能看到一切）、简单的客户端、机器人卸下了繁重的计算、拥有唯一的权威地图。</li>
+<li>缺点：单点故障、需要与服务器保持连接、服务器的带宽和算力必须随团队规模扩展，且作业范围受通信基础设施的限制。</li>
+</ul>
+<p>一个设计良好的集中式系统仍然能优雅地降级：CCM-SLAM 客户端通过缓存关键帧并事后同步，在连接中断期间持续跟踪，因此服务器对于<em>共享</em>地图而言至关重要，但对每个机器人自身的安全而言并非必需。</p>
+<h2 id="去中心化点对点架构">去中心化（点对点）架构</h2>
+<p>不存在服务器：机器人在通信范围内直接与邻近节点交换信息，每个机器人维护自己对（部分）全局地图的估计。优化是分布式的——每个机器人在自己的轨迹变量上进行迭代，只与邻居交换边界/分隔位姿的估计，反复迭代直到网络收敛到全局最优。示例：DOOR-SLAM、Kimera-Multi、Swarm-SLAM。</p>
+<p>网络上传输的内容：相遇时的紧凑场景识别描述子，随后是用于验证候选回环的特征，再之后是小规模的逐次迭代优化消息——从不传输整个地图。</p>
+<ul>
+<li>优点：无单点故障、可扩展到更大的团队、能在间歇性的自组织链路下工作，且原始数据可以留在每个机器人本地（隐私/带宽方面）。</li>
+<li>缺点：全局一致性更难保证——分布式优化器收敛更慢，每个机器人可能暂时持有地图的不同版本，并且鲁棒的异常值剔除（例如 PCM、渐进非凸优化）变得至关重要，因为没有中央权威来审核跨机器人回环。</li>
+</ul>
+<h2 id="对比">对比</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th>集中式</th><th>去中心化</th></tr></thead><tbody><tr><td>全局优化</td><td>在服务器上，精确求解</td><td>分布式，迭代求解</td></tr><tr><td>故障容忍度</td><td>服务器至关重要</td><td>优雅降级</td></tr><tr><td>通信方式</td><td>机器人到服务器</td><td>机器人到机器人（邻居）</td></tr><tr><td>异常值审核</td><td>服务器审核所有回环</td><td>需要鲁棒后端（PCM、GNC）</td></tr><tr><td>地图版本</td><td>一个权威地图</td><td>暂时存在分歧的局部视图</td></tr><tr><td>典型团队规模</td><td>较小（2-4）</td><td>更大规模的集群</td></tr></tbody></table>
+<h2 id="如何选择">如何选择</h2>
+<ul>
+<li>基础设施可靠（仓库 WiFi、实验室、云链接）且团队规模较小 → <strong>集中式</strong>：通向一个准确共享地图的最简单路径。</li>
+<li>链路间歇、短距离或受干扰（地下、灾害响应、集群）→ <strong>去中心化</strong>：唯一能在网络分裂时仍持续工作的架构。</li>
+<li>跨多个会话进行长期建图而非实时协作 → 集中式的<em>离线</em>融合（maplab 2.0 风格）通常就足够了，完全绕开了实时带宽问题。</li>
+<li>在实践中混合方案很常见：机器人在现场以点对点方式运行，一旦恢复连接就将数据转储到中央服务器。</li>
+</ul>
+<p>根本性的矛盾在于一致性与通信成本之间的权衡：集中式系统实现了更紧密的全局一致性，但会产生单点故障；去中心化系统更加稳健，但全局优化更难。近期的工作（Kimera-Multi、Swarm-SLAM）趋向于采用带有鲁棒异常值剔除的去中心化架构。</p>
+<h2 id="对slam的意义">对SLAM的意义</h2>
+<p>架构选择驱动着协作 SLAM 设计中的一切其他方面——传输什么内容、在哪里验证回环、地图融合如何发生、以及系统如何失效。对于拥有可靠 WiFi 的小型团队，集中式系统是获得准确共享地图的最简单路径；对于集群、地下探索或受干扰的网络，去中心化设计才是唯一能够存活下来的方案。</p>
+<h2 id="相关条目">相关条目</h2>
+<ul>
+<li><a href="/visual-slam-roadmap/zh/level-08-collaborative-slam/ccm-slam/">CCM-SLAM</a></li>
+<li><a href="/visual-slam-roadmap/zh/level-08-collaborative-slam/kimera-multi/">Kimera-Multi</a></li>
+<li><a href="/visual-slam-roadmap/zh/level-08-collaborative-slam/swarm-slam/">Swarm-SLAM</a></li>
+<li><a href="/visual-slam-roadmap/zh/level-08-collaborative-slam/communication-constraints/">Communication constraints</a></li>
+<li><a href="/visual-slam-roadmap/zh/level-08-collaborative-slam/map-merging/">Map merging</a></li>
+<li><a href="/visual-slam-roadmap/zh/level-08-collaborative-slam/door-slam/">DOOR-SLAM</a></li>
+</ul></article><div class="mt-10"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5473245269912288" data-ad-slot="2335164071" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></main><footer class="mx-auto max-w-5xl px-5 py-10 font-mono text-xs space-y-2 text-slate-400"><p><a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap/pulls">欢迎提出建议 — 请向本仓库提交 PR。</a></p><p>MIT License &copy; 2026 Hyunggi Chang · built from the <a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap">roadmap repository</a></p></footer><script type="module">document.querySelectorAll(`a[data-lang]`).forEach(e=>{e.addEventListener(`click`,()=>{try{localStorage.setItem(`vslam-lang`,e.dataset.lang)}catch{}})});</script></body></html>

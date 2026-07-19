@@ -1,0 +1,141 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>世界模型与空间智能 — Visual-SLAM Roadmap</title><meta name="description" content="从SLAM地图到学习型世界表征"><link rel="canonical" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/"><meta name="robots" content="index, follow, max-image-preview:large"><meta name="theme-color" content="#faf7f0"><link rel="icon" href="/visual-slam-roadmap/favicon.svg" type="image/svg+xml"><link rel="sitemap" href="/visual-slam-roadmap/sitemap-index.xml"><link rel="alternate" hreflang="en" href="https://www.cv-learn.com/visual-slam-roadmap/level-11-world-models-spatial-ai/"><link rel="alternate" hreflang="ko" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-11-world-models-spatial-ai/"><link rel="alternate" hreflang="zh-CN" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/"><link rel="alternate" hreflang="ja" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/"><link rel="alternate" hreflang="x-default" href="https://www.cv-learn.com/visual-slam-roadmap/level-11-world-models-spatial-ai/"><!-- Open Graph --><meta property="og:type" content="website"><meta property="og:site_name" content="Visual-SLAM Developer Roadmap"><meta property="og:title" content="世界模型与空间智能 — Visual-SLAM Roadmap"><meta property="og:description" content="从SLAM地图到学习型世界表征"><meta property="og:url" content="https://www.cv-learn.com/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/"><meta property="og:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="zh_CN"><meta property="og:locale:alternate" content="en_US"><meta property="og:locale:alternate" content="ko_KR"><meta property="og:locale:alternate" content="ja_JP"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="世界模型与空间智能 — Visual-SLAM Roadmap"><meta name="twitter:description" content="从SLAM地图到学习型世界表征"><meta name="twitter:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><!-- Google AdSense --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5473245269912288" crossorigin="anonymous"></script><!-- Google Analytics 4 --><!-- Microsoft Clarity --><link rel="stylesheet" href="/visual-slam-roadmap/_astro/readme.DemmKpdz.css"></head><body class="graph-paper min-h-screen text-inkline font-sans"><header class="border-b border-paper-line bg-paper/90 backdrop-blur sticky top-0 z-10"><nav class="mx-auto max-w-5xl px-5 py-3 flex items-center gap-4"><a href="/visual-slam-roadmap/zh/" class="font-display font-semibold tracking-wide text-sm uppercase text-scan-500 hover:opacity-80">VSLAM<span class="opacity-60">//</span>Roadmap</a><a href="https://ko-fi.com/changh95" target="_blank" rel="noopener" class="font-mono text-[11px] font-medium px-2.5 py-1 text-white bg-[#00b9fe] hover:opacity-85 transition-opacity leading-tight">♥ Support me if you liked this content!</a><a href="https://github.com/changh95/visual-slam-roadmap" class="ml-auto hidden sm:inline font-mono text-xs text-slate-500 hover:text-scan-500">GitHub &nearr;</a><div class="flex font-mono text-[11px] border border-paper-line bg-paper divide-paper-line divide-x ml-auto sm:ml-0" role="group" aria-label="Language"><a href="/visual-slam-roadmap/level-11-world-models-spatial-ai/" data-lang="en" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">EN</a><a href="/visual-slam-roadmap/ko/level-11-world-models-spatial-ai/" data-lang="ko" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">KO</a><a href="/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/" data-lang="zh" aria-current="true" class="px-2 py-1 transition-colors bg-scan-500/10 text-scan-500 font-medium">ZH</a><a href="/visual-slam-roadmap/ja/level-11-world-models-spatial-ai/" data-lang="ja" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">JA</a></div></nav></header><main class="mx-auto max-w-5xl px-5 py-10"><p class="font-mono text-xs text-scan-500 tracking-[0.25em] uppercase">第 11 级 / 11</p><h1 class="font-display font-bold text-3xl sm:text-4xl mt-2">世界模型与空间智能</h1><p class="mt-2 text-slate-500 max-w-2xl">从SLAM地图到学习型世界表征</p><article class="prose prose-slate max-w-none mt-8 prose-headings:font-display prose-a:text-scan-500 prose-a:decoration-scan-300/50 hover:prose-a:decoration-scan-500 prose-table:font-sans prose-table:text-sm bg-paper/80 border border-paper-line p-6 sm:p-8"><h3>关键概念</h3>
+<ul>
+<li><strong><a href="/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/world-model/">世界模型</a></strong> — 一种学习得到的环境动力学生成式模型，可用于预测与规划</li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/vlm-vs-vla/">VLM与VLA</a></strong> — 视觉-语言模型对图像进行推理；视觉-语言-动作模型在此基础上额外输出机器人动作</li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/spatial-ai/">Spatial AI</a></strong> — SLAM、场景理解与学习型世界表征的融合(Davison的FutureMapping愿景)</li>
+</ul>
+<h3>世界模型</h3>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>作者/年份</th>
+<th>关键概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/gaia-1/"><strong>GAIA-1</strong></a></td>
+<td><a href="https://arxiv.org/abs/2309.17080">Wayve 2023</a></td>
+<td>驾驶世界模型，动作条件下的未来场景生成</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/sora-dit/"><strong>Sora / DiT</strong></a></td>
+<td><a href="https://openai.com/index/sora/">OpenAI 2024</a></td>
+<td>扩散Transformer，时空图像块(spacetime patches)，涌现出的3D理解能力</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/nvidia-cosmos/"><strong>NVIDIA Cosmos</strong></a></td>
+<td><a href="https://github.com/NVIDIA/Cosmos">NVIDIA 2025</a></td>
+<td>面向物理AI的世界基础模型平台，为自动驾驶/机器人生成合成数据</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/world-labs-marble/"><strong>World Labs / Marble</strong></a></td>
+<td><a href="https://www.worldlabs.ai/">Fei-Fei Li 2025</a></td>
+<td>从图像/视频/文本提示生成生成式3D世界(持久化的高斯溅射场景)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/worldvla/"><strong>WorldVLA</strong></a></td>
+<td><a href="https://arxiv.org/abs/2506.21539">Cen (Alibaba) 2025</a></td>
+<td>自回归动作世界模型，为动作生成学习物理规律</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/scenedino/"><strong>SceneDINO</strong></a></td>
+<td><a href="https://arxiv.org/abs/2507.06230">Jevtić 2025</a></td>
+<td>前馈式无监督语义场景补全</td>
+</tr>
+</tbody>
+</table>
+<h3>生成式3D</h3>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>作者/年份</th>
+<th>关键概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/dreamfusion/"><strong>DreamFusion</strong></a></td>
+<td><a href="https://arxiv.org/abs/2209.14988">Poole 2023</a></td>
+<td>通过分数蒸馏采样(SDS)+NeRF实现文本生成3D</td>
+</tr>
+</tbody>
+</table>
+<h3>视觉-语言模型(VLM)</h3>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>作者/年份</th>
+<th>关键概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/clip/"><strong>CLIP</strong></a></td>
+<td><a href="https://arxiv.org/abs/2103.00020">Radford (OpenAI) 2021</a></td>
+<td>对比图文预训练，4亿图文对，零样本</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/siglip/"><strong>SigLIP</strong></a></td>
+<td><a href="https://arxiv.org/abs/2303.15343">Zhai (Google) 2023</a></td>
+<td>Sigmoid损失版CLIP，更高效，在较小模型规模下表现更好</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/blip-2/"><strong>BLIP-2</strong></a></td>
+<td><a href="https://arxiv.org/abs/2301.12597">Li (Salesforce) 2023</a></td>
+<td>Q-Former连接冻结的LLM与图像编码器</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/llava/"><strong>LLaVA</strong></a></td>
+<td><a href="https://arxiv.org/abs/2304.08485">Liu 2023</a></td>
+<td>LLaMA+视觉，对话式VLM</td>
+</tr>
+</tbody>
+</table>
+<h3>视觉-语言-动作模型(VLA)</h3>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>作者/年份</th>
+<th>关键概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/rt-2/"><strong>RT-2</strong></a></td>
+<td><a href="https://arxiv.org/abs/2307.15818">Brohan (DeepMind) 2023</a></td>
+<td>将机器人动作表示为文本token，涌现出的泛化能力</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/openvla/"><strong>OpenVLA</strong></a></td>
+<td><a href="https://arxiv.org/abs/2406.09246">Kim 2024</a></td>
+<td>开源VLA，SigLIP+Llama 7B+动作头</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-11-world-models-spatial-ai/navila/"><strong>NaVILA</strong></a></td>
+<td><a href="https://arxiv.org/abs/2412.04453">Cheng 2024</a></td>
+<td>面向导航的腿式/轮式机器人视觉-语言-动作模型</td>
+</tr>
+</tbody>
+</table>
+<h3>资料</h3>
+<table>
+<thead>
+<tr>
+<th>资料</th>
+<th>作者/年份</th>
+<th>关键概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/KwanWaiPang/Awesome-Transformer-based-SLAM">Awesome-Transformer-based-SLAM</a></td>
+<td>KwanWaiPang</td>
+<td>基于Transformer的SLAM方法GitHub精选列表</td>
+</tr>
+</tbody>
+</table></article><nav class="mt-8 flex justify-between font-mono text-sm"><span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/zh/level-10-event-camera-slam/">&larr; 10 · 事件相机SLAM</a></span><span></span></nav></main><footer class="mx-auto max-w-5xl px-5 py-10 font-mono text-xs space-y-2 text-slate-400"><p><a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap/pulls">欢迎提出建议 — 请向本仓库提交 PR。</a></p><p>MIT License &copy; 2026 Hyunggi Chang · built from the <a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap">roadmap repository</a></p></footer><script type="module">document.querySelectorAll(`a[data-lang]`).forEach(e=>{e.addEventListener(`click`,()=>{try{localStorage.setItem(`vslam-lang`,e.dataset.lang)}catch{}})});</script></body></html>

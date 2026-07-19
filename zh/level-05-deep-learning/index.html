@@ -1,0 +1,838 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>深度学习 + SLAM — Visual-SLAM Roadmap</title><meta name="description" content="学习型前端、可微分后端、端到端系统、基础模型与神经SLAM、场景理解"><link rel="canonical" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-05-deep-learning/"><meta name="robots" content="index, follow, max-image-preview:large"><meta name="theme-color" content="#faf7f0"><link rel="icon" href="/visual-slam-roadmap/favicon.svg" type="image/svg+xml"><link rel="sitemap" href="/visual-slam-roadmap/sitemap-index.xml"><link rel="alternate" hreflang="en" href="https://www.cv-learn.com/visual-slam-roadmap/level-05-deep-learning/"><link rel="alternate" hreflang="ko" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-05-deep-learning/"><link rel="alternate" hreflang="zh-CN" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-05-deep-learning/"><link rel="alternate" hreflang="ja" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-05-deep-learning/"><link rel="alternate" hreflang="x-default" href="https://www.cv-learn.com/visual-slam-roadmap/level-05-deep-learning/"><!-- Open Graph --><meta property="og:type" content="website"><meta property="og:site_name" content="Visual-SLAM Developer Roadmap"><meta property="og:title" content="深度学习 + SLAM — Visual-SLAM Roadmap"><meta property="og:description" content="学习型前端、可微分后端、端到端系统、基础模型与神经SLAM、场景理解"><meta property="og:url" content="https://www.cv-learn.com/visual-slam-roadmap/zh/level-05-deep-learning/"><meta property="og:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="zh_CN"><meta property="og:locale:alternate" content="en_US"><meta property="og:locale:alternate" content="ko_KR"><meta property="og:locale:alternate" content="ja_JP"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="深度学习 + SLAM — Visual-SLAM Roadmap"><meta name="twitter:description" content="学习型前端、可微分后端、端到端系统、基础模型与神经SLAM、场景理解"><meta name="twitter:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><!-- Google AdSense --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5473245269912288" crossorigin="anonymous"></script><!-- Google Analytics 4 --><!-- Microsoft Clarity --><link rel="stylesheet" href="/visual-slam-roadmap/_astro/readme.DemmKpdz.css"></head><body class="graph-paper min-h-screen text-inkline font-sans"><header class="border-b border-paper-line bg-paper/90 backdrop-blur sticky top-0 z-10"><nav class="mx-auto max-w-5xl px-5 py-3 flex items-center gap-4"><a href="/visual-slam-roadmap/zh/" class="font-display font-semibold tracking-wide text-sm uppercase text-scan-500 hover:opacity-80">VSLAM<span class="opacity-60">//</span>Roadmap</a><a href="https://ko-fi.com/changh95" target="_blank" rel="noopener" class="font-mono text-[11px] font-medium px-2.5 py-1 text-white bg-[#00b9fe] hover:opacity-85 transition-opacity leading-tight">♥ Support me if you liked this content!</a><a href="https://github.com/changh95/visual-slam-roadmap" class="ml-auto hidden sm:inline font-mono text-xs text-slate-500 hover:text-scan-500">GitHub &nearr;</a><div class="flex font-mono text-[11px] border border-paper-line bg-paper divide-paper-line divide-x ml-auto sm:ml-0" role="group" aria-label="Language"><a href="/visual-slam-roadmap/level-05-deep-learning/" data-lang="en" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">EN</a><a href="/visual-slam-roadmap/ko/level-05-deep-learning/" data-lang="ko" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">KO</a><a href="/visual-slam-roadmap/zh/level-05-deep-learning/" data-lang="zh" aria-current="true" class="px-2 py-1 transition-colors bg-scan-500/10 text-scan-500 font-medium">ZH</a><a href="/visual-slam-roadmap/ja/level-05-deep-learning/" data-lang="ja" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">JA</a></div></nav></header><main class="mx-auto max-w-5xl px-5 py-10"><p class="font-mono text-xs text-scan-500 tracking-[0.25em] uppercase">第 05 级 / 11</p><h1 class="font-display font-bold text-3xl sm:text-4xl mt-2">深度学习 + SLAM</h1><p class="mt-2 text-slate-500 max-w-2xl">学习型前端、可微分后端、端到端系统、基础模型与神经SLAM、场景理解</p><article class="prose prose-slate max-w-none mt-8 prose-headings:font-display prose-a:text-scan-500 prose-a:decoration-scan-300/50 hover:prose-a:decoration-scan-500 prose-table:font-sans prose-table:text-sm bg-paper/80 border border-paper-line p-6 sm:p-8"><h3>关键概念</h3>
+<ul>
+<li><strong><a href="/visual-slam-roadmap/zh/level-05-deep-learning/learned-vs-hand-crafted/">学习型方法与手工设计方法</a></strong> — 用网络替换单个传统模块(特征、深度、匹配) 对比 端到端学习</li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-05-deep-learning/differentiability/">可微分性</a></strong> — 使传统优化方法(RANSAC、BA)可微分，从而能够进行端到端训练</li>
+<li><strong><a href="/visual-slam-roadmap/zh/level-05-deep-learning/foundation-models/">基础模型</a></strong> — 大型预训练模型(CLIP、SAM、DUSt3R系列)作为可复用的感知骨干网络</li>
+</ul>
+<blockquote>
+<p>第5级分为五大支柱:
+<strong>A. 前端</strong> — 用学习型感知组件替代手工设计模块
+<strong>B. 后端</strong> — 用学习型/可证明最优的优化方法替代传统求解器
+<strong>C. 系统</strong> — 端到端深度VO/SLAM流水线
+<strong>D. 场景理解</strong> — 基于SLAM地图的语义、语言与关系推理
+<strong>E. 基础模型与神经SLAM</strong> — 点图Transformer、基于NeRF与3DGS的稠密SLAM系统</p>
+</blockquote>
+<h3>A. 深度前端 — 感知</h3>
+<h4>特征检测与匹配</h4>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>作者/年份</th>
+<th>关键概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/netvlad/"><strong>NetVLAD</strong></a></td>
+<td><a href="https://arxiv.org/abs/1511.07247">Arandjelović 2016</a></td>
+<td>VLAD、地点识别</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/superpoint/"><strong>SuperPoint</strong></a></td>
+<td><a href="https://arxiv.org/abs/1712.07629">DeTone 2017</a></td>
+<td>单应自适应(Homographic Adaptation)、自监督、VGG编码器+检测器/描述子头</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/hardnet/">HardNet</a></td>
+<td><a href="https://arxiv.org/abs/1705.10872">Mishchuk 2017</a></td>
+<td>学习型局部描述子</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/r2d2/"><strong>R2D2</strong></a></td>
+<td><a href="https://arxiv.org/abs/1906.06195">Revaud 2019</a></td>
+<td>可重复且可靠的检测器/描述子，显式的重复性/可靠性图</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/keynet/">KeyNet</a></td>
+<td><a href="https://arxiv.org/abs/1904.00889">Barroso-Laguna 2019</a></td>
+<td>学习型关键点检测器</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/hf-net/"><strong>HF-Net</strong></a></td>
+<td><a href="https://arxiv.org/abs/1812.03506">Sarlin 2019</a></td>
+<td>全局特征、局部特征、视觉定位</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/superglue/"><strong>SuperGlue</strong></a></td>
+<td><a href="https://arxiv.org/abs/1911.11763">Sarlin 2020</a></td>
+<td>自注意力/交叉注意力图神经网络(GNN)、Sinkhorn最优分配、用于处理外点的垃圾箱(dustbin)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/disk/"><strong>DISK</strong></a></td>
+<td><a href="https://arxiv.org/abs/2006.13566">Tyszkiewicz 2020</a></td>
+<td>策略梯度(强化学习)训练，将匹配成功/失败作为奖励</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/patch-netvlad/">Patch NetVLAD</a></td>
+<td><a href="https://arxiv.org/abs/2103.01486">Hausler 2021</a></td>
+<td>多尺度图像块级VLAD</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/loftr/"><strong>LoFTR</strong></a></td>
+<td><a href="https://arxiv.org/abs/2104.00680">Sun 2021</a></td>
+<td>无检测器(Detector-free)、Transformer由粗到精的稠密匹配</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/lightglue/"><strong>LightGlue</strong></a></td>
+<td><a href="https://arxiv.org/abs/2306.13643">Lindenberger 2023</a></td>
+<td>自适应深度/宽度，比SuperGlue快5-10倍</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/xfeat/"><strong>XFeat</strong></a></td>
+<td><a href="https://arxiv.org/abs/2404.19174">Potje 2024</a></td>
+<td>0.3M参数、1400 FPS(RTX 4090)、64维描述子，适合嵌入式设备</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/roma/"><strong>RoMa</strong></a></td>
+<td><a href="https://arxiv.org/abs/2305.15404">Edstedt 2024</a></td>
+<td>DINOv2基础特征+由粗到精稠密匹配</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/dedode/"><strong>DeDoDe</strong></a></td>
+<td><a href="https://arxiv.org/abs/2308.08479">Edstedt 2024</a></td>
+<td>一阶段联合检测与描述</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/roma-v2/"><strong>RoMa v2</strong></a></td>
+<td><a href="https://arxiv.org/abs/2511.15706">Edstedt 2025</a></td>
+<td>更难、更好、更快、更稠密的稠密特征匹配</td>
+</tr>
+</tbody>
+</table>
+<h4>深度估计</h4>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>作者/年份</th>
+<th>关键概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/monodepth/">MonoDepth</a></td>
+<td><a href="https://arxiv.org/abs/1609.03677">Godard 2016</a></td>
+<td>左右光度一致性，自监督</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/midas/"><strong>MiDaS</strong></a></td>
+<td><a href="https://arxiv.org/abs/1907.01341">Ranftl 2020</a></td>
+<td>多数据集混合训练、尺度与偏移不变损失、相对深度</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/dpt/"><strong>DPT</strong></a></td>
+<td><a href="https://arxiv.org/abs/2103.13413">Ranftl 2021</a></td>
+<td>稠密预测Transformer(ViT骨干网络)，全局上下文</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/zoedepth/"><strong>ZoeDepth</strong></a></td>
+<td><a href="https://arxiv.org/abs/2302.12288">Bhat 2023</a></td>
+<td>零样本度量深度、度量分箱模块(Metric Bins Module)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/metric3d/"><strong>Metric3D</strong></a></td>
+<td><a href="https://arxiv.org/abs/2307.10984">Yin 2023</a></td>
+<td>基于相机内参条件的度量深度、规范相机空间(Canonical Camera Space)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/depth-anything/"><strong>Depth Anything</strong></a></td>
+<td><a href="https://arxiv.org/abs/2401.10891">Yang 2024</a></td>
+<td>6200万张图像、单目深度基础模型</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/depth-anything-v2/"><strong>Depth Anything V2</strong></a></td>
+<td><a href="https://arxiv.org/abs/2406.09414">Yang 2024</a></td>
+<td>使用合成数据改进，边缘保持效果更佳</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/depth-anything-3/"><strong>Depth Anything 3</strong></a></td>
+<td><a href="https://arxiv.org/abs/2511.10647">Lin 2025</a></td>
+<td>从任意输入恢复任意视角几何，深度-光线预测目标，单一普通Transformer(DINOv2)，师生训练</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/marigold/"><strong>Marigold</strong></a></td>
+<td><a href="https://arxiv.org/abs/2312.02145">Ke 2024</a></td>
+<td>用Stable Diffusion做深度估计，细节丰富，通过采样获得不确定性</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/align3r/"><strong>Align3R</strong></a></td>
+<td><a href="https://arxiv.org/abs/2412.03079">Lu 2025</a></td>
+<td>视频时序一致性，基于DUSt3R，CVPR 2025 Highlight</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/masked-depth-modeling-lingbot-depth/"><strong>Masked Depth Modeling (LingBot-Depth)</strong></a></td>
+<td><a href="https://arxiv.org/abs/2601.17895">Tan 2026</a></td>
+<td>修复了RGB-D在玻璃/镜面/金属材质上的失效问题</td>
+</tr>
+</tbody>
+</table>
+<h4>光流与场景流</h4>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>作者/年份</th>
+<th>关键概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/flownet/"><strong>FlowNet</strong></a></td>
+<td><a href="https://arxiv.org/abs/1504.06852">Dosovitskiy 2015</a></td>
+<td>首个端到端深度光流网络(SimpleNet / CorrNet)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/flownet-2-0/"><strong>FlowNet 2.0</strong></a></td>
+<td><a href="https://arxiv.org/abs/1612.01925">Ilg 2017</a></td>
+<td>堆叠网络，达到传统方法级别的精度</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/pwc-net/"><strong>PWC-Net</strong></a></td>
+<td><a href="https://arxiv.org/abs/1709.02371">Sun 2018</a></td>
+<td>金字塔-变形-代价体(Pyramid-Warping-Cost volume)，由粗到精，840万参数</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/flownet3d/"><strong>FlowNet3D</strong></a></td>
+<td><a href="https://arxiv.org/abs/1806.01411">Liu 2019</a></td>
+<td>点云场景流，基于PointNet++</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/raft/"><strong>RAFT</strong></a></td>
+<td><a href="https://arxiv.org/abs/2003.12039">Teed 2020</a></td>
+<td>全局对关联(All-Pairs Correlation)+迭代ConvGRU更新，<strong>ECCV最佳论文</strong></td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/raft-3d/"><strong>RAFT-3D</strong></a></td>
+<td><a href="https://arxiv.org/abs/2012.00726">Teed 2021</a></td>
+<td>基于RAFT的场景流(3D运动)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/flowformer/"><strong>FlowFormer</strong></a></td>
+<td><a href="https://arxiv.org/abs/2203.16194">Huang 2022</a></td>
+<td>在代价体token上应用Transformer，全局上下文</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/sea-raft/"><strong>SEA-RAFT</strong></a></td>
+<td><a href="https://arxiv.org/abs/2405.14793">Wang 2024</a></td>
+<td>面向实时应用的高效RAFT变体</td>
+</tr>
+</tbody>
+</table>
+<h4>相机位姿回归与重定位</h4>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>作者/年份</th>
+<th>关键概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/posenet/"><strong>PoseNet</strong></a></td>
+<td><a href="https://arxiv.org/abs/1505.07427">Kendall 2015</a></td>
+<td>基于CNN的6自由度位姿回归(APR)，GoogLeNet骨干网络</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/dsac/"><strong>DSAC</strong></a></td>
+<td><a href="https://arxiv.org/abs/1611.05705">Brachmann 2017</a></td>
+<td>可微分RANSAC，场景坐标回归(SCR)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/dsacpp/"><strong>DSAC++</strong></a></td>
+<td><a href="https://arxiv.org/abs/1711.10228">Brachmann 2018</a></td>
+<td>自监督，支持RGB-D</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/cnn-pose-regression-limitations/">CNN位姿回归的局限性</a></td>
+<td><a href="https://arxiv.org/abs/1903.07504">Sattler 2019</a></td>
+<td>位姿回归性能≈图像检索性能</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/lm-reloc/">LM-Reloc</a></td>
+<td><a href="https://arxiv.org/abs/2010.06323">von Stumberg 2020</a></td>
+<td>深度直接法重定位</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/dsac-star/"><strong>DSAC*</strong></a></td>
+<td><a href="https://arxiv.org/abs/2002.12324">Brachmann 2021</a></td>
+<td>基于RGB/RGB-D的视觉重定位，改进了学习稳定性(TPAMI)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/ace/"><strong>ACE</strong></a></td>
+<td><a href="https://arxiv.org/abs/2305.14059">Brachmann 2023</a></td>
+<td>加速坐标编码(Accelerated Coordinate Encoding)，每场景仅需5分钟训练</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/ace-zero/"><strong>ACE Zero</strong></a></td>
+<td><a href="https://arxiv.org/abs/2404.14351">Brachmann 2024</a></td>
+<td>零样本SCR，不需要预先构建3D地图</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/ace-g/"><strong>ACE-G</strong></a></td>
+<td><a href="https://arxiv.org/abs/2510.11605">Bruns 2025</a></td>
+<td>通过查询预训练实现可泛化SCR，新场景无需微调</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/ace-slam/"><strong>ACE-SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2512.14032">Alzugaray 2025</a></td>
+<td>神经隐式实时SLAM，网络权重即地图</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/hloc/"><strong>hloc</strong></a></td>
+<td><a href="https://github.com/cvg/Hierarchical-Localization">Sarlin 2019</a></td>
+<td>实现HF-Net层次化定位思想的工具箱: 粗定位(NetVLAD)→精定位(SuperGlue)</td>
+</tr>
+</tbody>
+</table>
+<h4>面向SLAM的物体检测与分割</h4>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>作者/年份</th>
+<th>关键概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/yolo/"><strong>YOLO</strong></a>(v1→v11)</td>
+<td><a href="https://arxiv.org/abs/1506.02640">Redmon 2016→2024</a></td>
+<td>实时物体检测，Ultralytics生态系统</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/detr/"><strong>DETR</strong></a></td>
+<td><a href="https://arxiv.org/abs/2005.12872">Carion 2020</a></td>
+<td>Transformer检测，无锚框(anchor-free)，无需NMS</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/rt-detr/"><strong>RT-DETR</strong></a></td>
+<td><a href="https://arxiv.org/abs/2304.08069">Zhao (Baidu) 2023</a></td>
+<td>实时DETR，兼具YOLO的速度与Transformer的质量</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/rf-detr/"><strong>RF-DETR</strong></a></td>
+<td><a href="https://arxiv.org/abs/2511.09554">Robinson 2025</a></td>
+<td>面向DETR的权重共享NAS，精度-延迟帕累托调优，首个在COCO上突破60 AP的实时检测器</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/sam/"><strong>SAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2304.02643">Kirillov 2023</a></td>
+<td>Segment Anything，基于提示，基础模型</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/sam-2/"><strong>SAM 2</strong></a></td>
+<td><a href="https://arxiv.org/abs/2408.00714">Meta 2024</a></td>
+<td>视频分割，记忆注意力(Memory Attention)，时序一致性</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/sam-3/"><strong>SAM 3</strong></a></td>
+<td><a href="https://arxiv.org/abs/2511.16719">Carion 2025</a></td>
+<td>可提示概念分割(名词短语/样例提示)，存在性头，检测器+基于记忆的视频跟踪器</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/grounding-dino/"><strong>Grounding DINO</strong></a></td>
+<td><a href="https://arxiv.org/abs/2303.05499">Liu 2023</a></td>
+<td>文本提示检测→SAM流水线(Grounded SAM)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/open-yolo-3d/"><strong>Open-YOLO 3D</strong></a></td>
+<td><a href="https://arxiv.org/abs/2406.02548">Boudjoghra 2024</a></td>
+<td>2D开放词汇检测→3D实例分割，速度提升16倍</td>
+</tr>
+</tbody>
+</table>
+<h3>B. 深度后端 — 优化</h3>
+<h4>可微分光束法平差</h4>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>作者/年份</th>
+<th>关键概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/ba-net/"><strong>BA-Net</strong></a></td>
+<td><a href="https://arxiv.org/abs/1806.04807">Tang 2019</a></td>
+<td>FPN+可微分LM层，端到端SfM(ICLR)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/droid-slam/"><strong>DROID-SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2108.10869">Teed 2021</a></td>
+<td>稠密光流+可微分稠密BA，全像素重投影</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/dpvo/"><strong>DPVO</strong></a></td>
+<td><a href="https://arxiv.org/abs/2208.04726">Teed 2023</a></td>
+<td>基于图像块的轻量化DROID-SLAM，30+ FPS实时</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/theseus/"><strong>Theseus</strong></a></td>
+<td><a href="https://arxiv.org/abs/2207.09442">Pineda (Meta) 2022</a></td>
+<td>可微分非线性优化库(PyTorch)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/lietorch/"><strong>Lietorch</strong></a></td>
+<td><a href="https://github.com/princeton-vl/lietorch">Teed 2021</a></td>
+<td>面向PyTorch的李群运算(SE(3)/SO(3))</td>
+</tr>
+</tbody>
+</table>
+<h3>C. 端到端深度VO/SLAM系统</h3>
+<h4>自监督与学习型VO</h4>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>作者/年份</th>
+<th>关键概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/deepvo/">DeepVO</a></td>
+<td><a href="https://arxiv.org/abs/1709.08429">Wang 2017</a></td>
+<td>有监督学习</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/sfm-learner/">SfM-Learner</a></td>
+<td><a href="https://arxiv.org/abs/1704.07813">Zhou 2017</a></td>
+<td>无监督，深度深度估计+深度位姿估计</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/demon/">DeMoN</a></td>
+<td><a href="https://arxiv.org/abs/1612.02401">Ummenhofer 2017</a></td>
+<td>从两帧中估计深度+运动，编码器-解码器结构</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/undeepvo/">UndeepVO</a></td>
+<td><a href="https://arxiv.org/abs/1709.06841">Li 2018</a></td>
+<td>立体自监督，绝对尺度恢复</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/deeptam/">DeepTAM</a></td>
+<td><a href="https://arxiv.org/abs/1808.01900">Zhou 2018</a></td>
+<td>深度跟踪与建图，基于代价体</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/deepv2d/">DeepV2D</a></td>
+<td><a href="https://arxiv.org/abs/1812.04605">Teed 2018</a></td>
+<td>从视频中迭代估计深度，可微分几何层</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/depth-from-videos-in-the-wild/">Depth from Videos in the Wild</a></td>
+<td><a href="https://arxiv.org/abs/1904.04998">Gordon 2019</a></td>
+<td>无约束视频深度估计，学习型相机内参</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/neural-ray-surfaces/">Neural Ray Surfaces</a></td>
+<td><a href="https://arxiv.org/abs/2008.06630">Vasiljevic 2020</a></td>
+<td>学习型光线表面模型，非针孔相机</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/gradslam/">GradSLAM</a></td>
+<td><a href="https://arxiv.org/abs/1910.10672">Murthy 2020</a></td>
+<td>可微分SLAM框架(PyTorch，支持多种SLAM后端)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/deepslam/">DeepSLAM</a></td>
+<td><a href="https://ieeexplore.ieee.org/document/9047170">Li 2020</a></td>
+<td>TrackingNet、MappingNet、LoopNet</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/monorec/">MonoRec</a></td>
+<td><a href="https://arxiv.org/abs/2011.11814">Wimbauer 2021</a></td>
+<td>自监督单目3D重建，运动物体处理</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/tandem/">TANDEM</a></td>
+<td><a href="https://arxiv.org/abs/2111.07418">Koestler 2021</a></td>
+<td>通过MVS深度实现实时跟踪+稠密建图，基于DSO</td>
+</tr>
+</tbody>
+</table>
+<h4>基于学习的SLAM系统</h4>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>作者/年份</th>
+<th>关键概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/droid-slam/"><strong>DROID-SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2108.10869">Teed 2021</a></td>
+<td>可微分BA、稠密光流、端到端学习</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/tartanvo/">TartanVO</a></td>
+<td><a href="https://arxiv.org/abs/2011.00359">Wang 2021</a></td>
+<td>可泛化的视觉里程计</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/dpv-slam/"><strong>DPV-SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2408.01654">Lipson 2024</a></td>
+<td>DPVO+回环检测，完整SLAM(ECCV 2024)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/mac-vo/">MAC-VO</a></td>
+<td><a href="https://arxiv.org/abs/2409.09479">Qiu 2024</a></td>
+<td>基于学习的VO，度量感知(metric-aware)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/vot/"><strong>VoT</strong></a></td>
+<td><a href="https://arxiv.org/abs/2510.03348">Yugay 2025</a></td>
+<td>基于Transformer的视觉里程计(后改名为FVO)</td>
+</tr>
+</tbody>
+</table>
+<h4>潜表征SLAM</h4>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>作者/年份</th>
+<th>关键概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/codeslam/"><strong>CodeSLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/1804.00874">Bloesch 2018</a></td>
+<td>深度表示为128维潜编码，在编码+位姿上进行光度BA</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/scenecode/"><strong>SceneCode</strong></a></td>
+<td><a href="https://arxiv.org/abs/1903.06482">Zhi 2019</a></td>
+<td>深度+语义共享单一潜编码，跨模态约束</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/deepfactors/"><strong>DeepFactors</strong></a></td>
+<td><a href="https://arxiv.org/abs/2001.05049">Czarnowski 2020</a></td>
+<td>概率深度编码+因子图，GPU上30+ FPS</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/nodeslam/"><strong>NodeSLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2004.04485">Sucar 2020</a></td>
+<td>物体级DeepSDF编码，逐物体占据VAE</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/codemapping/"><strong>CodeMapping</strong></a></td>
+<td><a href="https://arxiv.org/abs/2107.08994">Matsuki 2021</a></td>
+<td>稀疏SLAM+学习型稠密建图，混合方法</td>
+</tr>
+</tbody>
+</table>
+<h4>神经渲染(参考)</h4>
+<blockquote>
+<p>基于NeRF/3DGS的SLAM系统 → 见下文<strong>支柱E</strong></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>作者/年份</th>
+<th>关键概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/nerf/"><strong>NeRF</strong></a></td>
+<td><a href="https://arxiv.org/abs/2003.08934">Mildenhall 2020</a></td>
+<td>神经辐射场，新视角合成(奠基性工作)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/difix3d/"><strong>DIFIX3D+</strong></a></td>
+<td><a href="https://arxiv.org/abs/2503.01774">Wu 2025</a></td>
+<td>单步扩散模型用于3D重建伪影去除(后处理)</td>
+</tr>
+</tbody>
+</table>
+<h3>D. 场景理解</h3>
+<h4>基准与基础</h4>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>作者/年份</th>
+<th>关键概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/efm3d/"><strong>EFM3D</strong></a></td>
+<td><a href="https://arxiv.org/abs/2406.10224">Straub (Meta) 2024</a></td>
+<td>第一人称视角基础模型3D基准，从第一人称视频中提取深度/表面/语义</td>
+</tr>
+</tbody>
+</table>
+<h4>3D场景图</h4>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>作者/年份</th>
+<th>关键概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/kimera-3d-dynamic-scene-graph/">Kimera / 3D动态场景图</a></td>
+<td><a href="https://arxiv.org/abs/2002.06289">Rosinol 2020</a></td>
+<td>Kimera-VIO、Kimera-Mesher、Kimera-PGMO、Kimera-Semantics、Kimera-DSG(立体/单目视觉惯性流水线)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/hydra/"><strong>Hydra</strong></a></td>
+<td><a href="https://arxiv.org/abs/2201.13360">Hughes (MIT SPARK) 2022</a></td>
+<td>实时分层场景图(网格→物体→区域→房间→建筑)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/hydra-multi/"><strong>Hydra-Multi</strong></a></td>
+<td><a href="https://arxiv.org/abs/2304.13487">Chang 2023</a></td>
+<td>分布式多机器人3D场景图</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/clio/"><strong>Clio</strong></a></td>
+<td><a href="https://arxiv.org/abs/2404.13696">Maggio (MIT SPARK) 2024</a></td>
+<td>开放集任务驱动场景图，每节点带CLIP嵌入</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/khronos/"><strong>Khronos</strong></a></td>
+<td><a href="https://arxiv.org/abs/2402.13817">Schmid (MIT SPARK) 2024</a></td>
+<td>时空场景图，动态物体历史跟踪</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/conceptgraphs/"><strong>ConceptGraphs</strong></a></td>
+<td><a href="https://arxiv.org/abs/2309.16650">Gu 2023</a></td>
+<td>开放词汇3D场景图，SAM+CLIP+LLM关系推理</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h4>语义/语言引导SLAM</h4>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>作者/年份</th>
+<th>关键概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/conceptfusion/"><strong>ConceptFusion</strong></a></td>
+<td><a href="https://arxiv.org/abs/2302.07241">Jatavallabhula (MIT) 2023</a></td>
+<td>CLIP特征融合进3D地图，开放词汇语言查询</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/lerf/"><strong>LERF</strong></a></td>
+<td><a href="https://arxiv.org/abs/2303.09553">Kerr 2023</a></td>
+<td>语言嵌入辐射场(Language Embedded Radiance Fields)，DINO多尺度特征，NeRF+CLIP</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/openscene/"><strong>OpenScene</strong></a></td>
+<td><a href="https://arxiv.org/abs/2211.15654">Peng (ETH) 2023</a></td>
+<td>语言特征反投影到3D点云</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/spatiallm/"><strong>SpatialLM</strong></a></td>
+<td><a href="https://github.com/manycore-research/SpatialLM">Mao 2025</a></td>
+<td>点云→LLM，将结构化室内建模表示为Python脚本</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>另见: <a href="https://arxiv.org/abs/2409.18108"><strong>LEGS</strong></a>、<a href="https://arxiv.org/abs/2503.01646"><strong>OpenGS-SLAM</strong></a>(见上文<strong>支柱E</strong>)；<a href="https://arxiv.org/abs/2406.02548"><strong>Open-YOLO 3D</strong></a>(第5级 物体检测)</p>
+</blockquote>
+<h3>E. 基础模型与神经表征SLAM</h3>
+<h4>基础模型SLAM</h4>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>作者/年份</th>
+<th>关键概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/dust3r/"><strong>DUSt3R</strong></a></td>
+<td><a href="https://arxiv.org/abs/2312.14132">Wang 2024</a></td>
+<td>从图像对回归点图(Pointmap)，无需标定</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/mast3r/"><strong>MASt3R</strong></a></td>
+<td><a href="https://arxiv.org/abs/2406.09756">Leroy 2024</a></td>
+<td>DUSt3R+局部特征匹配</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/mast3r-slam/"><strong>MASt3R-SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2412.12392">Murai 2024</a></td>
+<td>基于MASt3R先验的实时稠密SLAM</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/vggt/"><strong>VGGT</strong></a></td>
+<td><a href="https://arxiv.org/abs/2503.11651">Wang (Meta) 2025</a></td>
+<td>从N个视角前馈推断位姿、深度、点图、轨迹(<strong>CVPR 2025最佳论文</strong>)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/vggt-slam/"><strong>VGGT-SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2505.12549">Maggio 2025</a></td>
+<td>在SL(4)流形上优化的稠密RGB SLAM，VGGT前端</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/vggt-slam-2-0/"><strong>VGGT-SLAM 2.0</strong></a></td>
+<td><a href="https://arxiv.org/abs/2601.19887">Maggio 2026</a></td>
+<td>实时稠密前馈场景重建</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/vggt-geo/"><strong>VGGT-Geo</strong></a></td>
+<td><a href="https://www.mdpi.com/2220-9964/15/2/85">Qin 2026</a></td>
+<td>对VGGT先验进行概率几何融合，用于稠密室内SLAM</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/iggt/"><strong>IGGT</strong></a></td>
+<td><a href="https://arxiv.org/abs/2510.22706">Li 2025</a></td>
+<td>实例基础几何Transformer(Instance-grounded geometry transformer) — 统一3D重建与实例级理解</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/amb3r/"><strong>AMB3R</strong></a></td>
+<td><a href="https://arxiv.org/abs/2511.20343">Wang 2025</a></td>
+<td>带后端的高精度前馈度量尺度3D重建，支持SfM/SLAM</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/mast3r-fusion/"><strong>MASt3R-Fusion</strong></a></td>
+<td><a href="https://arxiv.org/abs/2509.20757">Zhou 2025</a></td>
+<td>MASt3R前馈视觉模型+IMU+GNSS融合</td>
+</tr>
+</tbody>
+</table>
+<h4>基于NeRF</h4>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>作者/年份</th>
+<th>关键概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/imap/"><strong>iMAP</strong></a></td>
+<td><a href="https://arxiv.org/abs/2103.12352">Sucar 2021</a></td>
+<td>首个NeRF-SLAM，单一MLP，实时跟踪/建图</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/barf/"><strong>BARF</strong></a></td>
+<td><a href="https://arxiv.org/abs/2104.06405">Lin 2021</a></td>
+<td>光束法平差式NeRF(Bundle-Adjusting NeRF)，由粗到精的位置编码，位姿与NeRF联合优化(非完整SLAM — 仅位姿+NeRF联合优化)</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/nice-slam/"><strong>NICE-SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2112.12130">Zhu &#x26; Peng 2022</a></td>
+<td>分层特征网格(粗/中/细)，可扩展</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/co-slam/"><strong>Co-SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2304.14377">Wang 2023</a></td>
+<td>哈希网格(Instant-NGP)+坐标编码，比NICE-SLAM快5-10倍</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/eslam/"><strong>ESLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2211.11704">Johari 2023</a></td>
+<td>三平面表征，O(N²)对比O(N³)的内存占用</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/point-slam/"><strong>Point-SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2304.04278">Sandström 2023</a></td>
+<td>基于神经点云</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/nerf-slam/"><strong>NeRF-SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2210.13641">Rosinol 2023</a></td>
+<td>NeRF+传统SLAM流水线</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/nicer-slam/"><strong>NICER-SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2302.03594">Zhu 2024</a></td>
+<td>仅RGB的NeRF-SLAM(无深度传感器)，融合单目深度估计</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/vmap/"><strong>vMAP</strong></a></td>
+<td><a href="https://arxiv.org/abs/2302.01838">Kong 2023</a></td>
+<td>物体级NeRF-SLAM，逐物体神经场</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/go-slam/"><strong>GO-SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2309.02436">Zhang 2023</a></td>
+<td>全局优化+NeRF-SLAM，回环检测+全局BA</td>
+</tr>
+</tbody>
+</table>
+<h4>基于3DGS</h4>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>作者/年份</th>
+<th>关键概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/splatam/"><strong>SplaTAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2312.02126">Keetha 2024</a></td>
+<td>最早的3DGS SLAM系统之一(与GS-SLAM、MonoGS同期)，RGB-D，基于轮廓引导的稠密化</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/monogs/"><strong>MonoGS</strong></a></td>
+<td><a href="https://arxiv.org/abs/2312.06741">Matsuki 2024</a></td>
+<td>首个单目3DGS SLAM(CVPR 2024 highlight)，基于直接光栅化的跟踪，解析相机雅可比矩阵</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/gs-icp-slam/"><strong>GS-ICP SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2403.12550">Ha 2024</a></td>
+<td>高斯到高斯ICP(马氏距离)，几何跟踪</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/photo-slam/"><strong>Photo-SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2311.16728">Huang 2024</a></td>
+<td>显式几何+隐式外观(MLP颜色)，抗锯齿</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/rtg-slam/"><strong>RTG-SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2404.19706">Peng 2024</a></td>
+<td>专注实时性，自适应高斯预算，Jetson Orin上25 FPS</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/egg-fusion/"><strong>EGG-Fusion</strong></a></td>
+<td><a href="https://arxiv.org/abs/2512.01296">Pan 2025</a></td>
+<td>在线几何感知高斯面元融合，基于信息滤波器，实时</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/online-3dgs-modeling/"><strong>Online 3DGS Modeling</strong></a></td>
+<td><a href="https://arxiv.org/abs/2508.14014">Lee 2025</a></td>
+<td>具备新视角选择的在线3D高斯溅射建模</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/activesplat/"><strong>ActiveSplat</strong></a></td>
+<td><a href="https://arxiv.org/abs/2410.21955">Li 2025</a></td>
+<td>结合3DGS与基于Voronoi的路径规划的主动建图</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/opengs-slam/"><strong>OpenGS-SLAM</strong></a></td>
+<td><a href="https://arxiv.org/abs/2503.01646">Yang 2025</a></td>
+<td>开放集稠密语义3DGS SLAM，物体级场景理解</td>
+</tr>
+<tr>
+<td><a href="/visual-slam-roadmap/zh/level-05-deep-learning/legs/"><strong>LEGS</strong></a></td>
+<td><a href="https://arxiv.org/abs/2409.18108">Yu 2024</a></td>
+<td>语言嵌入高斯溅射(Language Embedded Gaussian Splats)，实时语言可查询的3D场景</td>
+</tr>
+</tbody>
+</table></article><nav class="mt-8 flex justify-between font-mono text-sm"><span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/zh/level-04-rgbd-slam/">&larr; 04 · RGB-D SLAM</a></span><span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/zh/level-06-vio-vins/">06 · VIO / VINS &rarr;</a></span></nav></main><footer class="mx-auto max-w-5xl px-5 py-10 font-mono text-xs space-y-2 text-slate-400"><p><a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap/pulls">欢迎提出建议 — 请向本仓库提交 PR。</a></p><p>MIT License &copy; 2026 Hyunggi Chang · built from the <a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap">roadmap repository</a></p></footer><script type="module">document.querySelectorAll(`a[data-lang]`).forEach(e=>{e.addEventListener(`click`,()=>{try{localStorage.setItem(`vslam-lang`,e.dataset.lang)}catch{}})});</script></body></html>

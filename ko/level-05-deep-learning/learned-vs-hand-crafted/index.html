@@ -1,0 +1,114 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Learned vs hand-crafted — Visual-SLAM Roadmap</title><meta name="description" content="고전적 SLAM은 수작업으로 설계된 모듈들의 파이프라인입니다: 코너 검출기(FAST, Harris), descriptor(ORB, SIFT), 매처(최근접 이웃 + 비율 테스트), 강건한 추정(RANSAC), 비선형 최소제곱 백엔드입니다. 이 구성 요소 각각은 인간의 가정을 인코딩합니다 — &quot;좋은&quot; 특징이 어떤 모습인지, 어떤 노이즈 분포를 예상해야 하는지, 어떤 휴리스틱이 이상치를 거부하는지. 딥러닝은 대안을 제시합니다: 네트워크가 이 함수들을 데이터로부터 학습하도록 하는 것입니다."><link rel="canonical" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-05-deep-learning/learned-vs-hand-crafted/"><meta name="robots" content="index, follow, max-image-preview:large"><meta name="theme-color" content="#faf7f0"><link rel="icon" href="/visual-slam-roadmap/favicon.svg" type="image/svg+xml"><link rel="sitemap" href="/visual-slam-roadmap/sitemap-index.xml"><link rel="alternate" hreflang="en" href="https://www.cv-learn.com/visual-slam-roadmap/level-05-deep-learning/learned-vs-hand-crafted/"><link rel="alternate" hreflang="ko" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-05-deep-learning/learned-vs-hand-crafted/"><link rel="alternate" hreflang="zh-CN" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-05-deep-learning/learned-vs-hand-crafted/"><link rel="alternate" hreflang="ja" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-05-deep-learning/learned-vs-hand-crafted/"><link rel="alternate" hreflang="x-default" href="https://www.cv-learn.com/visual-slam-roadmap/level-05-deep-learning/learned-vs-hand-crafted/"><!-- Open Graph --><meta property="og:type" content="article"><meta property="og:site_name" content="Visual-SLAM Developer Roadmap"><meta property="og:title" content="Learned vs hand-crafted — Visual-SLAM Roadmap"><meta property="og:description" content="고전적 SLAM은 수작업으로 설계된 모듈들의 파이프라인입니다: 코너 검출기(FAST, Harris), descriptor(ORB, SIFT), 매처(최근접 이웃 + 비율 테스트), 강건한 추정(RANSAC), 비선형 최소제곱 백엔드입니다. 이 구성 요소 각각은 인간의 가정을 인코딩합니다 — &quot;좋은&quot; 특징이 어떤 모습인지, 어떤 노이즈 분포를 예상해야 하는지, 어떤 휴리스틱이 이상치를 거부하는지. 딥러닝은 대안을 제시합니다: 네트워크가 이 함수들을 데이터로부터 학습하도록 하는 것입니다."><meta property="og:url" content="https://www.cv-learn.com/visual-slam-roadmap/ko/level-05-deep-learning/learned-vs-hand-crafted/"><meta property="og:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="ko_KR"><meta property="og:locale:alternate" content="en_US"><meta property="og:locale:alternate" content="zh_CN"><meta property="og:locale:alternate" content="ja_JP"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Learned vs hand-crafted — Visual-SLAM Roadmap"><meta name="twitter:description" content="고전적 SLAM은 수작업으로 설계된 모듈들의 파이프라인입니다: 코너 검출기(FAST, Harris), descriptor(ORB, SIFT), 매처(최근접 이웃 + 비율 테스트), 강건한 추정(RANSAC), 비선형 최소제곱 백엔드입니다. 이 구성 요소 각각은 인간의 가정을 인코딩합니다 — &quot;좋은&quot; 특징이 어떤 모습인지, 어떤 노이즈 분포를 예상해야 하는지, 어떤 휴리스틱이 이상치를 거부하는지. 딥러닝은 대안을 제시합니다: 네트워크가 이 함수들을 데이터로부터 학습하도록 하는 것입니다."><meta name="twitter:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><!-- Google AdSense --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5473245269912288" crossorigin="anonymous"></script><!-- Google Analytics 4 --><!-- Microsoft Clarity --><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Learned vs hand-crafted","description":"고전적 SLAM은 수작업으로 설계된 모듈들의 파이프라인입니다: 코너 검출기(FAST, Harris), descriptor(ORB, SIFT), 매처(최근접 이웃 + 비율 테스트), 강건한 추정(RANSAC), 비선형 최소제곱 백엔드입니다. 이 구성 요소 각각은 인간의 가정을 인코딩합니다 — \"좋은\" 특징이 어떤 모습인지, 어떤 노이즈 분포를 예상해야 하는지, 어떤 휴리스틱이 이상치를 거부하는지. 딥러닝은 대안을 제시합니다: 네트워크가 이 함수들을 데이터로부터 학습하도록 하는 것입니다.","inLanguage":"ko","url":"https://www.cv-learn.com/visual-slam-roadmap/ko/level-05-deep-learning/learned-vs-hand-crafted/","isPartOf":{"@type":"WebSite","name":"Visual-SLAM Developer Roadmap","url":"https://www.cv-learn.com/visual-slam-roadmap/"},"author":{"@type":"Person","name":"Hyunggi Chang","url":"https://github.com/changh95"},"license":"https://opensource.org/licenses/MIT"}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Visual-SLAM Roadmap","item":"https://www.cv-learn.com/visual-slam-roadmap/ko/"},{"@type":"ListItem","position":2,"name":"딥러닝 + SLAM","item":"https://www.cv-learn.com/visual-slam-roadmap/ko/level-05-deep-learning/"},{"@type":"ListItem","position":3,"name":"Learned vs hand-crafted","item":"https://www.cv-learn.com/visual-slam-roadmap/ko/level-05-deep-learning/learned-vs-hand-crafted/"}]}</script><link rel="stylesheet" href="/visual-slam-roadmap/_astro/readme.DemmKpdz.css"></head><body class="graph-paper min-h-screen text-inkline font-sans"><header class="border-b border-paper-line bg-paper/90 backdrop-blur sticky top-0 z-10"><nav class="mx-auto max-w-5xl px-5 py-3 flex items-center gap-4"><a href="/visual-slam-roadmap/ko/" class="font-display font-semibold tracking-wide text-sm uppercase text-scan-500 hover:opacity-80">VSLAM<span class="opacity-60">//</span>Roadmap</a><a href="https://ko-fi.com/changh95" target="_blank" rel="noopener" class="font-mono text-[11px] font-medium px-2.5 py-1 text-white bg-[#00b9fe] hover:opacity-85 transition-opacity leading-tight">♥ Support me if you liked this content!</a><a href="https://github.com/changh95/visual-slam-roadmap" class="ml-auto hidden sm:inline font-mono text-xs text-slate-500 hover:text-scan-500">GitHub &nearr;</a><div class="flex font-mono text-[11px] border border-paper-line bg-paper divide-paper-line divide-x ml-auto sm:ml-0" role="group" aria-label="Language"><a href="/visual-slam-roadmap/level-05-deep-learning/learned-vs-hand-crafted/" data-lang="en" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">EN</a><a href="/visual-slam-roadmap/ko/level-05-deep-learning/learned-vs-hand-crafted/" data-lang="ko" aria-current="true" class="px-2 py-1 transition-colors bg-scan-500/10 text-scan-500 font-medium">KO</a><a href="/visual-slam-roadmap/zh/level-05-deep-learning/learned-vs-hand-crafted/" data-lang="zh" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">ZH</a><a href="/visual-slam-roadmap/ja/level-05-deep-learning/learned-vs-hand-crafted/" data-lang="ja" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">JA</a></div></nav></header><main class="mx-auto max-w-3xl px-5 py-10"><nav class="font-mono text-xs text-slate-500 mb-6"><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/ko/">로드맵</a><span class="mx-1">/</span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/ko/level-05-deep-learning/">레벨 05 · 딥러닝 + SLAM</a></nav><article class="prose prose-slate max-w-none prose-headings:font-display prose-a:text-scan-500 prose-a:decoration-scan-300/50 hover:prose-a:decoration-scan-500 prose-blockquote:font-mono prose-blockquote:text-sm prose-blockquote:not-italic bg-paper/80 border border-paper-line p-6 sm:p-8"><h1 id="learned-vs-hand-crafted">Learned vs hand-crafted</h1>
+<p>고전적 SLAM은 수작업으로 설계된 모듈들의 파이프라인입니다: 코너 검출기(FAST, Harris), descriptor(ORB, SIFT), 매처(최근접 이웃 + 비율 테스트), 강건한 추정(RANSAC), 비선형 최소제곱 백엔드입니다. 이 구성 요소 각각은 인간의 가정을 인코딩합니다 — “좋은” 특징이 어떤 모습인지, 어떤 노이즈 분포를 예상해야 하는지, 어떤 휴리스틱이 이상치를 거부하는지. 딥러닝은 대안을 제시합니다: 네트워크가 이 함수들을 데이터로부터 학습하도록 하는 것입니다.</p>
+<h2 id="두-가지-매우-다른-전략">두 가지 매우 다른 전략</h2>
+<p>SLAM에 학습을 적용하는 방법은 두 가지가 있으며, 이를 구분하는 것이 중요합니다:</p>
+<ul>
+<li><strong>모듈 교체</strong>: 고전적 파이프라인 구조는 유지하되, 개별 hand-crafted 모듈을 학습된 모듈로 교체합니다. 시스템은 여전히 해석 가능하며, 기하학적 백엔드(bundle adjustment, pose-graph 최적화)는 그대로 유지됩니다.</li>
+<li><strong>End-to-end 학습</strong>: 전체 파이프라인(또는 그 상당 부분)을 이미지를 포즈나 맵으로 직접 매핑하는 네트워크로 교체합니다. 예를 들어 LSTM으로 모션을 회귀하는 DeepVO, 또는 미분 가능한 bundle-adjustment 레이어 주변에 recurrent 갱신 연산자를 학습하는 DROID-SLAM이 있습니다.</li>
+</ul>
+<h2 id="모듈별-교체-지도">모듈별 교체 지도</h2>
+<p>Level 5의 대부분은 각 논문이 어떤 고전적 모듈을 대체하는지를 중심으로 구성되어 있습니다:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>파이프라인 단계</th><th>Hand-crafted 표준</th><th>학습된 대체물</th></tr></thead><tbody><tr><td>Keypoint 검출 + 기술</td><td>FAST/Harris + ORB/SIFT</td><td>SuperPoint, R2D2, DISK, XFeat</td></tr><tr><td>매칭</td><td>최근접 이웃 + 비율 테스트</td><td>SuperGlue, LightGlue, LoFTR (검출기 없는 방식)</td></tr><tr><td>장소 인식</td><td>bag-of-words (DBoW)</td><td>NetVLAD, Patch-NetVLAD, HF-Net</td></tr><tr><td>깊이</td><td>스테레오 블록 매칭 / 깊이 센서</td><td>MonoDepth, MiDaS, Depth Anything</td></tr><tr><td>Optical flow</td><td>Lucas-Kanade, variational flow</td><td>RAFT, SEA-RAFT</td></tr><tr><td>재위치 인식</td><td>3D 맵에 대한 descriptor 매칭</td><td>PoseNet (회귀), DSAC/ACE (scene coordinate)</td></tr><tr><td>이상치 제거 / 솔버</td><td>RANSAC, Gauss-Newton</td><td>DSAC (soft RANSAC), unrolled/implicit BA 레이어</td></tr></tbody></table>
+<p>새로운 논문을 읽을 때 첫 번째로 물어야 할 질문은: <em>이 표의 어느 행에 해당하며, 고전적 백엔드를 유지하는가?</em> 입니다.</p>
+<h2 id="각-진영이-우세한-영역">각 진영이 우세한 영역</h2>
+<p><strong>학습된 모듈은 명백히 우세합니다</strong> hand-crafted 가정을 무너뜨리는 조건 하에서: 심한 조명 변화, 약한 텍스처, 모션 블러, 계절 또는 낮/밤 외관 변화, 넓은 baseline 매칭입니다. 학습된 특징은 정확히 이러한 변동성에 대해 학습되는 반면, hand-crafted descriptor는 설계자의 상상력만 반영합니다.</p>
+<p><strong>고전적 모듈은 여전히 우세합니다</strong> 텍스처가 풍부하고 조명이 좋은 장면에서 높은 프레임 레이트로 동작할 때: ORB는 계산 비용이 몇 자릿수 더 저렴하고, 고전적 기하학은 학습 분포에 대한 걱정 없이 정확하고 검증 가능한 해를 제공하며, 실패 모드를 분석할 수 있습니다. RANSAC 실패는 인라이어 수로부터 진단할 수 있지만, 네트워크 실패는 흔히 조용히 일어납니다.</p>
+<p><strong>End-to-end 포즈 회귀는 특히 기하학에 열세입니다</strong>: 포즈를 직접 회귀하는 네트워크(PoseNet 방식)는 삼각측량보다는 이미지 검색처럼 동작하며, 그 오차는 기하학적 방법의 오차처럼 더 많은 텍스처나 더 나은 캘리브레이션에 따라 줄어들지 않습니다. 이것이 바로 이 분야가 하이브리드로 수렴한 이유입니다 — 학습된 인지, 기하학적 추정입니다.</p>
+<h2 id="실용적인-판단-기준">실용적인 판단 기준</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>질문</th><th>고전적 방식이 유리</th><th>학습된 방식이 유리</th></tr></thead><tbody><tr><td>계산 예산</td><td>임베디드 CPU</td><td>GPU 사용 가능</td></tr><tr><td>환경</td><td>통제됨, 텍스처가 풍부함</td><td>외관 변화, 낮은 텍스처</td></tr><tr><td>해석 가능성 / 인증</td><td>필수</td><td>선택적</td></tr><tr><td>해당 도메인의 학습 데이터</td><td>부족함</td><td>풍부함</td></tr></tbody></table>
+<h2 id="학습된-모듈-도입-시-흔한-함정">학습된 모듈 도입 시 흔한 함정</h2>
+<ul>
+<li><strong>분포 이동(distribution shift)</strong>: 실외 랜드마크로 학습된 매처는 실내에서 성능이 저하될 수 있습니다. 논문의 벤치마크가 아니라 항상 <em>자신의</em> 도메인 데이터로 검증하세요.</li>
+<li><strong>처리량 계산</strong>: 논문은 GPU 추론 시간을 인용하지만, 로봇에서는 GPU가 다른 인지 작업과 공유될 수 있고, 전처리(리사이즈, 정규화)가 흔히 숨겨진 비용입니다.</li>
+<li><strong>혼합 규약 버그</strong>: 학습된 특징은 자체적인 해상도, 점수 규약, 서브픽셀 동작을 가지고 있습니다. SuperPoint를 ORB에 맞춰 조정된 파이프라인에 임계값(매칭, RANSAC, 키프레임 선택)을 재조정하지 않고 끼워 넣는 것은 조용한 정확도 저하의 전형적인 원인입니다.</li>
+<li><strong>평가 누출(evaluation leakage)</strong>: 일부 학습된 모듈은 평가에 사용되는 벤치마크 자체(또는 그와 유사한 데이터)로 학습되었습니다. 비교를 신뢰하기 전에 학습 데이터셋을 확인하세요.</li>
+</ul>
+<h2 id="하이브리드-합의">하이브리드 합의</h2>
+<p>실제로 가장 성공적인 현대 시스템들은 하이브리드입니다: 학습된 인지가 고전적 기하학 최적화에 입력을 제공합니다(예: ORB-SLAM 방식 파이프라인 내부의 학습된 특징, 또는 고전적 BA 솔버 주변의 DROID-SLAM의 학습된 업데이트). SLAM의 최대 우도 기법은 블랙박스로 이기기 어렵지만, 그것에 입력을 제공하는 인지 레이어는 학습이 먼저 성과를 내는 지점입니다. <a href="/visual-slam-roadmap/ko/level-05-deep-learning/differentiability/">Differentiability</a> 문서는 이 두 절반을 함께 학습시킬 수 있게 하는 기술을 다룹니다.</p>
+<h2 id="slam에서의-의미">SLAM에서의 의미</h2>
+<p>Level 5의 거의 모든 논문은 learned-vs-hand-crafted 스펙트럼 위의 한 점이며, 어떤 방법이 그 스펙트럼의 어디에 위치하는지를 아는 것은 그것이 어떤 문제를 풀고 어떤 대가를 요구하는지를 알려줍니다. 시스템을 설계할 때, 이러한 프레임은 “딥러닝을 써야 하는가?”라는 질문을 구체적인 엔지니어링 질문으로 바꿉니다: 어떤 모듈이 실패하고 있는가, 자신의 플랫폼에서 추론을 감당할 수 있는가, 그리고 기하학은 고전적 방식으로 유지되어야 하는가입니다.</p>
+<h2 id="관련-문서">관련 문서</h2>
+<ul>
+<li><a href="/visual-slam-roadmap/ko/level-05-deep-learning/superpoint/">SuperPoint</a></li>
+<li><a href="/visual-slam-roadmap/ko/level-05-deep-learning/superglue/">SuperGlue</a></li>
+<li><a href="/visual-slam-roadmap/ko/level-05-deep-learning/deepvo/">DeepVO</a></li>
+<li><a href="/visual-slam-roadmap/ko/level-05-deep-learning/droid-slam/">DROID-SLAM</a></li>
+<li><a href="/visual-slam-roadmap/ko/level-05-deep-learning/differentiability/">Differentiability</a></li>
+<li><a href="/visual-slam-roadmap/ko/level-05-deep-learning/netvlad/">NetVLAD</a></li>
+<li><a href="/visual-slam-roadmap/ko/level-05-deep-learning/foundation-models/">Foundation models</a></li>
+</ul></article><div class="mt-10"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5473245269912288" data-ad-slot="2335164071" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></main><footer class="mx-auto max-w-5xl px-5 py-10 font-mono text-xs space-y-2 text-slate-400"><p><a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap/pulls">제안은 언제든 환영합니다 — 저장소에 PR을 제출해 주세요.</a></p><p>MIT License &copy; 2026 Hyunggi Chang · built from the <a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap">roadmap repository</a></p></footer><script type="module">document.querySelectorAll(`a[data-lang]`).forEach(e=>{e.addEventListener(`click`,()=>{try{localStorage.setItem(`vslam-lang`,e.dataset.lang)}catch{}})});</script></body></html>

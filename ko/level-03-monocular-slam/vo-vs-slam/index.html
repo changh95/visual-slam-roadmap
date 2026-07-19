@@ -1,0 +1,81 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>VO vs SLAM — Visual-SLAM Roadmap</title><meta name="description" content="Visual Odometry (VO)는 연속된 프레임으로부터 지역적이고 증분적인 카메라 모션을 추정합니다: 프레임 간 특징점을 매칭하거나 추적하고(또는 직접 방법의 경우 광도 오차를 최소화하고), 상대 포즈를 추정한 뒤 추정치들을 연쇄시킵니다. VO에는 전역 지도라는 개념이 없고 루프 클로저를 수행할 수 없으므로 — 드리프트가 무한히 누적됩니다. 긴 루프를 돌아 출발점으로 돌아와도 순수 VO 궤적은 닫히지 않습니다."><link rel="canonical" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-03-monocular-slam/vo-vs-slam/"><meta name="robots" content="index, follow, max-image-preview:large"><meta name="theme-color" content="#faf7f0"><link rel="icon" href="/visual-slam-roadmap/favicon.svg" type="image/svg+xml"><link rel="sitemap" href="/visual-slam-roadmap/sitemap-index.xml"><link rel="alternate" hreflang="en" href="https://www.cv-learn.com/visual-slam-roadmap/level-03-monocular-slam/vo-vs-slam/"><link rel="alternate" hreflang="ko" href="https://www.cv-learn.com/visual-slam-roadmap/ko/level-03-monocular-slam/vo-vs-slam/"><link rel="alternate" hreflang="zh-CN" href="https://www.cv-learn.com/visual-slam-roadmap/zh/level-03-monocular-slam/vo-vs-slam/"><link rel="alternate" hreflang="ja" href="https://www.cv-learn.com/visual-slam-roadmap/ja/level-03-monocular-slam/vo-vs-slam/"><link rel="alternate" hreflang="x-default" href="https://www.cv-learn.com/visual-slam-roadmap/level-03-monocular-slam/vo-vs-slam/"><!-- Open Graph --><meta property="og:type" content="article"><meta property="og:site_name" content="Visual-SLAM Developer Roadmap"><meta property="og:title" content="VO vs SLAM — Visual-SLAM Roadmap"><meta property="og:description" content="Visual Odometry (VO)는 연속된 프레임으로부터 지역적이고 증분적인 카메라 모션을 추정합니다: 프레임 간 특징점을 매칭하거나 추적하고(또는 직접 방법의 경우 광도 오차를 최소화하고), 상대 포즈를 추정한 뒤 추정치들을 연쇄시킵니다. VO에는 전역 지도라는 개념이 없고 루프 클로저를 수행할 수 없으므로 — 드리프트가 무한히 누적됩니다. 긴 루프를 돌아 출발점으로 돌아와도 순수 VO 궤적은 닫히지 않습니다."><meta property="og:url" content="https://www.cv-learn.com/visual-slam-roadmap/ko/level-03-monocular-slam/vo-vs-slam/"><meta property="og:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="ko_KR"><meta property="og:locale:alternate" content="en_US"><meta property="og:locale:alternate" content="zh_CN"><meta property="og:locale:alternate" content="ja_JP"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="VO vs SLAM — Visual-SLAM Roadmap"><meta name="twitter:description" content="Visual Odometry (VO)는 연속된 프레임으로부터 지역적이고 증분적인 카메라 모션을 추정합니다: 프레임 간 특징점을 매칭하거나 추적하고(또는 직접 방법의 경우 광도 오차를 최소화하고), 상대 포즈를 추정한 뒤 추정치들을 연쇄시킵니다. VO에는 전역 지도라는 개념이 없고 루프 클로저를 수행할 수 없으므로 — 드리프트가 무한히 누적됩니다. 긴 루프를 돌아 출발점으로 돌아와도 순수 VO 궤적은 닫히지 않습니다."><meta name="twitter:image" content="https://www.cv-learn.com/visual-slam-roadmap/og.png"><!-- Google AdSense --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5473245269912288" crossorigin="anonymous"></script><!-- Google Analytics 4 --><!-- Microsoft Clarity --><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"VO vs SLAM","description":"Visual Odometry (VO)는 연속된 프레임으로부터 지역적이고 증분적인 카메라 모션을 추정합니다: 프레임 간 특징점을 매칭하거나 추적하고(또는 직접 방법의 경우 광도 오차를 최소화하고), 상대 포즈를 추정한 뒤 추정치들을 연쇄시킵니다. VO에는 전역 지도라는 개념이 없고 루프 클로저를 수행할 수 없으므로 — 드리프트가 무한히 누적됩니다. 긴 루프를 돌아 출발점으로 돌아와도 순수 VO 궤적은 닫히지 않습니다.","inLanguage":"ko","url":"https://www.cv-learn.com/visual-slam-roadmap/ko/level-03-monocular-slam/vo-vs-slam/","isPartOf":{"@type":"WebSite","name":"Visual-SLAM Developer Roadmap","url":"https://www.cv-learn.com/visual-slam-roadmap/"},"author":{"@type":"Person","name":"Hyunggi Chang","url":"https://github.com/changh95"},"license":"https://opensource.org/licenses/MIT"}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Visual-SLAM Roadmap","item":"https://www.cv-learn.com/visual-slam-roadmap/ko/"},{"@type":"ListItem","position":2,"name":"단안 SLAM","item":"https://www.cv-learn.com/visual-slam-roadmap/ko/level-03-monocular-slam/"},{"@type":"ListItem","position":3,"name":"VO vs SLAM","item":"https://www.cv-learn.com/visual-slam-roadmap/ko/level-03-monocular-slam/vo-vs-slam/"}]}</script><link rel="stylesheet" href="/visual-slam-roadmap/_astro/readme.DemmKpdz.css"></head><body class="graph-paper min-h-screen text-inkline font-sans"><header class="border-b border-paper-line bg-paper/90 backdrop-blur sticky top-0 z-10"><nav class="mx-auto max-w-5xl px-5 py-3 flex items-center gap-4"><a href="/visual-slam-roadmap/ko/" class="font-display font-semibold tracking-wide text-sm uppercase text-scan-500 hover:opacity-80">VSLAM<span class="opacity-60">//</span>Roadmap</a><a href="https://ko-fi.com/changh95" target="_blank" rel="noopener" class="font-mono text-[11px] font-medium px-2.5 py-1 text-white bg-[#00b9fe] hover:opacity-85 transition-opacity leading-tight">♥ Support me if you liked this content!</a><a href="https://github.com/changh95/visual-slam-roadmap" class="ml-auto hidden sm:inline font-mono text-xs text-slate-500 hover:text-scan-500">GitHub &nearr;</a><div class="flex font-mono text-[11px] border border-paper-line bg-paper divide-paper-line divide-x ml-auto sm:ml-0" role="group" aria-label="Language"><a href="/visual-slam-roadmap/level-03-monocular-slam/vo-vs-slam/" data-lang="en" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">EN</a><a href="/visual-slam-roadmap/ko/level-03-monocular-slam/vo-vs-slam/" data-lang="ko" aria-current="true" class="px-2 py-1 transition-colors bg-scan-500/10 text-scan-500 font-medium">KO</a><a href="/visual-slam-roadmap/zh/level-03-monocular-slam/vo-vs-slam/" data-lang="zh" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">ZH</a><a href="/visual-slam-roadmap/ja/level-03-monocular-slam/vo-vs-slam/" data-lang="ja" class="px-2 py-1 transition-colors text-slate-500 hover:text-scan-500">JA</a></div></nav></header><main class="mx-auto max-w-3xl px-5 py-10"><nav class="font-mono text-xs text-slate-500 mb-6"><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/ko/">로드맵</a><span class="mx-1">/</span><a class="text-scan-500 hover:underline" href="/visual-slam-roadmap/ko/level-03-monocular-slam/">레벨 03 · 단안 SLAM</a></nav><article class="prose prose-slate max-w-none prose-headings:font-display prose-a:text-scan-500 prose-a:decoration-scan-300/50 hover:prose-a:decoration-scan-500 prose-blockquote:font-mono prose-blockquote:text-sm prose-blockquote:not-italic bg-paper/80 border border-paper-line p-6 sm:p-8"><h1 id="vo-vs-slam">VO vs SLAM</h1>
+<p>**Visual Odometry (VO)**는 연속된 프레임으로부터 지역적이고 증분적인 카메라 모션을 추정합니다: 프레임 간 특징점을 매칭하거나 추적하고(또는 직접 방법의 경우 광도 오차를 최소화하고), 상대 포즈를 추정한 뒤 추정치들을 연쇄시킵니다. VO에는 전역 지도라는 개념이 없고 루프 클로저를 수행할 수 없으므로 — 드리프트가 무한히 누적됩니다. 긴 루프를 돌아 출발점으로 돌아와도 순수 VO 궤적은 닫히지 않습니다.</p>
+<p><strong>Visual SLAM</strong>은 전역 일관성을 위한 메커니즘으로 VO를 확장합니다:</p>
+<ul>
+<li>지역 슬라이딩 윈도우를 넘어 지속되는 <strong>영속적 전역 지도</strong>(랜드마크/키프레임)로, 오래된 랜드마크의 재관측을 가능하게 합니다;</li>
+<li>루프 클로저(이전에 매핑된 영역의 재방문)를 감지하는 <strong>장소 인식</strong>;</li>
+<li>루프가 감지되었을 때 누적된 드리프트를 재분배하는 <strong>전역 최적화</strong>(포즈 그래프 최적화 또는 전역 번들 조정);</li>
+<li>보통 <strong>재지역화</strong>도 포함됩니다: 추적 실패 이후 지도로부터 포즈를 복구하는 것.</li>
+</ul>
+<p>간결한 비교:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>측면</th><th>VO</th><th>SLAM</th></tr></thead><tbody><tr><td>범위</td><td>지역적(최근 프레임의 윈도우)</td><td>전역적(전체 궤적 + 지도)</td></tr><tr><td>드리프트</td><td>무한히 증가</td><td>루프 클로저에서 보정됨</td></tr><tr><td>지도</td><td>없음, 또는 임시 지역 지도</td><td>영속적이고 재사용 가능</td></tr><tr><td>비용</td><td>낮고 한정됨</td><td>더 높음; 지도 크기에 따라 증가</td></tr><tr><td>실패 복구</td><td>손실되면 끝</td><td>지도에 대해 재지역화</td></tr></tbody></table>
+<h2 id="vo-파이프라인이-실제로-하는-일">VO 파이프라인이 실제로 하는 일</h2>
+<p>구체적으로, 특징점 기반 VO의 한 반복은 다음과 같습니다 — 이는 모든 특징점 기반 SLAM 시스템의 추적 스레드이기도 하므로 익혀둘 가치가 있습니다:</p>
+<ol>
+<li>새 프레임에서 특징점을 <strong>검출/추적</strong>합니다(FAST/ORB 검출, 또는 이전 프레임으로부터의 KLT 추적).</li>
+<li>이전 프레임(들)과 <strong>연관</strong>시킵니다: 디스크립터 매칭이나 추적된 대응점을 RANSAC으로 정제합니다.</li>
+<li><strong>상대 포즈를 추정</strong>합니다: 2D-2D 매칭으로부터 essential matrix(초기화 단계), 또는 지역적으로 삼각측량된 3D 점에 대한 PnP(정상 상태).</li>
+<li>지역 3D 구조를 계속 유지하기 위해, 추정된 모션으로부터 새로운 점을 <strong>삼각측량</strong>합니다.</li>
+<li><strong>지역적으로 정제</strong>합니다: 최근 몇 프레임/키프레임에 대한 작은 번들 조정(윈도우 BA).</li>
+</ol>
+<p>직접(direct) VO는 1-3단계를 광도 정렬로 대체합니다: 명시적인 대응점 없이, 포즈(및 픽셀별 깊이)에 대해 프레임 간 픽셀 강도 오차를 최소화합니다. 어느 방식이든, 출력은 상대 포즈들의 연쇄이며 — 3단계 이후의 모든 단계는 드리프트를 제거하는 것이 아니라 느리게 만드는 데 존재합니다.</p>
+<p>이에 대응하는 평가지표: **RPE(relative pose error, 상대 포즈 오차)**는 고정된 거리/시간 간격에 대한 포즈 증분의 오차를 측정합니다 — 드리프트 속도로, VO의 솔직한 점수입니다. **ATE(absolute trajectory error, 절대 궤적 오차)**는 추정치를 정답과 정렬한 후의 전역 위치 오차를 측정합니다 — 루프가 닫혔는지에 지배되며, SLAM의 점수입니다. RPE는 훌륭하지만 ATE가 나쁜 시스템은 전역 일관성이 없는 좋은 오도미터이며, 그 반대는 잡음이 많은 프론트엔드 위에 강력한 루프 클로저가 있음을 시사합니다.</p>
+<h2 id="경계는-하나의-스펙트럼이다">경계는 하나의 스펙트럼이다</h2>
+<p>DSO와 SVO는 VO 시스템입니다; LDSO는 “DSO + 루프 클로저”, 즉 동일한 프론트엔드가 SLAM으로 승격된 것입니다. ORB-SLAM의 추적 스레드만 놓고 보면 본질적으로 VO 시스템입니다 — 지역 매핑과 루프 클로징 스레드가 그것을 SLAM으로 만드는 요소입니다. VIO에서도 동일한 구분이 나타납니다: <em>오도메트리</em>(MSCKF, VINS 프론트엔드) 대 <em>지도 재사용을 포함한 완전한 SLAM</em>(ORB-SLAM3, 루프 클로저가 활성화된 VINS-Mono).</p>
+<p>어느 쪽이 필요한지는 엔지니어링 판단입니다. 단기적인 자기 운동만이 중요하다면(예: 컨트롤러에 입력을 주거나 드론 안정화), VO의 한정된 계산량과 단순함이 유리합니다. 로봇이 장소를 재방문하거나, 오랜 시간 동작하거나, 사전 지도 안에서 위치를 추정해야 한다면 SLAM이 필요합니다 — 무한한 드리프트를 멈추는 것은 그것뿐입니다.</p>
+<h2 id="흔한-함정">흔한 함정</h2>
+<ul>
+<li><strong>범주를 넘나들며 ATE 비교하기</strong>: 루프가 있는 시퀀스에서 VO 시스템을 ATE로 판단하는 것(또는 SLAM 시스템을 RPE만으로 판단하는 것)은 각 방법이 설계된 목적을 오독하는 것입니다; 논문이 어떤 지표와 어떤 정렬(단안의 경우 6-DoF 대 7-DoF)을 보고하는지 확인하십시오.</li>
+<li><strong>루프 클로저가 공짜라고 가정하기</strong>: VO를 SLAM으로 승격시키면 장소 인식 데이터베이스, 검증 로직, 전역 최적화가 추가되고 — 결정적으로 — 새로운 실패 모드(거짓 루프)도 추가됩니다. 강건한 VO가 실제로는 취약한 SLAM보다 나을 수 있습니다.</li>
+<li><strong>무한한 지도 증가</strong>: “일단 다 유지하는” SLAM은 몇 시간의 동작 이후 성능이 저하됩니다; 키프레임 정리와 지도 관리는 선택 사항이 아니라 SLAM 계약의 일부입니다.</li>
+<li><strong>재지역화 ≠ 루프 클로저</strong>: 둘 다 장소 인식을 사용하지만, 재지역화는 기존 지도에 대해 <em>추적</em>을 복구하는 것이고, 루프 클로저는 지도를 변형시키는 <em>제약 조건</em>을 추가하는 것입니다; 이를 혼동하면 시스템 설계 논의가 흐려집니다.</li>
+</ul>
+<h2 id="slam에서의-의미">SLAM에서의 의미</h2>
+<p>이 구분은 전체 분야를 조직하는 틀입니다: 여러분이 공부할 거의 모든 시스템은 VO/오도메트리 방법이거나, VO 코어를 지도 관리, 장소 인식, 전역 최적화로 감싸서 만든 SLAM 시스템입니다. 어떤 논문이 무엇을 주장하는지(지역적 정확도인지 전역적 일관성인지) 아는 것은 어떤 벤치마크가 중요한지 — VO는 RPE, SLAM은 루프 클로저를 포함한 ATE — 그리고 그 실패 모드가 무엇일지를 알려줍니다.</p>
+<h2 id="실습">실습</h2>
+<ul>
+<li><a href="https://github.com/changh95/slam_lecture_codes/tree/main/SLAM_zero_to_hero/part2_ch02_05">MonoVO 실습</a></li>
+</ul>
+<h2 id="관련-문서">관련 문서</h2>
+<ul>
+<li><a href="/visual-slam-roadmap/ko/level-03-monocular-slam/visual-odometry/">Visual Odometry</a></li>
+<li><a href="/visual-slam-roadmap/ko/level-03-monocular-slam/visual-place-recognition-vpr/">Visual Place Recognition (VPR)</a></li>
+<li><a href="/visual-slam-roadmap/ko/level-02-getting-familiar/pose-graph-optimization/">Pose graph optimization</a></li>
+<li><a href="/visual-slam-roadmap/ko/level-03-monocular-slam/ldso/">LDSO</a></li>
+<li><a href="/visual-slam-roadmap/ko/level-03-monocular-slam/orb-slam/">ORB-SLAM</a></li>
+</ul></article><div class="mt-10"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5473245269912288" data-ad-slot="2335164071" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></main><footer class="mx-auto max-w-5xl px-5 py-10 font-mono text-xs space-y-2 text-slate-400"><p><a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap/pulls">제안은 언제든 환영합니다 — 저장소에 PR을 제출해 주세요.</a></p><p>MIT License &copy; 2026 Hyunggi Chang · built from the <a class="underline hover:no-underline" href="https://github.com/changh95/visual-slam-roadmap">roadmap repository</a></p></footer><script type="module">document.querySelectorAll(`a[data-lang]`).forEach(e=>{e.addEventListener(`click`,()=>{try{localStorage.setItem(`vslam-lang`,e.dataset.lang)}catch{}})});</script></body></html>
