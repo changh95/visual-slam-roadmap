@@ -107,6 +107,10 @@ const ogImage = abs(`${base}og.png`);
         <a href={`${base}${lang === 'en' ? '' : lang + '/'}`} class={`font-display font-semibold tracking-wide text-sm uppercase ${dark ? 'text-scan-300' : 'text-scan-500'} hover:opacity-80`}>
           VSLAM<span class="opacity-60">//</span>Roadmap
         </a>
+        <a href="https://ko-fi.com/changh95" target="_blank" rel="noopener"
+           class="font-mono text-[11px] font-medium px-2.5 py-1 text-white bg-[#00b9fe] hover:opacity-85 transition-opacity whitespace-nowrap">
+          ♥ Tip Me
+        </a>
         <a href="https://github.com/changh95/visual-slam-roadmap" class={`ml-auto hidden sm:inline font-mono text-xs ${dark ? 'text-slate-400 hover:text-scan-300' : 'text-slate-500 hover:text-scan-500'}`}>GitHub &nearr;</a>
         <div class={`flex font-mono text-[11px] border ${dark ? 'border-scan-500/30 divide-scan-500/30' : 'border-paper-line bg-paper divide-paper-line'} divide-x ml-auto sm:ml-0`} role="group" aria-label="Language">
           {LANGS.map((l) => (
@@ -128,16 +132,6 @@ const ogImage = abs(`${base}og.png`);
         a.addEventListener('click', () => {
           try { localStorage.setItem('vslam-lang', a.dataset.lang); } catch {}
         });
-      });
-    </script>
-    <!-- Ko-fi floating tip button -->
-    <script is:inline src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
-    <script is:inline>
-      kofiWidgetOverlay.draw('changh95', {
-        'type': 'floating-chat',
-        'floating-chat.donateButton.text': 'Tip Me',
-        'floating-chat.donateButton.background-color': '#00b9fe',
-        'floating-chat.donateButton.text-color': '#fff'
       });
     </script>
   </body>
